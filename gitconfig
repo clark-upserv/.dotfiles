@@ -5,6 +5,7 @@
 [user]
 	name = Clark Taylor
 	email = clark@upserv.io
+	password = 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
 [core]
 	editor = /usr/local/bin/nvim
 	pager = diff-so-fancy | less --tabs=4 -RFX
@@ -19,3 +20,5 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [credential]
 	helper = osxkeychain
+[pull]
+	rebase = false

@@ -9,7 +9,7 @@
 "     Html Forms
 "     Html form Inputs
 "     Html form Show elements
-"     Html Beagle
+"     Html Templates
 "   Ruby
 "     Ruby Basic
 "     Ruby Models
@@ -44,6 +44,19 @@
 
 " normal mode mappings
   " single key mappings
+  " up
+  nnoremap <silent> f <up>
+  vnoremap <silent> f <up>
+  " left
+  nnoremap <silent> s <left>
+  vnoremap <silent> s <left>
+  " train me not to use h for left
+  nnoremap <silent> h dd
+  vnoremap <silent> h d
+  " train me not to use k for up
+  nnoremap <silent> k dd
+  vnoremap <silent> k d
+
 
   " comma + single key mappings
     nnoremap <silent> ,o o <backspace><esc>
@@ -65,7 +78,7 @@
     " Misc. Dd but combine to Forward line instead of delete line
     " NOTE: this will delete first word if line has no indentation...
     nmap <silent> ,mdf A<esc>whvvxi<backspace><esc>
-    nnoremap <silent> ,mminsert_input a<%# ChangeThisPls - Replace this with HTML Form input %><esc>/ChangeThisPls<return>
+    nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
 
   " Edit mappings
     "
@@ -131,10 +144,36 @@
     "
     nmap <silent> ,even <space>fT/vendor<return><return><esc>:noh<return>
     nnoremap <silent> ,cven :edit vendor/
-
-
+    " Edit GEMfile
+    nmap <silent> ,egem <space>fT/Gemfile<return><return><esc>:noh<return>
 
   " Html mappings  
+    " Html Templages
+      " Html Templates PAge
+      nnoremap <silent> ,htpa :read ../templates/views/page_frame/page.html.erb<return>ggdd/DeleteThisPls\\|ChangeTemplate\\|ChangePath\\|ChangeLocals<return>
+      " Html Templates Page Header
+      nnoremap <silent> ,htph :read ../templates/views/page_frame/page_header.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangeUrl<return>
+      " Html Templates TAbs
+      nnoremap <silent> ,htta :read ../templates/views/page_frame/tabs.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangeUrl<return>
+      " Html Templates Page Body 
+      nnoremap <silent> ,htpb :read ../templates/views/page_frame/page_body.html.erb<return>/ChangePath\\|ChangeTemplate\\|ChangeCardName\\|ChangeWidth\\|ChangeLocals<return>
+      " Html Templates Page body full height Columns
+      nnoremap <silent> ,htpc :read ../templates/views/page_frame/page_body_full_height_columns.html.erb<return>/ChangePath\\|ChangeTemplate\\|ChangeColumnName\\|ChangeScreenSize\\|ChangeWidth\\|ChangeColumnName\\|ChangeLocals<return>
+      " Html Templates CArd
+      nnoremap <silent> ,htca :read ../templates/views/page_frame/card.html.erb<return>/ChangeThisPls\\|DeleteThisPls<return>
+      " Html Templates Card Non-card
+      nnoremap <silent> ,htcn :read ../templates/views/page_frame/card_non_card.html.erb<return>/DeleteThisPls<return>
+      " Html Templates Card Header
+      nnoremap <silent> ,htch :read ../templates/views/page_frame/card_header.html.erb<return>/ChangeThisPls<return>
+      " Html Templates Card body Single show
+      nnoremap <silent> ,htcs :read ../templates/views/card_body_options/single_show.html.erb<return>/ChangeThisPls<return>
+      " Html Templates Top label Edit
+      nnoremap <silent> ,httb :read ../templates/views/form_options/top_label_edit.html.erb<return>/ChangeThisPls<return>
+      " Html Templates non-standard Forms Array Simple
+      nnoremap <silent> ,htas :read ../templates/views/non_standard_forms/array_simple.html.erb<return>/ChangeParentForm\\|ChangeAttributes\\|ChangeModels\\|ChangeModel\\|ChangeAttribute\\|ReplaceThis\\|DeleteThis:<return>
+      " Html Templates non-standard Forms Array Hash
+      nnoremap <silent> ,htah :read ../templates/views/non_standard_forms/array_hash.html.erb<return>/ChangeParentForm\\|ChangeModels\\|ChangeModel\\|ReplaceThis\\|DeleteThis:\\|ChangeAttribute<return>
+
     " Html Elements
       " Html Elements ATtributes
       nnoremap <silent> ,heat a <return>id="ChangeThisPls" <return>class="ChangeThisPls" <return>style="ChangeThisPls" <return>data-ChangeThisPls="ChangeThisPls"<return><esc>/ChangeThisPls<return>
@@ -222,11 +261,11 @@
       
     " Html Form
       " Html Form WIth
-      nnoremap <silent> ,hfwi a<%= form_with(scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><esc>o<% end %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hfwi a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><esc>o<% end %><esc>/ChangeThisPls<return>
       " Html Form Full Errors
       nnoremap <silent> ,hffe a<%= render(partial: 'shared/full_errors', locals: { errors_hash: ChangeThisPls.errors.messages, ian: false }) %><esc>/ChangeThisPls<return>
       " Html Form Fields For
-      nnoremap <silent> ,hfff a<%= ChangeThisPls_form.fields_for(:ChangeThisPls) do \|ChangeThisPls_form\| %><return><% end %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hfff a<%= ChangeThisPls_form.fields_for(:ChangeScope, ChangeModel) do \|ChangeThisPls_form\| %><return><% end %><esc>/ChangeThisPls\\|ChangeScope\\|ChangeModel<return>
       " Html Form LAbel
       nnoremap <silent> ,hfla a<%= ChangeThisPls_form.label(:ChangeThisPls, 'ChangeThisPls', class: 'col-form-label') %><esc>/ChangeThisPls<return>
       " Html Form Label Block
@@ -260,13 +299,13 @@
       " Html form Input ROw
       nmap <silent> ,hiro ,hsro
       " Html form Input Group 1
-      nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input,o,hiiejo</div><esc>/DeleteThis\\|ChangeThisPls<return>
+      nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis<return>
       " Html form Input Group 2
-      nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input,o,hiiejo</div><esc>/DeleteThis\\|ChangeThisPls<return>
+      nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis<return>
       " Html form Input Group 3
-      nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input,o,hiiejo</div><esc>/DeleteThis\\|ChangeThisPls<return>
+      nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis<return>
       " Html form Input Group 4
-      nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input,o,hiiejo</div><esc>/DeleteThis\\|ChangeThisPls<return>
+      nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis<return>
       " Htmo form Input ATtrubutes common
       nnoremap <silent> ,hiat a, <return>autofocus: true, <return>autocomplete: 'ChangeThisPls', <return>placeholder: 'ChangeThisPls', <return>required: true <return><esc>/ChangeThisPls<return>
       " Htmo form Input common ATtrubutes full
@@ -321,26 +360,6 @@
       nnoremap <silent> ,htsi a<%= image_submit_tag(ChangeThisPls, alt: 'ChangeThisPls', width: 'ChangeThisPls', height: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
       " Html Form CUstom Field
       nnoremap <silent> ,hicu a<%= ChangeThisPls_form.ChangeThisPls(:ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
-            
-    " Html Beagle
-      " Html Beagle PAge
-      nnoremap <silent> ,hbpa :read ../templates/views/page_frame/pages.html.erb<return>ggdd/ChangeThisPls<return>
-      " Html Beagle Page full height columns
-      nnoremap <silent> ,hbpc :read ../templates/views/page_frame/full_height_columns.html.erb<return>/ChangeThisPls\\|ChangeColumnName\\|ChangeScreenSize\\|ChangeWidth<return>
-      " Html Beagle TAbs
-      nnoremap <silent> ,hbta :read ../templates/views/page_frame/tabs.html.erb<return>ggdd/ChangeThisPls<return>
-      " Html Beagle CArd
-      nnoremap <silent> ,hbca :read ../templates/views/page_frame/cards.html.erb<return>ggdd/ChangeThisPls<return>
-      " Html Beagle Card body Single show
-      nnoremap <silent> ,hbcs :read ../templates/views/card_body_options/single_show.html.erb<return>/ChangeThisPls<return>
-      " Html Beagle Top label Edit
-      nnoremap <silent> ,hbtb :read ../templates/views/form_options/top_label_edit.html.erb<return>/ChangeThisPls<return>
-      " Templates views non-standard Forms Array Simple
-      nnoremap <silent> ,tfas :read ../templates/views/non_standard_forms/array_simple.html.erb<return>/ChangeParentForm\\|ChangeAttributes\\|ChangeModels\\|ChangeModel\\|ChangeAttribute\\|ReplaceThis\\|DeleteThis:<return>
-      " Templates views non-standard Forms Array Hash
-      nnoremap <silent> ,tfah :read ../templates/views/non_standard_forms/array_hash.html.erb<return>/ChangeParentForm\\|ChangeModels\\|ChangeModel\\|ReplaceThis\\|DeleteThis:\\|ChangeAttribute<return>
-
-
 
   " ruby mappings 
     " ruby basics
@@ -545,13 +564,17 @@
         nnoremap <silent> ,jvcr aclassList.add('FirstClassToRemove', 'SecondClassToRemove', 'EtcClassToRemove')<esc>/FirstClassToRemove\\|SecondClassToRemove\\|EtcClassToRemove<return>
         " Javascript Vanilla Class list Toggle
         nnoremap <silent> ,jvct aclassList.toggle('ChangeClass')<esc>/ChangeClass<return>
-        " Javascript Vanilla Class list Toggle
+        " Javascript Vanilla Console Log
         nnoremap <silent> ,jvcl aconsole.log(ChangeThisPls)<esc>/ChangeThisPls<return>
+        " Javascript Vanilla Remove Addtribute
+        nnoremap <silent> ,jvra aremoveAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
+        " Javascript Vanilla Add Addtribute
+        nnoremap <silent> ,jvaa aaddAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
 
 
     " Javascript jQuery   
         " Javascript jQiery SElect
-        nnoremap <silent> ,jqse a$(ChangeSelector)<esc>/ChangeSelector<return>
+        nnoremap <silent> ,jqse a$('ChangeSelector')<esc>/ChangeSelector<return>
         " Javascript jQiery Select Class
         nnoremap <silent> ,jqsc a$('.ChangeClass')<esc>/ChangeClass<return>
         " Javascript jQiery Select Id
@@ -611,3 +634,4 @@
     " Integration
       " Tests Integration BAse
       nnoremap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathToTest\\|ChangeThisPls\\|ChangePermission\\|DeleteThisIfNotNecessary<return>
+
