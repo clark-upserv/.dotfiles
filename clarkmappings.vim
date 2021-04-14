@@ -566,6 +566,8 @@
         nnoremap <silent> ,jvct aclassList.toggle('ChangeClass')<esc>/ChangeClass<return>
         " Javascript Vanilla Console Log
         nnoremap <silent> ,jvcl aconsole.log(ChangeThisPls)<esc>/ChangeThisPls<return>
+        " Javascript Vanilla ALert
+        nnoremap <silent> ,jval aalert(ChangeThisPls)<esc>/ChangeThisPls<return>
         " Javascript Vanilla Remove Addtribute
         nnoremap <silent> ,jvra aremoveAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
         " Javascript Vanilla Add Addtribute

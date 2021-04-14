@@ -5,7 +5,6 @@
 [user]
 	name = Clark Taylor
 	email = clark@upserv.io
-	password = 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
 [core]
 	editor = /usr/local/bin/nvim
 	pager = diff-so-fancy | less --tabs=4 -RFX
