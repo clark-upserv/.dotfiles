@@ -572,7 +572,8 @@
         nnoremap <silent> ,jvra aremoveAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
         " Javascript Vanilla Add Addtribute
         nnoremap <silent> ,jvaa aaddAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
-
+        " Javascript Vanilla Dispatch Event
+        nnoremap <silent> ,jvaa adocument.dispatchEvent(new Event('ChangeEvent'));<esc>/ChangeEvent<return>
 
     " Javascript jQuery   
         " Javascript jQiery SElect
@@ -590,9 +591,7 @@
         " Javascript jQiery Document On 
         nnoremap <silent> ,jqdo a$(document).on('ChangeEvent', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvent\\|ChangeSelectors<return>
         " Javascript jQiery Document Ready
-        nnoremap <silent> ,jqdr a$(document).ready(function(){<return>ChangeThisPls<return>})<return>$(document).ajaxComplete(function(){<return>ChangeThisPls<return>})<esc>/ChangeThisPls<return>
-        " Javascript jQiery Document Ajax complete
-        nmap <silent> ,jqda a$(document).ajaxComplete(function(){<return>})<esc>,O
+        nnoremap <silent> ,jqdr a// Make sure to include logic to prevent duplicate events<return><esc>ddi$(document).ready(function(){<return>ChangeThisPls<return>})<return>$(document).on('ajax:complete', function() {<return>ChangeThisPls<return>})<esc>/ChangeThisPls<return>
         " Javascript jQiery Element On 
         nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
 
@@ -603,6 +602,8 @@
       nnoremap <silent> ,tbte atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
       " Tests Base Assertions and Tools
       nnoremap <silent> ,tbat :read ../templates/tests/assertions_and_tools.rb<return>
+      " Tests Base Fixture File upload
+      nnoremap <silent> ,tbff :read ../templates/tests/misc/fixture_file_upload.rb<return><esc>/ChangeVariable\\|ChangeFileNameExtension\\|ChangeFileName\\|ChangeFileType\\|ChangeFileSubType\\|DeleteThisPls\\|ChangeInstance\\|ChangeAttachment<return>
     " Controller
       " Tests Controller BAse
       nnoremap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathToTest\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel\\|DeleteThisIfNotNecessary<return>
