@@ -267,19 +267,19 @@
       " Html Form Fields For
       nnoremap <silent> ,hfff a<%= ChangeThisPls_form.fields_for(:ChangeScope, ChangeModel) do \|ChangeThisPls_form\| %><return><% end %><esc>/ChangeThisPls\\|ChangeScope\\|ChangeModel<return>
       " Html Form LAbel
-      nnoremap <silent> ,hfla a<%= ChangeThisPls_form.label(:ChangeThisPls, 'ChangeThisPls', class: 'col-form-label') %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hfla a<%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
       " Html Form Label Block
-      nnoremap <silent> ,hflb a<%= ChangeThisPls_form.label(:ChangeThisPls, class: 'col-form-label') do %>ChangeThisPls<% end %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hflb a<%= ChangeThisPls_form.label(:ChangeAttribute, class: 'col-form-label') do %>ChangeDisplay<% end %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
       " Html Form Label for Checkboxes
       " NOTE: this is used by the checkbox mappings so if you chnage this, you
       " need to update those as well...
-      nnoremap <silent> ,hflc a<%= ChangeThisPls_form.label(:ChangeThisPls, 'ChangeThisPls', class: "custom-control-label text-wrap") %><return><%# NOTE: for blank label, make this a block with a space (" ") between the do and end %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hflc a<%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay', class: "custom-control-label text-wrap") %><return><%# NOTE: for blank label, make this a block with a blank space (" ") between the do and end %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
       " Html Form Label Tag
-      nnoremap <silent> ,hflt a<%= label_tag(:ChangeThisPls, 'ChangeThisPls', class: 'col-form-label') %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hflt a<%= label_tag(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
 
     " Html form Show elements
       " Html form Show Left Label wrapper
-      nmap <silent> ,hsll a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group col-12 pr-0"><return><%= label_tag(:ChangeThisPls, 'ChangeThisPls:', class: 'col-form-label', style: 'hyphens: auto;') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Show Group %><return></div><return></div><return></div><esc>/ChangeThisPls\\|DeleteThis<return>
+      nmap <silent> ,hsll a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group col-12 pr-0"><return><%= label_tag(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label', style: 'hyphens: auto;') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Show Group %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
       " Html form Show ROw
       nmap <silent> ,hsro a<div class="form-row"><return></div><esc>,O
       " Html form Show Group 1
@@ -295,7 +295,7 @@
 
     " Html form Inputs
       " Html form Input Left Label wrapper
-      nmap <silent> ,hill a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group col-12 pr-0"><return><%= ChangeThisPls_form.label(:ChangeThisPls, 'ChangeThisPls:', class: 'col-form-label', style: 'hyphens: auto;') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Input Group %><return></div><return></div><return></div><esc>/ChangeThisPls\\|DeleteThis<return>
+      nmap <silent> ,hill a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group col-12 pr-0"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label', style: 'hyphens: auto;') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Input Group %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
       " Html form Input ROw
       nmap <silent> ,hiro ,hsro
       " Html form Input Group 1
@@ -516,29 +516,51 @@
       " Ruby Controllers BAse
       nnoremap <silent> ,rcba :read ../templates/controllers/base_controller.rb<return>ggdd/ChangeThisPls<return>
       " Ruby Controllers Index Base
-      nnoremap <silent> ,rcib :read ../templates/controllers/actions/index_base.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeVerb\\|ChangeObjects<return>
+      nnoremap <silent> ,rcib :read ../templates/controllers/actions/index_base.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeVerb\\|ChangeObjects\\|DeleteThis<return>
+      " Ruby Controllers Index Simple
+      nnoremap <silent> ,rcis :read ../templates/controllers/actions/index_simple.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeVerb\\|ChangeObjects\\|DeleteThis<return>
       " Ruby Controllers Show Base
-      nnoremap <silent> ,rcsb :read ../templates/controllers/actions/show_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission<return>
+      nnoremap <silent> ,rcsb :read ../templates/controllers/actions/show_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis<return>
       " Ruby Controllers Show Tab Router 
-      nnoremap <silent> ,rcsr :read ../templates/controllers/actions/show_router.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeUrl<return>
+      nnoremap <silent> ,rcsr :read ../templates/controllers/actions/show_router.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeUrl\\|DeleteThis<return>
       " Ruby Controllers Show for Tab
-      nnoremap <silent> ,rcst :read ../templates/controllers/actions/show_tab.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeTab<return>
+      nnoremap <silent> ,rcst :read ../templates/controllers/actions/show_tab.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeTab\\|DeleteThis<return>
       " Ruby Controllers New Base
-      nmap <silent> ,rcnb ,tcsb/show<return>cgnnew<esc>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission<return>
+      nmap <silent> ,rcnb ,tcsb/show<return>cgnnew<esc>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis<return>
       " Ruby Controllers Create Base
       nnoremap <silent> ,rccb :read ../templates/controllers/actions/create_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeAttributes\\|DeleteThis\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
       " Ruby Controllers Edit Base
-      nmap <silent> ,rceb ,tcsb/show<return>cgnedit<esc>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission<return>
+      nmap <silent> ,rceb ,tcsb/show<return>cgnedit<esc>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis<return>
       " Ruby Controllers Update Base
       nnoremap <silent> ,rcub :read ../templates/controllers/actions/update_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
       " Ruby Controllers Destroy Base
-      nnoremap <silent> ,rcdb :read ../templates/controllers/actions/destroy_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+      nnoremap <silent> ,rcdb :read ../templates/controllers/actions/destroy_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
 
     " Ruby Helpers
       " Ruby Helpers BAse
       nnoremap <silent> ,thba :read ../templates/helpers/base_helper.rb<return>ggdd/ChangeThisPls<return>
     "
   " javascript mappings 
+    " Javascript jQuery   
+        " Javascript jQiery SElect
+        nnoremap <silent> ,jqse a$('ChangeSelector')<esc>/ChangeSelector<return>
+        " Javascript jQiery Select Class
+        nnoremap <silent> ,jqsc a$('.ChangeClass')<esc>/ChangeClass<return>
+        " Javascript jQiery Select Id
+        nnoremap <silent> ,jqsi a$('#ChangeId')<esc>/ChangeId<return>
+        " Javascript jQiery Select Attribute
+        nnoremap <silent> ,jqsa a$('[ChangeAttribute]')<esc>/ChangeAttribute\\|ChangeValue<return>
+        " Javascript jQiery Select attribute Value
+        nnoremap <silent> ,jqsv a$('[ChangeAttribute="ChangeValue"]')<esc>/ChangeAttribute\\|ChangeValue<return>
+        " Javascript jQiery Select Data attribute
+        nnoremap <silent> ,jqsd a$('[data-ChangeAttribute="ChangeValue"]')<esc>/ChangeAttribute\\|ChangeValue<return>
+        " Javascript jQiery Document On 
+        nnoremap <silent> ,jqdo a$(document).on('ChangeEvent', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvent\\|ChangeSelectors<return>
+        " Javascript jQiery Document Ready
+        nnoremap <silent> ,jqdr a// Make sure to include logic to prevent duplicate events<return><esc>ddi$(document).ready(function(){<return>ChangeThisPls<return>})<return>$(document).on('ajax:complete', function() {<return>ChangeThisPls<return>})<esc>/ChangeThisPls<return>
+        " Javascript jQiery Element On 
+        nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
+
     " Javascript Vanilla
         " Javascript Vanilla IF
         nnoremap <silent> ,jvif aif (ChangeThisPls) {<return>}<esc>/ChangeThisPls<return>
@@ -574,28 +596,17 @@
         nnoremap <silent> ,jvaa aaddAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
         " Javascript Vanilla Dispatch Event
         nnoremap <silent> ,jvaa adocument.dispatchEvent(new Event('ChangeEvent'));<esc>/ChangeEvent<return>
-
-    " Javascript jQuery   
-        " Javascript jQiery SElect
-        nnoremap <silent> ,jqse a$('ChangeSelector')<esc>/ChangeSelector<return>
-        " Javascript jQiery Select Class
-        nnoremap <silent> ,jqsc a$('.ChangeClass')<esc>/ChangeClass<return>
-        " Javascript jQiery Select Id
-        nnoremap <silent> ,jqsi a$('#ChangeId')<esc>/ChangeId<return>
-        " Javascript jQiery Select Attribute
-        nnoremap <silent> ,jqsa a$('[ChangeAttribute]')<esc>/ChangeAttribute\\|ChangeValue<return>
-        " Javascript jQiery Select attribute Value
-        nnoremap <silent> ,jqsv a$('[ChangeAttribute="ChangeValue"]')<esc>/ChangeAttribute\\|ChangeValue<return>
-        " Javascript jQiery Select Data attribute
-        nnoremap <silent> ,jqsd a$('[data-ChangeAttribute="ChangeValue"]')<esc>/ChangeAttribute\\|ChangeValue<return>
-        " Javascript jQiery Document On 
-        nnoremap <silent> ,jqdo a$(document).on('ChangeEvent', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvent\\|ChangeSelectors<return>
-        " Javascript jQiery Document Ready
-        nnoremap <silent> ,jqdr a// Make sure to include logic to prevent duplicate events<return><esc>ddi$(document).ready(function(){<return>ChangeThisPls<return>})<return>$(document).on('ajax:complete', function() {<return>ChangeThisPls<return>})<esc>/ChangeThisPls<return>
-        " Javascript jQiery Element On 
-        nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
-
-    
+    " Javascript Ajax
+        " Javascript Ajax BAse
+        nnoremap <silent> ,jaba :read ../templates/views/ajax/base.js.erb<return>ggdd/DeleteThis<return>
+        " Javascript Ajax SUccess
+        nnoremap <silent> ,jasu :read ../templates/views/ajax/success.js.erb<return>/CopyIdFromView\\|CopyPathFromView\\|ChangeLocals\\|DeleteThis<return>
+        " Javascript Ajax Invalid Create
+        nnoremap <silent> ,jaic :read ../templates/views/ajax/invalid_create.js.erb<return>/CopyIdFromView\\|CopyPathFromView\\|ChangeModel<return>
+        " Javascript Ajax Invalid Update
+        nnoremap <silent> ,jaiu :read ../templates/views/ajax/invalid_update.js.erb<return>/CopyIdFromView\\|CopyPathFromView\\|ChangeModel<return>
+        " Javascript Ajax Close Modal
+        nnoremap <silent> ,jacm :read ../templates/views/ajax/close_modal.js.erb<return>
   " Tests
     " Base
       " Tests Base TEst
