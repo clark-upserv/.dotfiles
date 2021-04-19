@@ -285,11 +285,11 @@
       " Html form Show Group 1
       nmap <silent> ,hsg1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeThisPls<return>
       " Html form Show Group 2
-      nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeThisPls<return>
+      nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeThisPls<return><up>V3<down>yP
       " Html form Show Group 3
-      nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeThisPls<return>
+      nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeThisPls<return><up>V3<down>yPP
       " Html form Show Group 4
-      nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeThisPls<return>
+      nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeThisPls<return><up>V3<down>yPPP
       " Html form Show element SImple
       nnoremap <silent> ,hssi a<div class="sse">ChangeThisPls</div><esc>/ChangeThisPls<return>
 
@@ -299,13 +299,13 @@
       " Html form Input ROw
       nmap <silent> ,hiro ,hsro
       " Html form Input Group 1
-      nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis<return>
+      nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
       " Html form Input Group 2
-      nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis<return>
+      nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
       " Html form Input Group 3
-      nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis<return>
+      nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
       " Html form Input Group 4
-      nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis<return>
+      nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
       " Htmo form Input ATtrubutes common
       nnoremap <silent> ,hiat a, <return>autofocus: true, <return>autocomplete: 'ChangeThisPls', <return>placeholder: 'ChangeThisPls', <return>required: true <return><esc>/ChangeThisPls<return>
       " Htmo form Input common ATtrubutes full
@@ -353,7 +353,7 @@
       " Html form Input OPtion
       nnoremap <silent> ,hiop a<option <%= "selected='true'" if ChangeThisPls %> value="<%= ChangeThisPls %>">ChangeThisPls</option><esc>/ChangeThisPls<return>
       " Html form Input Inline Errors
-      nnoremap <silent> ,hiie a<%= render(partial: 'shared/inline_errors', locals: { errors_hash: ChangeThisPls.errors.messages, attribute: :ChangeThisPls, include_names: false }) %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hiie a<%= render(partial: 'shared/inline_errors', locals: { errors: ChangeObject.errors.messages[:ChangeAttribute] }) %><esc>/ChangeObject\\|ChangeAttribute<return>
       " Html form Input SUbmit
       nnoremap <silent> ,hisu a<%= ChangeThisPls_form.submit(:ChangeThisPls, class: 'btn btn-ChangeThisPls') %><esc>/ChangeThisPls<return>
       " Html Torm Submit with Image
@@ -363,22 +363,24 @@
 
   " ruby mappings 
     " ruby basics
+      " Ruby Basic Frozen String
+      nnoremap <silent> ,rbfs a# frozen_string_literal: true
       " Ruby Basic EAch block
-      nnoremap <silent> ,rbea aChangeThisPls.each do \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rbea aeach do \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
       " Ruby Basic EAch inline
-      nnoremap <silent> ,rbeA aChangeThisPls.each { \|ChangeThisPls\| ChangeThisPls }<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rbeA aeach { \|ChangeThisPls\| ChangeThisPls }<esc>/ChangeThisPls<return>
       " Ruby Basic Each With index block
-      nnoremap <silent> ,rbew aChangeThisPls.each_with_index do \|ChangeThisPls, index\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rbew aeach_with_index do \|ChangeThisPls, index\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
       " Ruby Basic Each With index inline
-      nnoremap <silent> ,rbeW aChangeThisPls.each_with_index { \|ChangeThisPls, index\| ChangeThisPls }<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rbeW aeach_with_index { \|ChangeThisPls, index\| ChangeThisPls }<esc>/ChangeThisPls<return>
       " Ruby Basic MAp block 
-      nnoremap <silent> ,rbma aChangeThisPls.map do \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rbma amap do \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
       " Ruby Basic MAp inline
-      nnoremap <silent> ,rbmA aChangeThisPls.map { <bar>ChangeThisPls<bar> ChangeThisPls }<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rbmA amap { <bar>ChangeThisPls<bar> ChangeThisPls }<esc>/ChangeThisPls<return>
       " Ruby Basic SElect block
-      nnoremap <silent> ,rbse aChangeThisPls.select <bar>ChangeThisPls<bar><return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rbse aselect <bar>ChangeThisPls<bar><return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
       " Ruby Basic SElect inline
-      nnoremap <silent> ,rbsE aChangeThisPls.select { <bar>ChangeThisPls<bar> ChangeThisPls }<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rbsE aselect { <bar>ChangeThisPls<bar> ChangeThisPls }<esc>/ChangeThisPls<return>
       " Ruby Basic IF
       nnoremap <silent> ,rbif aif ChangeThisPls<return>end<esc>/ChangeThisPls<return>
       " Ruby Basic IF inline
@@ -535,6 +537,19 @@
       nnoremap <silent> ,rcub :read ../templates/controllers/actions/update_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
       " Ruby Controllers Destroy Base
       nnoremap <silent> ,rcdb :read ../templates/controllers/actions/destroy_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
+      " Ruby Controllers FLash
+      nnoremap <silent> ,rcfl aflash[:ChangeFlashType] = ChangeMessage<esc>/ChangeFlashType\\|ChangeMessage<return>
+      " Ruby Controllers Flash Success
+      nnoremap <silent> ,rcfs aflash[:success] = ChangeMessage<esc>/ChangeMessage<return>
+      " Ruby Controllers Flash Info
+      nnoremap <silent> ,rcfi aflash[:info] = ChangeMessage<esc>/ChangeMessage<return>
+      " Ruby Controllers Flash Danger
+      nnoremap <silent> ,rcfd aflash[:danger] = ChangeMessage<esc>/ChangeMessage<return>
+      " Ruby Controllers Flash Danger
+      nnoremap <silent> ,rcfD aflash[:danger] = "ChangeMessage because of the following errors: #{ChangeObject.errors.map { \|error\| error.type[0].capitalize + error.type[1..] }.join('; ')}."<esc>/ChangeMessage\\|ChangeObject<return>
+
+          
+          
 
     " Ruby Helpers
       " Ruby Helpers BAse
