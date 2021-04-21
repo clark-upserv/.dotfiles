@@ -178,7 +178,7 @@
       " Html Elements ATtributes
       nnoremap <silent> ,heat a <return>id="ChangeThisPls" <return>class="ChangeThisPls" <return>style="ChangeThisPls" <return>data-ChangeThisPls="ChangeThisPls"<return><esc>/ChangeThisPls<return>
       " Html Elements DIv
-      nnoremap <silent> ,hedi a<div><return>ChangeThisPls<return></div><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hedi a<div><return></div><esc>k
       " Html Elements PAragraph
       nnoremap <silent> ,hepa a<p><return>ChangeThisPls<return></p><esc>/ChangeThisPls<return>
       " Html Elements SPan
