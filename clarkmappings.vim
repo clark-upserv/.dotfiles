@@ -224,12 +224,14 @@
       nnoremap <silent> ,hriF a<% ChangeThisPls if ChangeThisPls %><esc>/ChangeThisPls<return>
       " Html Ruby (erb) If Else
       nnoremap <silent> ,hrie a<% if ChangeThisPls %><esc>o<% else %><esc>o<% end %><esc>/ChangeThisPls<return>
-      " Html Ruby (erb) If Else if else
+      " Html Ruby (erb) If Else else
       nnoremap <silent> ,hriE a<% if ChangeThisPls %><esc>o<% elsif ChangeThisPls %><esc>o<% else %><esc>o<% end %><esc>/ChangeThisPls<return>
       " Html Ruby (erb) UNless
       nnoremap <silent> ,hrun a<% unless ChangeThisPls %><return><% end %><esc>/ChangeThisPls<return>
       " Html Ruby (erb) UNless inline
       nnoremap <silent> ,hruN a<% ChangeThisPls unless ChangeThisPls %><esc>/ChangeThisPls<return>
+      " Html Ruby (erb) CAse
+      nnoremap <silent> ,hrca a<% case ChangeThisPls %><return><% when ChangeThisPls %><return><% else %><return><% end %><esc>/ChangeThisPls<return>
       " Html Ruby (erb) EAch
       nnoremap <silent> ,hrea a<% ChangeThisPls.each do \|ChangeThisPls\| %><return><% end %><esc>/ChangeThisPls<return>
       " Html Ruby (erb) Each With index
@@ -409,6 +411,8 @@
       nnoremap <silent> ,rbcm acan?(:ChangeNamespace_ChangePermission, @ChangeModel)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel<return>
       " Ruby Basic Can Non-mmodel Model based
       nnoremap <silent> ,rbcn acan?(:ChangeNamespace_ChangeVerb, :ChangeObjects)<esc>/ChangeNamespace\\|ChangeVerb\\|ChangeObjects<return>
+      " Ruby Basic Interpolated String
+      nnoremap <silent> ,rbis a#{}<esc>i
 
     " Ruby model mappings
       " Ruby Models Can Model based
@@ -557,8 +561,8 @@
     "
   " javascript mappings 
     " Javascript jQuery   
-        " Javascript jQiery SElect
-        nnoremap <silent> ,jqse a$('ChangeSelector')<esc>/ChangeSelector<return>
+        " Javascript jQiery Select Element
+        nnoremap <silent> ,jqse a$(ChangeElement)<esc>/ChangeElement<return>
         " Javascript jQiery Select Class
         nnoremap <silent> ,jqsc a$('.ChangeClass')<esc>/ChangeClass<return>
         " Javascript jQiery Select Id
@@ -568,11 +572,11 @@
         " Javascript jQiery Select attribute Value
         nnoremap <silent> ,jqsv a$('[ChangeAttribute="ChangeValue"]')<esc>/ChangeAttribute\\|ChangeValue<return>
         " Javascript jQiery Select Data attribute
-        nnoremap <silent> ,jqsd a$('[data-ChangeAttribute="ChangeValue"]')<esc>/ChangeAttribute\\|ChangeValue<return>
+        nnoremap <silent> ,jqsd a$('[data-ChangeAttributeAttribute\\|ChangeValue<return>
         " Javascript jQiery Document On 
         nnoremap <silent> ,jqdo a$(document).on('ChangeEvent', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvent\\|ChangeSelectors<return>
         " Javascript jQiery Document Ready
-        nnoremap <silent> ,jqdr a// Make sure to include logic to prevent duplicate events<return><esc>ddi$(document).ready(function(){<return>ChangeThisPls<return>})<return>$(document).on('ajax:complete', function() {<return>ChangeThisPls<return>})<esc>/ChangeThisPls<return>
+        nnoremap <silent> ,jqdr a// Make sure to include logic to prevent duplicate events<return><backspace><backspace><backspace>$(document).ready(function(){<return>ChangeThisPls<return>})<return>$(document).on('ajax:complete', function() {<return>ChangeThisPls<return>})<esc>/ChangeThisPls<return>
         " Javascript jQiery Element On 
         nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
 
@@ -596,9 +600,9 @@
         " Javascript Vanilla Class list Contains
         nnoremap <silent> ,jvcc aclassList.contains('ChangeClass')<esc>/ChangeClass<return>
         " Javascript Vanilla Class list Add
-        nnoremap <silent> ,jvca aclassList.add('FirstClassToAdd', 'SecondClassToAdd', 'EtcClassToAdd')<esc>/FirstClassToAdd\\|SecondClassToAdd\\|EtcClassToAdd<return>
+        nnoremap <silent> ,jvca aclassList.add('FirstClassToAdd')<esc>/FirstClassToAdd<return>
         " Javascript Vanilla Class list Remove
-        nnoremap <silent> ,jvcr aclassList.add('FirstClassToRemove', 'SecondClassToRemove', 'EtcClassToRemove')<esc>/FirstClassToRemove\\|SecondClassToRemove\\|EtcClassToRemove<return>
+        nnoremap <silent> ,jvcr aclassList.add('FirstClassToRemove')<esc>/FirstClassToRemove<return>
         " Javascript Vanilla Class list Toggle
         nnoremap <silent> ,jvct aclassList.toggle('ChangeClass')<esc>/ChangeClass<return>
         " Javascript Vanilla Console Log
@@ -610,7 +614,10 @@
         " Javascript Vanilla Add Addtribute
         nnoremap <silent> ,jvaa aaddAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
         " Javascript Vanilla Dispatch Event
-        nnoremap <silent> ,jvaa adocument.dispatchEvent(new Event('ChangeEvent'));<esc>/ChangeEvent<return>
+        nnoremap <silent> ,jvde adocument.dispatchEvent(new Event('ChangeEvent'));<esc>/ChangeEvent<return>
+        " Javascript Vanilla Dispatch Event
+        nnoremap <silent> ,jvcs awindow.getComputedStyle(ChangeElement).changeStyle<esc>/ChangeElement\\|changeStyle<return>
+        
     " Javascript Ajax
         " Javascript Ajax BAse
         nnoremap <silent> ,jaba :read ../templates/views/ajax/base.js.erb<return>ggdd/DeleteThis<return>
