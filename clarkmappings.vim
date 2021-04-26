@@ -395,6 +395,8 @@
       nnoremap <silent> ,rbun aunless ChangeThisPls<return>end<esc>/ChangeThisPls<return>
       " Ruby Basic Unless
       nnoremap <silent> ,rbuN aChangeThisPls unless ChangeThisPls<esc>/ChangeThisPls<return>
+      " Ruby Basic CAse
+      nnoremap <silent> ,rbca acase ChangeThisPls<return>when ChangeThisPls<return>else<return>end<esc>/ChangeThisPls<return>
       " Ruby Basic TErnary
       nnoremap <silent> ,rbte aChangeBoolean ? ChangeTrueResult : ChangeFalseResult<esc>/ChangeBoolean\\|ChangeTrueResult\\|ChangeFalseResult<return>
       " Ruby Basic Puts Debugger
@@ -574,9 +576,9 @@
         " Javascript jQiery Select Data attribute
         nnoremap <silent> ,jqsd a$('[data-ChangeAttributeAttribute\\|ChangeValue<return>
         " Javascript jQiery Document On 
-        nnoremap <silent> ,jqdo a$(document).on('ChangeEvent', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvent\\|ChangeSelectors<return>
+        nnoremap <silent> ,jqdo a$(document).on('ChangeEvents', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvents\\|ChangeSelectors<return>
         " Javascript jQiery Document Ready
-        nnoremap <silent> ,jqdr a// Make sure to include logic to prevent duplicate events<return><backspace><backspace><backspace>$(document).ready(function(){<return>ChangeThisPls<return>})<return>$(document).on('ajax:complete', function() {<return>ChangeThisPls<return>})<esc>/ChangeThisPls<return>
+        nnoremap <silent> ,jqdr a// Make sure to include logic to prevent duplicate events<return><backspace><backspace><backspace>$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>function ChangeThisPlsSetUp() {<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
         " Javascript jQiery Element On 
         nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
 
@@ -597,22 +599,26 @@
         nnoremap <silent> ,jvfu afunction ChangeThisPls(){<return>}<esc>/ChangeThisPls<return>
         " Javascript Vanilla Get Attribute
         nnoremap <silent> ,jvga agetAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
+        " Javascript Vanilla Add Attribute
+        nnoremap <silent> ,jvaa aaddAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
+        " Javascript Vanilla Remove Attribute
+        nnoremap <silent> ,jvra aremoveAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
+        " Javascript Vanilla Set Attribute
+        nnoremap <silent> ,jvsa asetAttribute('ChangeAttribute', 'ChangeValue')<esc>/ChangeAttribute\\|ChangeValue<return>
+        " Javascript Vanilla STyle
+        nnoremap <silent> ,jvst astyle.ChangeProperty = ChangeValue<esc>/ChangeProperty\\|ChangeValue<return>
         " Javascript Vanilla Class list Contains
         nnoremap <silent> ,jvcc aclassList.contains('ChangeClass')<esc>/ChangeClass<return>
         " Javascript Vanilla Class list Add
         nnoremap <silent> ,jvca aclassList.add('FirstClassToAdd')<esc>/FirstClassToAdd<return>
         " Javascript Vanilla Class list Remove
-        nnoremap <silent> ,jvcr aclassList.add('FirstClassToRemove')<esc>/FirstClassToRemove<return>
+        nnoremap <silent> ,jvcr aclassList.remove('FirstClassToRemove')<esc>/FirstClassToRemove<return>
         " Javascript Vanilla Class list Toggle
         nnoremap <silent> ,jvct aclassList.toggle('ChangeClass')<esc>/ChangeClass<return>
         " Javascript Vanilla Console Log
         nnoremap <silent> ,jvcl aconsole.log(ChangeThisPls)<esc>/ChangeThisPls<return>
         " Javascript Vanilla ALert
         nnoremap <silent> ,jval aalert(ChangeThisPls)<esc>/ChangeThisPls<return>
-        " Javascript Vanilla Remove Addtribute
-        nnoremap <silent> ,jvra aremoveAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
-        " Javascript Vanilla Add Addtribute
-        nnoremap <silent> ,jvaa aaddAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
         " Javascript Vanilla Dispatch Event
         nnoremap <silent> ,jvde adocument.dispatchEvent(new Event('ChangeEvent'));<esc>/ChangeEvent<return>
         " Javascript Vanilla Dispatch Event
