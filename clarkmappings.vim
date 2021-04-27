@@ -5,7 +5,8 @@
 "   Edit
 "   Html 
 "     Html Elements
-"     Html Ruby
+"     Html Ruby (needs to be changed to embedded ruby instead of html ruby...
+"       but that means changing Edit mappings too...
 "     Html Forms
 "     Html form Inputs
 "     Html form Show elements
@@ -260,6 +261,8 @@
       nnoremap <silent> ,hrpa a<%= render(partial: 'ChangeThisPls', locals: { ChangeThisPls }) %><esc>/ChangeThisPls<return>
       " Html Ruby Puts Debugger
       nnoremap <silent> ,hrpd a<% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts nil %><return><% puts 'ChangeLabel:' %><return><% puts ChangeThisPls %><esc>/ChangeLabel\\|ChangeThisPls<return>
+      " Html Ruby Escape Javascript with partial
+      nnoremap <silent> ,hrej a<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %><esc>/ChangePath\\|ChangeLocals<return>
       
     " Html Form
       " Html Form WIth
@@ -578,9 +581,13 @@
         " Javascript jQiery Document On 
         nnoremap <silent> ,jqdo a$(document).on('ChangeEvents', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvents\\|ChangeSelectors<return>
         " Javascript jQiery Document Ready
-        nnoremap <silent> ,jqdr a// Make sure to include logic to prevent duplicate events<return><backspace><backspace><backspace>$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>function ChangeThisPlsSetUp() {<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
+        nnoremap <silent> ,jqdr a$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>// Make sure to include logic to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp() {<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
+        " Javascript jQiery Document Ready
+        nnoremap <silent> ,jqdR a$(document).ready(function(){<return>ChangeThisPlsSetUp<return>})<return>$(document).on('ajax:complete', function(){<return>ChangeThisPlsSetUp()<return>})<return>// Make sure to include logic to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp(){<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
         " Javascript jQiery Element On 
         nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
+        " Javascript jQiery Element On 
+        nnoremap <silent> ,jqht ahtml("<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>")<esc>/ChangePath\\|ChangeLocals<return>
 
     " Javascript Vanilla
         " Javascript Vanilla IF
@@ -623,6 +630,12 @@
         nnoremap <silent> ,jvde adocument.dispatchEvent(new Event('ChangeEvent'));<esc>/ChangeEvent<return>
         " Javascript Vanilla Dispatch Event
         nnoremap <silent> ,jvcs awindow.getComputedStyle(ChangeElement).changeStyle<esc>/ChangeElement\\|changeStyle<return>
+        " Javascript Vanilla Inner Html
+        nnoremap <silent> ,jvih ainnerHTML = "ChangeHTML"<esc>/ChangeHTML<return>
+        " Javascript Vanilla Append Html
+        nnoremap <silent> ,jvah ainnerHTML += "ChangeHTML"<esc>/ChangeHTML<return>
+        " Javascript Vanilla Prepend Html
+        nnoremap <silent> ,jvph ainnerHTML = "ChangeHTML" + ChangeElement.innerHTML<esc>/ChangeHTML\\|ChangeElement<return>
         
     " Javascript Ajax
         " Javascript Ajax BAse
