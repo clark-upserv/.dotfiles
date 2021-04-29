@@ -198,7 +198,15 @@
       " Html Elements STrong
       nnoremap <silent> ,hest a<strong>ChangeThisPls</strong><esc>/ChangeThisPls<return>
       " Html Elements BUtton
-      nnoremap <silent> ,hebu a<button class="btn btn-ChangeThisPls">ChangeThisPls</button><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hebu a<button class="btn btn-ChangeColor">ChangeText</button><esc>/ChangeColor\\|ChangeText<return>
+      " Html Elements Button Icon (classes only)
+      nnoremap <silent> ,hebi abtn-no-background px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
+      " Html Elements Button Icon (full)
+      nnoremap <silent> ,hebI a<button class="btn-no-background px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon"></button><esc>/ChangeColor\\|ChangeIcon<return>
+      " Html Elements Button Link (classes only)
+      nnoremap <silent> ,hebl abtn-no-background text-primary<esc>
+      " Html Elements Button Link (full)
+      nnoremap <silent> ,hebL a<button class="btn-no-background text-primary">ChangeText</button><esc>/ChangeText<return>
       " Html Elements TAble
       nnoremap <silent> ,heta a<table><esc>o</table><esc>k
       " Html Elements TAble
@@ -256,10 +264,22 @@
       nnoremap <silent> ,hren a<% end %><esc>
       " Html Ruby (erb) Link To
       nnoremap <silent> ,hrlt a<%= link_to(ChangeDisplay, ChangeUrl) %><esc>/ChangeDisplay\\|ChangeUrl<return>
-      " Html Ruby (erb) Link to Remote 
-      nnoremap <silent> ,hrlr a<%= link_to(ChangeThisPls, ChangeThisPls, remote: true, method: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
-      " Html Ruby (erb) Link to Block 
-      nnoremap <silent> ,hrlb a<%= link_to(ChangeThisPls) do %>ChangeThisPls<% end %><esc>/ChangeThisPls<return>
+      " Html Ruby (erb) Link to Icon (classes only)
+      nnoremap <silent> ,hrli apx-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
+      " Html Ruby (erb) Link to Icon (full)
+      nnoremap <silent> ,hrlI a<%= link_to('', ChangeUrl, class: 'px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon') %><esc>/ChangeUrl\\|ChangeColor\\|ChangeIcon<return>
+      " Html Ruby (erb) Link to Button (classes only)
+      nnoremap <silent> ,hrlb abtn btn-ChangeColor<esc>/ChangeColor<return>
+      " Html Ruby (erb) Link to Button (full)
+      nnoremap <silent> ,hrlB a<%= link_to(ChangeDisplay, ChangeUrl, class: 'btn btn-ChangeColor') %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeColor<return>
+      " Html Ruby (erb) Link to No href
+      nnoremap <silent> ,hrln a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor") %><esc>/ChangeDisplay\\|ChangeColor<return>
+      " Html Ruby (erb) Link to Modal
+      nnoremap <silent> ,hrlM a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor", data: { toggle: "modal", target: "#ChangeModalId" }) %><esc>/ChangeDisplay\\|ChangeColor\\|ChangeModalId<return>
+      " Html Ruby (erb) Link to Remote (attributes only)
+      nnoremap <silent> ,hrlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
+      " Html Ruby (erb) Link to Remote (full)
+      nnoremap <silent> ,hrlR a<%= link_to(ChangeDisplay, ChangeUrl, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeMethod<return>
       " Html Ruby (erb) Image Tag
       nnoremap <silent> ,hrit a<%= image_tag(ChangeThisPls, alt: 'ChangeThisPls', width: 'ChangeThisPls', height: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
       " Html Ruby (erb) Javascript Tag
@@ -311,9 +331,9 @@
       " Html form Show element SImple
       nnoremap <silent> ,hssi a<div class="sse">ChangeThisPls</div><esc>/ChangeThisPls<return>
       " Html form Show show edit swap Edit Button
-      nnoremap <silent> ,hseb a<button class="btn btn-primary ChangeSesId-edit-button">ChangeDisplay</button><esc>/ChangeSesId\\|ChangeDisplay<return>
+      nnoremap <silent> ,hseb a<a class="btn btn-primary text-whitetext-whitetext-white   ChangeSesId-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
       " Html form Show show edit swap Edit button Icon
-      nnoremap <silent> ,hsei a<a class="px-3 c-pointer text-primary fs-4 mdi mdi-edit ChangeSesId-edit-button"></a><esc>/ChangeSesId<return>
+      nnoremap <silent> ,hsei a<a class="c-pointer text-primary px-3 fs-4 mdi mdi-edit ChangeSesId-edit-button"></a><esc>/ChangeSesId<return>
 
     " Html form Inputs
       " Html form Input Left Label wrapper
@@ -661,6 +681,8 @@
         nnoremap <silent> ,jvah ainnerHTML += "ChangeHTML"<esc>/ChangeHTML<return>
         " Javascript Vanilla Prepend Html
         nnoremap <silent> ,jvph ainnerHTML = "ChangeHTML" + ChangeElement.innerHTML<esc>/ChangeHTML\\|ChangeElement<return>
+        " Javascript Vanilla Get Computed style
+        nnoremap <silent> ,jvgc awindow.getComputedStyle(ChangeElement, null)<esc>/ChangeElement<return>
         
     " Javascript Ajax
         " Javascript Ajax BAse
