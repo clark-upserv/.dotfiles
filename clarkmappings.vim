@@ -21,6 +21,7 @@
 "     Javascript Vanillia
 "     Javascript jQuery
 "   Tests
+"   Packages
 "       
 "   
 " Caps lock in insert mode (press ctrl - ^ to toggle)
@@ -366,7 +367,7 @@
       " Html form Input Hidden field Tag
       nnoremap <silent> ,hiht a<%= hidden_field_tag(:ChangeThisPls, ChangeThisPls) %><esc>/ChangeThisPls<return>
       " Html form Input Text Field
-      nnoremap <silent> ,hitf a<%= ChangeThisPls_form.text_field(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hitf a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>maxlength: 'ChangeMaxLength'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|true\\|ChangeAutocomplete\\|ChangePlaceholder\\|ChangeMaxLength<return>
       " Html form Input Text Area
       nnoremap <silent> ,hita a<%= ChangeThisPls_form.text_area(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
       " Html form Input Rich Text
@@ -392,11 +393,11 @@
       " Html form Input Password Confirmation
       nnoremap <silent> ,hipc a<%= ChangeThisPls_form.password_field(:password_confirmation, class: 'form-control') %><esc>/ChangeThisPls<return>
       " Html form Input SElect
-      nnoremap <silent> ,hise a<%= ChangeThisPls_form.select(:ChangeThisPls , [], { include_blank: "Select" }, { class: 'form-control' }) %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hise a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>ChangeOptionsArray,<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|autofocus\\|required<return>
       " Html form Input Select Options for select
-      nnoremap <silent> ,hiso a<%= ChangeThisPls_form.select(:ChangeThisPls , options_for_select(ChangeThisPls, ChangeThisPls), { include_blank: "Select" }, { class: 'form-control' }) %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hiso a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>options_for_select(ChangeOptionsArray, ChangeSelectedOption),<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|ChangeSelectedOption\\|autofocus\\|required<return>
       " Html form Input Select Grouped options for select
-      nnoremap <silent> ,hisg a<%= ChangeThisPls_form.select(:ChangeThisPls , grouped_options_for_select(ChangeThisPls, ChangeThisPls), { include_blank: "Select" }, { class: 'form-control' }) %><esc>/ChangeThisPls<return>
+      nnoremap <silent> ,hisg a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>grouped_options_for_select(ChangeOptionsHash, ChangeSelectedOption),<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsHash\\|ChangeSelectedOption\\|autofocus\\|required<return>
       " Html form Input Select Block
       nnoremap <silent> ,hisb a<%= ChangeThisPls_form.select(:ChangeThisPls , [], { include_blank: "Select" }, { class: 'form-control' }) do %><esc>o<% end %><esc>/ChangeThisPls<return>
       " Html form Input OPtion
@@ -618,22 +619,26 @@
         nnoremap <silent> ,jqsi a$('#ChangeId')<esc>/ChangeId<return>
         " Javascript jQiery Select Attribute
         nnoremap <silent> ,jqsa a$('[ChangeAttribute]')<esc>/ChangeAttribute\\|ChangeValue<return>
-        " Javascript jQiery Select attribute Value
-        nnoremap <silent> ,jqsv a$("[ChangeAttribute='ChangeValue']")<esc>/ChangeAttribute\\|ChangeValue<return>
         " Javascript jQiery Select Data attribute
         nnoremap <silent> ,jqsd a$('[data-ChangeAttribute]')<esc>/ChangeAttribute<return>
         " Javascript jQiery Select attribute contains *
         nnoremap <silent> ,jqs* a$("[ChangeAttribute*='ChangeString']")<esc>/ChangeAttribute\\|ChangeString<return>
+        " Javascript jQiery Select attribute Value
+        nnoremap <silent> ,jqsv a$("[ChangeAttribute='ChangeValue']")<esc>/ChangeAttribute\\|ChangeValue<return>
         " Javascript jQiery Document On 
         nnoremap <silent> ,jqdo a$(document).on('ChangeEvents', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvents\\|ChangeSelectors<return>
-        " Javascript jQiery Document Ready
-        nnoremap <silent> ,jqdr a$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>// Make sure to include logic to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp() {<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
-        " Javascript jQiery Document Ready
-        nnoremap <silent> ,jqdR a$(document).ready(function(){<return>ChangeThisPlsSetUp()<return>})<return>$(document).on('ajax:complete', function(){<return>ChangeThisPlsSetUp()<return>})<return>// Make sure to include logic to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp(){<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
         " Javascript jQiery Element On 
         nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
-        " Javascript jQiery Element On 
-        nnoremap <silent> ,jqht ahtml("<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>")<esc>/ChangePath\\|ChangeLocals<return>
+        " Javascript jQiery Document Ready
+        nnoremap <silent> ,jqdr a$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp() {<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
+        " Javascript jQiery Document Ready (full)
+        nnoremap <silent> ,jqdR a$(document).ready(function(){<return>ChangeThisPlsSetUp()<return>})<return>$(document).on('ajax:complete', function(){<return>ChangeThisPlsSetUp()<return>})<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp(){<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
+        " Javascript jQiery html
+        nnoremap <silent> ,jqht ahtml("ChangeHtml")<esc>/ChangeHtml<return>
+        " Javascript jQiery html (full)
+        nnoremap <silent> ,jqhT ahtml("<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>")<esc>/ChangePath\\|ChangeLocals<return>
+        " Javascript jQiery EAch 
+        nnoremap <silent> ,jqea aeach(function(index){<return>})<esc>O
 
     " Javascript Vanilla
         " Javascript Vanilla IF
@@ -674,16 +679,16 @@
         nnoremap <silent> ,jval aalert(ChangeThisPls)<esc>/ChangeThisPls<return>
         " Javascript Vanilla Dispatch Event
         nnoremap <silent> ,jvde adocument.dispatchEvent(new Event('ChangeEvent'));<esc>/ChangeEvent<return>
-        " Javascript Vanilla Dispatch Event
-        nnoremap <silent> ,jvcs awindow.getComputedStyle(ChangeElement).changeStyle<esc>/ChangeElement\\|changeStyle<return>
         " Javascript Vanilla Inner Html
         nnoremap <silent> ,jvih ainnerHTML = "ChangeHTML"<esc>/ChangeHTML<return>
+        " Javascript Vanilla Inner Html (full)
+        nnoremap <silent> ,jviH ainnerHTML = "<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>"<esc>/ChangePath\\|ChangeLocals<return>
         " Javascript Vanilla Append Html
         nnoremap <silent> ,jvah ainnerHTML += "ChangeHTML"<esc>/ChangeHTML<return>
         " Javascript Vanilla Prepend Html
         nnoremap <silent> ,jvph ainnerHTML = "ChangeHTML" + ChangeElement.innerHTML<esc>/ChangeHTML\\|ChangeElement<return>
         " Javascript Vanilla Get Computed style
-        nnoremap <silent> ,jvgc awindow.getComputedStyle(ChangeElement, null)<esc>/ChangeElement<return>
+        nnoremap <silent> ,jvgc agetComputedStyle(ChangeElement, null).ChangeStyle<esc>/ChangeElement\\|ChangeStyle<return>
         
     " Javascript Ajax
         " Javascript Ajax BAse
@@ -737,4 +742,12 @@
     " Integration
       " Tests Integration BAse
       nnoremap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathToTest\\|ChangeThisPls\\|ChangePermission\\|DeleteThisIfNotNecessary<return>
+
+  " Packages
+    " Sortable Table positions
+      " Controller
+      nnoremap <silent> ,pstc :read ../templates/packages/sortable_table_positions/controller.rb<return>/ChangeParentModel\\|ChangeParent\\|ChangeAuth\\|DeleteThis\\|ChangeChildren\\|ChangeChild\\|ChangeStpId<return>
+      " View
+      nnoremap <silent> ,pstv :read ../templates/packages/sortable_table_positions/view.html.erb<return>/ChangeStpId\\|ChangePath\\|ChangeStpIdForm\\|ChangeParent\\|ChangeChildren\\|ChangeChild\\|DeleteThis\\|ChangeFinalHiddenRowHeight<return>
+
 
