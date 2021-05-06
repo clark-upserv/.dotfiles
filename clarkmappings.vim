@@ -231,7 +231,7 @@
     " Embedded Ruby Link to No href
     nnoremap <silent> ,erln a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor") %><esc>/ChangeDisplay\\|ChangeColor<return>
     " Embedded Ruby Link to Modal
-    nnoremap <silent> ,erlM a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor", data: { toggle: "modal", target: "#ChangeModalId" }) %><esc>/ChangeDisplay\\|ChangeColor\\|ChangeModalId<return>
+    nnoremap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor", data: { toggle: "modal", target: "#ChangeModalId" }) %><esc>/ChangeDisplay\\|ChangeColor\\|ChangeModalId<return>
     " Embedded Ruby Link to Remote (attributes only)
     nnoremap <silent> ,erlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
     " Embedded Ruby Link to Remote (full)
@@ -464,6 +464,15 @@
     nnoremap <silent> ,rbcn acan?(:ChangeNamespace_ChangeVerb, :ChangeObjects)<esc>/ChangeNamespace\\|ChangeVerb\\|ChangeObjects<return>
     " Ruby Basic Interpolated String
     nnoremap <silent> ,rbis a#{}<esc>i
+    " Ruby Basic ORder
+    nnoremap <silent> ,rbor aorder(:ChangeAttribute)<esc>/ChangeAttribute<return>
+    " Ruby Basic Order Descending
+    nnoremap <silent> ,rbod aorder(ChangeAttribute: :desc)<esc>/ChangeAttribute<return>
+    " Ruby Basic Order Case insensitive
+    nnoremap <silent> ,rboc aorder("LOWER(ChangeAttribute)")<esc>/ChangeAttribute<return>
+    " Ruby Basic ORder (full)
+    nnoremap <silent> ,rboR aorder("LOWER(ChangeAttribute) DESC")<esc>/ChangeAttribute<return>
+
 
   " Ruby model mappings
     " Ruby Models Can Model based
@@ -692,11 +701,11 @@
       " Javascript Ajax BAse
       nnoremap <silent> ,jaba :read ../templates/views/ajax/base.js.erb<return>ggdd/DeleteThis<return>
       " Javascript Ajax SUccess
-      nnoremap <silent> ,jasu :read ../templates/views/ajax/success.js.erb<return>/CopyIdFromView\\|CopyPathFromView\\|ChangeLocals\\|DeleteThis<return>
+      nnoremap <silent> ,jasu :read ../templates/views/ajax/success.js.erb<return>/ChangeThisPls\\|CopyIdFromView\\|CopyPathFromView\\|ChangeLocals\\|DeleteThis<return>
       " Javascript Ajax Invalid Create
-      nnoremap <silent> ,jaic :read ../templates/views/ajax/invalid_create.js.erb<return>/CopyIdFromView\\|CopyPathFromView\\|ChangeObject\\|ChangeModel<return>
+      nnoremap <silent> ,jaic :read ../templates/views/ajax/invalid_create.js.erb<return>/ChangeSesId\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls\\|ChangeModel<return>
       " Javascript Ajax Invalid Update
-      nnoremap <silent> ,jaiu :read ../templates/views/ajax/invalid_update.js.erb<return>/CopyIdFromView\\|CopyPathFromView\\|ChangeObject<return>
+      nnoremap <silent> ,jaiu :read ../templates/views/ajax/invalid_update.js.erb<return>/ChangeSesId\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls<return>
       " Javascript Ajax Close Modal
       nnoremap <silent> ,jacm :read ../templates/views/ajax/close_modal.js.erb<return>
 " Tests
