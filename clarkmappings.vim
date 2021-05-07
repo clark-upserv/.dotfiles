@@ -83,6 +83,7 @@
   " NOTE: this will delete first word if line has no indentation...
   nmap <silent> ,mdf A<esc>whvvxi<backspace><esc>
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
+  nnoremap <silent> ,mmno_href_comment a<%# DeleteThis: if styling like link, keep "no-href-link" class; if styling like icon, keep "no-href-icon" and add standard icon classes; if styling like button, remove both classes above and add standard button classes %>
 
 " File mappings
   "
@@ -191,13 +192,15 @@
     " View templates Mdoels BAse
     nnoremap <silent> ,vmba :read ../templates/views/modals/base.html.erb<return>
     " View templates Models Contents Base
-    nnoremap <silent> ,vmcb :read ../templates/views/modals/contents_base.html.erb<return>/ChangeContent<return>
+    nnoremap <silent> ,vmcb :read ../templates/views/modals/contents_base.html.erb<return>/DeleteThis<return>
     " View templates Models Contents Destroy
     nnoremap <silent> ,vmcd :read ../templates/views/modals/contents_destroy.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeAttribute\\|ChangeUrl\\|SetToTrueOrRemove<return>
     " View templates Models Contents Image
     nnoremap <silent> ,vmci :read ../templates/views/modals/contents_image.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeProcessedAttribute<return>
     " View templates Mdoels Header Base
     nnoremap <silent> ,vmhb :read ../templates/views/modals/header_base.html.erb<return>/ChangeIconColor\\|DeleteThis\\|ChangeIconType\\|ChangeTitle<return>
+    " View templates Mdoels Close button Group
+    nmap <silent> ,vmcg :read ../templates/views/modals/close_button_base.html.erb<return>/DeleteThis<return>
 
 " Embedded
   " Embedded Ruby
@@ -233,8 +236,6 @@
     nnoremap <silent> ,eren a<% end %><esc>
     " Embedded Ruby Link To
     nnoremap <silent> ,erlt a<%= link_to(ChangeDisplay, ChangeUrl_url) %><esc>/ChangeDisplay\\|ChangeUrl<return>
-    " Embedded Ruby Link to Ajax
-    nnoremap <silent> ,erla a<%= link_to(ChangeDisplay, ChangeUrl_url, method: :ChangeMethod, remote: true) %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeMethod<return>
     " Embedded Ruby Link to Icon (classes only)
     nnoremap <silent> ,erli apx-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
     " Embedded Ruby Link to Icon (full)
@@ -243,10 +244,12 @@
     nnoremap <silent> ,erlb abtn btn-ChangeColor<esc>/ChangeColor<return>
     " Embedded Ruby Link to Button (full)
     nnoremap <silent> ,erlB a<%= link_to(ChangeDisplay, ChangeUrl_url, class: 'btn btn-ChangeColor') %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeColor<return>
+    " Embedded Ruby Link to Ajax
+    nnoremap <silent> ,erla a<%= link_to(ChangeDisplay, ChangeUrl_url, method: :ChangeMethod, remote: true) %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeMethod<return>
     " Embedded Ruby Link to No href
-    nnoremap <silent> ,erln a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor") %><esc>/ChangeDisplay\\|ChangeColor<return>
+    nmap <silent> ,erln a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon") %><return><esc>,mmno_href_comment<esc>/ChangeDisplay\\|no-href-link\\|no-href-icon\\|DeleteThis<return>
     " Embedded Ruby Link to Modal
-    nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor", data: { toggle: "modal", target: "#ChangeModalId-#{ChangeErbIfNecessary}-modal" }) %><esc>,ermc/ChangeDisplay\\|ChangeColor\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
+    nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon", data: { toggle: "modal", target: "#ChangeModalId-#{ChangeErbIfNecessary}-modal" }) %><return><esc>,mmno_href_comment<esc>,ermc/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
     " Embedded Ruby Modal Container
     nmap <silent> ,ermc :read ../templates/views/elements/buttons_and_links/modal_container_after_modal_button.html.erb<return>/ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
     " Embedded Ruby Link to Remote (attributes only)
@@ -283,13 +286,13 @@
     " Html Elements BUtton
     nnoremap <silent> ,hebu a<button class="btn btn-ChangeColor">ChangeText</button><esc>/ChangeColor\\|ChangeText<return>
     " Html Elements Button Icon (classes only)
-    nnoremap <silent> ,hebi abtn-no-background px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
+    nnoremap <silent> ,hebi abtn-icon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
     " Html Elements Button Icon (full)
-    nnoremap <silent> ,hebI a<button class="btn-no-background px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon"></button><esc>/ChangeColor\\|ChangeIcon<return>
+    nnoremap <silent> ,hebI a<button class="btn-icon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon"></button><esc>/ChangeColor\\|ChangeIcon<return>
     " Html Elements Button Link (classes only)
-    nnoremap <silent> ,hebl abtn-no-background text-primary<esc>
+    nnoremap <silent> ,hebl abtn-link<esc>
     " Html Elements Button Link (full)
-    nnoremap <silent> ,hebL a<button class="btn-no-background text-primary">ChangeText</button><esc>/ChangeText<return>
+    nnoremap <silent> ,hebL a<button class="btn-link">ChangeText</button><esc>/ChangeText<return>
     " Html Elements TAble
     nnoremap <silent> ,heta a<table><esc>o</table><esc>k
     " Html Elements TAble
@@ -351,15 +354,19 @@
     " Html form Show element SImple
     nnoremap <silent> ,hssi a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
     " Html form Show show edit swap Edit Button
-    nnoremap <silent> ,hseb a<a class="btn btn-primary text-whitetext-whitetext-white   ChangeSesId-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
+    nnoremap <silent> ,hseb a<a class="btn btn-primary ChangeSesId-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
     " Html form Show show edit swap Edit button Icon
-    nnoremap <silent> ,hsei a<a class="c-pointer text-primary px-3 fs-4 mdi mdi-edit ChangeSesId-edit-button"></a><esc>/ChangeSesId<return>
+    nnoremap <silent> ,hsei a<a class="no-href-icon px-3 fs-4 text-primary mdi mdi-edit ChangeSesId-edit-button"></a><esc>/ChangeSesId<return>
+    " Html form Show show edit swap Edit button Link
+    nnoremap <silent> ,hsel a<a class="no-href-link ChangeSesId-edit-button"></a><esc>/ChangeSesId<return>
+    " Html form Show show edit swap Edit button Modal (data attribute only)
+    nnoremap <silent> ,hsem adata-toggle="modal" data-target="ChangeModalId-<% ChangeErbIfNecessary %>-modal"<esc>/ChangeModalId\\|ChangeErbIfNecessary<return>
 
   " Html form Inputs
     " Html form Input Left Label wrapper
     nmap <silent> ,hill a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group col-12 pr-0"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Input Group OR Cancel & Submit buttons %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
     " Html form Top Label (for top label)
-    nmap <silent> ,hitl a<div class="form-row"><return><%#<delete> DeleteThis - insert Input Group OR Cancel & Submit buttons %><return></div><esc>/DeleteThis<return>
+    nmap <silent> ,hitl a<div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Input Group OR Cancel & Submit buttons %><return></div><esc>/DeleteThis<return>
     " Html form Input ROw (for top label)
     nmap <silent> ,hiro a<div class="form-row"><return></div><esc>,O
     " Html form Input Group 1
@@ -372,8 +379,10 @@
     nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
     " Html form Input Group Cancel & submit buttons
     nmap <silent> ,higc :read ../templates/views/elements/buttons_and_links/cancel_and_submit_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
-    " Html form Input Group Cancel & submit icons
+    " Html form Input Group cancel & submit Icons
     nmap <silent> ,higi :read ../templates/views/elements/buttons_and_links/cancel_and_submit_button_icons.html.erb<return>/ChangeSesId<return>
+    " Html form Input Group cancel & submit from Modal
+    nmap <silent> ,higm :read ../templates/views/elements/buttons_and_links/cancel_and_submit_modal_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
     " Htmo form Input ATtrubutes common
     nnoremap <silent> ,hiat a, <return>autofocus: true, <return>autocomplete: 'ChangeThisPls', <return>placeholder: 'ChangeThisPls', <return>required: true <return><esc>/ChangeThisPls<return>
     " Htmo form Input common ATtrubutes full
@@ -423,9 +432,11 @@
     " Html form Input Inline Errors
     nnoremap <silent> ,hiie a<%= render(partial: 'shared/inline_errors', locals: { errors: ChangeObject.errors.messages[:ChangeAttribute] }) %><esc>/ChangeObject\\|ChangeAttribute<return>
     " Html form Input SUbmit
-    nnoremap <silent> ,hisu a<%= ChangeThisPls_form.submit(:ChangeThisPls, class: 'btn btn-ChangeThisPls') %><esc>/ChangeThisPls<return>
-    " Html Form Submit with Image
-    nnoremap <silent> ,hfsi a<%= image_submit_tag(ChangeThisPls, alt: 'ChangeThisPls', width: 'ChangeThisPls', height: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
+    nnoremap <silent> ,hisu a<%= ChangeThisPls_form.submit(:ChangeDisplay, class: 'btn btn-ChangeColor') %><esc>/ChangeDisplay\\|ChangeColor<return>
+    " Html form Input Submit Link
+    nnoremap <silent> ,hisl a<%= ChangeThisPls_form.submit(:ChangeDisplay, class: 'btn-link') %><esc>/ChangeDisplay<return>
+    " Html Form Input Submit with Image
+    nnoremap <silent> ,hisi a<%= image_submit_tag('ChangePathAndFileName', alt: 'ChangeAltText', width: 'ChangeWidth', height: 'auto') %><esc>/ChangePathAndFileName\\|ChangeAltText\\|ChangeWidth<return>
     " Html Form CUstom Field
     nnoremap <silent> ,hicu a<%= ChangeThisPls_form.ChangeThisPls(:ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
 
