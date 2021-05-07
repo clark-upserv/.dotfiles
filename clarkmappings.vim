@@ -5,7 +5,7 @@
 "   Files / Create
 "   View templates
 "   Erb
-"   Html 
+"   Html
 "     Html Elements
 "     Html Forms
 "     Html form Inputs
@@ -20,10 +20,12 @@
 "   Javascript
 "     Javascript Vanillia
 "     Javascript jQuery
+"   Stylesheets
+"     Stylesheets Base
 "   Tests
 "   Packages
-"       
-"   
+"
+"
 " random one off stuff
   " Caps lock in insert mode (press ctrl - ^ to toggle)
     " Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
@@ -34,8 +36,8 @@
     " Kill the capslock when leaving insert mode.
     autocmd InsertLeave * set iminsert=0
 
-  " insert mode only mappings 
-    " single key mappings 
+  " insert mode only mappings
+    " single key mappings
       " prevent return from autocomplete (very annoying because to return you have
       " to hit space then return. Now, tab does autocomplete and return does
       " return
@@ -69,7 +71,7 @@
   nnoremap <silent> ,,// I<delete><delete><esc>0
   nnoremap <silent> ,/* O/*<esc>o*/<esc>Vx0
   nnoremap <silent> ,< O<!--<esc>o--><esc>Vx0
-  "nnoremap <silent> 
+  "nnoremap <silent>
 
 " Misc. mapping / messages
   " Misc. Reload Source
@@ -178,16 +180,27 @@
   " View templates Show edit swap BAse
     " View templates card Body Single show Edit swap
     nmap <silent> ,vsba :read ../templates/views/show_edit_swap/base.html.erb<return>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
-  " Tempaltes Forms
+  " Forms
     " View templates Forms BAse
     nnoremap <silent> ,vfba :read ../templates/views/forms/base.html.erb<return>/ChangeThisPls\\|DeleteThisPls<return>
     " View templates Forms non-standard forms Array Simple
     nnoremap <silent> ,vfas :read ../templates/views/forms/non_standard_forms/array_simple.html.erb<return>/ChangeModel\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ChangeAttributes\\|ChangeAttribute\\|ReplaceThis\\|DeleteThis:<return>
     " View templates Forms non-standard forms Array Hash
     nnoremap <silent> ,vfah :read ../templates/views/forms/non_standard_forms/array_hash.html.erb<return>/ChangeModel\\|ChangeScop\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ReplaceThis\\|DeleteThis:\\|ChangeAttribute<return>
-    
-" Embedded 
-  " Embedded Ruby 
+  " View templates Modals
+    " View templates Mdoels BAse
+    nnoremap <silent> ,vmba :read ../templates/views/modals/base.html.erb<return>
+    " View templates Models Contents Base
+    nnoremap <silent> ,vmcb :read ../templates/views/modals/contents_base.html.erb<return>/ChangeContent<return>
+    " View templates Models Contents Destroy
+    nnoremap <silent> ,vmcd :read ../templates/views/modals/contents_destroy.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeAttribute\\|ChangeUrl\\|SetToTrueOrRemove<return>
+    " View templates Models Contents Image
+    nnoremap <silent> ,vmci :read ../templates/views/modals/contents_image.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeProcessedAttribute<return>
+    " View templates Mdoels Header Base
+    nnoremap <silent> ,vmhb :read ../templates/views/modals/header_base.html.erb<return>/ChangeIconColor\\|DeleteThis\\|ChangeIconType\\|ChangeTitle<return>
+
+" Embedded
+  " Embedded Ruby
     " Embedded Ruby ERb
     nnoremap <silent> ,erer a<%  %><esc>hhh
     " Embedded Ruby Erb Entered
@@ -219,23 +232,27 @@
     " Embedded Ruby ENd
     nnoremap <silent> ,eren a<% end %><esc>
     " Embedded Ruby Link To
-    nnoremap <silent> ,erlt a<%= link_to(ChangeDisplay, ChangeUrl) %><esc>/ChangeDisplay\\|ChangeUrl<return>
+    nnoremap <silent> ,erlt a<%= link_to(ChangeDisplay, ChangeUrl_url) %><esc>/ChangeDisplay\\|ChangeUrl<return>
+    " Embedded Ruby Link to Ajax
+    nnoremap <silent> ,erla a<%= link_to(ChangeDisplay, ChangeUrl_url, method: :ChangeMethod, remote: true) %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeMethod<return>
     " Embedded Ruby Link to Icon (classes only)
     nnoremap <silent> ,erli apx-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
     " Embedded Ruby Link to Icon (full)
-    nnoremap <silent> ,erlI a<%= link_to('', ChangeUrl, class: 'px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon') %><esc>/ChangeUrl\\|ChangeColor\\|ChangeIcon<return>
+    nnoremap <silent> ,erlI a<%= link_to('', ChangeUrl_url, class: 'px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon') %><esc>/ChangeUrl\\|ChangeColor\\|ChangeIcon<return>
     " Embedded Ruby Link to Button (classes only)
     nnoremap <silent> ,erlb abtn btn-ChangeColor<esc>/ChangeColor<return>
     " Embedded Ruby Link to Button (full)
-    nnoremap <silent> ,erlB a<%= link_to(ChangeDisplay, ChangeUrl, class: 'btn btn-ChangeColor') %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeColor<return>
+    nnoremap <silent> ,erlB a<%= link_to(ChangeDisplay, ChangeUrl_url, class: 'btn btn-ChangeColor') %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeColor<return>
     " Embedded Ruby Link to No href
     nnoremap <silent> ,erln a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor") %><esc>/ChangeDisplay\\|ChangeColor<return>
     " Embedded Ruby Link to Modal
-    nnoremap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor", data: { toggle: "modal", target: "#ChangeModalId" }) %><esc>/ChangeDisplay\\|ChangeColor\\|ChangeModalId<return>
+    nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "c-pointer text-ChangeColor", data: { toggle: "modal", target: "#ChangeModalId-#{ChangeErbIfNecessary}-modal" }) %><esc>,ermc/ChangeDisplay\\|ChangeColor\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
+    " Embedded Ruby Modal Container
+    nmap <silent> ,ermc :read ../templates/views/elements/buttons_and_links/modal_container_after_modal_button.html.erb<return>/ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
     " Embedded Ruby Link to Remote (attributes only)
     nnoremap <silent> ,erlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
     " Embedded Ruby Link to Remote (full)
-    nnoremap <silent> ,erlR a<%= link_to(ChangeDisplay, ChangeUrl, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeMethod<return>
+    nnoremap <silent> ,erlR a<%= link_to(ChangeDisplay, ChangeUrl_url, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeMethod<return>
     " Embedded Ruby Image Tag
     nnoremap <silent> ,erit a<%= image_tag(ChangeThisPls, alt: 'ChangeThisPls', width: 'ChangeThisPls', height: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
     " Embedded Ruby Javascript Tag
@@ -251,7 +268,7 @@
     " Html Ruby Escape Javascript with partial
     nnoremap <silent> ,erej a<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %><esc>/ChangePath\\|ChangeLocals<return>
 
-" Html mappings  
+" Html mappings
   " Html Elements
     " Html Elements ATtributes
     nnoremap <silent> ,heat a <return>id="ChangeThisPls" <return>class="ChangeThisPls" <return>style="ChangeThisPls" <return>data-ChangeThisPls="ChangeThisPls"<return><esc>/ChangeThisPls<return>
@@ -296,8 +313,8 @@
     nnoremap <silent> ,heul a<ul><return><li>ChangeThisPls</li><return></ul><esc>/ChangeThisPls<return>
     " Html Elements CUstom
     nnoremap <silent> ,hecu a<ChangeThisPls></ChangeThisPls><esc>/ChangeThisPls<return>
-    
-    
+
+
   " Html Form
     " Html Form WIth
     nnoremap <silent> ,hfwi a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><esc>o<% end %><esc>/ChangeThisPls<return>
@@ -412,7 +429,7 @@
     " Html Form CUstom Field
     nnoremap <silent> ,hicu a<%= ChangeThisPls_form.ChangeThisPls(:ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
 
-" ruby mappings 
+" ruby mappings
   " ruby basics
     " Ruby Basic Frozen String
     nnoremap <silent> ,rbfs a# frozen_string_literal: true
@@ -424,7 +441,7 @@
     nnoremap <silent> ,rbew aeach_with_index do \|ChangeThisPls, index\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
     " Ruby Basic Each With index inline
     nnoremap <silent> ,rbeW aeach_with_index { \|ChangeThisPls, index\| ChangeThisPls }<esc>/ChangeThisPls<return>
-    " Ruby Basic MAp block 
+    " Ruby Basic MAp block
     nnoremap <silent> ,rbma amap do \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
     " Ruby Basic MAp inline
     nnoremap <silent> ,rbmA amap { <bar>ChangeThisPls<bar> ChangeThisPls }<esc>/ChangeThisPls<return>
@@ -450,9 +467,9 @@
     nnoremap <silent> ,rbte aChangeBoolean ? ChangeTrueResult : ChangeFalseResult<esc>/ChangeBoolean\\|ChangeTrueResult\\|ChangeFalseResult<return>
     " Ruby Basic Puts Debugger
     nnoremap <silent> ,rbpd aputs 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW'<return>puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW'<return>puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW'<return>puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW'<return>puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW'<return>puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW'<return>puts nil<return>puts 'ChangeLabel:'<return>puts ChangeThisPls<esc>/ChangeLabel\\|ChangeThisPls<return>
-    " Ruby Basic puts Json pretty Generate 
+    " Ruby Basic puts Json pretty Generate
     nnoremap <silent> ,rbjg aputs JSON.pretty_generate(ChangeHash)<esc>/ChangeHash<return>
-    " Ruby Basic puts Json pretty Generate 
+    " Ruby Basic puts Json pretty Generate
     nnoremap <silent> ,rbjp aJSON.parse(ChangeNonHash)<esc>/ChangeNonHash<return>
 
     nnoremap <silent> ,rbde adef <esc>oend<esc>kla
@@ -515,8 +532,8 @@
     nnoremap <silent> ,rmmo :read ../templates/models/models/module.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models SErvice
     nnoremap <silent> ,rmse :read ../templates/models/models/service.rb<return>ggdd/ChangeThisPls<return>
-    
-  " Ruby Routes 
+
+  " Ruby Routes
     " main routes
       " Ruby Routes NAmespace
       nnoremap <silent> ,rrna anamespace :ChangeThisPls do<return>end<esc>/ChangeThisPls<return>
@@ -528,12 +545,12 @@
       nnoremap <silent> ,rrgm aget 'ChangeThisPls/:id/ChangeThisPls', to: 'ChangeThisPls#ChangeThisPls', as: :ChangeThisPls_ChangeThisPls <esc>o# REMEMBER TO MAKE PARENT PLURAL ON INITIAL ARGUMENT AND "TO" BUT SINGULAR ON "AS"<esc>oExample: get 'users/:id/sub_profile', to: 'users#sub_profile', as: :user_subprofile<esc>oThis is because the helper method is pointing to a single user just like the show, edit, update and destroy actions<esc>ocore_user_subprofile_path is appropriate but core_users_subprofile_path is not<esc>/ChangeThisPls<return>
       " Ruby Routes GEt (for non-restful routes)
       nnoremap <silent> ,rrge aget 'ChangeThisPls', to: 'ChangeThisPls#ChangeThisPls'<esc>/ChangeThisPls<return>
-    " other routes 
+    " other routes
       "
       nnoremap <silent> ,rrsc ascope path: :ChangeThisPls, module: :ChangeThisPls, as: :ChangeThisPls do<return>end<esc>/ChangeThisPls<return>
       " Ruby Routes REsources full
       nnoremap <silent> ,rrrE aresources path: :ChangeThisPls, controller: :ChangeThisPls, as: :ChangeThisPls, only %i[index show create update destroy]<esc>/ChangeThisPls<return>
-      
+
       nnoremap <silent> ,rrra aresources path: :ChangeThisPls, module: :ChangeThisPls, as: :ChangeThisPls, only %i[] do<return>end<esc>/ChangeThisPls<return>
       "
       nnoremap <silent> ,rrme amember do<return>end<esc>O <backspace><esc>
@@ -587,7 +604,7 @@
     nnoremap <silent> ,rcis :read ../templates/controllers/actions/index_simple.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeVerb\\|ChangeObjects\\|DeleteThis<return>
     " Ruby Controllers Show Base
     nnoremap <silent> ,rcsb :read ../templates/controllers/actions/show_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis<return>
-    " Ruby Controllers Show Tab Router 
+    " Ruby Controllers Show Tab Router
     nnoremap <silent> ,rcsr :read ../templates/controllers/actions/show_router.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeUrl\\|DeleteThis<return>
     " Ruby Controllers Show for Tab
     nnoremap <silent> ,rcst :read ../templates/controllers/actions/show_tab.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeTab\\|DeleteThis<return>
@@ -616,98 +633,107 @@
     " Ruby Helpers BAse
     nnoremap <silent> ,rhba :read ../templates/helpers/base_helper.rb<return>ggdd/ChangeThisPls<return>
   "
-" javascript mappings 
-  " Javascript jQuery   
-      " Javascript jQiery Select Element
-      nnoremap <silent> ,jqse a$(ChangeElement)<esc>/ChangeElement<return>
-      " Javascript jQiery Select Class
-      nnoremap <silent> ,jqsc a$('.ChangeClass')<esc>/ChangeClass<return>
-      " Javascript jQiery Select Id
-      nnoremap <silent> ,jqsi a$('#ChangeId')<esc>/ChangeId<return>
-      " Javascript jQiery Select Attribute
-      nnoremap <silent> ,jqsa a$('[ChangeAttribute]')<esc>/ChangeAttribute\\|ChangeValue<return>
-      " Javascript jQiery Select Data attribute
-      nnoremap <silent> ,jqsd a$('[data-ChangeAttribute]')<esc>/ChangeAttribute<return>
-      " Javascript jQiery Select attribute contains *
-      nnoremap <silent> ,jqs* a$("[ChangeAttribute*='ChangeString']")<esc>/ChangeAttribute\\|ChangeString<return>
-      " Javascript jQiery Select attribute Value
-      nnoremap <silent> ,jqsv a$("[ChangeAttribute='ChangeValue']")<esc>/ChangeAttribute\\|ChangeValue<return>
-      " Javascript jQiery Document On 
-      nnoremap <silent> ,jqdo a$(document).on('ChangeEvents', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvents\\|ChangeSelectors<return>
-      " Javascript jQiery Element On 
-      nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
-      " Javascript jQiery Document Ready
-      nnoremap <silent> ,jqdr a$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp() {<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
-      " Javascript jQiery Document Ready (full)
-      nnoremap <silent> ,jqdR a$(document).ready(function(){<return>ChangeThisPlsSetUp()<return>})<return>$(document).on('ajax:complete', function(){<return>ChangeThisPlsSetUp()<return>})<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp(){<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
-      " Javascript jQiery html
-      nnoremap <silent> ,jqht ahtml("ChangeHtml")<esc>/ChangeHtml<return>
-      " Javascript jQiery html (full)
-      nnoremap <silent> ,jqhT ahtml("<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>")<esc>/ChangePath\\|ChangeLocals<return>
-      " Javascript jQiery EAch 
-      nnoremap <silent> ,jqea aeach(function(index, ChangeElementOrLeaveBlank){<return>})<esc>/ChangeElementOrLeaveBlank<return>
+" javascript mappings
+  " Javascript jQuery
+    " Javascript jQiery Select Element
+    nnoremap <silent> ,jqse a$(ChangeElement)<esc>/ChangeElement<return>
+    " Javascript jQiery Select Class
+    nnoremap <silent> ,jqsc a$('.ChangeClass')<esc>/ChangeClass<return>
+    " Javascript jQiery Select Id
+    nnoremap <silent> ,jqsi a$('#ChangeId')<esc>/ChangeId<return>
+    " Javascript jQiery Select Attribute
+    nnoremap <silent> ,jqsa a$('[ChangeAttribute]')<esc>/ChangeAttribute\\|ChangeValue<return>
+    " Javascript jQiery Select Data attribute
+    nnoremap <silent> ,jqsd a$('[data-ChangeAttribute]')<esc>/ChangeAttribute<return>
+    " Javascript jQiery Select attribute contains *
+    nnoremap <silent> ,jqs* a$("[ChangeAttribute*='ChangeString']")<esc>/ChangeAttribute\\|ChangeString<return>
+    " Javascript jQiery Select attribute Value
+    nnoremap <silent> ,jqsv a$("[ChangeAttribute='ChangeValue']")<esc>/ChangeAttribute\\|ChangeValue<return>
+    " Javascript jQiery Document On
+    nnoremap <silent> ,jqdo a$(document).on('ChangeEvents', 'ChangeSelectors', {}, function(event){})<esc>hi<return><esc>/ChangeEvents\\|ChangeSelectors<return>
+    " Javascript jQiery Element On
+    nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
+    " Javascript jQiery Document Ready
+    nnoremap <silent> ,jqdr a$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp() {<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
+    " Javascript jQiery Document Ready (full)
+    nnoremap <silent> ,jqdR a$(document).ready(function(){<return>ChangeThisPlsSetUp()<return>})<return>$(document).on('ajax:complete', function(){<return>ChangeThisPlsSetUp()<return>})<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp(){<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
+    " Javascript jQiery html
+    nnoremap <silent> ,jqht ahtml("ChangeHtml")<esc>/ChangeHtml<return>
+    " Javascript jQiery html (full)
+    nmap <silent> ,jqhT a$('#ChangeId').html("<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>")<esc>/ChangeId\\|ChangePath\\|ChangeLocals<return><n
+    " Javascript jQiery EAch
+    nnoremap <silent> ,jqea aeach(function(index, ChangeElementOrLeaveBlank){<return>})<esc>/ChangeElementOrLeaveBlank<return>
 
   " Javascript Vanilla
-      " Javascript Vanilla IF
-      nnoremap <silent> ,jvif aif (ChangeThisPls) {<return>}<esc>/ChangeThisPls<return>
-      " Javascript Vanilla IF inline
-      nnoremap <silent> ,jviF aif (ChangeThisPls) ChangeThisPls<esc>/ChangeThisPls<return>
-      " Javascript Vanilla If Else
-      nnoremap <silent> ,jvie aif (ChangeThisPls) {<return>} else {<return>}<esc>/ChangeThisPls<return>
-      " Javascript Vanilla If Else if else
-      nnoremap <silent> ,jviE aif (ChangeThisPls) {<return>} else if (ChangeThisPls) {<return>} else {<return>}<esc>/ChangeThisPls<return>
-      " Javascript Vanilla TErnary
-      nnoremap <silent> ,jvte aChangeBoolean ? ChangeTrueResult : ChangeFalseResult<esc>/ChangeBoolean\\|ChangeTrueResult\\|ChangeFalseResult<return>
-      " Javascrip Vanilla FOr
-      nnoremap <silent> ,jvfo afor (ChangeThisPls of ChangeThisPls) {<return>}<esc>/ChangeThisPls<return>
-      " Javascript Vanilla FUnction
-      nnoremap <silent> ,jvfu afunction ChangeThisPls(){<return>}<esc>/ChangeThisPls<return>
-      " Javascript Vanilla Get Attribute
-      nnoremap <silent> ,jvga agetAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
-      " Javascript Vanilla Add Attribute
-      nnoremap <silent> ,jvaa aaddAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
-      " Javascript Vanilla Remove Attribute
-      nnoremap <silent> ,jvra aremoveAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
-      " Javascript Vanilla Set Attribute
-      nnoremap <silent> ,jvsa asetAttribute('ChangeAttribute', 'ChangeValue')<esc>/ChangeAttribute\\|ChangeValue<return>
-      " Javascript Vanilla STyle
-      nnoremap <silent> ,jvst astyle.ChangeProperty = ChangeValue<esc>/ChangeProperty\\|ChangeValue<return>
-      " Javascript Vanilla Class list Contains
-      nnoremap <silent> ,jvcc aclassList.contains('ChangeClass')<esc>/ChangeClass<return>
-      " Javascript Vanilla Class list Add
-      nnoremap <silent> ,jvca aclassList.add('FirstClassToAdd')<esc>/FirstClassToAdd<return>
-      " Javascript Vanilla Class list Remove
-      nnoremap <silent> ,jvcr aclassList.remove('FirstClassToRemove')<esc>/FirstClassToRemove<return>
-      " Javascript Vanilla Class list Toggle
-      nnoremap <silent> ,jvct aclassList.toggle('ChangeClass')<esc>/ChangeClass<return>
-      " Javascript Vanilla Console Log
-      nnoremap <silent> ,jvcl aconsole.log(ChangeThisPls)<esc>/ChangeThisPls<return>
-      " Javascript Vanilla ALert
-      nnoremap <silent> ,jval aalert(ChangeThisPls)<esc>/ChangeThisPls<return>
-      " Javascript Vanilla Dispatch Event
-      nnoremap <silent> ,jvde adocument.dispatchEvent(new Event('ChangeEvent'));<esc>/ChangeEvent<return>
-      " Javascript Vanilla Inner Html
-      nnoremap <silent> ,jvih ainnerHTML = "ChangeHTML"<esc>/ChangeHTML<return>
-      " Javascript Vanilla Inner Html (full)
-      nnoremap <silent> ,jviH ainnerHTML = "<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>"<esc>/ChangePath\\|ChangeLocals<return>
-      " Javascript Vanilla Append Html
-      nnoremap <silent> ,jvah ainnerHTML += "ChangeHTML"<esc>/ChangeHTML<return>
-      " Javascript Vanilla Prepend Html
-      nnoremap <silent> ,jvph ainnerHTML = "ChangeHTML" + ChangeElement.innerHTML<esc>/ChangeHTML\\|ChangeElement<return>
-      " Javascript Vanilla Get Computed style
-      nnoremap <silent> ,jvgc agetComputedStyle(ChangeElement, null).ChangeStyle<esc>/ChangeElement\\|ChangeStyle<return>
-      
+    " Javascript Vanilla IF
+    nnoremap <silent> ,jvif aif (ChangeThisPls) {<return>}<esc>/ChangeThisPls<return>
+    " Javascript Vanilla IF inline
+    nnoremap <silent> ,jviF aif (ChangeThisPls) ChangeThisPls<esc>/ChangeThisPls<return>
+    " Javascript Vanilla If Else
+    nnoremap <silent> ,jvie aif (ChangeThisPls) {<return>} else {<return>}<esc>/ChangeThisPls<return>
+    " Javascript Vanilla If Else if else
+    nnoremap <silent> ,jviE aif (ChangeThisPls) {<return>} else if (ChangeThisPls) {<return>} else {<return>}<esc>/ChangeThisPls<return>
+    " Javascript Vanilla TErnary
+    nnoremap <silent> ,jvte aChangeBoolean ? ChangeTrueResult : ChangeFalseResult<esc>/ChangeBoolean\\|ChangeTrueResult\\|ChangeFalseResult<return>
+    " Javascrip Vanilla FOr
+    nnoremap <silent> ,jvfo afor (ChangeThisPls of ChangeThisPls) {<return>}<esc>/ChangeThisPls<return>
+    " Javascript Vanilla FUnction
+    nnoremap <silent> ,jvfu afunction ChangeThisPls(){<return>}<esc>/ChangeThisPls<return>
+    " Javascript Vanilla Get Attribute
+    nnoremap <silent> ,jvga agetAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
+    " Javascript Vanilla Add Attribute
+    nnoremap <silent> ,jvaa aaddAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
+    " Javascript Vanilla Remove Attribute
+    nnoremap <silent> ,jvra aremoveAttribute('ChangeAttribute')<esc>/ChangeAttribute<return>
+    " Javascript Vanilla Set Attribute
+    nnoremap <silent> ,jvsa asetAttribute('ChangeAttribute', 'ChangeValue')<esc>/ChangeAttribute\\|ChangeValue<return>
+    " Javascript Vanilla STyle
+    nnoremap <silent> ,jvst astyle.ChangeProperty = ChangeValue<esc>/ChangeProperty\\|ChangeValue<return>
+    " Javascript Vanilla Class list Contains
+    nnoremap <silent> ,jvcc aclassList.contains('ChangeClass')<esc>/ChangeClass<return>
+    " Javascript Vanilla Class list Add
+    nnoremap <silent> ,jvca aclassList.add('FirstClassToAdd')<esc>/FirstClassToAdd<return>
+    " Javascript Vanilla Class list Remove
+    nnoremap <silent> ,jvcr aclassList.remove('FirstClassToRemove')<esc>/FirstClassToRemove<return>
+    " Javascript Vanilla Class list Toggle
+    nnoremap <silent> ,jvct aclassList.toggle('ChangeClass')<esc>/ChangeClass<return>
+    " Javascript Vanilla Console Log
+    nnoremap <silent> ,jvcl aconsole.log(ChangeThisPls)<esc>/ChangeThisPls<return>
+    " Javascript Vanilla ALert
+    nnoremap <silent> ,jval aalert(ChangeThisPls)<esc>/ChangeThisPls<return>
+    " Javascript Vanilla Dispatch Event
+    nnoremap <silent> ,jvde adocument.dispatchEvent(new Event('ChangeEvent'));<esc>/ChangeEvent<return>
+    " Javascript Vanilla Inner Html
+    nnoremap <silent> ,jvih ainnerHTML = "ChangeHTML"<esc>/ChangeHTML<return>
+    " Javascript Vanilla Inner Html (full)
+    nnoremap <silent> ,jviH ainnerHTML = "<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>"<esc>/ChangePath\\|ChangeLocals<return>
+    " Javascript Vanilla Append Html
+    nnoremap <silent> ,jvah ainnerHTML += "ChangeHTML"<esc>/ChangeHTML<return>
+    " Javascript Vanilla Prepend Html
+    nnoremap <silent> ,jvph ainnerHTML = "ChangeHTML" + ChangeElement.innerHTML<esc>/ChangeHTML\\|ChangeElement<return>
+    " Javascript Vanilla Get Computed style
+    nnoremap <silent> ,jvgc agetComputedStyle(ChangeElement, null).ChangeStyle<esc>/ChangeElement\\|ChangeStyle<return>
+
   " Javascript Ajax
-      " Javascript Ajax BAse
-      nnoremap <silent> ,jaba :read ../templates/views/ajax/base.js.erb<return>ggdd/DeleteThis<return>
-      " Javascript Ajax SUccess
-      nnoremap <silent> ,jasu :read ../templates/views/ajax/success.js.erb<return>/ChangeThisPls\\|CopyIdFromView\\|CopyPathFromView\\|ChangeLocals\\|DeleteThis<return>
-      " Javascript Ajax Invalid Create
-      nnoremap <silent> ,jaic :read ../templates/views/ajax/invalid_create.js.erb<return>/ChangeSesId\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls\\|ChangeModel<return>
-      " Javascript Ajax Invalid Update
-      nnoremap <silent> ,jaiu :read ../templates/views/ajax/invalid_update.js.erb<return>/ChangeSesId\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls<return>
-      " Javascript Ajax Close Modal
-      nnoremap <silent> ,jacm :read ../templates/views/ajax/close_modal.js.erb<return>
+    " Javascript Ajax BAse
+    nnoremap <silent> ,jaba :read ../templates/javascript/ajax/base.js.erb<return>ggdd/DeleteThis<return>
+    " Javascript Ajax SUccess
+    nnoremap <silent> ,jasu :read ../templates/javascript/ajax/success.js.erb<return>/ChangeThisPls\\|CopyIdFromView\\|CopyPathFromView\\|ChangeLocals\\|DeleteThis<return>
+    " Javascript Ajax Invalid Create
+    nnoremap <silent> ,jaic :read ../templates/javascript/ajax/invalid_create.js.erb<return>/ChangeSesId\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls\\|ChangeModel<return>
+    " Javascript Ajax Invalid Update
+    nnoremap <silent> ,jaiu :read ../templates/javascript/ajax/invalid_update.js.erb<return>/ChangeSesId\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls<return>
+
+
+" Stylesheet mappings
+  " Stylesheet Base
+    " Stylesheet Base Icon Options
+    nnoremap <silent> ,sbio amdi-edit, mdi-delete, mdi-more, mdi-plus-circle-o, mdi-check, mdi-info-outline, mdi-alert-triangle, mdi-close-circle-o
+    " Stylesheet Base Text Colors
+    nnoremap <silent> ,sbtc atext-primary,text-secondary,text-danger, text-warning, text-warning-2
+
+
+
 " Tests
   " Base
     " Tests Base TEst
