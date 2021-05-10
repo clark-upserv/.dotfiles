@@ -160,7 +160,13 @@
 " View templates Mappings
   "  View templates Page
     " View templates Page BAse
-    nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThisPls\\|ChangeTemplate\\|ChangePath\\|ChangeLocals\\|InsertSingleStylesheet\\|InsertPack\\|Etc.<return>
+    nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThisPls\\|ChangeTemplate\\|ChangePath\\|ChangeLocals<return>
+    " View templates Page STylesheets
+    nnoremap <silent> ,vpst :read ../templates/views/page/stylesheets.html.erb<return>/DeleteThisNote\\|ChangePath<return>
+    " View templates Page Javascript Packs
+    nnoremap <silent> ,vpjp :read ../templates/views/page/javascript_packs.html.erb<return>/DeleteThisNote\\|ChangePath\\|Etc\.<return>
+    " View templates Page End of Body
+    nnoremap <silent> ,vpeb :read ../templates/views/page/end_of_body.html.erb<return>/DeleteThisNote\\|ChangePath<return>
     " View templates Page Header Base
     nnoremap <silent> ,vphb :read ../templates/views/page/header_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangeUrl<return>
     " View templates Page TAbs base
@@ -264,9 +270,9 @@
     " Embedded Ruby Image Tag
     nnoremap <silent> ,erit a<%= image_tag(ChangeThisPls, alt: 'ChangeThisPls', width: 'ChangeThisPls', height: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
     " Embedded Ruby Javascript Tag
-    nnoremap <silent> ,erjt a<%= javascript_include_tag('ChangeThisPls') %><esc>/ChangeThisPls<return>
+    nnoremap <silent> ,erjt a<%= javascript_include_tag('ChangePath') %><esc>/ChangePath<return>
     " Embedded Ruby Javascript Pack
-    nnoremap <silent> ,erjp a<%= javascript_pack_tag('ChangeThisPls', 'data-turbolinks-track': 'reload') %><esc>/ChangeThisPls<return>
+    nnoremap <silent> ,erjp a<%= javascript_pack_tag('ChangePath', 'data-turbolinks-track': 'reload') %><esc>/ChangePath<return>
     " Embedded Ruby StyleSheet
     nnoremap <silent> ,erss a<%= stylesheet_link_tag('ChangeThisPls') %><esc>/ChangeThisPls<return>
     " Embedded Ruby PArtial
