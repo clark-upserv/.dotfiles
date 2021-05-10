@@ -180,7 +180,7 @@
     nnoremap <silent> ,vbse :read ../templates/views/card_body/single_show_edit_swap.html.erb<return>/ChangeThisPls<return>
   " View templates Show edit swap BAse
     " View templates card Body Single show Edit swap
-    nmap <silent> ,vsba :read ../templates/views/show_edit_swap/base.html.erb<return>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,vsba :read ../templates/views/show_edit_swap/base.html.erb<return>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
   " Forms
     " View templates Forms BAse
     nnoremap <silent> ,vfba :read ../templates/views/forms/base.html.erb<return>/ChangeThisPls\\|DeleteThisPls<return>
@@ -264,8 +264,12 @@
     nnoremap <silent> ,erjp a<%= javascript_pack_tag('ChangeThisPls', 'data-turbolinks-track': 'reload') %><esc>/ChangeThisPls<return>
     " Embedded Ruby StyleSheet
     nnoremap <silent> ,erss a<%= stylesheet_link_tag('ChangeThisPls') %><esc>/ChangeThisPls<return>
-    " Embedded Ruby Partial
-    nnoremap <silent> ,erpa a<%= render(partial: 'ChangeThisPls', locals: { ChangeThisPls }) %><esc>/ChangeThisPls<return>
+    " Embedded Ruby PArtial
+    nnoremap <silent> ,erpa a<%= render(partial: 'ChangePath', locals: { ChangeLocals }) %><esc>/ChangePath\\|ChangeLocals<return>
+    " Embedded Ruby PArtial (full)
+    nnoremap <silent> ,erpA a<div id="ChangeId"><return><%= render(partial: 'ChangePath', locals: { ChangeLocals }) %><return></div><esc>/ChangeId\\|ChangePath\\|ChangeLocals<return>
+    " Embedded Ruby Partials for Show edit swap
+    nmap <silent> ,erps ,vsba
     " Embedded Ruby Puts Debugger
     nnoremap <silent> ,erpd a<% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts nil %><return><% puts 'ChangeLabel:' %><return><% puts ChangeThisPls %><esc>/ChangeLabel\\|ChangeThisPls<return>
     " Html Ruby Escape Javascript with partial
