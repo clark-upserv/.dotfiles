@@ -1,3 +1,3 @@
 alias rs='source ~/.zshrc'
 alias gs='git status'
-alias gpwip='git add -A; git commit -am "wip"; git status'
+alias gpwip='git add -A; git commit -am "wip"; git push; git status'
