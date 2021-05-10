@@ -81,9 +81,14 @@
   nmap <silent> ,mdd I<esc>vvxi<backspace><esc>
   " Misc. Dd but combine to Forward line instead of delete line
   " NOTE: this will delete first word if line has no indentation...
-  nmap <silent> ,mdf A<esc>whvvxi<backspace><esc>
+  nmap <silent> ,mdf A<esc>wsvvxi<backspace><esc>
+  " Misc. Copy File path
+  nnoremap <silent> ,mcf :let @+ = expand("%")<return>
+
+  " Misc. Messages
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
   nnoremap <silent> ,mmno_href_comment a<%# DeleteThis: if styling like link, keep "no-href-link" class; if styling like icon, keep "no-href-icon" and add standard icon classes; if styling like button, remove both classes above and add standard button classes %>
+  nnoremap <silent> ,mmdir_notes a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace><esc>
 
 " File mappings
   "
@@ -504,6 +509,8 @@
     nnoremap <silent> ,rboc aorder("LOWER(ChangeAttribute)")<esc>/ChangeAttribute<return>
     " Ruby Basic ORder (full)
     nnoremap <silent> ,rboR aorder("LOWER(ChangeAttribute) DESC")<esc>/ChangeAttribute<return>
+    " Ruby Basic Dir
+    nmap <silent> ,rbdi ,mmdir_notesaDir['app/ChangePath/**/*.ChangeExtension*'].each do \|path\|<return># DeleteThisNote: add logic here...<return>DeleteThisNote: use this to clean file name: path.remove('<delete>app/ChangePath/').split('<delete>.ChangeExtension').first<return><backspace><backspace>end<esc>/DeleteThisNote\\|ChangePath\\|ChangeExtension<return>
 
 
   " Ruby model mappings
