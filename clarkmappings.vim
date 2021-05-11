@@ -82,8 +82,6 @@
   " Misc. Dd but combine to Forward line instead of delete line
   " NOTE: this will delete first word if line has no indentation...
   nmap <silent> ,mdf A<esc>wsvvxi<backspace><esc>
-  " Misc. Copy File path
-  nnoremap <silent> ,mcf :let @+ = expand("%")<return>
 
   " Misc. Messages
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
@@ -91,6 +89,10 @@
   nnoremap <silent> ,mmdir_notes a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace><esc>
 
 " File mappings
+  " File SEArch
+  nnoremap ,fsea :e **/*
+  " File Copy PAth
+  nnoremap ,fcpa :let @+ = expand("%")<return>
   "
   nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
   nnoremap <silent> ,caas :edit app/assets/
@@ -369,11 +371,11 @@
     " Html form Show element SImple
     nnoremap <silent> ,hssi a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
     " Html form Show show edit swap Edit Button
-    nnoremap <silent> ,hseb a<a class="btn btn-primary ChangeSesId-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
+    nnoremap <silent> ,hseb a<a class="btn btn-primary ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
     " Html form Show show edit swap Edit button Icon
-    nnoremap <silent> ,hsei a<a class="no-href-icon px-3 fs-4 text-primary mdi mdi-edit ChangeSesId-edit-button"></a><esc>/ChangeSesId<return>
+    nnoremap <silent> ,hsei a<a class="no-href-icon px-3 fs-4 text-primary mdi mdi-edit ChangeSesId-ses-edit-button"></a><esc>/ChangeSesId<return>
     " Html form Show show edit swap Edit button Link
-    nnoremap <silent> ,hsel a<a class="no-href-link ChangeSesId-edit-button"></a><esc>/ChangeSesId<return>
+    nnoremap <silent> ,hsel a<a class="no-href-link ChangeSesId-ses-edit-button"></a><esc>/ChangeSesId<return>
     " Html form Show show edit swap Edit button Modal (data attribute only)
     nnoremap <silent> ,hsem adata-toggle="modal" data-target="ChangeModalId-<% ChangeErbIfNecessary %>-modal"<esc>/ChangeModalId\\|ChangeErbIfNecessary<return>
 
@@ -756,9 +758,9 @@
 " Stylesheet mappings
   " Stylesheet Base
     " Stylesheet Base Icon Options
-    nnoremap <silent> ,sbio amdi-edit, mdi-delete, mdi-more, mdi-plus-circle-o, mdi-check, mdi-info-outline, mdi-alert-triangle, mdi-close-circle-o
+    nnoremap <silent> ,sbio amdi-edit mdi-delete mdi-more mdi-plus-circle-o mdi-check mdi-info-outline mdi-alert-triangle mdi-close-circle-o
     " Stylesheet Base Text Colors
-    nnoremap <silent> ,sbtc atext-primary,text-secondary,text-danger, text-warning, text-warning-2
+    nnoremap <silent> ,sbtc atext-primary text-secondary text-danger text-warning text-warning-2
 
 
 
