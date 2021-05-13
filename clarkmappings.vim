@@ -48,18 +48,24 @@
         inoremap <silent> <bar><bar>= <bar><bar>=
 
   " retrain d-pad
-    " down 5
-    nnoremap <silent> r 5<down>
-    vnoremap <silent> r 5<down>
-    " up 5
-    nnoremap <nowait> e 5<up>
-    vnoremap <silent> e 5<up>
+    " down several
+    nnoremap <silent> r 4jzz
+    vnoremap <silent> r 4jzz
+    " up several
+    nnoremap <nowait> e 4kzz
+    vnoremap <silent> e 4kzz
     " back
     nnoremap <silent> q b
     vnoremap <silent> q b
     " forward to end
     nnoremap <silent> w e
     vnoremap <silent> w e
+    " up
+    nnoremap <silent> k kzz
+    vnoremap <silent> k kzz
+    " down
+    nnoremap <silent> j jzz
+    vnoremap <silent> j jzz
     " left
     nnoremap <silent> l <left>
     vnoremap <silent> l <left>
@@ -67,8 +73,8 @@
     nnoremap <silent> ; <right>
     vnoremap <silent> ; <right>
     " remap r
-    nnoremap <silent> f r
-    vnoremap <silent> f r
+    nnoremap <silent> s r
+    vnoremap <silent> s r
     " remap w
     nnoremap <silent> b w
     vnoremap <silent> b w
@@ -104,71 +110,83 @@
   nnoremap ,fsea :e **/*
   " File Copy PAth
   nnoremap ,fcpa :let @+ = expand("%")<return>
-  " File Copy Path into Edit
-  nnoremap ,fcpe :let @+ = expand("%")<return>:e <C-R><C-R>+<space><backspace>
+  " File Paste Path into Edit
+  nnoremap ,fppe :let @+ = expand("%")<return>:e <C-R><C-R>+<space><backspace>
+  " File Paste Path into Edit and return
+  nnoremap ,fppE :let @+ = expand("%")<return>:e <C-R><C-R>+<return>
+  " File Paste Clipboard into Edit
+  nnoremap ,fpce :e <C-R><C-R>+<space><backspace>
+  " File Paste Clipboard into Edit and return
+  nnoremap ,fpcE :e <C-R><C-R>+<return>
   "
   nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
-  nnoremap <silent> ,caas :edit app/assets/
+  nnoremap <silent> ,caas :edit app/assets/<space><backspace>
   " Edit App Assets Css (stylesheets)
   nmap <silent> ,faac <space>fT/app<return><return>/assets<return><return>/stylesheets<return><return><esc>:noh<return>
-  nnoremap <silent> ,caac :edit app/assets/stylesheets/
+  nnoremap <silent> ,caac :edit app/assets/stylesheets/<space><backspace>
   "
   nmap <silent> ,fach <space>fT/app<return><return>/channels<return><return><esc>:noh<return>
-  nnoremap <silent> ,cach :edit app/channels/
+  nnoremap <silent> ,cach :edit app/channels/<space><backspace>
   "
   nmap <silent> ,faco <space>fT/app<return><return>/controllers<return><return><esc>:noh<return>
-  nnoremap <silent> ,caco :edit app/controllers/
+  nnoremap <silent> ,caco :edit app/controllers/<space><backspace>
   "
   nmap <silent> ,fahe <space>fT/app<return><return>/helpers<return><return><esc>:noh<return>
-  nnoremap <silent> ,cahe :edit app/helpers/
+  nnoremap <silent> ,cahe :edit app/helpers/<space><backspace>
   "
   nmap <silent> ,faja <space>fT/app<return><return>/javascript<return><return><esc>:noh<return>
-  nnoremap <silent> ,caja :edit app/javascript/
+  nnoremap <silent> ,caja :edit app/javascript/<space><backspace>
   "
   nmap <silent> ,fajp <space>fT/app<return><return>/javascript<return><return>/packs<return><return><esc>:noh<return>
-  nnoremap <silent> ,cajp :edit app/javascript/packs/
+  nnoremap <silent> ,cajp :edit app/javascript/packs/<space><backspace>
   "
   nmap <silent> ,fajo <space>fT/app<return><return>/jobs<return><return><esc>:noh<return>
-  nnoremap <silent> ,cajo :edit app/jobs/
+  nnoremap <silent> ,cajo :edit app/jobs/<space><backspace>
   " Edit App/MAilers
   nmap <silent> ,fama <space>fT/app<return><return>/mailers<return><return><esc>:noh<return>
-  nnoremap <silent> ,cama :edit app/mailers/
+  nnoremap <silent> ,cama :edit app/mailers/<space><backspace>
   " Edit App/MOddels
   nmap <silent> ,famo <space>fT/app<return><return>/models<return><return><esc>:noh<return>
-  nnoremap <silent> ,camo :edit app/models/
+  nnoremap <silent> ,camo :edit app/models/<space><backspace>
   " Edit App/Mddels/aBility.rb Cancancan
   nmap <silent> ,famc <space>fT/app<return><return>/models<return><return>/ability.rb<return><return><esc>:noh<return>
   "
   nmap <silent> ,favi <space>fT/app<return><return>/views<return><return><esc>:noh<return>
-  nnoremap <silent> ,cavi :edit app/views/
+  nnoremap <silent> ,cavi :edit app/views/<space><backspace>
   "
   nmap <silent> ,fcon <space>fT/config<return><return><esc>:noh<return>
-  nnoremap <silent> ,ccon :edit config/
+  nnoremap <silent> ,ccon :edit config/<space><backspace>
   "
   nnoremap <silent> ,fcro :edit config/routes.rb<return>
   "
   nnoremap <silent> ,fdsc :edit db/schema.rb<return>
   "
   nmap <silent> ,fdmi <space>fT/db<return><return>/migrate<return><return><esc>:noh<return>
-  nnoremap <silent> ,cdmi :edit db/migrate/
+  nnoremap <silent> ,cdmi :edit db/migrate/<space><backspace>
   "
   nmap <silent> ,flib <space>fT/lib<return><return><esc>:noh<return>
-  nnoremap <silent> ,clib :edit lib/
+  nnoremap <silent> ,clib :edit lib/<space><backspace>
   "
   nmap <silent> ,ftes <space>fT/test<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctes :edit test/
+  nnoremap <silent> ,ctes :edit test/<space><backspace>
   "
   nmap <silent> ,ftco <space>fT/test<return><return>/controllers<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctco :edit test/controllers/
+  nnoremap <silent> ,ctco :edit test/controllers/<space><backspace>
   "
   nmap <silent> ,ftmo <space>fT/test<return><return>/models<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctmo :edit test/models/
-  " Edit Test FIxtures
+  nnoremap <silent> ,ctmo :edit test/models/<space><backspace>
+  " File Test FIxtures
   nmap <silent> ,ftfi <space>fT/test<return><return>/fixtures<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctfi :edit test/fixtures/
+  nnoremap <silent> ,ctfi :edit test/fixtures/<space><backspace>
+  " File Test Mailers
+  nmap <silent> ,ftma <space>fT/test<return><return>/mailers<return><return><esc>:noh<return>
+  nnoremap <silent> ,ctma :edit test/fixtures/mailers/<space><backspace>
+  " File Test Mailers Previews
+  nmap <silent> ,ftmp <space>fT/test<return><return>/mailers<return><return>/previews<return><return><esc>:noh<return>
+  nnoremap <silent> ,ctmp :edit test/fixtures/mailers/previews/<space><backspace>
   "
   nmap <silent> ,fven <space>fT/vendor<return><return><esc>:noh<return>
-  nnoremap <silent> ,cven :edit vendor/
+  nnoremap <silent> ,cven :edit vendor/<space><backspace>
   " Edit GEMfile
   nmap <silent> ,fgem <space>fT/Gemfile<return><return><esc>:noh<return>
 
@@ -193,7 +211,7 @@
     " View templates Page Body Base
     nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/ChangePath\\|ChangeTemplate\\|ChangeCardName\\|ChangeWidth\\|ChangeLocals<return>
     " View templates Page Body Full height columns
-    nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeColumnName\\|d-xx-or-larger\\|background-color: ChangeBackgroundColor\\|ChangeWidth\\|DeleteThis\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeColumnName\\|d-xx-or-larger\\|background-color: ChangeBackgroundColor\\|ChangeWidth\\|overflow-y: scroll\\|DeleteThis\\|ChangePath\\|ChangeLocals<return>
     " View templates Page Body full height Columns - alternate mapping
     nmap <silent> ,vpbc ,vpbf
   " View templates Card
@@ -226,7 +244,7 @@
     " View templates Models Contents Base
     nnoremap <silent> ,vmcb :read ../templates/views/modals/contents_base.html.erb<return>/DeleteThis<return>
     " View templates Models Contents Destroy
-    nnoremap <silent> ,vmcd :read ../templates/views/modals/contents_destroy.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeAttribute\\|ChangeUrl\\|SetToTrueOrRemove<return>
+    nnoremap <silent> ,vmcd :read ../templates/views/modals/contents_destroy.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeAttribute\\|ChangeName\\|ChangeUrl\\|SetToTrueOrRemove<return>
     " View templates Models Contents Image
     nnoremap <silent> ,vmci :read ../templates/views/modals/contents_image.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeProcessedAttribute<return>
     " View templates Mdoels Header Base
@@ -833,5 +851,3 @@
     nnoremap <silent> ,pstc :read ../templates/packages/sortable_table_positions/controller.rb<return>/ChangeParentModel\\|ChangeParent\\|ChangeAuth\\|DeleteThis\\|ChangeChildren\\|ChangeChild\\|ChangeStpId<return>
     " View
     nnoremap <silent> ,pstv :read ../templates/packages/sortable_table_positions/view.html.erb<return>/ChangeStpId\\|ChangePath\\|ChangeStpIdForm\\|ChangeParent\\|ChangeChildren\\|ChangeChild\\|DeleteThis\\|ChangeFinalHiddenRowHeight<return>
-
-
