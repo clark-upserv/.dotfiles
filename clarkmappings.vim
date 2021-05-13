@@ -48,19 +48,30 @@
         inoremap <silent> <bar><bar>= <bar><bar>=
 
   " retrain d-pad
-    " up
-    nnoremap <silent> f <up>
-    vnoremap <silent> f <up>
+    " down 5
+    nnoremap <silent> r 5<down>
+    vnoremap <silent> r 5<down>
+    " up 5
+    nnoremap <nowait> e 5<up>
+    vnoremap <silent> e 5<up>
+    " back
+    nnoremap <silent> q b
+    vnoremap <silent> q b
+    " forward to end
+    nnoremap <silent> w e
+    vnoremap <silent> w e
     " left
-    nnoremap <silent> s <left>
-    vnoremap <silent> s <left>
-    " train me not to use h for left
-    nnoremap <silent> h dd
-    vnoremap <silent> h d
-    " train me not to use k for up
-    nnoremap <silent> k dd
-    vnoremap <silent> k d
-
+    nnoremap <silent> l <left>
+    vnoremap <silent> l <left>
+    " right
+    nnoremap <silent> ; <right>
+    vnoremap <silent> ; <right>
+    " remap r
+    nnoremap <silent> f r
+    vnoremap <silent> f r
+    " remap w
+    nnoremap <silent> b w
+    vnoremap <silent> b w
 
 " single key comma mappings
   nnoremap <silent> ,o o <backspace><esc>
@@ -93,6 +104,8 @@
   nnoremap ,fsea :e **/*
   " File Copy PAth
   nnoremap ,fcpa :let @+ = expand("%")<return>
+  " File Copy Path into Edit
+  nnoremap ,fcpe :let @+ = expand("%")<return>:e <C-R><C-R>+<space><backspace>
   "
   nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
   nnoremap <silent> ,caas :edit app/assets/
@@ -162,13 +175,17 @@
 " View templates Mappings
   "  View templates Page
     " View templates Page BAse
-    nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThisPls\\|ChangeTemplate\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/ChangeNavTypeOrDeleteThisLine\\|DeleteThisPls\\|ChangeTemplate\\|ChangePath\\|ChangeLocals<return>
     " View templates Page STylesheets
     nnoremap <silent> ,vpst :read ../templates/views/page/stylesheets.html.erb<return>/DeleteThisNote\\|ChangePath<return>
     " View templates Page Javascript Packs
     nnoremap <silent> ,vpjp :read ../templates/views/page/javascript_packs.html.erb<return>/DeleteThisNote\\|ChangePath\\|Etc\.<return>
+    " View templates Page  Non Pack javascriopts
+    nnoremap <silent> ,vpnp :read ../templates/views/page/non_pack_javascripts.html.erb<return>/ChangePath<return>
     " View templates Page End of Body
-    nnoremap <silent> ,vpeb :read ../templates/views/page/end_of_body.html.erb<return>/DeleteThisNote\\|ChangePath<return>
+    nnoremap <silent> ,vpeb :read ../templates/views/page/end_of_body.html.erb<return>/DeleteThisNote<return>
+    " View templates Page End Of body - alternate mapping
+    nmap <silent> ,vpeo ,vpeb
     " View templates Page Header Base
     nnoremap <silent> ,vphb :read ../templates/views/page/header_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangeUrl<return>
     " View templates Page TAbs base
@@ -176,7 +193,9 @@
     " View templates Page Body Base
     nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/ChangePath\\|ChangeTemplate\\|ChangeCardName\\|ChangeWidth\\|ChangeLocals<return>
     " View templates Page Body Full height columns
-    nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeColumnName\\|ChangePadding\\|ChangeScreenSize\\|ChangeWidth\\|DeleteThis\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeColumnName\\|d-xx-or-larger\\|background-color: ChangeBackgroundColor\\|ChangeWidth\\|DeleteThis\\|ChangePath\\|ChangeLocals<return>
+    " View templates Page Body full height Columns - alternate mapping
+    nmap <silent> ,vpbc ,vpbf
   " View templates Card
     " View templates Card BAse
     nnoremap <silent> ,vcba :read ../templates/views/card/base.html.erb<return>/ChangeThisPls\\|DeleteThisPls<return>
@@ -294,6 +313,8 @@
     nnoremap <silent> ,heat a <return>id="ChangeThisPls" <return>class="ChangeThisPls" <return>style="ChangeThisPls" <return>data-ChangeThisPls="ChangeThisPls"<return><esc>/ChangeThisPls<return>
     " Html Elements DIv
     nnoremap <silent> ,hedi a<div><return></div><esc>k
+    " Html Elements Div with Class
+    nnoremap <silent> ,hedc a<div class="ChangeClass"><return></div><esc>/ChangeClass<return>
     " Html Elements PAragraph
     nnoremap <silent> ,hepa a<p><return>ChangeThisPls<return></p><esc>/ChangeThisPls<return>
     " Html Elements SPan
@@ -692,7 +713,7 @@
     " Javascript jQiery html (full)
     nmap <silent> ,jqhT a$('#ChangeId').html("<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>")<esc>/ChangeId\\|ChangePath\\|ChangeLocals<return><n
     " Javascript jQiery EAch
-    nnoremap <silent> ,jqea aeach(function(index, ChangeElementOrLeaveBlank){<return>})<esc>/ChangeElementOrLeaveBlank<return>
+    nmap <silent> ,jqea aeach(function(index){<return>})<esc>,O
 
   " Javascript Vanilla
     " Javascript Vanilla IF
