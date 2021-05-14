@@ -49,26 +49,26 @@
 
   " retrain d-pad
     " down several
-    nnoremap <silent> r 4jzz
-    vnoremap <silent> r 4jzz
+    nnoremap <silent> e 4jzz
+    vnoremap <silent> e 4jzz
     " up several
-    nnoremap <nowait> e 4kzz
-    vnoremap <silent> e 4kzz
+    nnoremap <nowait> w 4kzz
+    vnoremap <silent> w 4kzz
     " back
     nnoremap <silent> q b
     vnoremap <silent> q b
     " forward to end
-    nnoremap <silent> w e
-    vnoremap <silent> w e
+    nnoremap <silent> r e
+    vnoremap <silent> r e
     " up
-    nnoremap <silent> k kzz
-    vnoremap <silent> k kzz
+    nnoremap <silent> l kzz
+    vnoremap <silent> l kzz
     " down
-    nnoremap <silent> j jzz
-    vnoremap <silent> j jzz
+    nnoremap <silent> k jzz
+    vnoremap <silent> k jzz
     " left
-    nnoremap <silent> l <left>
-    vnoremap <silent> l <left>
+    nnoremap <silent> j <left>
+    vnoremap <silent> j <left>
     " right
     nnoremap <silent> ; <right>
     vnoremap <silent> ; <right>
@@ -76,8 +76,8 @@
     nnoremap <silent> s r
     vnoremap <silent> s r
     " remap w
-    nnoremap <silent> b w
-    vnoremap <silent> b w
+    nnoremap <silent> f w
+    vnoremap <silent> f w
 
 " single key comma mappings
   nnoremap <silent> ,o o <backspace><esc>
@@ -242,7 +242,7 @@
     " View templates Mdoels BAse
     nnoremap <silent> ,vmba :read ../templates/views/modals/base.html.erb<return>
     " View templates Models Contents Base
-    nnoremap <silent> ,vmcb :read ../templates/views/modals/contents_base.html.erb<return>/DeleteThis<return>
+    nnoremap <silent> ,vmcb :read ../templates/views/modals/contents_base.html.erb<return>/DivOrP\\|DeleteThis<return>
     " View templates Models Contents Destroy
     nnoremap <silent> ,vmcd :read ../templates/views/modals/contents_destroy.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeAttribute\\|ChangeName\\|ChangeUrl\\|SetToTrueOrRemove<return>
     " View templates Models Contents Image
@@ -251,6 +251,8 @@
     nnoremap <silent> ,vmhb :read ../templates/views/modals/header_base.html.erb<return>/ChangeIconColor\\|DeleteThis\\|ChangeIconType\\|ChangeTitle<return>
     " View templates Mdoels Close button Group
     nmap <silent> ,vmcg :read ../templates/views/modals/close_button_base.html.erb<return>/DeleteThis<return>
+    " View templates Mdoels Info Modal and button
+    nmap <silent> ,vmim :read ../templates/views/modals/info_modal_and_button.html.erb<return>/ChangeModalId\\|ChangeTitle\\|ChangeContent<return>
 
 " Embedded
   " Embedded Ruby
@@ -388,7 +390,7 @@
     " Html Form Label for Checkboxes
     " NOTE: this is used by the checkbox mappings so if you chnage this, you
     " need to update those as well...
-    nnoremap <silent> ,hflc a<%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay', class: "custom-control-label text-wrap") %><return><%# NOTE: for blank label, make this a block with a blank space (" ") between the do and end %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
+    nnoremap <silent> ,hflc a<%= ChangeForm_form.label(:ChangeAttribute, 'ChangeDisplay', class: "custom-control-label text-wrap") %><return><%# NOTE: for blank label, make this a block with a blank space (" ") between the do and end %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>
     " Html Form Label Tag
     nnoremap <silent> ,hflt a<%= label_tag(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
 
@@ -426,13 +428,13 @@
     " Html form Input ROw (for top label)
     nmap <silent> ,hiro a<div class="form-row"><return></div><esc>,O
     " Html form Input Group 1
-    nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
+    nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input<down>,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
     " Html form Input Group 2
-    nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
+    nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input<down>,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
     " Html form Input Group 3
-    nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
+    nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input<down>,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
     " Html form Input Group 4
-    nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_inputj,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
+    nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input<down>,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
     " Html form Input Group Cancel & submit buttons
     nmap <silent> ,higc :read ../templates/views/elements/buttons_and_links/cancel_and_submit_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
     " Html form Input Group cancel & submit Icons
@@ -458,17 +460,17 @@
     " Html form Input Email Field
     nnoremap <silent> ,hief a<%= ChangeThisPls_form.email_field(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
     " Html form Input Checkbox Stacked
-    nmap <silent> ,hics a<div><esc>,o,hicwcgnxr1m39dak5<esc>....jj,o,hicwjjjo</div><esc>/xr1m39dak5<return>cgnChangeThisPls<esc>..../ChangeThisPls<return>NNNNN
-    " Html form Input Checkbox Inline
-    nmap <silent> ,hici a<div class="d-flex"><esc>,o,hicwcgnxr1m39dak5<esc>....jj,o,hicwjjjo</div><esc>/xr1m39dak5<return>cgnChangeThisPls<esc>..../ChangeThisPls<return>NNNNN
+    nmap <silent> ,hics a<div><esc>,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,o,hicw<down><down><down>o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
+    " Html form Input Checkbox Inline (exact same as hics but add d-flex to parent div)
+    nmap <silent> ,hici a<div class="d-flex"><esc>,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,o,hicw<down><down><down>o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
     " Html form Input Checkbox Wrapper
     " this is used by by ,hics and ,hici so if you change this you might
     " need to change those as well
-    nmap <silent> ,hicw a<div class="pr-2 custom-control custom-checkbox"><esc>,o,hicb<esc>,o,hflc<esc>jjo</div><esc>/ChangeThisPls<return>
+    nmap <silent> ,hicw a<div class="pr-2 custom-control custom-checkbox"><esc>,o,hicb<esc>,o,hflc<esc><down><down>o</div><esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>
     " Html form Input CheckBox
     " this is used by ,hicw so if you change this you might need to change
     " ,hicw as well
-    nnoremap <silent> ,hicb a<%= ChangeThisPls_form.check_box(:ChangeThisPls, class: 'custom-control-input') %><esc>/ChangeThisPls<return>
+    nnoremap <silent> ,hicb a<%= ChangeForm_form.check_box(:ChangeAttribute, class: 'custom-control-input') %><esc>/ChangeForm\\|ChangeAttribute<return>
     " Html form Input CheckBox full
     nnoremap <silent> ,hicB a<%= ChangeThisPls_form.check_box(:ChangeThisPls, { class: 'custom-control-input' }, ChangeThisPls, false) %><esc>/ChangeThisPls<return>
     " Html form Input Password field
@@ -478,7 +480,7 @@
     " Html form Input SElect
     nnoremap <silent> ,hise a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>ChangeOptionsArray,<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|autofocus\\|required<return>
     " Html form Input Select Options for select
-    nnoremap <silent> ,hiso a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>options_for_select(ChangeOptionsArray, ChangeSelectedOption),<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|ChangeSelectedOption\\|autofocus\\|required<return>
+    nnoremap <silent> ,hiso a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>options_for_select(ChangeOptionsArray, ChangeSelectedOption),<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><bacut<down>space>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|ChangeSelectedOption\\|autofocus\\|required<return>
     " Html form Input Select Grouped options for select
     nnoremap <silent> ,hisg a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>grouped_options_for_select(ChangeOptionsHash, ChangeSelectedOption),<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsHash\\|ChangeSelectedOption\\|autofocus\\|required<return>
     " Html form Input Select Block
@@ -488,9 +490,9 @@
     " Html form Input Inline Errors
     nnoremap <silent> ,hiie a<%= render(partial: 'shared/inline_errors', locals: { errors: ChangeObject.errors.messages[:ChangeAttribute] }) %><esc>/ChangeObject\\|ChangeAttribute<return>
     " Html form Input SUbmit
-    nnoremap <silent> ,hisu a<%= ChangeThisPls_form.submit(:ChangeDisplay, class: 'btn btn-ChangeColor') %><esc>/ChangeDisplay\\|ChangeColor<return>
+    nnoremap <silent> ,hisu a<%= ChangeForm_form.submit(:ChangeDisplay, class: 'btn btn-ChangeColor') %><esc>/ChangeForm\\|ChangeDisplay\\|ChangeColor<return>
     " Html form Input Submit Link
-    nnoremap <silent> ,hisl a<%= ChangeThisPls_form.submit(:ChangeDisplay, class: 'btn-link') %><esc>/ChangeDisplay<return>
+    nnoremap <silent> ,hisl a<%= ChangeForm_form.submit(:ChangeDisplay, class: 'btn-link') %><esc>/ChangeForm\\|ChangeDisplay<return>
     " Html Form Input Submit with Image
     nnoremap <silent> ,hisi a<%= image_submit_tag('ChangePathAndFileName', alt: 'ChangeAltText', width: 'ChangeWidth', height: 'auto') %><esc>/ChangePathAndFileName\\|ChangeAltText\\|ChangeWidth<return>
     " Html Form CUstom Field
@@ -813,7 +815,7 @@
     nnoremap <silent> ,tbff :read ../templates/tests/misc/fixture_file_upload.rb<return><esc>/ChangeVariable\\|ChangeFileNameExtension\\|ChangeFileName\\|ChangeFileType\\|ChangeFileSubType\\|DeleteThisPls\\|ChangeInstance\\|ChangeAttachment<return>
   " Controller
     " Tests Controller BAse
-    nnoremap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathToTest\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel\\|DeleteThisIfNotNecessary<return>
+    nnoremap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel\\|DeleteThisIfNotNecessary<return>
     " Tests Controller Base Scenarios
     nnoremap <silent> ,tcbs :read ../templates/tests/controller_base_scenarios.rb<return>/ChangePermission\\|ChangeMethodUrlAndParams\\|ReplaceThisPls<return>
     " Tests Controller Base Test
@@ -834,7 +836,7 @@
     nnoremap <silent> ,tcde adelete ChangeUrlHelper_path(ChangeModel)<esc>/ChangeUrlHelper\\|ChangeModel<return>
   " Models
     " Tests Model BAse
-    nnoremap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathToTest\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
+    nnoremap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
     " Tests Models Belongs To
     nnoremap <silent> ,tmbt atest "ChangeModel should belong to ChangeAssociationName" do<return>assert_equal @ChangeParent, @ChangeModel.ChangeParent<return>end<esc>/ChangeModel\\|ChangeAssociationName\\|ChangeParent<return>
     " Tests Models Has Many
@@ -843,7 +845,7 @@
     nnoremap <silent> ,tmva atest "ChangeModel ChangeAttribute should be ChangeValidation" do<return>@ChangeModel.attrbitute = ChangeInvalidValue<return>assert_not @ChangeModel.valid?<return>end<esc>/ChangeModel\\|ChangeAttribute\\|ChangeValidation\\|ChangeInvalidValue<return>
   " Integration
     " Tests Integration BAse
-    nnoremap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathToTest\\|ChangeThisPls\\|ChangePermission\\|DeleteThisIfNotNecessary<return>
+    nnoremap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName\\|ChangeThisPls\\|ChangePermission\\|DeleteThisIfNotNecessary<return>
 
 " Packages
   " Sortable Table positions
