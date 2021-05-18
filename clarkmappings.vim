@@ -49,11 +49,11 @@
 
   " retrain d-pad
     " down several
-    nnoremap <silent> e 4jzz
-    vnoremap <silent> e 4jzz
+    nnoremap <silent> e 4k
+    vnoremap <silent> e 4k
     " up several
-    nnoremap <nowait> w 4kzz
-    vnoremap <silent> w 4kzz
+    nnoremap <nowait> w 4j
+    vnoremap <silent> w 4j
     " back
     nnoremap <silent> q b
     vnoremap <silent> q b
@@ -61,11 +61,11 @@
     nnoremap <silent> r e
     vnoremap <silent> r e
     " up
-    nnoremap <silent> l kzz
-    vnoremap <silent> l kzz
+    nnoremap <silent> l k
+    vnoremap <silent> l k
     " down
-    nnoremap <silent> k jzz
-    vnoremap <silent> k jzz
+    nnoremap <silent> k j
+    vnoremap <silent> k j
     " left
     nnoremap <silent> j <left>
     vnoremap <silent> j <left>
@@ -108,16 +108,32 @@
 " File mappings
   " File SEArch
   nnoremap ,fsea :e **/*
-  " File Copy PAth
-  nnoremap ,fcpa :let @+ = expand("%")<return>
-  " File Paste Path into Edit
-  nnoremap ,fppe :let @+ = expand("%")<return>:e <C-R><C-R>+<space><backspace>
-  " File Paste Path into Edit and return
-  nnoremap ,fppE :let @+ = expand("%")<return>:e <C-R><C-R>+<return>
-  " File Paste Clipboard into Edit
-  nnoremap ,fpce :e <C-R><C-R>+<space><backspace>
-  " File Paste Clipboard into Edit and return
-  nnoremap ,fpcE :e <C-R><C-R>+<return>
+  " File Path
+    " File PAth COpy
+    nnoremap ,fpco :let @+ = expand('%:h') . '/'<return>
+  " File Edit
+    " File Edit PAth
+    nnoremap ,fepa :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
+    " File Edit PAth and return
+    nnoremap ,fepA :let @+ = expand('%:h')<return>:e <C-R><C-R>+<return>
+    " File Edit CLipboard
+    nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
+    " File Edit Clipboard and return
+    nnoremap ,fecL :e <C-R><C-R>+<return>
+    " File Edit Controller to View 
+    nnoremap ,fecv :let @+ = expand("%")<return>o<esc>pO<esc>/controllers<return>cgnviews<esc>/_controller\.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Controller to Helper 
+    nnoremap ,fech :let @+ = expand("%")<return>o<esc>pO<esc>/controllers<return>cgnhelpers<esc>/_controller\.rb<return>cgn_helper.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to Helper
+    nnoremap ,fevh :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnhelpers<esc>A_helpehelperup>dddd:e <C-R><C-R>+
+    " File Edit View to View
+    nmap ,fevv ,fepa
+    " File Edit View to Controller
+    nnoremap ,fevc :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgncontrollers<esc>A_controller.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Helper to Controller 
+    nnoremap ,fehc :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgncontrollers<esc>/_helper\.rb<return>cgn_controller.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Helper to Views 
+    nnoremap ,fehv :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgnviews<esc>/_helper\.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
   "
   nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
   nnoremap <silent> ,caas :edit app/assets/<space><backspace>
@@ -473,6 +489,12 @@
     nnoremap <silent> ,hicb a<%= ChangeForm_form.check_box(:ChangeAttribute, class: 'custom-control-input') %><esc>/ChangeForm\\|ChangeAttribute<return>
     " Html form Input CheckBox full
     nnoremap <silent> ,hicB a<%= ChangeThisPls_form.check_box(:ChangeThisPls, { class: 'custom-control-input' }, ChangeThisPls, false) %><esc>/ChangeThisPls<return>
+    " Html form Input Toggle Wrapper
+    nnoremap <silent> ,hitw :read ../templates/views/elements/toggle_wrapper.html.erb<return>/DeleteThis<return>
+    " Html form Input Toggle with Form
+    nnoremap <silent> ,hitf :read ../templates/views/elements/toggle_with_form.html.erb<return>/ChangeModel\\|ChangeScope\\|ChangeUrl\\|ChangeMethod\\|ChangeId\\|ChangeForm\\|ChangeColor\\|switch-button-yesno\\|DeleteThis\\|ChangeAttribute<return>
+    " Html form Input TOggle
+    nnoremap <silent> ,hito :read ../templates/views/elements/toggle.html.erb<return>/ChangeForm\\|ChangeColor\\|switch-button-yesno\\|DeleteThis\\|ChangeAttribute<return>
     " Html form Input Password field
     nnoremap <silent> ,hipf a<%= ChangeThisPls_form.password_field(:password, class: 'form-control') %><esc>/ChangeThisPls<return>
     " Html form Input Password Confirmation
