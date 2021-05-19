@@ -109,8 +109,10 @@
   " File SEArch
   nnoremap ,fsea :e **/*
   " File Path
-    " File PAth COpy
-    nnoremap ,fpco :let @+ = expand('%:h') . '/'<return>
+    " File Copy PAth
+    nnoremap ,fcpa :let @+ = expand('%:h') . '/'<return>
+    " File Copy Path and File name
+    nnoremap ,fcpf :let @+ = expand('%')<return>
   " File Edit
     " File Edit PAth
     nnoremap ,fepa :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
@@ -130,10 +132,16 @@
     nmap ,fevv ,fepa
     " File Edit View to Controller
     nnoremap ,fevc :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgncontrollers<esc>A_controller.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to Javascript pack
+    nnoremap ,fevj :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnjavascript/packs<esc>A/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to Stylesheet
+    nnoremap ,fevs :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnassets/stylesheets<esc>A/<esc><up>dddd:e <C-R><C-R>+
     " File Edit Helper to Controller 
     nnoremap ,fehc :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgncontrollers<esc>/_helper\.rb<return>cgn_controller.rb<esc><up>dddd:e <C-R><C-R>+
-    " File Edit Helper to Views 
+    " File Edit Helper to View
     nnoremap ,fehv :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgnviews<esc>/_helper\.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Stylesheet to View 
+    "nnoremap ,fesv :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgnviews<esc>/_helper\.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
   "
   nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
   nnoremap <silent> ,caas :edit app/assets/<space><backspace>
@@ -205,6 +213,8 @@
   nnoremap <silent> ,cven :edit vendor/<space><backspace>
   " Edit GEMfile
   nmap <silent> ,fgem <space>fT/Gemfile<return><return><esc>:noh<return>
+  " Edit REAdme
+  nmap <silent> ,frea <space>fT/README.md<return><return><esc>:noh<return>
 
 " View templates Mappings
   "  View templates Page
@@ -427,6 +437,10 @@
     nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
     " Html form Show element SImple
     nnoremap <silent> ,hssi a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
+    " Html form Show Date Base
+    nnoremap <silent> ,hsdb astrftime("%B %-d, %Y")
+    " Html form Show Date with Day of week
+    nnoremap <silent> ,hsdd astrftime("%A, %B %-e, %Y")
     " Html form Show show edit swap Edit Button
     nnoremap <silent> ,hseb a<a class="btn btn-primary ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
     " Html form Show show edit swap Edit button Icon
@@ -582,6 +596,8 @@
     nnoremap <silent> ,rboR aorder("LOWER(ChangeAttribute) DESC")<esc>/ChangeAttribute<return>
     " Ruby Basic Dir
     nmap <silent> ,rbdi ,mmdir_notesaDir['app/ChangePath/**/*.ChangeExtension*'].each do \|path\|<return># DeleteThisNote: add logic here...<return>DeleteThisNote: use this to clean file name: path.remove('<delete>app/ChangePath/').split('<delete>.ChangeExtension').first<return><backspace><backspace>end<esc>/DeleteThisNote\\|ChangePath\\|ChangeExtension<return>
+    " Ruby Basic BEgin
+    noremap <silent> ,rbbe abegin<return># DeleteThis - have code that could possibly error<return><backspace><backspace>rescue ChangeError<return># DeleteThis - some exception handling<return><backspace><backspace>else<return># DeleteThis - add logic to run only when no errors occur<return><backspace><backspace>ensure<return># DeleteThis - add logic to run whether there are error or not<return><backspace><backspace>end<esc>/DeleteThis\\|ChangeError<return>
 
 
   " Ruby model mappings
@@ -725,7 +741,16 @@
   " Ruby Helpers
     " Ruby Helpers BAse
     nnoremap <silent> ,rhba :read ../templates/helpers/base_helper.rb<return>ggdd/ChangeThisPls<return>
-  "
+  " Ruby Tasks
+    " Ruby Tasks BAse
+    nnoremap <silent> ,rtba :read ../templates/tasks/base.rake<return>ggdd/ChangeNamespace\\|ChangeTaskType\\|ChangeCategory\\|DeleteThis<return>
+    " Ruby Tasks Task Base
+    nmap <silent> ,rttb :read ../templates/tasks/task_base.rake<return>/insert run notes<return>dd<up>:read ../templates/tasks/run_notes.rake<return>/insert task notes<return>dd<up>:read ../templates/tasks/task_notes.rake<return>/ChangeNamespace\\|ChangeType\\|ChangeCategory\\|ChangeDescription\\|ChangeTaskName\\|ChangeTask1\\|ChangeTask2\\|ChangeTask3\\|DeleteThis<return>
+    " Ruby Tasks Date Helper
+    nnoremap <silent> ,rtdh :read ../templates/tasks/date_helper.rake<return>/DeleteThis<return>
+    " Ruby Tasks Repeat  Helper
+    nnoremap <silent> ,rtrb :read ../templates/tasks/repeat_block.rake<return>/DeleteThis<return>
+
 " javascript mappings
   " Javascript jQuery
     " Javascript jQiery Select Element
@@ -747,9 +772,9 @@
     " Javascript jQiery Element On
     nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
     " Javascript jQiery Document Ready
-    nnoremap <silent> ,jqdr a$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp() {<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
+    nnoremap <silent> ,jqdr a$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp() {<return>// DeleteThis - do not use $(document).on() because event listeners will not be removed on ajax and could cause duplicates. Instead use $(element).on()<return><backspace><backspace><backspace>}<esc>/ChangeThisPls\\|DeleteThis<return>
     " Javascript jQiery Document Ready (full)
-    nnoremap <silent> ,jqdR a$(document).ready(function(){<return>ChangeThisPlsSetUp()<return>})<return>$(document).on('ajax:complete', function(){<return>ChangeThisPlsSetUp()<return>})<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp(){<return>ChangeThisPls<return>}<esc>/ChangeThisPls<return>
+    nnoremap <silent> ,jqdR a$(document).ready(function(){<return>ChangeThisPlsSetUp()<return>})<return>$(document).on('ajax:complete', function(){<return>ChangeThisPlsSetUp()<return>})<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp(){<return>// DeleteThis - do not use $(document).on() because event listeners will not be removed on ajax and could cause duplicates. Instead use $(element).on()<return><backspace><backspace><backspace>}<esc>/ChangeThisPls\\|DeleteThis<return>
     " Javascript jQiery html
     nnoremap <silent> ,jqht ahtml("ChangeHtml")<esc>/ChangeHtml<return>
     " Javascript jQiery html (full)
