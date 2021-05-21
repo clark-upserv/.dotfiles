@@ -48,10 +48,10 @@
         inoremap <silent> <bar><bar>= <bar><bar>=
 
   " retrain d-pad
-    " down several
+    " up several
     nnoremap <silent> e 4k
     vnoremap <silent> e 4k
-    " up several
+    " down several
     nnoremap <nowait> w 4j
     vnoremap <silent> w 4j
     " back
@@ -78,6 +78,10 @@
     " remap w
     nnoremap <silent> f w
     vnoremap <silent> f w
+    " make hh go to bottom
+    nnoremap <silent> hh G
+    vnoremap <silent> hh G
+
 
 " single key comma mappings
   nnoremap <silent> ,o o <backspace><esc>
@@ -94,8 +98,7 @@
   " Misc. Reload Source
   nnoremap <silent> ,mrs :so ~/.dotfiles/clarkmappings.vim<return>
   " Misc. DD but combine to previous line instead of delete line
-  " NOTE: this will delete first word if line has no indentation...
-  nmap <silent> ,mdd I<esc>vvxi<backspace><esc>
+  nmap <silent> ,mdd >I<esc>vvxi<backspace><esc>
   " Misc. Dd but combine to Forward line instead of delete line
   " NOTE: this will delete first word if line has no indentation...
   nmap <silent> ,mdf A<esc>wsvvxi<backspace><esc>
@@ -106,14 +109,14 @@
   nnoremap <silent> ,mmdir_notes a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace><esc>
 
 " File mappings
-  " File SEArch
-  nnoremap ,fsea :e **/*
   " File Path
     " File Copy PAth
     nnoremap ,fcpa :let @+ = expand('%:h') . '/'<return>
     " File Copy Path and File name
     nnoremap ,fcpf :let @+ = expand('%')<return>
   " File Edit
+    " File Edit SEarch
+    nnoremap ,fese :e **/*
     " File Edit PAth
     nnoremap ,fepa :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
     " File Edit PAth and return
@@ -422,7 +425,7 @@
 
   " Html form Show elements
     " Html form Show Left Label wrapper
-    nmap <silent> ,hsll a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group col-12 pr-0"><return><%= label_tag(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Show Group %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
+    nmap <silent> ,hsll a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= label_tag(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Show Group %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
     " Html form Top Label (for top label)
     nmap <silent> ,hstl a<div class="form-row"><return><%#<delete> DeleteThis - insert Show Group %><return></div><esc>/DeleteThis<return>
     " Html form Show ROw
@@ -452,7 +455,7 @@
 
   " Html form Inputs
     " Html form Input Left Label wrapper
-    nmap <silent> ,hill a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group col-12 pr-0"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Input Group OR Cancel & Submit buttons %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
+    nmap <silent> ,hill a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Input Group OR Cancel & Submit buttons %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
     " Html form Top Label (for top label)
     nmap <silent> ,hitl a<div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Input Group OR Cancel & Submit buttons %><return></div><esc>/DeleteThis<return>
     " Html form Input ROw (for top label)
@@ -736,16 +739,16 @@
     " Ruby Controllers Flash Danger
     nnoremap <silent> ,rcfd aflash[:danger] = ChangeMessage<esc>/ChangeMessage<return>
     " Ruby Controllers Flash Danger
-    nnoremap <silent> ,rcfD aflash[:danger] = "ChangeMessage because of the following errors: #{ChangeObject.errors.map { \|error\| error.type[0].capitalize + error.type[1..] }.join('; ')}."<esc>/ChangeMessage\\|ChangeObject<return>
+    nnoremap <silent> ,rcfD aflash[:danger] = "ChangeMessage because of the following errors: #{ChangeObject.errors.map { \|error\| error.message[0].capitalize + error.message[1..] }.join('; ')}."<esc>/ChangeMessage\\|ChangeObject<return>
 
   " Ruby Helpers
     " Ruby Helpers BAse
     nnoremap <silent> ,rhba :read ../templates/helpers/base_helper.rb<return>ggdd/ChangeThisPls<return>
   " Ruby Tasks
     " Ruby Tasks BAse
-    nnoremap <silent> ,rtba :read ../templates/tasks/base.rake<return>ggdd/ChangeNamespace\\|ChangeTaskType\\|ChangeCategory\\|DeleteThis<return>
+    nmap <silent> ,rtba :read ../templates/tasks/base.rake<return>ggdd/insert first task<return>dd<up>,rttb
     " Ruby Tasks Task Base
-    nmap <silent> ,rttb :read ../templates/tasks/task_base.rake<return>/insert run notes<return>dd<up>:read ../templates/tasks/run_notes.rake<return>/insert task notes<return>dd<up>:read ../templates/tasks/task_notes.rake<return>/ChangeNamespace\\|ChangeType\\|ChangeCategory\\|ChangeDescription\\|ChangeTaskName\\|ChangeTask1\\|ChangeTask2\\|ChangeTask3\\|DeleteThis<return>
+    nmap <silent> ,rttb :read ../templates/tasks/task_base.rake<return>/insert run notes<return>dd<up>:read ../templates/tasks/run_notes.rake<return>/insert task notes<return>dd<up>:read ../templates/tasks/task_notes.rake<return>/ChangeNamespace\\|ChangeTaskType\\|ChangeCategory\\|ChangeDescription\\|ChangeTaskName\\|ChangeTask1\\|ChangeTask2\\|ChangeTask3\\|DeleteThis\\|ChangeMessage<return>
     " Ruby Tasks Date Helper
     nnoremap <silent> ,rtdh :read ../templates/tasks/date_helper.rake<return>/DeleteThis<return>
     " Ruby Tasks Repeat  Helper
