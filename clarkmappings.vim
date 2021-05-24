@@ -100,8 +100,7 @@
   " Misc. DD but combine to previous line instead of delete line
   nmap <silent> ,mdd >I<esc>vvxi<backspace><esc>
   " Misc. Dd but combine to Forward line instead of delete line
-  " NOTE: this will delete first word if line has no indentation...
-  nmap <silent> ,mdf A<esc>wsvvxi<backspace><esc>
+  nmap <silent> ,mdf <down>,mdd
 
   " Misc. Messages
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
@@ -125,26 +124,75 @@
     nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
     " File Edit Clipboard and return
     nnoremap ,fecL :e <C-R><C-R>+<return>
-    " File Edit Controller to View 
-    nnoremap ,fecv :let @+ = expand("%")<return>o<esc>pO<esc>/controllers<return>cgnviews<esc>/_controller\.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+
+    " File Edit Stylesheet to Controller 
+    "
+    " File Edit Stylesheet to Helper
+    "
+    " File Edit Stylesheet to Javascript pack
+    "
+    " File Edit Stylesheet to View 
+    nnoremap ,fesv :let @+ = expand("%")<return>o<esc>po<esc>/assets\/stylesheets<return>cgnviews<esc>/scss<return>cgnhtml.erb<esc><up>dddd:e <c-r><c-r>+
+    " File Edit Stylesheet to (controller) Test
+    "
+
+    " File Edit Controller to Stylesheet 
+    "
     " File Edit Controller to Helper 
-    nnoremap ,fech :let @+ = expand("%")<return>o<esc>pO<esc>/controllers<return>cgnhelpers<esc>/_controller\.rb<return>cgn_helper.rb<esc><up>dddd:e <C-R><C-R>+
-    " File Edit View to Helper
-    nnoremap ,fevh :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnhelpers<esc>A_helpehelperup>dddd:e <C-R><C-R>+
-    " File Edit View to View
-    nmap ,fevv ,fepa
-    " File Edit View to Controller
-    nnoremap ,fevc :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgncontrollers<esc>A_controller.rb<esc><up>dddd:e <C-R><C-R>+
-    " File Edit View to Javascript pack
-    nnoremap ,fevj :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnjavascript/packs<esc>A/<esc><up>dddd:e <C-R><C-R>+
+    nnoremap ,fech :let @+ = expand("%")<return>o<esc>pO<esc>/controllers<return>cgnhelpers<esc>/_controller.rb<return>cgn_helper.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Controller to Javascript pack
+    "
+    " File Edit Controller to View 
+    nnoremap ,fecv :let @+ = expand("%")<return>o<esc>pO<esc>/controllers<return>cgnviews<esc>/_controller.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Controller to (controller) Test 
+    nnoremap ,fect :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/_controller.rb<return>cgn_controller_test.rb<esc><up>dddd:e <C-R><C-R>+
+    "
+
+    " File Edit Helper to Stylesheet
+    "
+    " File Edit Helper to Controller 
+    nnoremap ,fehc :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgncontrollers<esc>/_helper.rb<return>cgn_controller.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Helper to Javascript
+    "
+    " File Edit Helper to View
+    nnoremap ,fehv :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgnviews<esc>/_helper.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Helper to (helper) Test
+    "
+
+    " File Edit Javascript pack to Stylesheet
+    "
+    " File Edit Javascript pack to Controller 
+    "
+    " File Edit Javascript pack to Helper
+    "
+    " File Edit Javascript pack to View 
+    "
+    " File Edit Javascript pack to (controller) Test
+    "
+
+    " File Edit Model to (model) Test
+    " 
+
     " File Edit View to Stylesheet
     nnoremap ,fevs :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnassets/stylesheets<esc>A/<esc><up>dddd:e <C-R><C-R>+
-    " File Edit Helper to Controller 
-    nnoremap ,fehc :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgncontrollers<esc>/_helper\.rb<return>cgn_controller.rb<esc><up>dddd:e <C-R><C-R>+
-    " File Edit Helper to View
-    nnoremap ,fehv :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgnviews<esc>/_helper\.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
-    " File Edit Stylesheet to View 
-    "nnoremap ,fesv :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgnviews<esc>/_helper\.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to Controller
+    nnoremap ,fevc :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgncontrollers<esc>A_controller.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to Helper
+    nnoremap ,fevh :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnhelpers<esc>A_helpehelperup>dddd:e <C-R><C-R>+
+    " File Edit View to Javascript pack
+    nnoremap ,fevj :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnjavascript/packs<esc>A/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to View
+    nmap ,fevv ,fepa
+    " File Edit View to (controller) Test
+    nnoremap ,fevt :let @+ = expand('%:h')<return>o<esc>pO<esc>/app\/views<return>cgntest/controllers<esc>A_controller_test.rb<esc><up>dddd:e <C-R><C-R>+
+
+    " File Edit Test to Controller 
+    nnoremap ,fetc :let @+ = expand("%")<return>o<esc>po<esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><up>dddd:e <c-r><c-r>+
+    " File Edit Test to Model 
+    "
+    " File Edit Test to Helper 
+    "
+    
   "
   nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
   nnoremap <silent> ,caas :edit app/assets/<space><backspace>
@@ -744,6 +792,7 @@
   " Ruby Helpers
     " Ruby Helpers BAse
     nnoremap <silent> ,rhba :read ../templates/helpers/base_helper.rb<return>ggdd/ChangeThisPls<return>
+
   " Ruby Tasks
     " Ruby Tasks BAse
     nmap <silent> ,rtba :read ../templates/tasks/base.rake<return>ggdd/insert first task<return>dd<up>,rttb
@@ -753,6 +802,10 @@
     nnoremap <silent> ,rtdh :read ../templates/tasks/date_helper.rake<return>/DeleteThis<return>
     " Ruby Tasks Repeat  Helper
     nnoremap <silent> ,rtrb :read ../templates/tasks/repeat_block.rake<return>/DeleteThis<return>
+
+  " Ruby Jobs
+    " Ruby Jobs BAse
+    nmap <silent> ,rjba :read ../templates/jobs/base.rb<return>/DeleteThis\\|ChangeArguments\\|ChangeObject\\|ChangeModel\\|ChangeAttribute<return>
 
 " javascript mappings
   " Javascript jQuery
