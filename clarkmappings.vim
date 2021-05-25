@@ -170,6 +170,13 @@
     " File Edit Javascript pack to (controller) Test
     "
 
+    " File Edit mAiler to View
+    nnoremap ,feav :let @+ = expand("%")<return>o<esc>pO<esc>/mailers<return>cgnviews<esc>/.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit mAiler to Test
+    nnoremap ,feat :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/.rb<return>cgn_test.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit mAiler to Preview
+    nnoremap ,feap :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
+
     " File Edit Model to (model) Test
     " 
 
@@ -181,10 +188,16 @@
     nnoremap ,fevh :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnhelpers<esc>A_helpehelperup>dddd:e <C-R><C-R>+
     " File Edit View to Javascript pack
     nnoremap ,fevj :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnjavascript/packs<esc>A/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to mAiler
+    nnoremap ,feva :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnmailers<esc>A.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to mailer Preview
+    nnoremap ,fevp :let @+ = expand('%:h')<return>o<esc>pO<esc>/app\/views<return>cgntest/mailers/previews<esc>A_preview.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit View to View
     nmap ,fevv ,fecp
     " File Edit View to (controller) Test
     nnoremap ,fevt :let @+ = expand('%:h')<return>o<esc>pO<esc>/app\/views<return>cgntest/controllers<esc>A_controller_test.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to (mailer) tEst
+    nnoremap ,feve :let @+ = expand('%:h')<return>o<esc>p<esc><up>/app\/views<return>cgntest/mailers<esc>A_test.rb<esc>dd:e <C-R><C-R>+
 
     " File Edit Test to Controller 
     nnoremap ,fetc :let @+ = expand("%")<return>o<esc>po<esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><up>dddd:e <c-r><c-r>+
@@ -192,25 +205,19 @@
     "
     " File Edit Test to Helper 
     "
-    
-    " File Edit View to mAiler
-    nnoremap ,feva :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnmailers<esc>A.rb<esc><up>dddd:e <C-R><C-R>+
-    " File Edit View to mailer Preview
-    nnoremap ,fevp :let @+ = expand('%:h')<return>o<esc>pO<esc>/app\/views<return>cgntest/mailers/previews<esc>A_preview.rb<esc><up>dddd:e <C-R><C-R>+
-    " File Edit View to (mailer) Test
     " File Edit Test to mAiler
+    nnoremap ,feta :let @+ = expand("%")<return>o<esc>po<esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><down>dd<up>dd:e <C-R><C-R>+
+    " File Edit Test to View (for controller and mailer tests)
+    nnoremap ,fetv :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc><up>/controllers\\|mailers<return>cgnviews<esc><up>/_test.rb<return>cgn/<esc>dd:e <C-R><C-R>+ 
     " File Edit Test to mailer Preview
-    " File Edit Test to (mailer) View
-    " File Edit mAiler to View
-    nnoremap ,feav :let @+ = expand("%")<return>o<esc>pO<esc>/mailers<return>cgnviews<esc>/.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
-    " File Edit mAiler to Test
-    " File Edit mAiler to Preview
-    nnoremap ,feap :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
+    nnoremap ,fetp :let @+ = expand("%")<return>o<esc>po<esc>/mailers<return>Ncgnmailers/previews<esc>/_test<return>cgn_preview<esc><down>dd<up>dd:e <C-R><C-R>+
+
     " File Edit Preview to View
     nnoremap ,fepv :let @+ = expand("%")<return>o<esc>pO<esc>/test\/mailers\/previews<return>cgnapp/views<esc>/_preview.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
     " File Edit Preview to mAiler
     nnoremap ,fepa :let @+ = expand("%")<return>o<esc>pO<esc>/test\/mailers\/previews<return>cgnapp/mailers<esc>/_preview<return>cgn<esc><up>dddd:e <C-R><C-R>+
-    " File Edit Preview to 
+    " File Edit Preview to Test
+    nnoremap ,fept :let @+ = expand("%")<return>o<esc>p<up>/\/previews<return>cgn<esc><up>/_preview<return>cgn_test<esc>dd:e <C-R><C-R>+
   "
   nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
   nnoremap <silent> ,caas :edit app/assets/<space><backspace>
