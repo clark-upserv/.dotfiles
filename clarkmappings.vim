@@ -116,10 +116,10 @@
   " File Edit
     " File Edit SEarch
     nnoremap ,fese :e **/*
-    " File Edit PAth
-    nnoremap ,fepa :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
-    " File Edit PAth and return
-    nnoremap ,fepA :let @+ = expand('%:h')<return>:e <C-R><C-R>+<return>
+    " File Edit Current Path
+    nnoremap ,fecp :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
+    " File Edit Current Path and return
+    nnoremap ,fecP :let @+ = expand('%:h')<return>:e <C-R><C-R>+<return>
     " File Edit CLipboard
     nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
     " File Edit Clipboard and return
@@ -182,7 +182,7 @@
     " File Edit View to Javascript pack
     nnoremap ,fevj :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnjavascript/packs<esc>A/<esc><up>dddd:e <C-R><C-R>+
     " File Edit View to View
-    nmap ,fevv ,fepa
+    nmap ,fevv ,fecp
     " File Edit View to (controller) Test
     nnoremap ,fevt :let @+ = expand('%:h')<return>o<esc>pO<esc>/app\/views<return>cgntest/controllers<esc>A_controller_test.rb<esc><up>dddd:e <C-R><C-R>+
 
@@ -193,6 +193,24 @@
     " File Edit Test to Helper 
     "
     
+    " File Edit View to mAiler
+    nnoremap ,feva :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnmailers<esc>A.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to mailer Preview
+    nnoremap ,fevp :let @+ = expand('%:h')<return>o<esc>pO<esc>/app\/views<return>cgntest/mailers/previews<esc>A_preview.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to (mailer) Test
+    " File Edit Test to mAiler
+    " File Edit Test to mailer Preview
+    " File Edit Test to (mailer) View
+    " File Edit mAiler to View
+    nnoremap ,feav :let @+ = expand("%")<return>o<esc>pO<esc>/mailers<return>cgnviews<esc>/.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit mAiler to Test
+    " File Edit mAiler to Preview
+    nnoremap ,feap :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Preview to View
+    nnoremap ,fepv :let @+ = expand("%")<return>o<esc>pO<esc>/test\/mailers\/previews<return>cgnapp/views<esc>/_preview.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Preview to mAiler
+    nnoremap ,fepa :let @+ = expand("%")<return>o<esc>pO<esc>/test\/mailers\/previews<return>cgnapp/mailers<esc>/_preview<return>cgn<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Preview to 
   "
   nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
   nnoremap <silent> ,caas :edit app/assets/<space><backspace>
@@ -648,7 +666,9 @@
     " Ruby Basic Dir
     nmap <silent> ,rbdi ,mmdir_notesaDir['app/ChangePath/**/*.ChangeExtension*'].each do \|path\|<return># DeleteThisNote: add logic here...<return>DeleteThisNote: use this to clean file name: path.remove('<delete>app/ChangePath/').split('<delete>.ChangeExtension').first<return><backspace><backspace>end<esc>/DeleteThisNote\\|ChangePath\\|ChangeExtension<return>
     " Ruby Basic BEgin
-    noremap <silent> ,rbbe abegin<return># DeleteThis - have code that could possibly error<return><backspace><backspace>rescue ChangeError<return># DeleteThis - some exception handling<return><backspace><backspace>else<return># DeleteThis - add logic to run only when no errors occur<return><backspace><backspace>ensure<return># DeleteThis - add logic to run whether there are error or not<return><backspace><backspace>end<esc>/DeleteThis\\|ChangeError<return>
+    noremap <silent> ,rbbe arescue StandardError => e<return># DeleteThis - some exception handling<return><backspace><backspace>else<return># DeleteThis - add logic to run only when no errors occur<return><backspace><backspace>ensure<return># DeleteThis - add logic to run whether there are error or not<return><backspace><backspace>end<esc>/DeleteThis\\|StandardError<return>
+    " Ruby Basic BEgin (full)
+    noremap <silent> ,rbbE abegin<return># DeleteThis - have code that could possibly error<return><backspace><backspace>rescue StandardError => e<return># DeleteThis - some exception handling<return><backspace><backspace>else<return># DeleteThis - add logic to run only when no errors occur<return><backspace><backspace>ensure<return># DeleteThis - add logic to run whether there are error or not<return><backspace><backspace>end<esc>/DeleteThis\\|StandardError<return>
 
 
   " Ruby model mappings
@@ -806,6 +826,12 @@
   " Ruby Jobs
     " Ruby Jobs BAse
     nmap <silent> ,rjba :read ../templates/jobs/base.rb<return>/DeleteThis\\|ChangeArguments\\|ChangeObject\\|ChangeModel\\|ChangeAttribute<return>
+
+  " Ruby mAilers
+    " Ruby mAilers BAse
+    nmap <silent> ,raba :read ../templates/mailers/base.rb<return>/ChangeObject\\|ChangeModel\\|ChangeId\\|ChangeVariable\\|ChangeOption\\|DeleteThis\\|ChangeGuardLogic\\|ChangeToEmail\\|ChangeFromEmail\\|ChangeSubject<return>
+    " Ruby mAilers Html Email
+    nmap <silent> ,rahe :read ../templates/mailers/html_email.html.erb<return>ggdd/DeleteThis\\|ChangeUrl<return>
 
 " javascript mappings
   " Javascript jQuery
