@@ -831,7 +831,7 @@
     " Ruby mAilers BAse
     nmap <silent> ,raba :read ../templates/mailers/base.rb<return>/ChangeObject\\|ChangeModel\\|ChangeId\\|ChangeVariable\\|ChangeOption\\|DeleteThis\\|ChangeGuardLogic\\|ChangeToEmail\\|ChangeFromEmail\\|ChangeSubject<return>
     " Ruby mAilers Html Email
-    nmap <silent> ,rahe :read ../templates/mailers/html_email.html.erb<return>ggdd/DeleteThis\\|ChangeUrl<return>
+    nmap <silent> ,rahe :read ../templates/mailers/html_email.html.erb<return>ggdd/DeleteThis\\|ChangeUrl\\|ChangeEmail<return>
 
 " javascript mappings
   " Javascript jQuery
