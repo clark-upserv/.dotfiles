@@ -677,6 +677,8 @@
     nnoremap <silent> ,rboR aorder("LOWER(ChangeAttribute) DESC")<esc>/ChangeAttribute<return>
     " Ruby Basic Dir
     nmap <silent> ,rbdi ,mmdir_notesaDir['app/ChangePath/**/*.ChangeExtension*'].each do \|path\|<return># DeleteThisNote: add logic here...<return>DeleteThisNote: use this to clean file name: path.remove('<delete>app/ChangePath/').split('<delete>.ChangeExtension').first<return><backspace><backspace>end<esc>/DeleteThisNote\\|ChangePath\\|ChangeExtension<return>
+    " Ruby basic Rails Root
+    nnoremap <silent> ,rbrr aRails.root.join('ChangeThis', 'ChangeThis', 'Etc.')<esc>/ChangeThis\\|Etc.<return>
     " Ruby Basic BEgin
     noremap <silent> ,rbbe arescue StandardError => e<return># DeleteThis - some exception handling<return><backspace><backspace>else<return># DeleteThis - add logic to run only when no errors occur<return><backspace><backspace>ensure<return># DeleteThis - add logic to run whether there are error or not<esc>/DeleteThis<return>
     " Ruby Basic BEgin (full)
@@ -845,7 +847,7 @@
 
   " Ruby mAilers
     " Ruby mAilers BAse
-    nmap <silent> ,raba :read ../templates/mailers/base.rb<return>/ChangeObject\\|ChangeModel\\|ChangeId\\|ChangeVariable\\|ChangeOption\\|DeleteThis\\|ChangeGuardLogic\\|ChangeToEmail\\|ChangeFromEmail\\|ChangeSubject<return>
+    nmap <silent> ,raba :read ../templates/mailers/base.rb<return>/@to_user\\|ChangeObject\\|ChangeModel\\|ChangeId\\|ChangeVariable\\|ChangeOption\\|DeleteThis\\|ChangeGuardLogic\\|ChangeToEmail\\|ChangeFromEmail\\|ChangeSubject<return>
     " Ruby mAilers Html Email
     nmap <silent> ,rahe :read ../templates/mailers/html_email.html.erb<return>ggdd/DeleteThis\\|ChangeUrl\\|ChangeEmail<return>
 
@@ -960,7 +962,7 @@
     nnoremap <silent> ,tbuf :read ../templates/tests/misc/upload_fixture_file.rb<return><esc>/ChangeVariable\\|ChangePath\\|ChangeContentType\\|DeleteThisPls\\|ChangeObject\\|ChangeAttachment<return>
   " Controller
     " Tests Controller BAse
-    nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
+    nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
     " Tests Controller Scenario Bases
     nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/ChangePermission\\|ChangeMethodUrlAndParams\\|ReplaceThisPls<return>
     " Tests Controller Tes Baset
@@ -981,21 +983,21 @@
     nnoremap <silent> ,tcde adelete ChangeUrlHelper_path(ChangeModel)<esc>/ChangeUrlHelper\\|ChangeModel<return>
   " Helper
     " Tests Helper BAse
-    nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+    nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
   " Integration
     " Tests Integration BAse
-    nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThisIfNotNecessary<return>
+    nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThisIfNotNecessary<return>
   " Jobs
     " Tests Job BAse
-    nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/ChangeThisPls<return>
+    nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls<return>
   " Mailers
     " Tests mAiler BAse
-    nmap <silent> ,taba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
+    nmap <silent> ,taba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
     " Tests mAiler Test Base
     nmap <silent> ,tatb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
   " Models
     " Tests Model BAse
-    nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
+    nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
     " Tests Models Belongs To
     nnoremap <silent> ,tmbt atest "ChangeModel should belong to ChangeAssociationName" do<return>assert_equal @ChangeParent, @ChangeModel.ChangeParent<return>end<esc>/ChangeModel\\|ChangeAssociationName\\|ChangeParent<return>
     " Tests Models Has Many
@@ -1006,7 +1008,8 @@
     " Tests Test Helpers Base
     nnoremap <silent> ,tthb :read ../templates/tests/test_helper_base.rb<return>ggdd/ChangeThis<return>
     " Tests Test Helpers Test
-    nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+    nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+    nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can easily change (ie text in source code)<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break<esc>
 
 " Packages
   " Sortable Table positions
