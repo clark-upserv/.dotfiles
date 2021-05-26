@@ -952,8 +952,8 @@
     nnoremap <silent> ,tbte atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
     " Tests Base Assertions and Tools
     nnoremap <silent> ,tbat :read ../templates/tests/assertions_and_tools.rb<return>
-    " Tests Base Fixture File upload
-    nnoremap <silent> ,tbff :read ../templates/tests/misc/fixture_file_upload.rb<return><esc>/ChangeVariable\\|ChangeFileNameExtension\\|ChangeFileName\\|ChangeFileType\\|ChangeFileSubType\\|DeleteThisPls\\|ChangeInstance\\|ChangeAttachment<return>
+    " Tests Base Upload fixture File
+    nnoremap <silent> ,tbuf :read ../templates/tests/misc/upload_fixture_file.rb<return><esc>/ChangeVariable\\|ChangePath\\|ChangeContentType\\|DeleteThisPls\\|ChangeObject\\|ChangeAttachment<return>
   " Controller
     " Tests Controller BAse
     nnoremap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel\\|DeleteThisIfNotNecessary<return>
