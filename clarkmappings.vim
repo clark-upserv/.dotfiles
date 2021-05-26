@@ -952,8 +952,8 @@
 
 " Tests
   " Base
-    " Tests Base TEst
-    nnoremap <silent> ,tbte atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
+    " Tests Base Test Base
+    nnoremap <silent> ,tbtb atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
     " Tests Base Assertions and Tools
     nnoremap <silent> ,tbat :read ../templates/tests/assertions_and_tools.rb<return>
     " Tests Base Upload fixture File
@@ -1006,7 +1006,7 @@
     " Tests Test Helpers Base
     nnoremap <silent> ,tthb :read ../templates/tests/test_helper_base.rb<return>ggdd/ChangeThis<return>
     " Tests Test Helpers Test
-    nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+    nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
 
 " Packages
   " Sortable Table positions
