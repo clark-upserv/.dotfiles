@@ -109,10 +109,10 @@
 
 " File mappings
   " File Path
-    " File Copy PAth
-    nnoremap ,fcpa :let @+ = expand('%:h') . '/'<return>
-    " File Copy Path and File name
-    nnoremap ,fcpf :let @+ = expand('%')<return>
+    " File Copy Current Path
+    nnoremap ,fccp :let @+ = expand('%:h') . '/'<return>
+    " File Copy Current Path and file name
+    nnoremap ,fccP :let @+ = expand('%')<return>
   " File Edit
     " File Edit SEarch
     nnoremap ,fese :e **/*
@@ -170,6 +170,9 @@
     " File Edit Javascript pack to (controller) Test
     "
 
+    " File Edit Job to (job) Test 
+    nnoremap ,fejt :let @+ = expand("%")<return>o<esc>p<up>/app<return>cgntest<esc><up>/_job.rb<return>cgn_job_test.rb<esc>dd:e <C-R><C-R>+
+
     " File Edit mAiler to View
     nnoremap ,feav :let @+ = expand("%")<return>o<esc>pO<esc>/mailers<return>cgnviews<esc>/.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
     " File Edit mAiler to Test
@@ -205,6 +208,8 @@
     "
     " File Edit Test to Helper 
     "
+    " File Edit Test to Job 
+    nnoremap ,fetj :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc><up>/_test<return>cgn<esc>dd:e <c-r><c-r>+
     " File Edit Test to mAiler
     nnoremap ,feta :let @+ = expand("%")<return>o<esc>po<esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><down>dd<up>dd:e <C-R><C-R>+
     " File Edit Test to View (for controller and mailer tests)
@@ -979,6 +984,9 @@
     nnoremap <silent> ,tmhm atest "ChangeModel should have many ChangeAssociationName" do<return>assert_equal @ChangeModel.ChangeAssociationName.count, ChangeModel.where(ChangeModel_id: ChangeModel.id).count<return>end<esc>/ChangeModel\\|ChangeAssociationName<return>
     " Tests Models Model VAlication
     nnoremap <silent> ,tmva atest "ChangeModel ChangeAttribute should be ChangeValidation" do<return>@ChangeModel.attrbitute = ChangeInvalidValue<return>assert_not @ChangeModel.valid?<return>end<esc>/ChangeModel\\|ChangeAttribute\\|ChangeValidation\\|ChangeInvalidValue<return>
+  " Jobs
+    " Tests Job BAse
+    nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/ChangeThisPls<return>
   " Integration
     " Tests Integration BAse
     nnoremap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName\\|ChangeThisPls\\|ChangePermission\\|DeleteThisIfNotNecessary<return>
