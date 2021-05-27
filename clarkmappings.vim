@@ -835,7 +835,7 @@
     " Ruby Tasks BAse
     nmap <silent> ,rtba :read ../templates/tasks/base.rake<return>ggdd/insert first task<return>dd<up>,rttb
     " Ruby Tasks Task Base
-    nmap <silent> ,rttb :read ../templates/tasks/task_base.rake<return>/insert run notes<return>dd<up>:read ../templates/tasks/run_notes.rake<return>/insert task notes<return>dd<up>:read ../templates/tasks/task_notes.rake<return>/ChangeNamespace\\|ChangeTaskType\\|ChangeCategory\\|ChangeDescription\\|ChangeTaskName\\|ChangeTask1\\|ChangeTask2\\|ChangeTask3\\|DeleteThis\\|ChangeMessage<return>
+    nmap <silent> ,rttb :read ../templates/tasks/task_base.rake<return>/ChangeApp\\|ChangeTaskType\\|ChangeCategory\\|ChangeDescription\\|ChangeTaskName\\|ChangeTask1\\|ChangeTask2\\|ChangeTask3\\|DeleteThis\\|ChangeMessage<return>
     " Ruby Tasks Date Helper
     nnoremap <silent> ,rtdh :read ../templates/tasks/date_helper.rake<return>/DeleteThis<return>
     " Ruby Tasks Repeat  Helper
