@@ -424,15 +424,15 @@
     " Embedded Ruby StyleSheet
     nnoremap <silent> ,erss a<%= stylesheet_link_tag('ChangeThisPls') %><esc>/ChangeThisPls<return>
     " Embedded Ruby PArtial
-    nnoremap <silent> ,erpa a<%= render(partial: 'ChangePath', locals: { ChangeLocals }) %><esc>/ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,erpa a<%= render('ChangePath', ChangeLocals) %><esc>/ChangePath\\|ChangeLocals<return>
     " Embedded Ruby PArtial (full)
-    nnoremap <silent> ,erpA a<div id="ChangeId"><return><%= render(partial: 'ChangePath', locals: { ChangeLocals }) %><return></div><esc>/ChangeId\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,erpA a<div id="ChangeId"><return><%= render('ChangePath', ChangeLocals) %><return></div><esc>/ChangeId\\|ChangePath\\|ChangeLocals<return>
     " Embedded Ruby Partials for Show edit swap
     nmap <silent> ,erps ,vsba
     " Embedded Ruby Puts Debugger
     nnoremap <silent> ,erpd a<% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts nil %><return><% puts 'ChangeLabel:' %><return><% puts ChangeThisPls %><esc>/ChangeLabel\\|ChangeThisPls<return>
     " Html Ruby Escape Javascript with partial
-    nnoremap <silent> ,erej a<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %><esc>/ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,erej a<%= escape_javascript(render('ChangePath' ChangeLocals)) %><esc>/ChangePath\\|ChangeLocals<return>
 
 " Html mappings
   " Html Elements
@@ -487,7 +487,7 @@
     " Html Form WIth
     nnoremap <silent> ,hfwi a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><esc>o<% end %><esc>/ChangeThisPls<return>
     " Html Form Full Errors
-    nnoremap <silent> ,hffe a<%= render(partial: 'shared/full_errors', locals: { errors_hash: ChangeThisPls.errors.messages, ian: false }) %><esc>/ChangeThisPls<return>
+    nnoremap <silent> ,hffe a<%= render('shared/full_errors', errors: ChangeThisPls.errors.messages) %><esc>/ChangeThisPls<return>
     " Html Form Fields For
     nnoremap <silent> ,hfff a<%= ChangeThisPls_form.fields_for(:ChangeScope, ChangeModel) do \|ChangeThisPls_form\| %><return><% end %><esc>/ChangeThisPls\\|ChangeScope\\|ChangeModel<return>
     " Html Form LAbel
@@ -605,7 +605,7 @@
     " Html form Input OPtion
     nnoremap <silent> ,hiop a<option <%= "selected='true'" if ChangeThisPls %> value="<%= ChangeThisPls %>">ChangeThisPls</option><esc>/ChangeThisPls<return>
     " Html form Input Inline Errors
-    nnoremap <silent> ,hiie a<%= render(partial: 'shared/inline_errors', locals: { errors: ChangeObject.errors.messages[:ChangeAttribute] }) %><esc>/ChangeObject\\|ChangeAttribute<return>
+    nnoremap <silent> ,hiie a<%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %><esc>/ChangeObject\\|ChangeAttribute<return>
     " Html form Input SUbmit
     nnoremap <silent> ,hisu a<%= ChangeForm_form.submit(:ChangeDisplay, class: 'btn btn-ChangeColor') %><esc>/ChangeForm\\|ChangeDisplay\\|ChangeColor<return>
     " Html form Input Submit Link
@@ -878,7 +878,7 @@
     " Javascript jQiery html
     nnoremap <silent> ,jqht ahtml("ChangeHtml")<esc>/ChangeHtml<return>
     " Javascript jQiery html (full)
-    nmap <silent> ,jqhT a$('#ChangeId').html("<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>")<esc>/ChangeId\\|ChangePath\\|ChangeLocals<return><n
+    nmap <silent> ,jqhT a$('#ChangeId').html("<%= escape_javascript(render('ChangePath', ChangeLocals)) %>")<esc>/ChangeId\\|ChangePath\\|ChangeLocals<return><n
     " Javascript jQiery EAch
     nmap <silent> ,jqea aeach(function(index){<return>})<esc>,O
 
@@ -924,7 +924,7 @@
     " Javascript Vanilla Inner Html
     nnoremap <silent> ,jvih ainnerHTML = "ChangeHTML"<esc>/ChangeHTML<return>
     " Javascript Vanilla Inner Html (full)
-    nnoremap <silent> ,jviH ainnerHTML = "<%= escape_javascript(render(partial: 'ChangePath', locals: { ChangeLocals })) %>"<esc>/ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,jviH ainnerHTML = "<%= escape_javascript(render('ChangePath', ChangeLocals)) %>"<esc>/ChangePath\\|ChangeLocals<return>
     " Javascript Vanilla Append Html
     nnoremap <silent> ,jvah ainnerHTML += "ChangeHTML"<esc>/ChangeHTML<return>
     " Javascript Vanilla Prepend Html
