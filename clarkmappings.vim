@@ -854,7 +854,7 @@
 " javascript mappings
   " Javascript jQuery
     " Javascript jQiery Select Element
-    nnoremap <silent> ,jqse a$(ChangeElement)<esc>/ChangeElement<return>
+    nnoremap <silent> ,jqse a$('ChangeElement')<esc>/ChangeElement<return>
     " Javascript jQiery Select Class
     nnoremap <silent> ,jqsc a$('.ChangeClass')<esc>/ChangeClass<return>
     " Javascript jQiery Select Id
