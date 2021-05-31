@@ -97,6 +97,9 @@
 " Misc. mapping / messages
   " Misc. Reload Source
   nnoremap <silent> ,mrs :so ~/.dotfiles/clarkmappings.vim<return>
+  " temp for helping with robot font in app/assets/beagle_lib/beagle.scss.erb
+  vmap <silent> ,mrr xi<%= asset_path(ChangePath) %><esc>/ChangePath<return>vvp0/\.\.\/lib\/<return>cgn<esc>/url(<return>
+  vmap <silent> ,mrt xi<%= "#{asset_path(ChangePath)}" %><esc>/ChangePath<return>vvp0/\.\.\/lib\/<return>cgn<esc>
   " Misc. DD but combine to previous line instead of delete line
   nmap <silent> ,mdd >I<esc>vvxi<backspace><esc>
   " Misc. Dd but combine to Forward line instead of delete line
@@ -111,8 +114,8 @@
   " File Path
     " File Copy Current Path
     nnoremap ,fccp :let @+ = expand('%:h') . '/'<return>
-    " File Copy Current Path and file name
-    nnoremap ,fccP :let @+ = expand('%')<return>
+    " File Copy Current Path and File
+    nnoremap ,fccf :let @+ = expand('%')<return>
   " File Edit
     " File Edit SEarch
     nnoremap ,fese :e **/*
@@ -872,7 +875,7 @@
     " Javascript jQiery Element On
     nnoremap <silent> ,jqeo a$(ChangeThisPls).on('ChangeThisPls', function(){})<esc>hi<return><esc>/ChangeThisPls<return>
     " Javascript jQiery Document Ready
-    nnoremap <silent> ,jqdr a$(document).ready(ChangeThisPlsSetUp())<return>$(document).on('ajax:complete', ChangeThisPlsSetUp())<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp() {<return>// DeleteThis - do not use $(document).on() because event listeners will not be removed on ajax and could cause duplicates. Instead use $(element).on()<return><backspace><backspace><backspace>}<esc>/ChangeThisPls\\|DeleteThis<return>
+    nnoremap <silent> ,jqdr a$(document).ready(function(){ChangeThisPlsSetUp()})<return>$(document).on('ajax:complete', function(){ChangeThisPlsSetUp()})<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp() {<return>// DeleteThis - do not use $(document).on() because event listeners will not be removed on ajax and could cause duplicates. Instead use $(element).on()<return><backspace><backspace><backspace>}<esc>/ChangeThisPls\\|DeleteThis<return>
     " Javascript jQiery Document Ready (full)
     nnoremap <silent> ,jqdR a$(document).ready(function(){<return>ChangeThisPlsSetUp()<return>})<return>$(document).on('ajax:complete', function(){<return>ChangeThisPlsSetUp()<return>})<return>// Make sure to include logic after ajax and also make sure to prevent duplicate events<return><backspace><backspace><backspace>function ChangeThisPlsSetUp(){<return>// DeleteThis - do not use $(document).on() because event listeners will not be removed on ajax and could cause duplicates. Instead use $(element).on()<return><backspace><backspace><backspace>}<esc>/ChangeThisPls\\|DeleteThis<return>
     " Javascript jQiery html
