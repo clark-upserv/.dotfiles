@@ -120,9 +120,9 @@
     " File Edit SEarch
     nnoremap ,fese :e **/*
     " File Edit Current Path
-    nnoremap ,fecp :let @+ = expand('%h') . '/'<return>:e <C-R><C-R>+<space><backspace>
-    " File Edit Current Path and file name
-    nnoremap ,fecP :let @+ = expand('%')<return>:e <C-R><C-R>+
+    nnoremap ,fecp :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
+    " File Edit Current path and File name
+    nnoremap ,fecf :let @+ = expand('%')<return>:e <C-R><C-R>+
     " File Edit CLipboard
     nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
     " File Edit Clipboard and return
@@ -146,7 +146,7 @@
     " File Edit Controller to Javascript pack
     "
     " File Edit Controller to View 
-    nnoremap ,fecv :let @+ = expand("%")<return>o<esc>pO<esc>/controllers<return>cgnviews<esc>/_controller.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
+    nnoremap ,fecv :let @+ = expand("%")<return>o<esc>p<up>/controllers<return>cgnviews<esc><up>/_controller.rb<return>cgn/<esc>C-R><C-R>+
     " File Edit Controller to (controller) Test 
     nnoremap ,fect :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/_controller.rb<return>cgn_controller_test.rb<esc><up>dddd:e <C-R><C-R>+
     "
@@ -689,6 +689,20 @@
 
 
   " Ruby model mappings
+    " Ruby Models BAse
+    nnoremap <silent> ,rmba :read ../templates/models/models/base.rb<return>ggdd/ChangeThisPls<return>
+    " Ruby Models Base Virtual
+    nnoremap <silent> ,rmbv :read ../templates/models/models/base_virtual.rb<return>ggdd
+    " Ruby Models VIrtual
+    nnoremap <silent> ,rmvi :read ../templates/models/models/virtual.rb<return>ggdd/ChangeThisPls<return>
+    " Ruby Models CLass
+    nnoremap <silent> ,rmcl :read ../templates/models/models/class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
+    " Ruby Models Sub Class
+    nnoremap <silent> ,rmsu :read ../templates/models/models/sub_class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
+    " Ruby Models MOdule
+    nnoremap <silent> ,rmmo :read ../templates/models/models/module.rb<return>ggdd/ChangeThisPls<return>
+    " Ruby Models SErvice
+    nnoremap <silent> ,rmse :read ../templates/models/models/service.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models Can Model based
     nnoremap <silent> ,rmcm acan [:ChangeNamespace_ChangePermission], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
     " Ruby Models Can Model based full
@@ -715,29 +729,19 @@
     nnoremap <silent> ,rmoa ahas_one_attached :ChangeAttribute<esc>/ChangeAttribute<return>
     " Ruby Models has Many Attached
     nnoremap <silent> ,rmma ahas_many_attached :ChangeAttributes<esc>/ChangeAttributes<return>
-    " Ruby Models BAse
-    nnoremap <silent> ,rmba :read ../templates/models/models/base.rb<return>ggdd/ChangeThisPls<return>
-    " Ruby Models Base Virtual
-    nnoremap <silent> ,rmbv :read ../templates/models/models/base_virtual.rb<return>ggdd
-    " Ruby Models VIrtual
-    nnoremap <silent> ,rmvi :read ../templates/models/models/virtual.rb<return>ggdd/ChangeThisPls<return>
-    " Ruby Models CLass
-    nnoremap <silent> ,rmcl :read ../templates/models/models/class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
-    " Ruby Models Sub Class
-    nnoremap <silent> ,rmsu :read ../templates/models/models/sub_class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
-    " Ruby Models MOdule
-    nnoremap <silent> ,rmmo :read ../templates/models/models/module.rb<return>ggdd/ChangeThisPls<return>
-    " Ruby Models SErvice
-    nnoremap <silent> ,rmse :read ../templates/models/models/service.rb<return>ggdd/ChangeThisPls<return>
+    " Ruby Models SCope
+    nnoremap <silent> ,rmsc ascope :ChangeName, -> { ChangeLogic }<esc>/ChangeName\\|ChangeLogic<return>
+    " Ruby Models SCope
+    nnoremap <silent> ,rmsC ascope :ChangeName, ->(ChangeArgument) { ChangeLogic }<esc>/ChangeName\\|ChangeArgument\\|ChangeLogic<return>
 
   " Ruby Routes
     " main routes
       " Ruby Routes NAmespace
-      nnoremap <silent> ,rrna anamespace :ChangeThisPls do<return>end<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rrna anamespace :ChangeNamespace do<return>end<esc>/ChangeNamespace<return>
       " Ruby Routes REsources
-      nnoremap <silent> ,rrre aresources :ChangeThisPls, only %i[index show create update destroy]<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rrre aresources :ChangeController, only: %i[index show create update destroy]<esc>/ChangeController<return>
       " Ruby Routes Resources Nested
-      nnoremap <silent> ,rrrn aget ':id/ChangeThisPls', to: 'ChangeThisPls#index', as: :ChangeThisPls<esc>opost ':id/ChangeThisPls', to: 'ChangeThisPls#create'<esc>oresources :ChangeThisPls, only %i[show update destroy]<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rrrn aget ':id/ChangeThisPls', to: 'ChangeThisPls#index', as: :ChangeThisPls<esc>opost ':id/ChangeThisPls', to: 'ChangeThisPls#create'<esc>oresources :ChangeThisPls, only: %i[show update destroy]<esc>/ChangeThisPls<return>
       " Ruby Routes Get Member
       nnoremap <silent> ,rrgm aget 'ChangeThisPls/:id/ChangeThisPls', to: 'ChangeThisPls#ChangeThisPls', as: :ChangeThisPls_ChangeThisPls <esc>o# REMEMBER TO MAKE PARENT PLURAL ON INITIAL ARGUMENT AND "TO" BUT SINGULAR ON "AS"<esc>oExample: get 'users/:id/sub_profile', to: 'users#sub_profile', as: :user_subprofile<esc>oThis is because the helper method is pointing to a single user just like the show, edit, update and destroy actions<esc>ocore_user_subprofile_path is appropriate but core_users_subprofile_path is not<esc>/ChangeThisPls<return>
       " Ruby Routes GEt (for non-restful routes)
@@ -746,9 +750,9 @@
       "
       nnoremap <silent> ,rrsc ascope path: :ChangeThisPls, module: :ChangeThisPls, as: :ChangeThisPls do<return>end<esc>/ChangeThisPls<return>
       " Ruby Routes REsources full
-      nnoremap <silent> ,rrrE aresources path: :ChangeThisPls, controller: :ChangeThisPls, as: :ChangeThisPls, only %i[index show create update destroy]<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rrrE aresources path: :ChangeThisPls, controller: :ChangeThisPls, as: :ChangeThisPls, only: %i[index show create update destroy]<esc>/ChangeThisPls<return>
 
-      nnoremap <silent> ,rrra aresources path: :ChangeThisPls, module: :ChangeThisPls, as: :ChangeThisPls, only %i[] do<return>end<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rrra aresources path: :ChangeThisPls, module: :ChangeThisPls, as: :ChangeThisPls, only: %i[] do<return>end<esc>/ChangeThisPls<return>
       "
       nnoremap <silent> ,rrme amember do<return>end<esc>O <backspace><esc>
       " Ruby Routes GEt full (for non-restful routes)
@@ -794,7 +798,7 @@
     " Ruby Controller Model impersonator add Error Message
     nnoremap <silent> ,rcme a@ChangeThisPls.add_error_message(:ChangeAttribute, ChangeMessage)<esc>/ChangeAttribute\\|ChangeMessage<return>
     " Ruby Controllers BAse
-    nnoremap <silent> ,rcba :read ../templates/controllers/base_controller.rb<return>ggdd/ChangeThisPls<return>
+    nnoremap <silent> ,rcba :read ../templates/controllers/base_controller.rb<return>ggdd/ChangeThisPls\\|DeleteThis<return>
     " Ruby Controllers Index Base
     nnoremap <silent> ,rcib :read ../templates/controllers/actions/index_base.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeVerb\\|ChangeObjects\\|DeleteThis<return>
     " Ruby Controllers Index Simple
