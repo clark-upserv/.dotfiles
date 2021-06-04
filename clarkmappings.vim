@@ -146,7 +146,7 @@
     " File Edit Controller to Javascript pack
     "
     " File Edit Controller to View 
-    nnoremap ,fecv :let @+ = expand("%")<return>o<esc>p<up>/controllers<return>cgnviews<esc><up>/_controller.rb<return>cgn/<esc>C-R><C-R>+
+    nnoremap ,fecv :let @+ = expand("%")<return>o<esc>p<up>/controllers<return>cgnviews<esc><up>/_controller.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Controller to (controller) Test 
     nnoremap ,fect :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/_controller.rb<return>cgn_controller_test.rb<esc><up>dddd:e <C-R><C-R>+
     "
@@ -257,7 +257,7 @@
   nmap <silent> ,famo <space>fT/app<return><return>/models<return><return><esc>:noh<return>
   nnoremap <silent> ,camo :edit app/models/<space><backspace>
   " Edit App/Mddels/aBility.rb Cancancan
-  nmap <silent> ,famc <space>fT/app<return><return>/models<return><return>/ability.rb<return><return><esc>:noh<return>
+  nmap <silent> ,famc :e app/models/ability.rb<return>
   "
   nmap <silent> ,favi <space>fT/app<return><return>/views<return><return><esc>:noh<return>
   nnoremap <silent> ,cavi :edit app/views/<space><backspace>
@@ -303,7 +303,7 @@
 " View templates Mappings
   "  View templates Page
     " View templates Page BAse
-    nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/ChangeNavTypeOrDeleteThisLine\\|DeleteThisPls\\|ChangeTemplate\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThisPls\\|ChangeNavTypeOrDeleteThisLine\\|ChangePath\\|ChangeTemplate\\|ChangeLocals<return>
     " View templates Page STylesheets
     nnoremap <silent> ,vpst :read ../templates/views/page/stylesheets.html.erb<return>/DeleteThisNote\\|ChangePath<return>
     " View templates Page Javascript Packs
@@ -315,22 +315,24 @@
     " View templates Page End Of body - alternate mapping
     nmap <silent> ,vpeo ,vpeb
     " View templates Page Header Base
-    nnoremap <silent> ,vphb :read ../templates/views/page/header_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangeUrl<return>
-    " View templates Page TAbs base
-    nnoremap <silent> ,vptb :read ../templates/views/page/tabs_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangeUrl<return>
+    nnoremap <silent> ,vphb :read ../templates/views/page/header_base.html.erb<return>/ChangeTitle\\|ChangeDisplay\\|ChangePathHelper<return>
     " View templates Page Body Base
-    nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/ChangePath\\|ChangeTemplate\\|ChangeCardName\\|ChangeWidth\\|ChangeLocals<return>
+    nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis<return>
+    " View templates Page TAbs base
+    nnoremap <silent> ,vptb :read ../templates/views/page/tabs_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangePathHelper<return>
     " View templates Page Body Full height columns
     nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeColumnName\\|d-xx-or-larger\\|background-color: ChangeBackgroundColor\\|ChangeWidth\\|overflow-y: scroll\\|DeleteThis\\|ChangePath\\|ChangeLocals<return>
     " View templates Page Body full height Columns - alternate mapping
     nmap <silent> ,vpbc ,vpbf
   " View templates Card
+    " View templates Card Container Base
+    nnoremap <silent> ,vccb :read ../templates/views/card/container_base.html.erb<return>/ChangeCardName\\|ChangePath\\|ChangeTemplate\\|ChangeLocals<return>
     " View templates Card BAse
-    nnoremap <silent> ,vcba :read ../templates/views/card/base.html.erb<return>/ChangeThisPls\\|DeleteThisPls<return>
+    nnoremap <silent> ,vcba :read ../templates/views/card/base.html.erb<return>/DeleteThis<return>
     " View templates Card Non-Card
-    nnoremap <silent> ,vcnc :read ../templates/views/card/non_card.html.erb<return>/DeleteThisPls<return>
+    nnoremap <silent> ,vcnc :read ../templates/views/card/non_card.html.erb<return>/DeleteThis<return>
     " View templates Card WIde
-    nnoremap <silent> ,vcwi :read ../templates/views/card/wide.html.erb<return>/DeleteThisPls<return>
+    nnoremap <silent> ,vcwi :read ../templates/views/card/wide.html.erb<return>/DeleteThis<return>
     " View templates Card Header Base
     nnoremap <silent> ,vchb :read ../templates/views/card/header_base.html.erb<return>/ChangeThisPls<return>
   " View templates card Body
@@ -566,7 +568,7 @@
     " Html form Input Hidden field Tag
     nnoremap <silent> ,hiht a<%= hidden_field_tag(:ChangeThisPls, ChangeThisPls) %><esc>/ChangeThisPls<return>
     " Html form Input Text Field
-    nnoremap <silent> ,hitf a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>maxlength: 'ChangeMaxLength'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|true\\|ChangeAutocomplete\\|ChangePlaceholder\\|ChangeMaxLength<return>
+    nnoremap <silent> ,hitf a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>maxlength: '255'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|true\\|ChangeAutocomplete\\|ChangePlaceholder\\|255<return>
     " Html form Input Text Area
     nnoremap <silent> ,hita a<%= ChangeForm_form.text_area(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>maxlength: 'ChangeMaxLength'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|true\\|ChangeAutocomplete\\|ChangePlaceholder\\|ChangeMaxLength<return>
     " Html form Input Rich Text
@@ -589,8 +591,8 @@
     nnoremap <silent> ,hicB a<%= ChangeThisPls_form.check_box(:ChangeThisPls, { class: 'custom-control-input' }, ChangeThisPls, false) %><esc>/ChangeThisPls<return>
     " Html form Input Toggle Wrapper
     nnoremap <silent> ,hitw :read ../templates/views/elements/toggle_wrapper.html.erb<return>/DeleteThis<return>
-    " Html form Input Toggle with Form
-    nnoremap <silent> ,hitf :read ../templates/views/elements/toggle_with_form.html.erb<return>/ChangeModel\\|ChangeScope\\|ChangeUrl\\|ChangeMethod\\|ChangeId\\|ChangeForm\\|ChangeColor\\|switch-button-yesno\\|DeleteThis\\|ChangeAttribute<return>
+    " Html form Input Toggle Stand alone (with it's own form)
+    nnoremap <silent> ,hits :read ../templates/views/elements/toggle_with_form.html.erb<return>/ChangeModel\\|ChangeScope\\|ChangeUrl\\|ChangeMethod\\|ChangeId\\|ChangeForm\\|ChangeColor\\|switch-button-yesno\\|DeleteThis\\|ChangeAttribute<return>
     " Html form Input TOggle
     nnoremap <silent> ,hito :read ../templates/views/elements/toggle.html.erb<return>/ChangeForm\\|ChangeColor\\|switch-button-yesno\\|DeleteThis\\|ChangeAttribute<return>
     " Html form Input Password field
@@ -739,11 +741,11 @@
       " Ruby Routes NAmespace
       nnoremap <silent> ,rrna anamespace :ChangeNamespace do<return>end<esc>/ChangeNamespace<return>
       " Ruby Routes REsources
-      nnoremap <silent> ,rrre aresources :ChangeController, only: %i[index show create update destroy]<esc>/ChangeController<return>
+      nnoremap <silent> ,rrre aresources :ChangeController, only: %i[index show create update destroy]<esc><up>/ChangeController\\|index \\|show \\|create \\|update \\|destroy<return>
       " Ruby Routes Resources Nested
       nnoremap <silent> ,rrrn aget ':id/ChangeThisPls', to: 'ChangeThisPls#index', as: :ChangeThisPls<esc>opost ':id/ChangeThisPls', to: 'ChangeThisPls#create'<esc>oresources :ChangeThisPls, only: %i[show update destroy]<esc>/ChangeThisPls<return>
-      " Ruby Routes Get Member
-      nnoremap <silent> ,rrgm aget 'ChangeThisPls/:id/ChangeThisPls', to: 'ChangeThisPls#ChangeThisPls', as: :ChangeThisPls_ChangeThisPls <esc>o# REMEMBER TO MAKE PARENT PLURAL ON INITIAL ARGUMENT AND "TO" BUT SINGULAR ON "AS"<esc>oExample: get 'users/:id/sub_profile', to: 'users#sub_profile', as: :user_subprofile<esc>oThis is because the helper method is pointing to a single user just like the show, edit, update and destroy actions<esc>ocore_user_subprofile_path is appropriate but core_users_subprofile_path is not<esc>/ChangeThisPls<return>
+      " Ruby Routes Member Get
+      nnoremap <silent> ,rrmg aget 'ChangeParentsPlural/:id/ChangeMemberInUrl', to: 'ChangeParentsPlural/ChangeMemberController#show', as: :ChangeParentSingular_ChangeMemberSingular<esc>/ChangeParentsPlural\\|ChangeMemberInUrl\\|ChangeMemberController\\|ChangeMemberSingulaSingularr\\|ChangeParentSingular<return>
       " Ruby Routes GEt (for non-restful routes)
       nnoremap <silent> ,rrge aget 'ChangeThisPls', to: 'ChangeThisPls#ChangeThisPls'<esc>/ChangeThisPls<return>
     " other routes
@@ -973,7 +975,7 @@
     " Tests Controller BAse
     nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
     " Tests Controller Scenario Bases
-    nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/ChangePermission\\|ChangeMethodUrlAndParams\\|ReplaceThisPls<return>
+    nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/ChangePermission\\|ChangeMethodUrlAndParams\\|ReplaceThisPls\\|UserWithAccess<return>
     " Tests Controller Tes Baset
     nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/ChangeThisPls\\|ChangeUserWithPermission\\|ChangeMethodUrlAndParams\\|DeleteThisPls\\|ChangeTemplate\\|ChangePath<return>
     " Tests Controller REquest
