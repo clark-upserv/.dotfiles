@@ -666,10 +666,14 @@
     nnoremap <silent> ,rbde adef <esc>oend<esc>kla
 
     nnoremap <silent> ,rbdo ado<return>end<esc>O
-    " Ruby Basic Can Model based
+    " Ruby Basic Cancancan Model based (feature specific)
     nnoremap <silent> ,rbcm acan?(:ChangeNamespace_ChangePermission, @ChangeModel)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel<return>
-    " Ruby Basic Can Non-mmodel Model based
-    nnoremap <silent> ,rbcn acan?(:ChangeNamespace_ChangeVerb, :ChangeObjects)<esc>/ChangeNamespace\\|ChangeVerb\\|ChangeObjects<return>
+    " Ruby Basic Cancancan Model based (granular / controller action specific)
+    nnoremap <silent> ,rbcM acan?(:ChangeAction_ChangeController, @ChangeModel)<esc>/ChangeAction\\|ChangeController\\|ChangeModel<return>
+    " Ruby Basic Cancancan Non-mmodel Model based (feature specific)
+    nnoremap <silent> ,rbcn acan?(:ChangeNamespace_ChangePermission, :ChangeObjects)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeObjects<return>
+    " Ruby Basic Cancancan Non-mmodel Model based (granular / controller action specific)
+    nnoremap <silent> ,rbcN acan?(:ChangeAction, :ChangeController)<esc>/ChangeAction\\|ChangeController<return>
     " Ruby Basic Interpolated String
     nnoremap <silent> ,rbis a#{}<esc>i
     " Ruby Basic ORder
@@ -705,12 +709,14 @@
     nnoremap <silent> ,rmmo :read ../templates/models/models/module.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models SErvice
     nnoremap <silent> ,rmse :read ../templates/models/models/service.rb<return>ggdd/ChangeThisPls<return>
-    " Ruby Models Can Model based
+    " Ruby Models Cancancan Model based (feature specific)
     nnoremap <silent> ,rmcm acan [:ChangeNamespace_ChangePermission], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
-    " Ruby Models Can Model based full
-    nnoremap <silent> ,rmcM acan [:ChangeNamespace_ChangePermission], ChangeModel, ChangeMethod: user.ChangeValue, ChangeMethod: [ChangeValue], ChangeMethod: { ChangeMethod: user.ChangeValue } <esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
-    " Ruby Models Can Non-model based
-    nnoremap <silent> ,rmcn acan [:ChangeNamespace_ChangeVerb], :ChangeObjects<esc>/ChangeNamespace\\|ChangeVerb\\|ChangeObjects<enter>
+    " Ruby Models Cancancan Model based (granular / controller action specific)
+    nnoremap <silent> ,rmcM acan [:ChangeAction_ChangeController], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeAction\\|ChangeController\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
+    " Ruby Models Cancancan Non-model based (feature specific)
+    nnoremap <silent> ,rmcn acan [:ChangeNamespace_ChangePermission], :ChangeObjects<esc>/ChangeNamespace\\|ChangePermission\\|ChangeObjects<enter>
+    " Ruby Models Cancancan Non-model based (granular / controller action specific)
+    nnoremap <silent> ,rmcN acan [:ChangeAction], :ChangeController<esc>/ChangeAction\\|ChangeController<enter>
     " Ruby Models Belongs To association
     nnoremap <silent> ,rmbt abelongs_to :ChangeParentName, class_name: 'ChangeParentModel', inverse_of: :ChangeChildrenNameIfHasManyOrChildNameIfHasOne(Optional-OnlyIfRlationshipIsInBothModels), optional: true<esc>/ChangeParentName\\|ChangeParentModel\\|ChangeChildrenNameIfHasManyOrChildNameIfHasOne(Optional-OnlyIfRlationshipIsInBothModels)<return>
     " Ruby Models Has Many association
@@ -781,10 +787,14 @@
     nnoremap <silent> ,rcsp adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute)<return>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute<return>
     " Ruby Controller Strong Params full
     nnoremap <silent> ,rcsP adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute,<return>ChangeArrayAttribute: [],<return>ChangeChildName: [:ChangeAttribute],<return>ChangeChildrenName: [ChangeChildName: [:ChangeAttribute]])<return>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|ChangeArrayAttribute\\|ChangeChildrenName\\|ChangeChildName<return>
-    " Ruby Controller Authorize Model based
-    nnoremap <silent> ,rcam aauthorize!(:ChangeNamespace_ChangePermission, @ChangeModel)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel<return>
-    " Ruby Controller Authorize Non-model based
-    nnoremap <silent> ,rcan aauthorize!(:ChangeNamespace_ChangeVerb, :ChangeObjects)<esc>/ChangeNamespace\\|ChangeVerb\\|ChangeObjects<return>
+    " Ruby Controller Cancancan authorize Model based (feature specific)
+    nnoremap <silent> ,rccm aauthorize!(:ChangeNamespace_ChangePermission, @ChangeModel)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel<return>
+    " Ruby Controller Cancancan authorize Model based (granular / controller action specific)
+    nnoremap <silent> ,rccM aauthorize!(:ChangeAction_ChangeController, @ChangeModel)<esc>/ChangeAction\\|ChangeController\\|ChangeModel<return>
+    " Ruby Controller Cancancan authorize Non-model based (feature specific)
+    nnoremap <silent> ,rccn aauthorize!(:ChangeNamespace_ChangePermission, :ChangeObjects)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeObjects<return>
+    " Ruby Controller Cancancan authorize Non-model based (granular / controller action pecific)
+    nnoremap <silent> ,rccN aauthorize!(:ChangeAction, :ChangeController)<esc>/ChangeAction\\|ChangeController<return>
     " Ruby Controller Accessible By
     nnoremap <silent> ,rcab aChangeModel.accessible_by(current_ability, :ChangeNameSpace_ChangePermission)<esc>/ChangeModel\\|ChangeNameSpace\\|ChangePermission<enter>
     " Ruby Controller Accessible By full
