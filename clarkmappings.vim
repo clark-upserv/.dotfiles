@@ -206,7 +206,7 @@
     nnoremap ,feve :let @+ = expand('%:h')<return>o<esc>p<esc><up>/app\/views<return>cgntest/mailers<esc>A_test.rb<esc>dd:e <C-R><C-R>+
 
     " File Edit Test to Controller 
-    nnoremap ,fetc :let @+ = expand("%")<return>o<esc>po<esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><up>dddd:e <c-r><c-r>+
+    nnoremap ,fetc :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc>ncgn<backspace><esc>dd:e <c-r><c-r>+
     " File Edit Test to Model 
     "
     " File Edit Test to Helper 
@@ -538,9 +538,13 @@
 
   " Html form Inputs
     " Html form Input Left Label wrapper
-    nmap <silent> ,hill a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Input Group OR Cancel & Submit buttons %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
-    " Html form Top Label (for top label)
-    nmap <silent> ,hitl a<div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Input Group OR Cancel & Submit buttons %><return></div><esc>/DeleteThis<return>
+    nmap <silent> ,hill o<%#<delete> Left label for ChangeAttribute %><return><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Input Group %><return></div><return></div><return></div><return><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
+    " Html form Input Left label Cancel and submit buttons
+    nmap <silent> ,hilc o<%#<delete> Left label cancel and submit buttons %><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return></div><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
+    " Html form Top Label
+    nmap <silent> ,hitl o<%#<delete> Top label for ChangeAttribute %><return><div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Input Group %><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
+    " Html form Top label Cancel and submit buttons
+    nmap <silent> ,hitc o<%#<delete> Top label cancel and submit buttons %><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
     " Html form Input ROw (for top label)
     nmap <silent> ,hiro a<div class="form-row"><return></div><esc>,O
     " Html form Input Group 1
@@ -784,7 +788,7 @@
 
   " Ruby Controller mappings
     " Ruby Controller Strong Params
-    nnoremap <silent> ,rcsp adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute)<return>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute<return>
+    nnoremap <silent> ,rcsp adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute)<return># DeleteThis - insert logic to restrict or clean params if necessary<return><backspace><backspace>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|DeleteThis<return>
     " Ruby Controller Strong Params full
     nnoremap <silent> ,rcsP adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute,<return>ChangeArrayAttribute: [],<return>ChangeChildName: [:ChangeAttribute],<return>ChangeChildrenName: [ChangeChildName: [:ChangeAttribute]])<return>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|ChangeArrayAttribute\\|ChangeChildrenName\\|ChangeChildName<return>
     " Ruby Controller Cancancan authorize Model based (feature specific)
@@ -823,14 +827,20 @@
     nnoremap <silent> ,rcst :read ../templates/controllers/actions/show_tab.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeTab\\|DeleteThis<return>
     " Ruby Controllers New Base
     nmap <silent> ,rcnb ,rcsb/show<return>cgnnew<esc>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis<return>
-    " Ruby Controllers Create Base
-    nnoremap <silent> ,rccb :read ../templates/controllers/actions/create_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeAttributes\\|DeleteThis\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    " Ruby Controllers Create Ajax
+    nnoremap <silent> ,rcca :read ../templates/controllers/actions/create_ajax.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeAttributes\\|DeleteThis\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    " Ruby Controllers Create Html
+    nnoremap <silent> ,rcch :read ../templates/controllers/actions/create_html.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeAttributes\\|DeleteThis\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
     " Ruby Controllers Edit Base
     nmap <silent> ,rceb ,rcsb/show<return>cgnedit<esc>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis<return>
-    " Ruby Controllers Update Base
-    nnoremap <silent> ,rcub :read ../templates/controllers/actions/update_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
-    " Ruby Controllers Destroy Base
-    nnoremap <silent> ,rcdb :read ../templates/controllers/actions/destroy_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
+    " Ruby Controllers Update Ajax
+    nnoremap <silent> ,rcua :read ../templates/controllers/actions/update_ajax.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    " Ruby Controllers Update Html
+    nnoremap <silent> ,rcuh :read ../templates/controllers/actions/update_html.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    " Ruby Controllers Destroy Atml
+    nnoremap <silent> ,rcdh :read ../templates/controllers/actions/destroy_html.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
+    " Ruby Controllers Destroy Ajax
+    nnoremap <silent> ,rcda :read ../templates/controllers/actions/destroy_ajax.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
     " Ruby Controllers FLash
     nnoremap <silent> ,rcfl aflash[:ChangeFlashType] = ChangeMessage<esc>/ChangeFlashType\\|ChangeMessage<return>
     " Ruby Controllers Flash Success
@@ -983,9 +993,9 @@
     nnoremap <silent> ,tbuf :read ../templates/tests/misc/upload_fixture_file.rb<return><esc>/ChangeVariable\\|ChangePath\\|ChangeContentType\\|DeleteThisPls\\|ChangeObject\\|ChangeAttachment<return>
   " Controller
     " Tests Controller BAse
-    nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
+    nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
     " Tests Controller Scenario Bases
-    nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/ChangePermission\\|ChangeMethodUrlAndParams\\|ReplaceThisPls\\|UserWithAccess<return>
+    nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeAction\\|ChangePermission\\|ChangeMethodUrlAndParams\\|UserWithAccess<return>
     " Tests Controller Tes Baset
     nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/ChangeThisPls\\|ChangeUserWithPermission\\|ChangeMethodUrlAndParams\\|DeleteThisPls\\|ChangeTemplate\\|ChangePath<return>
     " Tests Controller REquest
@@ -1000,6 +1010,8 @@
     nnoremap <silent> ,tcpo apost ChangeUrlHelper_path, params: { ChangeParams }<esc>/ChangeUrlHelper\\|ChangeParams<return>
     " Tests Controller PAtch
     nnoremap <silent> ,tcpa apatch ChangeUrlHelper_path(ChangeModel), params: { ChangeParams }<esc>/ChangeUrlHelper\\|ChangeModel\\|ChangeParams<return>
+    " Tests Controller PAtch (full)
+    nnoremap <silent> ,tcpA apatch ChangeUrlHelper_path(ChangeModel), params: { ChangeParams }, headers{ ChangeHeaders }, env: ChangeEnvironment, xhr: true, as: :json<esc>/ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeParams\\|ChangeHeaders\\|ChangeEnvironment\\|:json<return>
     " Tests Controller DElete
     nnoremap <silent> ,tcde adelete ChangeUrlHelper_path(ChangeModel)<esc>/ChangeUrlHelper\\|ChangeModel<return>
   " Helper
