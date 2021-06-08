@@ -114,6 +114,10 @@
   " File Path
     " File Copy Current Path
     nnoremap ,fccp :let @+ = expand('%:h') . '/'<return>
+    " File Copy Partial Path
+    nnoremap ,fcpp :let @+ = expand('%:h')<return>o<esc>p<up>/app\/views\/<return>cgn<esc>dd
+    " File Copy Partial File
+    nnoremap ,fcpf :let @+ = expand('%')<return>o<esc>p<up>/app\/views\/<return>cgn<esc>dd
     " File Paste Partial Path
     nnoremap ,fppp :let @+ = expand('%:h')<return>p/app\/views\/<return>cgn<esc>
     " File Copy Current Path and File
@@ -345,12 +349,6 @@
     " View card Body Single show Edit swap
     nnoremap <silent> ,vsba :read ../templates/views/show_edit_swap/base.html.erb<return>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
   " Forms
-    " View Forms BAse
-    nnoremap <silent> ,vfba :read ../templates/views/forms/base.html.erb<return>/ChangeThisPls\\|DeleteThisPls<return>
-    " View Forms non-standard forms Array Simple
-    nnoremap <silent> ,vfas :read ../templates/views/forms/non_standard_forms/array_simple.html.erb<return>/ChangeModel\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ChangeAttributes\\|ChangeAttribute\\|ReplaceThis\\|DeleteThis:<return>
-    " View Forms non-standard forms Array Hash
-    nnoremap <silent> ,vfah :read ../templates/views/forms/non_standard_forms/array_hash.html.erb<return>/ChangeModel\\|ChangeScop\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ReplaceThis\\|DeleteThis:\\|ChangeAttribute<return>
   " View Modals
     " View Mdoels BAse
     nnoremap <silent> ,vmba :read ../templates/views/modals/base.html.erb<return>
@@ -490,8 +488,14 @@
 
 
   " Html Form
+    " Html Form BAse
+    nnoremap <silent> ,hfba :read ../templates/views/forms/base.html.erb<return>/ChangeThisPls\\|DeleteThisPls<return>
     " Html Form WIth
     nnoremap <silent> ,hfwi a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><esc>o<% end %><esc>/ChangeThisPls<return>
+    " Html Form non-standard forms Array Simple
+    nnoremap <silent> ,hfas :read ../templates/views/forms/non_standard_forms/array_simple.html.erb<return>/ChangeModel\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ChangeAttributes\\|ChangeAttribute\\|ReplaceThis\\|DeleteThis:<return>
+    " Html Form non-standard forms Array Hash
+    nnoremap <silent> ,hfah :read ../templates/views/forms/non_standard_forms/array_hash.html.erb<return>/ChangeModel\\|ChangeScop\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ReplaceThis\\|DeleteThis:\\|ChangeAttribute<return>
     " Html Form Full Errors
     nnoremap <silent> ,hffe a<%= render('shared/full_errors', errors: ChangeThisPls.errors.messages) %><esc>/ChangeThisPls<return>
     " Html Form Fields For
@@ -507,34 +511,34 @@
     " Html Form Label Tag
     nnoremap <silent> ,hflt a<%= label_tag(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
 
-  " Html form Show elements
-    " Html form Show Left Label wrapper
-    nmap <silent> ,hsll a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= label_tag(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Show Group %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
-    " Html form Top Label (for top label)
+  " Html Show elements
+    " Html Show Left Label wrapper
+    nmap <silent> ,hsll a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= label_tag(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html Show Group %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
+    " Html Top Label (for top label)
     nmap <silent> ,hstl a<div class="form-row"><return><%#<delete> DeleteThis - insert Show Group %><return></div><esc>/DeleteThis<return>
-    " Html form Show ROw
+    " Html Show ROw
     nmap <silent> ,hsro a<div class="form-row"><return></div><esc>,O
-    " Html form Show Group 1
+    " Html Show Group 1
     nmap <silent> ,hsg1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return>
-    " Html form Show Group 2
+    " Html Show Group 2
     nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yP
-    " Html form Show Group 3
+    " Html Show Group 3
     nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPP
-    " Html form Show Group 4
+    " Html Show Group 4
     nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
-    " Html form Show element SImple
+    " Html Show element SImple
     nnoremap <silent> ,hssi a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
-    " Html form Show Date Base
+    " Html Show Date Base
     nnoremap <silent> ,hsdb astrftime("%B %-d, %Y")
-    " Html form Show Date with Day of week
+    " Html Show Date with Day of week
     nnoremap <silent> ,hsdd astrftime("%A, %B %-e, %Y")
-    " Html form Show Edit swap edit button - Button
+    " Html Show Edit swap edit button - Button
     nnoremap <silent> ,hseb a<a class="btn btn-primary ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
-    " Html form Show Edit swap edit button - Icon
+    " Html Show Edit swap edit button - Icon
     nnoremap <silent> ,hsei a<a class="no-href-icon px-3 fs-4 text-primary mdi mdi-edit ChangeSesId-ses-edit-button"></a><esc>/ChangeSesId<return>
-    " Html form Show Edit swap edit button - Link
+    " Html Show Edit swap edit button - Link
     nnoremap <silent> ,hsel a<a class="no-href-link ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDispla
-    " Html form Show show edit swap Edit button Modal (data attribute only)
+    " Html Show show edit swap Edit button Modal (data attribute only)
     nnoremap <silent> ,hsem adata-toggle="modal" data-target="ChangeModalId-<% ChangeErbIfNecessary %>-modal"<esc>/ChangeModalId\\|ChangeErbIfNecessary<return>
 
   " Html form Inputs
@@ -601,7 +605,7 @@
     " Html form Input TOggle
     nnoremap <silent> ,hito :read ../templates/views/elements/toggle.html.erb<return>/ChangeForm\\|ChangeColor\\|switch-button-yesno\\|DeleteThis\\|ChangeAttribute<return>
     " Html form Input Password field
-    nnoremap <silent> ,hipf a<%= ChangeThisPls_form.password_field(:password, class: 'form-control') %><esc>/ChangeThisPls<return>
+    nnoremap <silent> ,hipf a<%= ChangeForm_form.password_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>autofocus: true,<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>minlength: ChangeMinLength) %><esc>/ChangeAttribute\\|ChangeForm\\|true\\|ChangePlaceholder\\|C\\|ChangeMinLengthhangeMinLength<return>  
     " Html form Input Password Confirmation
     nnoremap <silent> ,hipc a<%= ChangeThisPls_form.password_field(:password_confirmation, class: 'form-control') %><esc>/ChangeThisPls<return>
     " Html form Input SElect
@@ -997,8 +1001,10 @@
     nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
     " Tests Controller Scenario Bases
     nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeAction\\|ChangePermission\\|ChangeMethodUrlAndParams\\|UserWithAccess<return>
-    " Tests Controller Tes Baset
+    " Tests Controller Test Base
     nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/ChangeThisPls\\|ChangeUserWithPermission\\|ChangeMethodUrlAndParams\\|DeleteThisPls\\|ChangeTemplate\\|ChangePath<return>
+    " Tests Controller Test Update
+    nnoremap <silent> ,tctu :read ../templates/tests/controller_test_update.rb<return>/ChangeScenario\\|ChangeUserWithPermission\\|ChangePath\\|ChangeObject\\|DeleteThis\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|ChangeTemplate<return>
     " Tests Controller REquest
     nnoremap <silent> ,tcre  aChangeHtmlMethod ChangeUrlHelper_path<esc>/ChangeHtmlMethod\\|ChangeUrlHelper<return>
     " Tests Controller REquest full
