@@ -154,7 +154,7 @@
     " File Edit Controller to View 
     nnoremap ,fecv :let @+ = expand("%")<return>o<esc>p<up>/controllers<return>cgnviews<esc><up>/_controller.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Controller to (controller) Test 
-    nnoremap ,fect :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/_controller.rb<return>cgn_controller_test.rb<esc><up>dddd:e <C-R><C-R>+
+    nnoremap ,fect :let @+ = expand("%")<return>o<esc>p<up>/app<return>cgntest<esc><up>/_controller.rb<return>cgn_controller_test.rb<esc>dd:e <C-R><C-R>+
     "
 
     " File Edit Helper to Stylesheet
@@ -430,13 +430,13 @@
     " Embedded Ruby PArtial
     nnoremap <silent> ,erpa a<%= render('ChangePath', ChangeLocals) %><esc>/ChangePath\\|ChangeLocals<return>
     " Embedded Ruby PArtial (full)
-    nnoremap <silent> ,erpA a<div id="ChangeId"><return><%= render('ChangePath', ChangeLocals) %><return></div><esc>/ChangeId\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,erpA a<div id="ChangeId_container"><return><%= render('ChangePath', ChangeLocals) %><return></div><esc>/ChangeId\\|ChangePath\\|ChangeLocals<return>
     " Embedded Ruby Partials for Show edit swap
     nmap <silent> ,erps ,vsba
     " Embedded Ruby Puts Debugger
     nnoremap <silent> ,erpd a<% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts nil %><return><% puts 'ChangeLabel:' %><return><% puts ChangeThisPls %><esc>/ChangeLabel\\|ChangeThisPls<return>
     " Html Ruby Escape Javascript with partial
-    nnoremap <silent> ,erej a<%= escape_javascript(render('ChangePath' ChangeLocals)) %><esc>/ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,erej a<%= escape_javascript(render('ChangePath', ChangeLocals)) %><esc>/ChangePath\\|ChangeLocals<return>
 
 " Html mappings
   " Html Elements
@@ -719,13 +719,13 @@
     " Ruby Models SErvice
     nnoremap <silent> ,rmse :read ../templates/models/models/service.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models Cancancan Model based (feature specific)
-    nnoremap <silent> ,rmcm acan [:ChangeNamespace_ChangePermission], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
+    nnoremap <silent> ,rmcm acan %i[ChangeNamespace_ChangePermission], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
     " Ruby Models Cancancan Model based (granular / controller action specific)
-    nnoremap <silent> ,rmcM acan [:ChangeAction_ChangeController], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeAction\\|ChangeController\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
+    nnoremap <silent> ,rmcM acan %i[ChangeAction_ChangeController], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeAction\\|ChangeController\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
     " Ruby Models Cancancan Non-model based (feature specific)
-    nnoremap <silent> ,rmcn acan [:ChangeNamespace_ChangePermission], :ChangeObjects<esc>/ChangeNamespace\\|ChangePermission\\|ChangeObjects<enter>
+    nnoremap <silent> ,rmcn acan %i[ChangeNamespace_ChangePermission], :ChangeObjects<esc>/ChangeNamespace\\|ChangePermission\\|ChangeObjects<enter>
     " Ruby Models Cancancan Non-model based (granular / controller action specific)
-    nnoremap <silent> ,rmcN acan [:ChangeAction], :ChangeController<esc>/ChangeAction\\|ChangeController<enter>
+    nnoremap <silent> ,rmcN acan %i[ChangeAction], :ChangeController<esc>/ChangeAction\\|ChangeController<enter>
     " Ruby Models Belongs To association
     nnoremap <silent> ,rmbt abelongs_to :ChangeParentName, class_name: 'ChangeParentModel', inverse_of: :ChangeChildrenNameIfHasManyOrChildNameIfHasOne(Optional-OnlyIfRlationshipIsInBothModels), optional: true<esc>/ChangeParentName\\|ChangeParentModel\\|ChangeChildrenNameIfHasManyOrChildNameIfHasOne(Optional-OnlyIfRlationshipIsInBothModels)<return>
     " Ruby Models Has Many association
@@ -819,7 +819,7 @@
     " Ruby Controller Model impersonator add Error Message
     nnoremap <silent> ,rcme a@ChangeThisPls.add_error_message(:ChangeAttribute, ChangeMessage)<esc>/ChangeAttribute\\|ChangeMessage<return>
     " Ruby Controllers BAse
-    nnoremap <silent> ,rcba :read ../templates/controllers/base_controller.rb<return>ggdd/ChangeThisPls\\|DeleteThis<return>
+    nnoremap <silent> ,rcba :read ../templates/controllers/base_controller.rb<return>ggdd/ChangeThisPls\\|ChangeDescription\\|DeleteThis<return>
     " Ruby Controllers Index Base
     nnoremap <silent> ,rcib :read ../templates/controllers/actions/index_base.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeVerb\\|ChangeObjects\\|DeleteThis<return>
     " Ruby Controllers Index Simple
@@ -997,14 +997,14 @@
     " Tests Base Upload fixture File
     nnoremap <silent> ,tbuf :read ../templates/tests/misc/upload_fixture_file.rb<return><esc>/ChangeVariable\\|ChangePath\\|ChangeContentType\\|DeleteThisPls\\|ChangeObject\\|ChangeAttachment<return>
   " Controller
+    " Tests Controller Scenario Base
+    nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeAction\\|ChangeAction\\|ChangeMethodUrlAndParams\\|ChangeUserWithPermission<return>
     " Tests Controller BAse
     nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
-    " Tests Controller Scenario Bases
-    nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeAction\\|ChangePermission\\|ChangeMethodUrlAndParams\\|UserWithAccess<return>
     " Tests Controller Test Base
     nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/ChangeThisPls\\|ChangeUserWithPermission\\|ChangeMethodUrlAndParams\\|DeleteThisPls\\|ChangeTemplate\\|ChangePath<return>
     " Tests Controller Test Update
-    nnoremap <silent> ,tctu :read ../templates/tests/controller_test_update.rb<return>/ChangeScenario\\|ChangeUserWithPermission\\|ChangePath\\|ChangeObject\\|DeleteThis\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|ChangeTemplate<return>
+    nnoremap <silent> ,tctu :read ../templates/tests/controller_test_update.rb<return>/ChangeUserWithPermission\\|ChangePath\\|ChangeObject\\|DeleteThis\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|ChangeTemplate<return>
     " Tests Controller REquest
     nnoremap <silent> ,tcre  aChangeHtmlMethod ChangeUrlHelper_path<esc>/ChangeHtmlMethod\\|ChangeUrlHelper<return>
     " Tests Controller REquest full
