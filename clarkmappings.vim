@@ -195,7 +195,7 @@
     " File Edit View to Stylesheet
     nnoremap ,fevs :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnassets/stylesheets<esc>A/<esc><up>dddd:e <C-R><C-R>+
     " File Edit View to Controller
-    nnoremap ,fevc :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgncontrollers<esc>A_controller.rb<esc><up>dddd:e <C-R><C-R>+
+    nnoremap ,fevc :let @+ = expand('%:h')<return>o<esc>p<up>/views<return>cgncontrollers<esc>A_controller.rb<esc>dd:e <C-R><C-R>+
     " File Edit View to Helper
     nnoremap ,fevh :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnhelpers<esc>A_helpehelperup>dddd:e <C-R><C-R>+
     " File Edit View to Javascript pack
@@ -242,7 +242,8 @@
   nmap <silent> ,fach <space>fT/app<return><return>/channels<return><return><esc>:noh<return>
   nnoremap <silent> ,cach :edit app/channels/<space><backspace>
   "
-  nmap <silent> ,faco <space>fT/app<return><return>/controllers<return><return><esc>:noh<return>
+  "nmap <silent> ,faco <space>fT/app<return><return>/controllers<return><return><esc>:noh<return>
+  nmap <silent> ,faco :e app/controllers/
   nnoremap <silent> ,caco :edit app/controllers/<space><backspace>
   "
   nmap <silent> ,fahe <space>fT/app<return><return>/helpers<return><return><esc>:noh<return>
@@ -398,17 +399,17 @@
     " Embedded Ruby ENd
     nnoremap <silent> ,eren a<% end %><esc>
     " Embedded Ruby Link To
-    nnoremap <silent> ,erlt a<%= link_to(ChangeDisplay, ChangeUrl_url) %><esc>/ChangeDisplay\\|ChangeUrl<return>
+    nnoremap <silent> ,erlt a<%= link_to(ChangeDisplay, ChangePath_path) %><esc>/ChangeDisplay\\|ChangePath<return>
     " Embedded Ruby Link to Icon (classes only)
     nnoremap <silent> ,erli apx-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
     " Embedded Ruby Link to Icon (full)
-    nnoremap <silent> ,erlI a<%= link_to('', ChangeUrl_url, class: 'px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon') %><esc>/ChangeUrl\\|ChangeColor\\|ChangeIcon<return>
+    nnoremap <silent> ,erlI a<%= link_to('', ChangePath_path, class: 'px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon') %><esc>/ChangePath\\|ChangeColor\\|ChangeIcon<return>
     " Embedded Ruby Link to Button (classes only)
     nnoremap <silent> ,erlb abtn btn-ChangeColor<esc>/ChangeColor<return>
     " Embedded Ruby Link to Button (full)
-    nnoremap <silent> ,erlB a<%= link_to(ChangeDisplay, ChangeUrl_url, class: 'btn btn-ChangeColor') %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeColor<return>
+    nnoremap <silent> ,erlB a<%= link_to(ChangeDisplay, ChangePath_path, class: 'btn btn-ChangeColor') %><esc>/ChangeDisplay\\|ChangePath\\|ChangeColor<return>
     " Embedded Ruby Link to Ajax
-    nnoremap <silent> ,erla a<%= link_to(ChangeDisplay, ChangeUrl_url, method: :ChangeMethod, remote: true) %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeMethod<return>
+    nnoremap <silent> ,erla a<%= link_to(ChangeDisplay, ChangePath_path, method: :ChangeMethod, remote: true) %><esc>/ChangeDisplay\\|ChangePath\\|ChangeMethod<return>
     " Embedded Ruby Link to No href
     nmap <silent> ,erln a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon") %><return><esc>,mmno_href_comment<esc>/ChangeDisplay\\|no-href-link\\|no-href-icon\\|DeleteThis<return>
     " Embedded Ruby Link to Modal
@@ -418,7 +419,7 @@
     " Embedded Ruby Link to Remote (attributes only)
     nnoremap <silent> ,erlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
     " Embedded Ruby Link to Remote (full)
-    nnoremap <silent> ,erlR a<%= link_to(ChangeDisplay, ChangeUrl_url, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangeUrl\\|ChangeMethod<return>
+    nnoremap <silent> ,erlR a<%= link_to(ChangeDisplay, ChangePath_path, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangePath\\|ChangeMethod<return>
     " Embedded Ruby Image Tag
     nnoremap <silent> ,erit a<%= image_tag(ChangeThisPls, alt: 'ChangeThisPls', width: 'ChangeThisPls', height: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
     " Embedded Ruby Javascript Tag
