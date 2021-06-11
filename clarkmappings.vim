@@ -401,9 +401,9 @@
     " Embedded Ruby Link To
     nnoremap <silent> ,erlt a<%= link_to(ChangeDisplay, ChangePath_path) %><esc>/ChangeDisplay\\|ChangePath<return>
     " Embedded Ruby Link to Icon (classes only)
-    nnoremap <silent> ,erli apx-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
+    nnoremap <silent> ,erli aicon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
     " Embedded Ruby Link to Icon (full)
-    nnoremap <silent> ,erlI a<%= link_to('', ChangePath_path, class: 'px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon') %><esc>/ChangePath\\|ChangeColor\\|ChangeIcon<return>
+    nnoremap <silent> ,erlI a<%= link_to('', ChangePath_path, class: 'icon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon') %><esc>/ChangePath\\|ChangeColor\\|ChangeIcon<return>
     " Embedded Ruby Link to Button (classes only)
     nnoremap <silent> ,erlb abtn btn-ChangeColor<esc>/ChangeColor<return>
     " Embedded Ruby Link to Button (full)
@@ -664,6 +664,8 @@
     nnoremap <silent> ,rbuN aChangeThisPls unless ChangeThisPls<esc>/ChangeThisPls<return>
     " Ruby Basic CAse
     nnoremap <silent> ,rbca acase ChangeThisPls<return>when ChangeThisPls<return>else<return>end<esc>/ChangeThisPls<return>
+    " Ruby Basic Hash Lookup
+    nnoremap <silent> ,rbhl alookup_hash = {<return>ChangeKey: ChangeValue,<return>ChangeKey: ChangeValue<return>}<return>lookup_hash[ChangeVariarble]<return># DeleteThis - you may need to add ".to_sym" to variable<esc>/ChangeKey\\|ChangeValue\\|ChangeVariarble\\|DeleteThis<return>
     " Ruby Basic TErnary
     nnoremap <silent> ,rbte aChangeBoolean ? ChangeTrueResult : ChangeFalseResult<esc>/ChangeBoolean\\|ChangeTrueResult\\|ChangeFalseResult<return>
     " Ruby Basic Puts Debugger
@@ -686,6 +688,8 @@
     nnoremap <silent> ,rbcN acan?(:ChangeAction, :ChangeController)<esc>/ChangeAction\\|ChangeController<return>
     " Ruby Basic Interpolated String
     nnoremap <silent> ,rbis a#{}<esc>i
+    
+    " this should be moved to ruby model and needs updating for distinct...
     " Ruby Basic ORder
     nnoremap <silent> ,rbor aorder(:ChangeAttribute)<esc>/ChangeAttribute<return>
     " Ruby Basic Order Descending
