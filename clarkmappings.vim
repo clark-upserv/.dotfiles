@@ -193,11 +193,11 @@
     " 
 
     " File Edit View to Stylesheet
-    nnoremap ,fevs :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnassets/stylesheets<esc>A/<esc><up>dddd:e <C-R><C-R>+
+    nnoremap ,fevs :let @+ = expand('%')<return>o<esc>p0/views<return>cgnassets/stylesheets<esc>0/html.erb<return>cgnscss<esc>dd:e <C-R><C-R>+
     " File Edit View to Controller
     nnoremap ,fevc :let @+ = expand('%:h')<return>o<esc>p<up>/views<return>cgncontrollers<esc>A_controller.rb<esc>dd:e <C-R><C-R>+
     " File Edit View to Helper
-    nnoremap ,fevh :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnhelpers<esc>A_helpehelperup>dddd:e <C-R><C-R>+
+    nnoremap ,fevh :let @+ = expand('%:h')<return>o<esc>p0/views<return>cgnhelpers<esc>A_helper.rb<esc>dd:e <C-R><C-R>+
     " File Edit View to Javascript pack
     nnoremap ,fevj :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnjavascript/packs<esc>A/<esc><up>dddd:e <C-R><C-R>+
     " File Edit View to mAiler
