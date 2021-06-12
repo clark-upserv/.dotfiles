@@ -108,9 +108,7 @@
   nmap <silent> ,mdf <down>,mdd
   " temp for whatever
   noremap <silent> ,mss ohelper Core::Users::UserTabsHelper<esc>
-  noremap <silent> ,msd o
 
-""<%= content_for :stylesheets do %><%= stylesheet_link_tag('core/users/profiles/show') %><% end %>
   " Misc. Messages
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
   nnoremap <silent> ,mmno_href_comment a<%# DeleteThis: if styling like link, keep "no-href-link" class; if styling like icon, keep "no-href-icon" and add standard icon classes; if styling like button, remove both classes above and add standard button classes %>
