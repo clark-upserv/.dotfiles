@@ -100,11 +100,17 @@
   " temp for helping with robot font in app/assets/beagle_lib/beagle.scss.erb
   vmap <silent> ,mrr xi<%= asset_path(ChangePath) %><esc>/ChangePath<return>vvp0/\.\.\/lib\/<return>cgn<esc>/url(<return>
   vmap <silent> ,mrt xi<%= "#{asset_path(ChangePath)}" %><esc>/ChangePath<return>vvp0/\.\.\/lib\/<return>cgn<esc>
-  " Misc. DD but combine to previous line instead of delete line
-  nmap <silent> ,mdd >I<esc>vvxi<backspace><esc>
+  " Misc. DD but combine to previous line instead of delete line (asdfasdfasdf
+  " is because if the next line is blank it will delete entire page. So adding
+  " asdfasdfasdf makes sure there is something on line. Then we remove later
+  nmap <silent> ,mdd Iasdfasdfasdf<esc>>I<esc>vvxi<backspace><esc>/asdfasdfasdf<return>cgn<esc>:noh<return>
   " Misc. Dd but combine to Forward line instead of delete line
   nmap <silent> ,mdf <down>,mdd
+  " temp for whatever
+  noremap <silent> ,mss ohelper Core::Users::UserTabsHelper<esc>
+  noremap <silent> ,msd o
 
+""<%= content_for :stylesheets do %><%= stylesheet_link_tag('core/users/profiles/show') %><% end %>
   " Misc. Messages
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
   nnoremap <silent> ,mmno_href_comment a<%# DeleteThis: if styling like link, keep "no-href-link" class; if styling like icon, keep "no-href-icon" and add standard icon classes; if styling like button, remove both classes above and add standard button classes %>
