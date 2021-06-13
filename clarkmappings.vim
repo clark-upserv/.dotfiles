@@ -47,19 +47,12 @@
         inoremap <silent> <bar><bar><space> <bar><bar><space>
         inoremap <silent> <bar><bar>= <bar><bar>=
 
+" single key non-comma
+  " Single key non-comma misc
+    " copy and search
+    vnoremap <silent> Y y0/<C-R><C-R>+<return>
+
   " retrain d-pad
-    " up several
-    nnoremap <silent> e 4k
-    vnoremap <silent> e 4k
-    " down several
-    nnoremap <nowait> w 4j
-    vnoremap <silent> w 4j
-    " back
-    nnoremap <silent> q b
-    vnoremap <silent> q b
-    " forward to end
-    nnoremap <silent> r e
-    vnoremap <silent> r e
     " up
     nnoremap <silent> l k
     vnoremap <silent> l k
@@ -72,16 +65,42 @@
     " right
     nnoremap <silent> ; <right>
     vnoremap <silent> ; <right>
-    " remap r
-    nnoremap <silent> s r
-    vnoremap <silent> s r
-    " remap w
-    nnoremap <silent> f w
-    vnoremap <silent> f w
-    " make hh go to bottom
+    " far left (^ map to q and when in visual don't get next line)
+    nnoremap <silent> q ^
+    vnoremap <silent> q ^<left>
+    " far right ($ map to r and when in visual don't get next line)
+    nnoremap <silent> r $
+    vnoremap <silent> r $<left>
+    " back to beginning
+    nnoremap <silent> w b
+    vnoremap <silent> w b
+    " forward to end (keep as e so no mapping needed
+    "
+    " forward to begiining (remap w) NOTE: can't remap visual v beacuse
+    " spacevim has some cool mappings that I am remapping recursively to f
+    " (vmap <silent> f v)
+    nnoremap <silent> v w
+    " up several
+    nnoremap <silent> t 4k
+    vnoremap <silent> t 4k
+    " down several
+    nnoremap <nowait> b 4j
+    vnoremap <silent> b 4j
+    " to top of page (keep same gg)
+    "
+    " to bottom of page (make hh go to bottom like G)
     nnoremap <silent> hh G
     vnoremap <silent> hh G
-
+    " remap r to s
+    nnoremap <silent> s r
+    vnoremap <silent> s r
+    " remap v to f so it's closer to new dpad
+    nnoremap <silent> f v
+    nnoremap <silent> F V
+    vmap <silent> f v
+    "nnoremap <silent> ff bve
+    "nnoremap <silent> fff V/^$<return><up>
+    "nnoremap <silent> ffff ggVGV/^$<return><up>
 
 " single key comma mappings
   nnoremap <silent> ,o o <backspace><esc>
@@ -107,7 +126,7 @@
   " Misc. Dd but combine to Forward line instead of delete line
   nmap <silent> ,mdf <down>,mdd
   " temp for whatever
-  noremap <silent> ,mss ohelper Core::Users::UserTabsHelper<esc>
+  noremap <silent> ,mss a
 
   " Misc. Messages
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
