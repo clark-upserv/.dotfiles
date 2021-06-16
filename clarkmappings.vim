@@ -827,6 +827,26 @@
     nnoremap <silent> ,rmsc ascope :ChangeName, -> { ChangeLogic }<esc>/ChangeName\\|ChangeLogic<return>
     " Ruby Models SCope
     nnoremap <silent> ,rmsC ascope :ChangeName, ->(ChangeArgument) { ChangeLogic }<esc>/ChangeName\\|ChangeArgument\\|ChangeLogic<return>
+    " Ruby Models Validates Base
+    nnoremap <silent> ,rmvb avalidates :ChangeAttribute, ChangeValidation: { message: 'ChangeMessage' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
+    " Ruby Models Validates Presence
+    nnoremap <silent> ,rmvp avalidates :ChangeAttribute, presence: { message: 'ChangeMessage' }<esc>/ChangeAttribute\\|ChangeMessage<return>
+    " Ruby Models Validates Length
+    nnoremap <silent> ,rmvl avalidates :ChangeAttribute, length: { maximum: 255, message: 'ChangeMessage' }<esc>/ChangeAttribute\\|255\\|ChangeMessage<return>
+    " Ruby Models Validates Uniqueness
+    nnoremap <silent> ,rmvu avalidates :ChangeAttribute, uniqueness: { message: 'ChangeMessage' }<esc>/ChangeAttribute\\|ChangeMessage<return>
+    " Ruby Models Validates Uniqueness
+    nnoremap <silent> ,rmvU avalidates :ChangeAttribute, uniqueness: { case_sensitive: false, scope: [:ChangeAttribute2, :ChangeAttribute3], message: 'ChangeMessage' }<esc>/case_sensitive: false, \\|ChangeAttribute2\\|ChangeAttribute3\\|ChangeAttribute\\|ChangeMessage<return>
+    " Ruby Models Validates Numericality
+    nnoremap <silent> ,rmvn avalidates :ChangeAttribute, numericality: { only_integer: true, allow_nil: true, less_than: 100, less_than_or_eqaul_to: 100; equal_to: 100, greater_than: 100, greater_than_or_equal_to: 100, other_than: 100, odd: true, even: true, message: 'ChangeMessage' }<esc>/ChangeAttribute\\|ChangeMessage<return>
+    " Ruby Models Validates Dependent_on
+    nnoremap <silent> ,rmvd avalidates :ChangeAttribute, dependent_on: { independent_path: [], dependent_path: [<OPTIONAL FIELD>], if_independent_is: [], if_independent_is_not: [], dependent_can_be: [], dependent_cannot_be: [], equal_values: true, not_equal_values: true, message: 'ChangeMessage' }<return># DeleteThis - can only have if_independent_is OR if_independent_is_not<return>DeleteThis - can only have dependent_can_be OR dependent_cannot_be OR equal_values OR not_equal_values<return>DeleteThis - custom message is optional<esc>/ChangeAttribute\\|ChangeMessage\\|DeleteThis<return>
+    " Ruby Models Validates Attachment
+    nnoremap <silent> ,rmva avalidates :ChangeAttachmenName, size: { less_than: 10.megabytes, message: 'ChangeMessage' }<return>validates :ChangeAttachmenName, attached: { message: 'ChangeMessage' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<return>validates :ChangeAttachmenName, content_type: { in: %w[image/jpeg image/gif image/png application/pdf], message: "Attached must be a valid format. Valid formats are: jpeg, gif, png, pdf" }<return>validates :ChangeAttachmenName, content_type: { in: %w[video/quicktime video/mp4 video/webm audio/ogg], message: "Attached must be a valid image video format. Valid formats are:  mp4, mov, webm, ogg" }<esc>/ChangeAttachmenName\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
+    " Ruby Models Validates Custom
+    nnoremap <silent> ,rmvc avalidate :ChangeCustomValidation<return># DeleteThis - move method to custom validations section of model<return><backspace><backspace>def ChangeCustomValidation<return># DeleteThis - insert logic<return><backspace><backspace>end<esc>/ChangeCustomValidation\\|DeleteThis<return>
+    " Ruby Models Validates if / unless
+    nnoremap <silent> ,rmvi a, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/ChangeObject\\|ChangeAttribute\\|ChangeLogic<return>
 
   " Ruby Routes
     " main routes
