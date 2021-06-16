@@ -84,7 +84,7 @@
     "nnoremap <silent> ff bve
     "nnoremap <silent> fff V/^$<return><up>
     "nnoremap <silent> ffff ggVGV/^$<return><up>
-    
+
     "remap v to V (normal mode only because I don't think V does anything in
     "visual mode
     nnoremap <silent> v V
@@ -120,7 +120,7 @@
     " forward to end
     nnoremap <silent> e e
     vnoremap <silent> e e
-    " forward to begiining 
+    " forward to begiining
     nnoremap <silent> E w
     vnoremap <silent> E w
     " up several
@@ -192,32 +192,32 @@
     " File Edit Clipboard and return
     nnoremap ,fecL :e <C-R><C-R>+<return>
 
-    " File Edit Stylesheet to Controller 
+    " File Edit Stylesheet to Controller
     "
     " File Edit Stylesheet to Helper
     "
     " File Edit Stylesheet to Javascript pack
     "
-    " File Edit Stylesheet to View 
+    " File Edit Stylesheet to View
     nnoremap ,fesv :let @+ = expand("%")<return>o<esc>po<esc>/assets\/stylesheets<return>cgnviews<esc>/scss<return>cgnhtml.erb<esc><up>dddd:e <c-r><c-r>+
     " File Edit Stylesheet to (controller) Test
     "
 
-    " File Edit Controller to Stylesheet 
+    " File Edit Controller to Stylesheet
     "
-    " File Edit Controller to Helper 
+    " File Edit Controller to Helper
     nnoremap ,fech :let @+ = expand("%")<return>o<esc>pO<esc>/controllers<return>cgnhelpers<esc>/_controller.rb<return>cgn_helper.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit Controller to Javascript pack
     "
-    " File Edit Controller to View 
+    " File Edit Controller to View
     nnoremap ,fecv :let @+ = expand("%")<return>o<esc>p<up>/controllers<return>cgnviews<esc><up>/_controller.rb<return>cgn/<esc>dd:e <C-R><C-R>+
-    " File Edit Controller to (controller) Test 
+    " File Edit Controller to (controller) Test
     nnoremap ,fect :let @+ = expand("%")<return>o<esc>p<up>/app<return>cgntest<esc><up>/_controller.rb<return>cgn_controller_test.rb<esc>dd:e <C-R><C-R>+
     "
 
     " File Edit Helper to Stylesheet
     "
-    " File Edit Helper to Controller 
+    " File Edit Helper to Controller
     nnoremap ,fehc :let @+ = expand("%")<return>o<esc>pO<esc>/helpers<return>cgncontrollers<esc>/_helper.rb<return>cgn_controller.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit Helper to Javascript
     "
@@ -228,16 +228,16 @@
 
     " File Edit Javascript pack to Stylesheet
     "
-    " File Edit Javascript pack to Controller 
+    " File Edit Javascript pack to Controller
     "
     " File Edit Javascript pack to Helper
     "
-    " File Edit Javascript pack to View 
+    " File Edit Javascript pack to View
     "
     " File Edit Javascript pack to (controller) Test
     "
 
-    " File Edit Job to (job) Test 
+    " File Edit Job to (job) Test
     nnoremap ,fejt :let @+ = expand("%")<return>o<esc>p<up>/app<return>cgntest<esc><up>/_job.rb<return>cgn_job_test.rb<esc>dd:e <C-R><C-R>+
 
     " File Edit mAiler to View
@@ -248,7 +248,7 @@
     nnoremap ,feap :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
 
     " File Edit Model to (model) Test
-    " 
+    "
 
     " File Edit View to Stylesheet
     nnoremap ,fevs :let @+ = expand('%')<return>o<esc>p0/views<return>cgnassets/stylesheets<esc>0/html.erb<return>cgnscss<esc>dd:e <C-R><C-R>+
@@ -269,18 +269,18 @@
     " File Edit View to (mailer) tEst
     nnoremap ,feve :let @+ = expand('%:h')<return>o<esc>p<esc><up>/app\/views<return>cgntest/mailers<esc>A_test.rb<esc>dd:e <C-R><C-R>+
 
-    " File Edit Test to Controller 
+    " File Edit Test to Controller
     nnoremap ,fetc :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc>ncgn<backspace><esc>dd:e <c-r><c-r>+
-    " File Edit Test to Model 
+    " File Edit Test to Model
     "
-    " File Edit Test to Helper 
+    " File Edit Test to Helper
     "
-    " File Edit Test to Job 
+    " File Edit Test to Job
     nnoremap ,fetj :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc><up>/_test<return>cgn<esc>dd:e <c-r><c-r>+
     " File Edit Test to mAiler
     nnoremap ,feta :let @+ = expand("%")<return>o<esc>po<esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><down>dd<up>dd:e <C-R><C-R>+
     " File Edit Test to View (for controller and mailer tests)
-    nnoremap ,fetv :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc><up>/controllers\\|mailers<return>cgnviews<esc><up>/_test.rb<return>cgn/<esc>dd:e <C-R><C-R>+ 
+    nnoremap ,fetv :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc><up>/controllers\\|mailers<return>cgnviews<esc><up>/_test.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Test to mailer Preview
     nnoremap ,fetp :let @+ = expand("%")<return>o<esc>po<esc>/mailers<return>Ncgnmailers/previews<esc>/_test<return>cgn_preview<esc><down>dd<up>dd:e <C-R><C-R>+
 
@@ -664,7 +664,7 @@
     " Html form Input TOggle
     nnoremap <silent> ,hito :read ../templates/views/elements/toggle.html.erb<return>/ChangeForm\\|ChangeColor\\|switch-button-yesno\\|DeleteThis\\|ChangeAttribute<return>
     " Html form Input Password field
-    nnoremap <silent> ,hipf a<%= ChangeForm_form.password_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>autofocus: true,<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>minlength: ChangeMinLength) %><esc>/ChangeAttribute\\|ChangeForm\\|true\\|ChangePlaceholder\\|C\\|ChangeMinLengthhangeMinLength<return>  
+    nnoremap <silent> ,hipf a<%= ChangeForm_form.password_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>autofocus: true,<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>minlength: ChangeMinLength) %><esc>/ChangeAttribute\\|ChangeForm\\|true\\|ChangePlaceholder\\|C\\|ChangeMinLengthhangeMinLength<return>
     " Html form Input Password Confirmation
     nnoremap <silent> ,hipc a<%= ChangeThisPls_form.password_field(:password_confirmation, class: 'form-control') %><esc>/ChangeThisPls<return>
     " Html form Input SElect
@@ -746,7 +746,7 @@
     nnoremap <silent> ,rbcN acan?(:ChangeAction, :ChangeController)<esc>/ChangeAction\\|ChangeController<return>
     " Ruby Basic Interpolated String
     nnoremap <silent> ,rbis a#{}<esc>i
-    
+
     " this should be moved to ruby model and needs updating for distinct...
     " Ruby Basic ORder
     nnoremap <silent> ,rbor aorder(:ChangeAttribute)<esc>/ChangeAttribute<return>
@@ -782,17 +782,17 @@
     " Ruby Models SErvice
     nnoremap <silent> ,rmse :read ../templates/models/models/service.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models Up Down
-    
+    nnoremap <silent> ,rmud adef up<return># Deletethis - insert migration methods for up<return><backspace><backspace>end<return><return>def down<return># Deletethis - insert migration methods for down<return><backspace><backspace>end<esc>/Deletethis<return>
     " Ruby Models Add Column
-    
+    nnoremap <silent> ,rmac aadd_column :ChangeTableName, :ChangeColumn, :ChangeColumnType, ChangeOptions<esc>/ChangeTableName\\|ChangeColumnType\\|ChangeColumn\\|ChangeOptions<return>
     " Ruby Models Add Reference
-    
+    nnoremap <silent> ,rmar aadd_reference :ChangeTableName, :ChangeColumn, ChangeOptions<esc>/ChangeTableName\\|ChangeColumn\\|ChangeOptions<return>
     " Ruby Models Change Column
-    
+    nnoremap <silent> ,rmcc a# DeleteThis - Change migration to Up / Down if not already changed<return>DeleteThis - add change to up method<return>ChangeDescriptionOfChange<return><backspace><backspace>change_column :ChangeTableName, :ChangeColumn, :ChangeColumnType, ChangeOptions<return># DeleteThis - add reversion to down method<return>ChangeDescriptionOfReversion<return><backspace><backspace>change_column :ChangeTableName, :ChangeColumn, :ChangeColumnType, ChangeOptions<esc>/DeleteThis\\|ChangeDescriptionOfChange\\|ChangeDescriptionOfReversion\\|ChangeTableName\\|ChangeColumnType\\|ChangeColumn\\|ChangeOptions<return>
     " Ruby Models Add Index
-    
+
     " Ruby Models Add Index (case insensitive)
-    nnoremap <silent> ,rmaI a# DeleteThis - Change migration to Up / Down if not already changed<return><backspace><backspace>execute <<-SQL<return><tab>CREATE UNIQUE INDEX index_table_name_on_lower_ChangeCaseInsensitiveAttribute_and_ChangeAdditionalAttributesIfAny ON ChangeTableName(LOWER(ChangeCaseInsensitiveAttribute), ChangeAdditionalAttributesIfAny);<return><C-d>SQL<return># DeleteThis - move code below to down method (index must be removed in down method)<return>DeleteThis - if a table is created, simply drop table (dropping table will remove index)<return><backspace><backspace>drop_table :ChangeTableName<return># DeleteThis - if tabe was not created, remove table explicitly<return><backspace><backspace>remove_index :index_table_name_on_lower_ChangeCaseInsensitiveAttribute_and_ChangeAdditionalAttributesIfAny<esc>/DeleteThis\\|ChangeCaseInsensitiveAttribute\\|ChangeAdditionalAttributesIfAny\\|ChangeTableName<return>
+    nnoremap <silent> ,rmaI a# DeleteThis - Change migration to Up / Down if not already changed<return><backspace><backspace>execute <<-SQL<return><tab>CREATE UNIQUE INDEX index_ChangeTableName_on_lower_ChangeCaseInsensitiveAttribute_and_ChangeAdditionalAttributesIfAny ON ChangeTableName(LOWER(ChangeCaseInsensitiveAttribute), ChangeAdditionalAttributesIfAny);<return><C-d>SQL<return># DeleteThis - move code below to down method (index must be removed in down method)<return>DeleteThis - if a table is created, simply drop table (dropping table will remove index)<return><backspace><backspace>drop_table :ChangeTableName<return># DeleteThis - if tabe was not created, remove table explicitly<return><backspace><backspace>remove_index :index_ChangeTableName_on_lower_ChangeCaseInsensitiveAttribute_and_ChangeAdditionalAttributesIfAny<esc>/DeleteThis\\|ChangeCaseInsensitiveAttribute\\|ChangeAdditionalAttributesIfAny\\|ChangeTableName<return>
     " Ruby Models Cancancan Model based (feature specific)
     nnoremap <silent> ,rmcm acan %i[ChangeNamespace_ChangePermission], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
     " Ruby Models Cancancan Model based (granular / controller action specific)
