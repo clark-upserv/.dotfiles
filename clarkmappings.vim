@@ -26,7 +26,7 @@
 "   Packages
 "
 "
-" random one off stuff
+" truly random one off stuff
   " Caps lock in insert mode (press ctrl - ^ to toggle)
     " Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
     for c in range(char2nr('A'), char2nr('Z'))
@@ -36,21 +36,62 @@
     " Kill the capslock when leaving insert mode.
     autocmd InsertLeave * set iminsert=0
 
-  " insert mode only mappings
-    " single key mappings
-      " prevent return from autocomplete (very annoying because to return you have
-      " to hit space then return. Now, tab does autocomplete and return does
-      " return
-        inoremap <silent> <return> <space><backspace><return>
-        inoremap <silent> {{ {<space><space>}<left><left>
-        inoremap <silent> <bar><bar><bar> <bar><bar><left>
-        inoremap <silent> <bar><bar><space> <bar><bar><space>
-        inoremap <silent> <bar><bar>= <bar><bar>=
+" insert mode only mappings
+  " single key mappings
+    " prevent return from autocomplete (very annoying because to return you have
+    " to hit space then return. Now, tab does autocomplete and return does
+    " return
+    inoremap <silent> <return> <space><backspace><return>
+    " ruby curley brace spacing
+    inoremap <silent> {{ {<space><space>}<left><left>
+    " bar options
+    inoremap <silent> <bar><bar><bar> <bar><bar><left>
+    inoremap <silent> <bar><bar><space> <bar><bar><space>
+    inoremap <silent> <bar><bar>= <bar><bar>=
 
 " single key non-comma
   " Single key non-comma misc
+    " remap o and O
+    nnoremap <silent> o o <backspace><esc>
+    nnoremap <silent> O O <backspace><esc>comments)
+    " these are the same as o and O but are used in nmaps... so if these need
+    " to be changed, make sure to search / reaplace all ,,o and ,,O (keeping
+    " these because ,,o and ,,O is easier to search than o and O)
+    nnoremap <silent> ,,o o <backspace><esc>
+    nnoremap <silent> ,,O O <backspace><esc>comments)
     " copy and search
+    nnoremap <silent> Y evby0/<C-R><C-R>+<return>
     vnoremap <silent> Y y0/<C-R><C-R>+<return>
+    " remap r to s (r is used by new dpad)
+    nnoremap <silent> s r
+    vnoremap <silent> s r
+    " remap v to f (f is easier to hit key) )NOTE: V and vv were used on several recursieve (ie nmap, not nnoremapp)
+    " mappings but have been changed to F and ff respcectively. If this mapping is
+    " changed, you must search / replace F and ff nnore mappings with whatever you change it to
+    " NOTE: must use vmap instead of vnoremap on visual mode because spacevim
+    " (or something) has some cool v mappings that I want to keep when
+    " remapping to f
+    " NOTE: technically don't need to remap F to V because v is remapped to V
+    " but several mappings used V and is easier to update those mapps to use F
+    " because F is easier to find / replace if necessary later on than v
+    nnoremap <silent> f v
+    vmap <silent> f v
+    nnoremap <silent> F V
+    vmap <silent> F V
+    " these are attempts at rebuilding spacevimes visual custom code for v
+    " (but spacevims is better because no lag so just leaving these as
+    " reference)
+    "nnoremap <silent> ff bve
+    "nnoremap <silent> fff V/^$<return><up>
+    "nnoremap <silent> ffff ggVGV/^$<return><up>
+    
+    "remap v to V (normal mode only because I don't think V does anything in
+    "visual mode
+    nnoremap <silent> v V
+    " keep ctrl v / do not remap to V
+    nnoremap <silent> <ALT-v> <ALT-v>
+    " copy entire line
+    nnoremap <silent> V Vy
 
   " retrain d-pad
     " up
@@ -65,21 +106,23 @@
     " right
     nnoremap <silent> ; <right>
     vnoremap <silent> ; <right>
-    " far left (^ map to q and when in visual don't get next line)
+    " far left
     nnoremap <silent> q ^
-    vnoremap <silent> q ^<left>
-    " far right ($ map to r and when in visual don't get next line)
+    vnoremap <silent> q ^
+    nnoremap <silent> Q I
+    " far right (when in visual mode, use <left> to make sure to not get next line)
     nnoremap <silent> r $
     vnoremap <silent> r $<left>
+    nnoremap <silent> R A
     " back to beginning
     nnoremap <silent> w b
     vnoremap <silent> w b
-    " forward to end (keep as e so no mapping needed
-    "
-    " forward to begiining (remap w) NOTE: can't remap visual v beacuse
-    " spacevim has some cool mappings that I am remapping recursively to f
-    " (vmap <silent> f v)
+    " forward to end
+    nnoremap <silent> e e
+    vnoremap <silent> e e
+    " forward to begiining 
     nnoremap <silent> E w
+    vnoremap <silent> E w
     " up several
     nnoremap <silent> t 4k
     vnoremap <silent> t 4k
@@ -91,30 +134,12 @@
     " to bottom of page (make hh go to bottom like G)
     nnoremap <silent> hh G
     vnoremap <silent> hh G
-    " remap r to s
-    nnoremap <silent> s r
-    vnoremap <silent> s r
-    " remap v to f NOTE: vv was used on several recursieve (ie nmap, not nnoremapp)
-    " mappings but has been changed to F and ff respcectively. If this mapping is
-    " changed, you must search / replace ff mappings with whatever you change it to
-    " NOTE: must use vmap instead of vnoremap on visual mode because spacevim
-    " (or something) has some cool v mappings that I want to keep when
-    " remapping to f
-    nnoremap <silent> f v
-    nnoremap <silent> F V
-    vmap <silent> f v
-    vmap <silent> F V
-    "nnoremap <silent> ff bve
-    "nnoremap <silent> fff V/^$<return><up>
-    "nnoremap <silent> ffff ggVGV/^$<return><up>
-    "remap v to V
-    nnoremap <silent> v V
-    nnoremap <silent> V Vy
-    nnoremap <silent> <ALT-v> <ALT-v>
 
 " single key comma mappings
-  nnoremap <silent> ,o o <backspace><esc>
-  nnoremap <silent> ,O O <backspace><esc>comments)
+  " get back o and O since they are remapped
+  nnoremap <silent> ,o o
+  nnoremap <silent> ,O O
+  " various comments and uncomments
   nnoremap <silent> ,# I#<esc>0
   nnoremap <silent> ,,# I<delete><esc>0
   nnoremap <silent> ,// I//<esc>0
@@ -136,7 +161,7 @@
   " Misc. Dd but combine to Forward line instead of delete line
   nmap <silent> ,mdf <down>,mdd
   " temp for whatever
-  vmap <silent> ,mss C<div id="tabs_for_mobile_container"><return><%= render('core/users/show_tabs_for_mobile', tab: @tab, user: @user) %><return></div><esc><space>fS
+  vmap <silent> ,mss ainsert one off mapping here<esc>
 
   " Misc. Messages
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
@@ -551,15 +576,15 @@
     " Html Top Label (for top label)
     nmap <silent> ,hstl a<div class="form-row"><return><%#<delete> DeleteThis - insert Show Group %><return></div><esc>/DeleteThis<return>
     " Html Show ROw
-    nmap <silent> ,hsro a<div class="form-row"><return></div><esc>,O
+    nmap <silent> ,hsro a<div class="form-row"><return></div><esc>,,O
     " Html Show Group 1
-    nmap <silent> ,hsg1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return>
+    nmap <silent> ,hsg1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return>
     " Html Show Group 2
-    nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>F3<down>yP
+    nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>F3<down>yP
     " Html Show Group 3
-    nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>F3<down>yPP
+    nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>F3<down>yPP
     " Html Show Group 4
-    nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>F3<down>yPPP
+    nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>F3<down>yPPP
     " Html Show element SImple
     nnoremap <silent> ,hssi a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
     " Html Show Date Base
@@ -585,15 +610,15 @@
     " Html form Top label Cancel and submit buttons
     nmap <silent> ,hitc o<%#<delete> Top label cancel and submit buttons %><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
     " Html form Input ROw (for top label)
-    nmap <silent> ,hiro a<div class="form-row"><return></div><esc>,O
+    nmap <silent> ,hiro a<div class="form-row"><return></div><esc>,,O
     " Html form Input Group 1
-    nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input<down>,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
+    nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
     " Html form Input Group 2
-    nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input<down>,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>F4<down>yP
+    nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>F4<down>yP
     " Html form Input Group 3
-    nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input<down>,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>F4<down>yPP
+    nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>F4<down>yPP
     " Html form Input Group 4
-    nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,o,mminsert_input<down>,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>F4<down>yPPP
+    nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>F4<down>yPPP
     " Html form Input Group Cancel & submit buttons
     nmap <silent> ,higc :read ../templates/views/elements/buttons_and_links/cancel_and_submit_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
     " Html form Input Group cancel & submit Icons
@@ -619,13 +644,13 @@
     " Html form Input Email Field
     nnoremap <silent> ,hief a<%= ChangeThisPls_form.email_field(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
     " Html form Input Checkbox Stacked
-    nmap <silent> ,hics a<div><esc>,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,o,hicw<down><down><down>o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
+    nmap <silent> ,hics a<div><esc>,,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,,o,hicw<down><down><down>o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
     " Html form Input Checkbox Inline (exact same as hics but add d-flex to parent div)
-    nmap <silent> ,hici a<div class="d-flex"><esc>,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,o,hicw<down><down><down>o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
+    nmap <silent> ,hici a<div class="d-flex"><esc>,,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,,o,hicw<down><down><down>o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
     " Html form Input Checkbox Wrapper
     " this is used by by ,hics and ,hici so if you change this you might
     " need to change those as well
-    nmap <silent> ,hicw a<div class="pr-2 custom-control custom-checkbox"><esc>,o,hicb<esc>,o,hflc<esc><down><down>o</div><esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>
+    nmap <silent> ,hicw a<div class="pr-2 custom-control custom-checkbox"><esc>,,o,hicb<esc>,,o,hflc<esc><down><down>o</div><esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>
     " Html form Input CheckBox
     " this is used by ,hicw so if you change this you might need to change
     " ,hicw as well
@@ -756,6 +781,18 @@
     nnoremap <silent> ,rmmo :read ../templates/models/models/module.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models SErvice
     nnoremap <silent> ,rmse :read ../templates/models/models/service.rb<return>ggdd/ChangeThisPls<return>
+    " Ruby Models Up Down
+    
+    " Ruby Models Add Column
+    
+    " Ruby Models Add Reference
+    
+    " Ruby Models Change Column
+    
+    " Ruby Models Add Index
+    
+    " Ruby Models Add Index (case insensitive)
+    nnoremap <silent> ,rmaI a# DeleteThis - Change migration to Up / Down if not already changed<return><backspace><backspace>execute <<-SQL<return><tab>CREATE UNIQUE INDEX index_table_name_on_lower_ChangeCaseInsensitiveAttribute_and_ChangeAdditionalAttributesIfAny ON ChangeTableName(LOWER(ChangeCaseInsensitiveAttribute), ChangeAdditionalAttributesIfAny);<return><C-d>SQL<return># DeleteThis - move code below to down method (index must be removed in down method)<return>DeleteThis - if a table is created, simply drop table (dropping table will remove index)<return><backspace><backspace>drop_table :ChangeTableName<return># DeleteThis - if tabe was not created, remove table explicitly<return><backspace><backspace>remove_index :index_table_name_on_lower_ChangeCaseInsensitiveAttribute_and_ChangeAdditionalAttributesIfAny<esc>/DeleteThis\\|ChangeCaseInsensitiveAttribute\\|ChangeAdditionalAttributesIfAny\\|ChangeTableName<return>
     " Ruby Models Cancancan Model based (feature specific)
     nnoremap <silent> ,rmcm acan %i[ChangeNamespace_ChangePermission], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
     " Ruby Models Cancancan Model based (granular / controller action specific)
@@ -768,12 +805,12 @@
     nnoremap <silent> ,rmbt abelongs_to :ChangeParentName, class_name: 'ChangeParentModel', inverse_of: :ChangeChildrenNameIfHasManyOrChildNameIfHasOne(Optional-OnlyIfRlationshipIsInBothModels), optional: true<esc>/ChangeParentName\\|ChangeParentModel\\|ChangeChildrenNameIfHasManyOrChildNameIfHasOne(Optional-OnlyIfRlationshipIsInBothModels)<return>
     " Ruby Models Has Many association
     nnoremap <silent> ,rmhm ahas_many :ChangeChildrenName, class_name: 'ChangeChildModel', inverse_of: :ChangeParentName(Optional-OnlyIfRlationshipIsInBothModels), dependent: :destroy<esc>/ChangeChildrenName\\|ChangeChildModel\\|ChangeParentName(Optional-OnlyIfRlationshipIsInBothModels)<return>
+    " Ruby Models has Many Through association
+    nnoremap <silent> ,rmhM ahas_many :ChangeChildrenName, through: :ChangeConnectingAssociationName, source: :ChangeChildrenName(ShouldMatchAssociationNameInConnectingModel), inverse_of: :ChangeTopParentModel(Optional-OnlyIfRlationshipIsInBothModels)<esc>/ChangeChildrenName(ShouldMatchAssociationNameInConnectingModel)\\|ChangeChildrenName\\|ChangeConnectingAssociationName\\|ChangeTopParentModel(Optional-OnlyIfRlationshipIsInBothModels)<return>
     " Ruby Models Has One association
     nnoremap <silent> ,rmho ahas_one :ChangeChildName, class_name: 'ChangeChildModel', inverse_of: :ChangeParentName(Optional-OnlyIfRlationshipIsInBothModels), dependent: :destroy<esc>/ChangeChildName\\|ChangeChildModel\\|ChangeParentName(Optional-OnlyIfRlationshipIsInBothModels)<return>
-    " Ruby Models has Many Through association
-    nnoremap <silent> ,rmmt ahas_many :ChangeChildrenName, through: :ChangeConnectingAssociationName, source: :ChangeChildrenName(ShouldMatchAssociationNameInConnectingModel), inverse_of: :ChangeTopParentModel(Optional-OnlyIfRlationshipIsInBothModels)<esc>/ChangeChildrenName(ShouldMatchAssociationNameInConnectingModel)\\|ChangeChildrenName\\|ChangeConnectingAssociationName\\|ChangeTopParentModel(Optional-OnlyIfRlationshipIsInBothModels)<return>
     " Ruby Models has One Through association
-    nnoremap <silent> ,rmot ahas_one :ChangeChildOrParentName, through: :ChangeConnectingAssociationName, source: :ChangeChildOrParentName(ShouldMatchAssociationNameInConnectingModel), inverse_of: :ChangeBottomChildOrTopParentModel(Optional-OnlyIfRlationshipIsInBothModels), autosave: false<esc>/ChangeChildOrParentName(ShouldMatchAssociationNameInConnectingModel)\\|ChangeChildOrParentName\\|ChangeConnectingAssociationName\\|ChangeBottomChildOrTopParentModel(Optional-OnlyIfRlationshipIsInBothModels)<return>
+    nnoremap <silent> ,rmhO ahas_one :ChangeChildOrParentName, through: :ChangeConnectingAssociationName, source: :ChangeChildOrParentName(ShouldMatchAssociationNameInConnectingModel), inverse_of: :ChangeBottomChildOrTopParentModel(Optional-OnlyIfRlationshipIsInBothModels), autosave: false<esc>/ChangeChildOrParentName(ShouldMatchAssociationNameInConnectingModel)\\|ChangeChildOrParentName\\|ChangeConnectingAssociationName\\|ChangeBottomChildOrTopParentModel(Optional-OnlyIfRlationshipIsInBothModels)<return>
     " Ruby Models accepts Nested attributes for has One
     nnoremap <silent> ,rmno aaccepts_nested_attributes_for :ChangeChildName, allow_destroy: true,  reject_if: proc \{ \|attributes\| attributes['ChangeAttribute'].blank? \}, update_only: true<esc>/ChangeChildName\\|ChangeAttribute<return>
     " Ruby Models accepts Nested attributes for has Many
@@ -952,7 +989,7 @@
     " Javascript jQiery html (full)
     nmap <silent> ,jqhT a$('#ChangeId').html("<%= escape_javascript(render('ChangePath', ChangeLocals)) %>")<esc>/ChangeId\\|ChangePath\\|ChangeLocals<return><n
     " Javascript jQiery EAch
-    nmap <silent> ,jqea aeach(function(index){<return>})<esc>,O
+    nmap <silent> ,jqea aeach(function(index){<return>})<esc>,,O
 
   " Javascript Vanilla
     " Javascript Vanilla IF
