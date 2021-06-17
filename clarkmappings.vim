@@ -2,7 +2,7 @@
 "   [some random one off stuff]
 "   single key comma (o, comments)
 "   Misc
-"   Files / Create
+"   Viles / Create
 "   View templates
 "   Erb
 "   Html
@@ -141,7 +141,7 @@
   " line deletes entire file contents...)
   nmap <silent> ,mdd I<tab><esc>0vvxi<backspace><esc><right>
   " Misc. Dd but combine to Forward line instead of delete line
-  nmap <silent> ,mdf <down>,mdd
+  nmap <silent> ,mdf $<down>,mdd
   " temp for whatever
   vmap <silent> ,mss ainsert one off mapping here<esc>
 
@@ -1076,10 +1076,10 @@
     " Tests Base Upload fixture File
     nnoremap <silent> ,tbuf :read ../templates/tests/misc/upload_fixture_file.rb<return><esc>/ChangeVariable\\|ChangePath\\|ChangeContentType\\|DeleteThisPls\\|ChangeObject\\|ChangeAttachment<return>
   " Controller
-    " Tests Controller Scenario Base
-    nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeAction\\|ChangeAction\\|ChangeMethodUrlAndParams\\|ChangeUserWithPermission<return>
     " Tests Controller BAse
     nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
+    " Tests Controller Scenarios Base
+    nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeAction\\|ChangeAction\\|ChangeMethodUrlAndParams\\|ChangeUserWithPermission<return>
     " Tests Controller Test Base
     nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/ChangeThisPls\\|ChangeUserWithPermission\\|ChangeMethodUrlAndParams\\|DeleteThisPls\\|ChangeTemplate\\|ChangePath<return>
     " Tests Controller Test Update
@@ -1118,11 +1118,18 @@
     " Tests Model BAse
     nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccvvfp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
     " Tests Models Belongs To
-    nnoremap <silent> ,tmbt atest "ChangeModel should belong to ChangeAssociationName" do<return>assert_equal @ChangeParent, @ChangeModel.ChangeParent<return>end<esc>/ChangeModel\\|ChangeAssociationName\\|ChangeParent<return>
+    nnoremap <silent> ,tmbt atest "ChangeChild should belong to ChangeParent" do<return>assert_equal @ChangeParent, @ChangeChild.ChangeParent<return>end<esc>/ChangeParent\\|ChangeChild<return>
+    " Tests Models Had One
+    nnoremap <silent> ,tmho atest "ChangeParent should have one ChangeChild" do<return>assert_equal @ChangeChild, @ChangeParent.ChangeChild<return>end<esc>/ChangeParent\\|ChangeChild<return>
     " Tests Models Has Many
-    nnoremap <silent> ,tmhm atest "ChangeModel should have many ChangeAssociationName" do<return>assert_equal @ChangeModel.ChangeAssociationName.count, ChangeModel.where(ChangeModel_id: ChangeModel.id).count<return>end<esc>/ChangeModel\\|ChangeAssociationName<return>
-    " Tests Models Model VAlication
-    nnoremap <silent> ,tmva atest "ChangeModel ChangeAttribute should be ChangeValidation" do<return>@ChangeModel.attrbitute = ChangeInvalidValue<return>assert_not @ChangeModel.valid?<return>end<esc>/ChangeModel\\|ChangeAttribute\\|ChangeValidation\\|ChangeInvalidValue<return>
+    nnoremap <silent> ,tmhm atest "ChangeParent should have many ChangeChildren" do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>/ChangeParent\\|ChangeChildren\\|ChangeChildModel<return>
+    " Tests Models VAlication
+    nnoremap <silent> ,tmva atest "ChangeModel ChangeAttribute should be ChangeValidation" do<return>@ChangeObject.ChangeAttribute = ChangeInvalidValue<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.first.attribute<return>end<esc>/ChangeModel\\|ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeInvalidValue<return>
+    " Tests Models scopes
+    " Tests Models Callbacks
+    " Tests Models Class Methods
+    " Tests Models Instance Methods
+
   " Test Helpers
     " Tests Test Helpers Base
     nnoremap <silent> ,tthb :read ../templates/tests/test_helper_base.rb<return>ggdd/ChangeThis<return>
