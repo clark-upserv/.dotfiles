@@ -52,9 +52,9 @@
 " single key non-comma
   " Single key non-comma misc
     " copy word
-    nmap <silent> 7 ffy
+    nmap <silent> y vvy
     " paste word and recopy 
-    nmap <silent> - ffpffy
+    nmap <silent> - vvpvvy
     " remap o and O
     nnoremap <silent> o o <backspace><esc>
     nnoremap <silent> O O <backspace><esc>comments)
@@ -69,33 +69,11 @@
     " remap r to s (r is used by new dpad)
     nnoremap <silent> s r
     vnoremap <silent> s r
-    " remap v to f (f is easier to hit key) )NOTE: V and vv were used on several recursieve (ie nmap, not nnoremapp)
-    " mappings but have been changed to F and ff respcectively. If this mapping is
-    " changed, you must search / replace F and ff nnore mappings with whatever you change it to
-    " NOTE: must use vmap instead of vnoremap on visual mode because spacevim
-    " (or something) has some cool v mappings that I want to keep when
-    " remapping to f
-    " NOTE: technically don't need to remap F to V because v is remapped to V
-    " but several mappings used V and is easier to update those mapps to use F
-    " because F is easier to find / replace if necessary later on than v
-    nnoremap <silent> f v
-    vmap <silent> f v
-    nnoremap <silent> F V
-    vmap <silent> F V
-    " these are attempts at rebuilding spacevimes visual custom code for v
-    " (but spacevims is better because no lag so just leaving these as
-    " reference)
-    "nnoremap <silent> ff bve
-    "nnoremap <silent> fff V/^$<return><up>
-    "nnoremap <silent> ffff ggVGV/^$<return><up>
-
-    "remap v to V (normal mode only because I don't think V does anything in
-    "visual mode
-    nnoremap <silent> v V
-    " keep ctrl v / do not remap to V
-    nnoremap <silent> <ALT-v> <ALT-v>
-    " copy entire line
-    nnoremap <silent> V Vy
+    
+    
+    nnoremap <silent> f V
+    vnoremap <silent> f V
+    nnoremap <silent> F Vy
 
   " retrain d-pad
     " up
@@ -156,12 +134,12 @@
   " Misc. Reload Source
   nnoremap <silent> ,mrs :so ~/.dotfiles/clarkmappings.vim<return>
   " temp for helping with robot font in app/assets/beagle_lib/beagle.scss.erb
-  vmap <silent> ,mrr xi<%= asset_path(ChangePath) %><esc>/ChangePath<return>ffp0/\.\.\/lib\/<return>cgn<esc>/url(<return>
-  vmap <silent> ,mrt xi<%= "#{asset_path(ChangePath)}" %><esc>/ChangePath<return>ffp0/\.\.\/lib\/<return>cgn<esc>
-  " Misc. DD but combine to previous line instead of delete line (asdfasdfasdf
-  " is because if the next line is blank it will delete entire page. So adding
-  " asdfasdfasdf makes sure there is something on line. Then we remove later
-  nmap <silent> ,mdd Iasdfasdfasdf<esc>>I<esc>ffxi<backspace><esc>/asdfasdfasdf<return>cgn<esc><right>:noh<return>
+  vmap <silent> ,mrr xi<%= asset_path(ChangePath) %><esc>/ChangePath<return>vvp0/\.\.\/lib\/<return>cgn<esc>/url(<return>
+  vmap <silent> ,mrt xi<%= "#{asset_path(ChangePath)}" %><esc>/ChangePath<return>vvp0/\.\.\/lib\/<return>cgn<esc>
+  " Misc. DD but combine to previous line instead of delete line  (I<tab>
+  " makes sure there is at least something on the line because vvx on empty
+  " line deletes entire file contents...)
+  nmap <silent> ,mdd I<tab><esc>0vvxi<backspace><esc><right>
   " Misc. Dd but combine to Forward line instead of delete line
   nmap <silent> ,mdf <down>,mdd
   " temp for whatever
@@ -584,11 +562,11 @@
     " Html Show Group 1
     nmap <silent> ,hsg1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return>
     " Html Show Group 2
-    nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>F3<down>yP
+    nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yP
     " Html Show Group 3
-    nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>F3<down>yPP
+    nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPP
     " Html Show Group 4
-    nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>F3<down>yPPP
+    nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssio</div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
     " Html Show element SImple
     nnoremap <silent> ,hssi a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
     " Html Show Date Base
@@ -618,11 +596,11 @@
     " Html form Input Group 1
     nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
     " Html form Input Group 2
-    nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>F4<down>yP
+    nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
     " Html form Input Group 3
-    nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>F4<down>yPP
+    nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
     " Html form Input Group 4
-    nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>F4<down>yPPP
+    nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
     " Html form Input Group Cancel & submit buttons
     nmap <silent> ,higc :read ../templates/views/elements/buttons_and_links/cancel_and_submit_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
     " Html form Input Group cancel & submit Icons
@@ -1101,7 +1079,7 @@
     " Tests Controller Scenario Base
     nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeAction\\|ChangeAction\\|ChangeMethodUrlAndParams\\|ChangeUserWithPermission<return>
     " Tests Controller BAse
-    nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPffp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
+    nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
     " Tests Controller Test Base
     nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/ChangeThisPls\\|ChangeUserWithPermission\\|ChangeMethodUrlAndParams\\|DeleteThisPls\\|ChangeTemplate\\|ChangePath<return>
     " Tests Controller Test Update
@@ -1124,21 +1102,21 @@
     nnoremap <silent> ,tcde adelete ChangeUrlHelper_path(ChangeModel)<esc>/ChangeUrlHelper\\|ChangeModel<return>
   " Helper
     " Tests Helper BAse
-    nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPffp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+    nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
   " Integration
     " Tests Integration BAse
-    nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPffp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThisIfNotNecessary<return>
+    nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThisIfNotNecessary<return>
   " Jobs
     " Tests Job BAse
-    nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPffp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls<return>
+    nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls<return>
   " Mailers
     " Tests mAiler BAse
-    nmap <silent> ,taba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPffp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
+    nmap <silent> ,taba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
     " Tests mAiler Test Base
     nmap <silent> ,tatb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
   " Models
     " Tests Model BAse
-    nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPffp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
+    nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccvvfp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
     " Tests Models Belongs To
     nnoremap <silent> ,tmbt atest "ChangeModel should belong to ChangeAssociationName" do<return>assert_equal @ChangeParent, @ChangeModel.ChangeParent<return>end<esc>/ChangeModel\\|ChangeAssociationName\\|ChangeParent<return>
     " Tests Models Has Many
@@ -1149,7 +1127,7 @@
     " Tests Test Helpers Base
     nnoremap <silent> ,tthb :read ../templates/tests/test_helper_base.rb<return>ggdd/ChangeThis<return>
     " Tests Test Helpers Test
-    nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPffp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+    nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
     nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can easily change (ie text in source code)<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break<esc>
 
 " Packages
