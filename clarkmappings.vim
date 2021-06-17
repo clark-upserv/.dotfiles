@@ -51,6 +51,10 @@
 
 " single key non-comma
   " Single key non-comma misc
+    " copy word
+    nmap <silent> 7 ffy
+    " paste word and recopy 
+    nmap <silent> - ffpffy
     " remap o and O
     nnoremap <silent> o o <backspace><esc>
     nnoremap <silent> O O <backspace><esc>comments)
@@ -248,7 +252,7 @@
     nnoremap ,feap :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
 
     " File Edit Model to (model) Test
-    "
+    nnoremap ,femt :let @+ = expand("%")<return>o<esc>p0/app<return>cgntest<esc>/.rb<return>cgn_test.rb<esc>dd:e <C-R><C-R>+
 
     " File Edit View to Stylesheet
     nnoremap ,fevs :let @+ = expand('%')<return>o<esc>p0/views<return>cgnassets/stylesheets<esc>0/html.erb<return>cgnscss<esc>dd:e <C-R><C-R>+
@@ -272,7 +276,7 @@
     " File Edit Test to Controller
     nnoremap ,fetc :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc>ncgn<backspace><esc>dd:e <c-r><c-r>+
     " File Edit Test to Model
-    "
+    nnoremap ,fetm :let @+ = expand("%")<return>o<esc>p0/test<return>Ncgnapp<esc>/_test<return>cgn<esc>dd:e <C-R><C-R>+
     " File Edit Test to Helper
     "
     " File Edit Test to Job
@@ -830,23 +834,23 @@
     " Ruby Models Validates Base
     nnoremap <silent> ,rmvb avalidates :ChangeAttribute, ChangeValidation: { message: 'ChangeMessage' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
     " Ruby Models Validates Presence
-    nnoremap <silent> ,rmvp avalidates :ChangeAttribute, presence: { message: 'ChangeMessage' }<esc>/ChangeAttribute\\|ChangeMessage<return>
+    nnoremap <silent> ,rmvp avalidates :ChangeAttribute, presence: { message: 'please add ChangeAttribute' }<esc>/ChangeAttribute<return>
     " Ruby Models Validates Length
-    nnoremap <silent> ,rmvl avalidates :ChangeAttribute, length: { maximum: 255, message: 'ChangeMessage' }<esc>/ChangeAttribute\\|255\\|ChangeMessage<return>
+    nnoremap <silent> ,rmvl avalidates :ChangeAttribute, length: { maximum: 255, message: 'ChangeAttribute is too long (maximum is 255 characters' }<esc>/ChangeAttribute\\|255<return>
     " Ruby Models Validates Uniqueness
-    nnoremap <silent> ,rmvu avalidates :ChangeAttribute, uniqueness: { message: 'ChangeMessage' }<esc>/ChangeAttribute\\|ChangeMessage<return>
+    nnoremap <silent> ,rmvu avalidates :ChangeAttribute, uniqueness: { message: 'this ChangeAttribute has already been taken' }<esc>/ChangeAttribute<return>
     " Ruby Models Validates Uniqueness
-    nnoremap <silent> ,rmvU avalidates :ChangeAttribute, uniqueness: { case_sensitive: false, scope: [:ChangeAttribute2, :ChangeAttribute3], message: 'ChangeMessage' }<esc>/case_sensitive: false, \\|ChangeAttribute2\\|ChangeAttribute3\\|ChangeAttribute\\|ChangeMessage<return>
+    nnoremap <silent> ,rmvU avalidates :ChangeAttribute, uniqueness: { case_sensitive: false, scope: [:ChangeAttribute2, :ChangeAttribute3], message: 'this ChangeAttribute has already been taken' }<esc>/case_sensitive: false, \\|ChangeAttribute2\\|ChangeAttribute3\\|ChangeAttribute<return>
     " Ruby Models Validates Numericality
-    nnoremap <silent> ,rmvn avalidates :ChangeAttribute, numericality: { only_integer: true, allow_nil: true, less_than: 100, less_than_or_eqaul_to: 100; equal_to: 100, greater_than: 100, greater_than_or_equal_to: 100, other_than: 100, odd: true, even: true, message: 'ChangeMessage' }<esc>/ChangeAttribute\\|ChangeMessage<return>
+    nnoremap <silent> ,rmvn avalidates :ChangeAttribute, numericality: { only_integer: true, allow_nil: true, less_than: 100, less_than_or_eqaul_to: 100; equal_to: 100, greater_than: 100, greater_than_or_equal_to: 100, other_than: 100, odd: true, even: true, message: 'ChangeAttribute must be a number' }<esc>/ChangeAttribute<return>
     " Ruby Models Validates Dependent_on
     nnoremap <silent> ,rmvd avalidates :ChangeAttribute, dependent_on: { independent_path: [], dependent_path: [<OPTIONAL FIELD>], if_independent_is: [], if_independent_is_not: [], dependent_can_be: [], dependent_cannot_be: [], equal_values: true, not_equal_values: true, message: 'ChangeMessage' }<return># DeleteThis - can only have if_independent_is OR if_independent_is_not<return>DeleteThis - can only have dependent_can_be OR dependent_cannot_be OR equal_values OR not_equal_values<return>DeleteThis - custom message is optional<esc>/ChangeAttribute\\|ChangeMessage\\|DeleteThis<return>
     " Ruby Models Validates Attachment
-    nnoremap <silent> ,rmva avalidates :ChangeAttachmenName, size: { less_than: 10.megabytes, message: 'ChangeMessage' }<return>validates :ChangeAttachmenName, attached: { message: 'ChangeMessage' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<return>validates :ChangeAttachmenName, content_type: { in: %w[image/jpeg image/gif image/png application/pdf], message: "Attached must be a valid format. Valid formats are: jpeg, gif, png, pdf" }<return>validates :ChangeAttachmenName, content_type: { in: %w[video/quicktime video/mp4 video/webm audio/ogg], message: "Attached must be a valid image video format. Valid formats are:  mp4, mov, webm, ogg" }<esc>/ChangeAttachmenName\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
+    nnoremap <silent> ,rmva avalidates :ChangeAttachmenName, size: { less_than: ChangeSize.megabytes, message: 'ChangeMessage' }<return>validates :ChangeAttachmenName, attached: { message: 'ChangeAttribute is too large (ChangeSize MB max)' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<return>validates :ChangeAttachmenName, content_type: { in: %w[image/jpeg image/gif image/png application/pdf], message: "Attached must be a valid format. Valid formats are: jpeg, gif, png, pdf" }<return>validates :ChangeAttachmenName, content_type: { in: %w[video/quicktime video/mp4 video/webm audio/ogg], message: "Attached must be a valid image video format. Valid formats are:  mp4, mov, webm, ogg" }<esc>/ChangeAttachmenName\\|ChangeSize\\|MB\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
     " Ruby Models Validates Custom
     nnoremap <silent> ,rmvc avalidate :ChangeCustomValidation<return># DeleteThis - move method to custom validations section of model<return><backspace><backspace>def ChangeCustomValidation<return># DeleteThis - insert logic<return><backspace><backspace>end<esc>/ChangeCustomValidation\\|DeleteThis<return>
-    " Ruby Models Validates if / unless
-    nnoremap <silent> ,rmvi a, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/ChangeObject\\|ChangeAttribute\\|ChangeLogic<return>
+    " Ruby silent Validates if / unless
+    nnoremap <silent> ,rmvi a, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/ChangeObject\\|ChangeAttribute\\|ChangeLogic<return> 
 
   " Ruby Routes
     " main routes
