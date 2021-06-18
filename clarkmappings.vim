@@ -37,7 +37,7 @@
     autocmd InsertLeave * set iminsert=0
 
 " insert mode only mappings
-  " single key mappings
+  " non-leader key mappings
     " prevent return from autocomplete (very annoying because to return you have
     " to hit space then return. Now, tab does autocomplete and return does
     " return
@@ -50,13 +50,26 @@
     inoremap <silent> <bar><bar>= <bar><bar>=
 
 " single key non-comma
-  " Single key non-comma misc
+  " non leader key mappings
     " copy word
     nmap <silent> y vvy
-    " cut word
+    " copy and search
+    nnoremap <silent> Y evby0/<C-R><C-R>+<return>
+    vnoremap <silent> Y y0/<C-R><C-R>+<return>
+    " cut word or highlighted
     nmap <silent> 7 vvx
-    " paste word and recopy 
+    vnoremap <silent> 7 x
+    nnoremap <silent> & D
+    " replace word or highlighed
+    nmap <
+    vnoremap <silent> 8 c
+    nnoremap <silent> * C
+    " paste word and keep orignal 
     nmap <silent> - vvpvvy
+    " paste word and copy word just replaced
+    nmap <silent> = vvp
+    " redo
+    nnoremap mu <C-r>
     " remap o and O
     nnoremap <silent> o o <backspace><esc>
     nnoremap <silent> O O <backspace><esc>comments)
@@ -65,9 +78,6 @@
     " these because ,,o and ,,O is easier to search than o and O)
     nnoremap <silent> ,,o o <backspace><esc>
     nnoremap <silent> ,,O O <backspace><esc>comments)
-    " copy and search
-    nnoremap <silent> Y evby0/<C-R><C-R>+<return>
-    vnoremap <silent> Y y0/<C-R><C-R>+<return>
     " remap r to s (r is used by new dpad)
     nnoremap <silent> s r
     vnoremap <silent> s r
@@ -118,8 +128,11 @@
     " to bottom of page (make hh go to bottom like G)
     nnoremap <silent> hh G
     vnoremap <silent> hh G
+    
 
 " single key comma mappings
+  " visual mode
+  nnoremap ,v <C-v>
   " get back o and O since they are remapped
   nnoremap <silent> ,o o
   nnoremap <silent> ,O O
@@ -144,6 +157,7 @@
   nmap <silent> ,mdd I<tab><esc>0vvxi<backspace><esc><right>
   " Misc. Dd but combine to Forward line instead of delete line
   nmap <silent> ,mdf $<down>,mdd
+  nmap <silent> ,mde $<down>,mddi<lt>return><esc>
   " temp for whatever
   vmap <silent> ,mss ainsert one off mapping here<esc>
 
@@ -153,7 +167,7 @@
   nnoremap <silent> ,mmdir_notes a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace><esc>
 
 " File mappings
-  " File Path
+  " File Copy
     " File Copy Current Path
     nnoremap ,fccp :let @+ = expand('%:h') . '/'<return>
     " File Copy Partial Path
@@ -164,6 +178,8 @@
     nnoremap ,fppp :let @+ = expand('%:h')<return>p/app\/views\/<return>cgn<esc>
     " File Copy Current Path and File
     nnoremap ,fccf :let @+ = expand('%')<return>
+    " File Copy Rails Test
+    nnoremap ,fcrt :let @+ = expand('%')<return>o<esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>
   " File Edit
     " File Edit SEarch
     nnoremap ,fese :e **/*
@@ -266,7 +282,7 @@
     " File Edit Test to mAiler
     nnoremap ,feta :let @+ = expand("%")<return>o<esc>po<esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><down>dd<up>dd:e <C-R><C-R>+
     " File Edit Test to View (for controller and mailer tests)
-    nnoremap ,fetv :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc><up>/controllers\\|mailers<return>cgnviews<esc><up>/_test.rb<return>cgn/<esc>dd:e <C-R><C-R>+
+    nnoremap ,fetv :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc><up>/controllers\\|mailers<return>cgnviews<esc><up>/_controller_test.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Test to mailer Preview
     nnoremap ,fetp :let @+ = expand("%")<return>o<esc>po<esc>/mailers<return>Ncgnmailers/previews<esc>/_test<return>cgn_preview<esc><down>dd<up>dd:e <C-R><C-R>+
     " File Edit (model) Test to fixture
@@ -400,8 +416,9 @@
     nnoremap <silent> ,vcbS :read ../templates/views/card/body_single_show_edit_swap.html.erb<return>/ChangeThisPls\\|ChangeSesId\\|ChangePath\\|ChangeLocals<return>
   " View Show edit swap
     " View Show edit swap BAse
- ""   nnoremap <silent> ,vsba :read ../templates/views/show_edit_swap/base.html.erb<return>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
     nnoremap <silent> ,vsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/show', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/edit', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
+    " View Show edit swap Base New
+    nnoremap <silent> ,vsbn a<div id="ChangeSesId-ses-new-show"><return><%= render('ChangePath/show_new', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-new-ses-edit"><return><%= render('ChangePath/edit_new', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
   " Forms
   " View Modals
     " View Mdoels BAse
@@ -544,6 +561,8 @@
     nnoremap <silent> ,hfba :read ../templates/views/forms/base.html.erb<return>/ChangeThisPls\\|DeleteThisPls<return>
     " Html Form WIth
     nnoremap <silent> ,hfwi a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><esc>o<% end %><esc>/ChangeThisPls<return>
+    " Html Form Single Item
+    nnoremap <silent> ,hfsi a<%= form_with(model: ChangeObject, scope: 'ChangeScope', url: ChangePath_path, method: :ChangeMethod) do \|ChangeForm_form\| %><return><div class="d-flex align-items-center"><return><%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>size: ChangeObject.ChangeAttribute.length,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>maxlength: '255'<return>) %><return></div><return><%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %><return><% end %><return><esc>/ChangeObject\\|ChangeScope\\|ChangePath\\|ChangeMethod\\|ChangeForm\\|text_field\\|ChangeAttribute\\|ChangeValue\\|true\\|ChangeAutocomplete\\|ChangePlaceholder\\|255<return>
     " Html Form non-standard forms Array Simple
     nnoremap <silent> ,hfas :read ../templates/views/forms/non_standard_forms/array_simple.html.erb<return>/ChangeModel\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ChangeAttributes\\|ChangeAttribute\\|ReplaceThis\\|DeleteThis:<return>
     " Html Form non-standard forms Array Hash
@@ -589,7 +608,7 @@
     " Html Show Edit swap edit button - Icon
     nnoremap <silent> ,hsei a<a class="no-href-icon px-3 fs-4 text-primary mdi mdi-edit ChangeSesId-ses-edit-button"></a><esc>/ChangeSesId<return>
     " Html Show Edit swap edit button - Link
-    nnoremap <silent> ,hsel a<a class="no-href-link ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDispla
+    nnoremap <silent> ,hsel a<a class="no-href-link ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
     " Html Show show edit swap Edit button Modal (data attribute only)
     nnoremap <silent> ,hsem adata-toggle="modal" data-target="ChangeModalId-<% ChangeErbIfNecessary %>-modal"<esc>/ChangeModalId\\|ChangeErbIfNecessary<return>
 
@@ -620,22 +639,19 @@
     nmap <silent> ,higm :read ../templates/views/elements/buttons_and_links/cancel_and_submit_modal_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
     " Htmo form Input ATtrubutes common
     nnoremap <silent> ,hiat a, <return>autofocus: true, <return>autocomplete: 'ChangeThisPls', <return>placeholder: 'ChangeThisPls', <return>required: true <return><esc>/ChangeThisPls<return>
-    " Htmo form Input common ATtrubutes full
-    nnoremap <silent> ,hiaT a, <return>id: 'ChangeThisPls', <return>name: 'ChangeThisPls', <return>type: 'ChangeThisPls', <return>class: 'ChangeThisPls', <return>value: 'ChangeThisPls', <return>autofocus: true, <return>autocomplete: 'ChangeThisPls', <return>placeholder: 'ChangeThisPls', <return>required: true, <return>size: 'ChangeThisPls', <return>maxlength: 'ChangeThisPls', <return>min: 'ChangeThisPls', <return>max: 'ChangeThisPls', <return>step: 'ChangeThisPls', <return>checked: true, <return>readonly: true, <return>disabled: true, <return>multiple: true <return><esc>/ChangeThisPls<return>
-    " Htmo form Input Attrubutes Other
-    nnoremap <silent> ,hiao a, size: 'ChangeThisPls', <return>maxlength: 'ChangeThisPls', <return>min: 'ChangeThisPls', <return>max: 'ChangeThisPls', <return>step: 'ChangeThisPls', <return>checked: true, <return>readonly: true, <return>disabled: true, <return>multiple: true <return><esc>/ChangeThisPls<return>
     " Html form Input HIdden field
     nnoremap <silent> ,hihf a<%= ChangeThisPls_form.hidden_field(:ChangeThisPls, value: ChangeThisPls) %><esc>/ChangeThisPls<return>
     " Html form Input Hidden field Tag
     nnoremap <silent> ,hiht a<%= hidden_field_tag(:ChangeThisPls, ChangeThisPls) %><esc>/ChangeThisPls<return>
     " Html form Input Text Field
-    nnoremap <silent> ,hitf a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>maxlength: '255'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|true\\|ChangeAutocomplete\\|ChangePlaceholder\\|255<return>
+    nnoremap <silent> ,hitf a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>size: ChangeSize,<return>maxlength: '255'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|true\\|ChangeAutocomplete\\|ChangePlaceholder\\|255<return>
     " Html form Input Text Area
     nnoremap <silent> ,hita a<%= ChangeForm_form.text_area(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>maxlength: 'ChangeMaxLength'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|true\\|ChangeAutocomplete\\|ChangePlaceholder\\|ChangeMaxLength<return>
     " Html form Input Rich Text
     nnoremap <silent> ,hirt a<%= ChangeThisPls_form.rich_text_area(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
     " Html form Input Email Field
-    nnoremap <silent> ,hief a<%= ChangeThisPls_form.email_field(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
+    nnoremap <silent> ,hief a<%= ChangeForm_form.email_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'email',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>size: 'ChangeSize',<return>maxlength: 'ChangeMaxLength'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|true\\|'email'\\|ChangePlaceholder\\|ChangeSize\\|ChangeMaxLength<return>
+
     " Html form Input Checkbox Stacked
     nmap <silent> ,hics a<div><esc>,,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,,o,hicw<down><down><down>o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
     " Html form Input Checkbox Inline (exact same as hics but add d-flex to parent div)
@@ -657,7 +673,7 @@
     " Html form Input TOggle
     nnoremap <silent> ,hito :read ../templates/views/elements/toggle.html.erb<return>/ChangeForm\\|ChangeColor\\|switch-button-yesno\\|DeleteThis\\|ChangeAttribute<return>
     " Html form Input Password field
-    nnoremap <silent> ,hipf a<%= ChangeForm_form.password_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>autofocus: true,<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>minlength: ChangeMinLength) %><esc>/ChangeAttribute\\|ChangeForm\\|true\\|ChangePlaceholder\\|C\\|ChangeMinLengthhangeMinLength<return>
+    nnoremap <silent> ,hipf a<%= ChangeForm_form.password_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>autofocus: true,<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>size: ChangeSize,<return>minlength: ChangeMinLength) %><esc>/ChangeAttribute\\|ChangeForm\\|true\\|ChangePlaceholder\\|ChangeSize\\|ChangeMinLength<return>
     " Html form Input Password Confirmation
     nnoremap <silent> ,hipc a<%= ChangeThisPls_form.password_field(:password_confirmation, class: 'form-control') %><esc>/ChangeThisPls<return>
     " Html form Input SElect
@@ -761,19 +777,17 @@
 
   " Ruby model mappings
     " Ruby Models BAse
-    nnoremap <silent> ,rmba :read ../templates/models/models/base.rb<return>ggdd/ChangeThisPls<return>
+    nnoremap <silent> ,rmba :read ../templates/models/base/base.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models Base Virtual
-    nnoremap <silent> ,rmbv :read ../templates/models/models/base_virtual.rb<return>ggdd
-    " Ruby Models VIrtual
-    nnoremap <silent> ,rmvi :read ../templates/models/models/virtual.rb<return>ggdd/ChangeThisPls<return>
+    nnoremap <silent> ,rmbv :read ../templates/models/base/virtual.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models CLass
-    nnoremap <silent> ,rmcl :read ../templates/models/models/class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
+    nnoremap <silent> ,rmbc :read ../templates/models/base/class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
     " Ruby Models Sub Class
-    nnoremap <silent> ,rmsu :read ../templates/models/models/sub_class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
+    nnoremap <silent> ,rmbs :read ../templates/models/base/sub_class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
     " Ruby Models MOdule
-    nnoremap <silent> ,rmmo :read ../templates/models/models/module.rb<return>ggdd/ChangeThisPls<return>
+    nnoremap <silent> ,rmbm :read ../templates/models/base/module.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models SErvice
-    nnoremap <silent> ,rmse :read ../templates/models/models/service.rb<return>ggdd/ChangeThisPls<return>
+    nnoremap <silent> ,rmbs :read ../templates/models/base/service.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models foreign key
     nnoremap <silent> ,rmfk a{ to_table: 'ChangeTableName' }<esc>/ChangeTableName<return>
     " Ruby Models Up Down
@@ -839,7 +853,7 @@
     " Ruby Models Validates Custom
     nnoremap <silent> ,rmvc avalidate :ChangeCustomValidation<return># DeleteThis - move method to custom validations section of model<return><backspace><backspace>def ChangeCustomValidation<return># DeleteThis - insert logic<return><backspace><backspace>end<esc>/ChangeCustomValidation\\|DeleteThis<return>
     " Ruby silent Validates if / unless
-    nnoremap <silent> ,rmvi a, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/ChangeObject\\|ChangeAttribute\\|ChangeLogic<return> 
+    nnoremap <silent> ,rmvi a, if proc { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/if\\|ChangeObject\\|ChangeAttribute\\|ChangeLogic<return> 
 
   " Ruby Routes
     " main routes
@@ -1002,7 +1016,7 @@
     " Javascript jQiery html
     nnoremap <silent> ,jqht ahtml("ChangeHtml")<esc>/ChangeHtml<return>
     " Javascript jQiery html (full)
-    nmap <silent> ,jqhT a$('#ChangeId').html("<%= escape_javascript(render('ChangePath', ChangeLocals)) %>")<esc>/ChangeId\\|ChangePath\\|ChangeLocals<return><n
+    nmap <silent> ,jqhT ahtml("<%= escape_javascript(render('ChangePath', ChangeLocals)) %>")<esc>/ChangePath\\|ChangeLocals<return><n
     " Javascript jQiery EAch
     nmap <silent> ,jqea aeach(function(index){<return>})<esc>,,O
 
@@ -1055,7 +1069,10 @@
     nnoremap <silent> ,jvph ainnerHTML = "ChangeHTML" + ChangeElement.innerHTML<esc>/ChangeHTML\\|ChangeElement<return>
     " Javascript Vanilla Get Computed style
     nnoremap <silent> ,jvgc agetComputedStyle(ChangeElement, null).ChangeStyle<esc>/ChangeElement\\|ChangeStyle<return>
-
+    " 
+    nnoremap <silent> ,jvcd aconsole.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW1')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW2')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW3')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW4')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW5')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW6')<return>console.log(ChangeThis)<esc>/ChangeThis<return>
+    " Javascript Vanilla Create Element
+    nnoremap <silent> ,jvce a// DeleteThis - create element<return>var div = document.createElement('CHANGEELEMENT')<return>div.id = 'ChangeId'<return>div.classList.add('ChangeClass')<return>div.innerHTML = "<%= escape_javascript(render('ChangePath', ChangeLocals)) %>"<return><return>// DeleteThis - get parent if inserting at beginning or end of parent<return>var parent = document.getElementById('ChangeId')<return>// DeleteThis - insert at end of parent<return>parent.prepend(div)<return>// DeleteThis - insert at end of parent<return>parent.append(div)<return><return>// DeleteThis - get sibling if inserting before or after sibling<return>var sibling = document.getElementById('#ChangeSibling')<return>// DeleteThis - insert before sibling<return>sibling.before(div)<return>// DeleteThis - insert after sibling<return>sibling.after(div)<esc>/DeleteThis\\|CHANGEELEMENT\\|ChangeId\\|ChangeClass\\|ChangePath\\|ChangeLocals\\|ChangeSibling<return>
   " Javascript Ajax
     " Javascript Ajax BAse
     nnoremap <silent> ,jaba :read ../templates/javascript/ajax/base.js.erb<return>ggdd/DeleteThis<return>
@@ -1098,17 +1115,17 @@
     " Tests Controller REquest
     nnoremap <silent> ,tcre  aChangeHtmlMethod ChangeUrlHelper_path<esc>/ChangeHtmlMethod\\|ChangeUrlHelper<return>
     " Tests Controller REquest full
-    nnoremap <silent> ,tcrE  aChangeHtmlMethod ChangeUrlHelper_path, params: { ChangeParams }, headers{ ChangeHeaders }, env: ChangeEnvironment, xhr: true, as: :json<esc>/ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeParams\\|ChangeHeaders\\|ChangeEnvironment\\|:json<return>
+    nnoremap <silent> ,tcrE  aChangeHtmlMethod ChangeUrlHelper_path, params: ChangeAction_params, headers{ ChangeHeaders }, env: ChangeEnvironment, xhr: true, as: :json<esc>/ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeAction\\|ChangeHeaders\\|ChangeEnvironment\\|:json<return>
     " Tests Controller GEt (index)
     nnoremap <silent> ,tcge aget ChangeUrlHelper_path<esc>/ChangeUrlHelper<return>
     " Tests Controller GEt full (show or new or edit)
     nnoremap <silent> ,tcgE aget ChangeUrlHelper_path(ChangeModel)<esc>/ChangeUrlHelper\\|ChangeModel<return>
     " Tests Controller POst
-    nnoremap <silent> ,tcpo apost ChangeUrlHelper_path, params: { ChangeParams }<esc>/ChangeUrlHelper\\|ChangeParams<return>
+    nnoremap <silent> ,tcpo apost ChangeUrlHelper_path, params: ChangeAction_params<esc>/ChangeUrlHelper\\|ChangeAction<return>
     " Tests Controller PAtch
-    nnoremap <silent> ,tcpa apatch ChangeUrlHelper_path(ChangeModel), params: { ChangeParams }<esc>/ChangeUrlHelper\\|ChangeModel\\|ChangeParams<return>
+    nnoremap <silent> ,tcpa apatch ChangeUrlHelper_path(ChangeModel), params: ChangeAction_params<esc>/ChangeUrlHelper\\|ChangeModel\\|ChangeAction<return>
     " Tests Controller PAtch (full)
-    nnoremap <silent> ,tcpA apatch ChangeUrlHelper_path(ChangeModel), params: { ChangeParams }, headers{ ChangeHeaders }, env: ChangeEnvironment, xhr: true, as: :json<esc>/ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeParams\\|ChangeHeaders\\|ChangeEnvironment\\|:json<return>
+    nnoremap <silent> ,tcpA apatch ChangeUrlHelper_path(ChangeModel), params: ChangeAction_params, headers{ ChangeHeaders }, env: ChangeEnvironment, xhr: true, as: :json<esc>/ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeAction\\|ChangeHeaders\\|ChangeEnvironment\\|:json<return>
     " Tests Controller DElete
     nnoremap <silent> ,tcde adelete ChangeUrlHelper_path(ChangeModel)<esc>/ChangeUrlHelper\\|ChangeModel<return>
   " Helper
