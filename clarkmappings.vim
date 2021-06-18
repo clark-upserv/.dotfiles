@@ -53,6 +53,8 @@
   " Single key non-comma misc
     " copy word
     nmap <silent> y vvy
+    " cut word
+    nmap <silent> 7 vvx
     " paste word and recopy 
     nmap <silent> - vvpvvy
     " remap o and O
@@ -147,7 +149,7 @@
 
   " Misc. Messages
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
-  nnoremap <silent> ,mmno_href_comment a<%# DeleteThis: if styling like link, keep "no-href-link" class; if styling like icon, keep "no-href-icon" and add standard icon classes; if styling like button, remove both classes above and add standard button classes %>
+  nnoremap <silent> ,mmno_href_comment a<%# DeleteThis - if styling like link, keep "no-href-link" class %><return><%# DeleteThis - if styling like icon, keep "no-href-icon" and add standard icon classes %><return><%# DeleteThis - if styling like button, remove both classes above and add standard button classes %>
   nnoremap <silent> ,mmdir_notes a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace><esc>
 
 " File mappings
@@ -231,6 +233,8 @@
 
     " File Edit Model to (model) Test
     nnoremap ,femt :let @+ = expand("%")<return>o<esc>p0/app<return>cgntest<esc>/.rb<return>cgn_test.rb<esc>dd:e <C-R><C-R>+
+    " File Edit Model to Fixture
+    nnoremap ,femf :let @+ = expand("%:h")<return>o<esc>p0/app<return>cgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
 
     " File Edit View to Stylesheet
     nnoremap ,fevs :let @+ = expand('%')<return>o<esc>p0/views<return>cgnassets/stylesheets<esc>0/html.erb<return>cgnscss<esc>dd:e <C-R><C-R>+
@@ -265,6 +269,9 @@
     nnoremap ,fetv :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc><up>/controllers\\|mailers<return>cgnviews<esc><up>/_test.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Test to mailer Preview
     nnoremap ,fetp :let @+ = expand("%")<return>o<esc>po<esc>/mailers<return>Ncgnmailers/previews<esc>/_test<return>cgn_preview<esc><down>dd<up>dd:e <C-R><C-R>+
+    " File Edit (model) Test to fixture
+    nnoremap ,fetf :let @+ = expand("%:h")<return>o<esc>p0/test<return>Ncgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
+    ""<esc>/mailers<return>Ncgnmailers/previews<esc>/_test<return>cgn_preview<esc><down>dd<up>dd:e <C-R><C-R>+
 
     " File Edit Preview to View
     nnoremap ,fepv :let @+ = expand("%")<return>o<esc>pO<esc>/test\/mailers\/previews<return>cgnapp/views<esc>/_preview.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
@@ -272,6 +279,11 @@
     nnoremap ,fepa :let @+ = expand("%")<return>o<esc>pO<esc>/test\/mailers\/previews<return>cgnapp/mailers<esc>/_preview<return>cgn<esc><up>dddd:e <C-R><C-R>+
     " File Edit Preview to Test
     nnoremap ,fept :let @+ = expand("%")<return>o<esc>p<up>/\/previews<return>cgn<esc><up>/_preview<return>cgn_test<esc>dd:e <C-R><C-R>+
+    
+    " File Edit Fixture to Model
+    nnoremap ,fefm :let @+ = expand("%:h")<return>o<esc>p0/test\/fixtures<return>cgnapp/models<esc>dd:e <C-R><C-R>+/
+    " File Edit Fixture to (model) Test
+    nnoremap ,feft :let @+ = expand("%:h")<return>o<esc>p0/fixtures<return>cgnmodels<esc>dd:e <C-R><C-R>+/
   "
   nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
   nnoremap <silent> ,caas :edit app/assets/<space><backspace>
@@ -386,9 +398,10 @@
     nnoremap <silent> ,vcbs :read ../templates/views/card/body_single_show.html.erb<return>/ChangeThisPls<return>
     " View Card Body Single show edit swap
     nnoremap <silent> ,vcbS :read ../templates/views/card/body_single_show_edit_swap.html.erb<return>/ChangeThisPls\\|ChangeSesId\\|ChangePath\\|ChangeLocals<return>
-  " View Show edit swap BAse
-    " View card Body Single show Edit swap
-    nnoremap <silent> ,vsba :read ../templates/views/show_edit_swap/base.html.erb<return>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
+  " View Show edit swap
+    " View Show edit swap BAse
+ ""   nnoremap <silent> ,vsba :read ../templates/views/show_edit_swap/base.html.erb<return>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,vsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/show', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/edit', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
   " Forms
   " View Modals
     " View Mdoels BAse
@@ -453,9 +466,7 @@
     " Embedded Ruby Link to No href
     nmap <silent> ,erln a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon") %><return><esc>,mmno_href_comment<esc>/ChangeDisplay\\|no-href-link\\|no-href-icon\\|DeleteThis<return>
     " Embedded Ruby Link to Modal
-    nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon", data: { toggle: "modal", target: "#ChangeModalId-#{ChangeErbIfNecessary}-modal" }) %><return><esc>,mmno_href_comment<esc>,ermc/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
-    " Embedded Ruby Modal Container
-    nmap <silent> ,ermc :read ../templates/views/elements/buttons_and_links/modal_container_after_modal_button.html.erb<return>/ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
+    nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon", data: { toggle: "modal", target: "#ChangeModalId_modal" }) %><return><esc>,mmno_href_comment<esc>a<return><div class="modal fade" id="ChangeModalId_modal" tabindex="-1" role="dialog"><return><%= render('ChangePath/ChangeModal_modal', ChangeLocals) %><return></div><esc>/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
     " Embedded Ruby Link to Remote (attributes only)
     nnoremap <silent> ,erlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
     " Embedded Ruby Link to Remote (full)
@@ -588,19 +599,19 @@
     " Html form Input Left label Cancel and submit buttons
     nmap <silent> ,hilc o<%#<delete> Left label cancel and submit buttons %><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return></div><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
     " Html form Top Label
-    nmap <silent> ,hitl o<%#<delete> Top label for ChangeAttribute %><return><div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Input Group %><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
+    nmap <silent> ,hitl a<%#<delete> Top label for ChangeAttribute %><return><div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Input Group %><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
     " Html form Top label Cancel and submit buttons
-    nmap <silent> ,hitc o<%#<delete> Top label cancel and submit buttons %><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
+    nmap <silent> ,hitc a<%#<delete> Top label cancel and submit buttons %><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
     " Html form Input ROw (for top label)
     nmap <silent> ,hiro a<div class="form-row"><return></div><esc>,,O
     " Html form Input Group 1
-    nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
+    nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
     " Html form Input Group 2
-    nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
+    nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
     " Html form Input Group 3
-    nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
+    nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
     " Html form Input Group 4
-    nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiieo</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
+    nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
     " Html form Input Group Cancel & submit buttons
     nmap <silent> ,higc :read ../templates/views/elements/buttons_and_links/cancel_and_submit_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
     " Html form Input Group cancel & submit Icons
@@ -764,7 +775,7 @@
     " Ruby Models SErvice
     nnoremap <silent> ,rmse :read ../templates/models/models/service.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models foreign key
-    nnoremap <silent> ,rmfk a{ to_table: 'ChangeTablename' }<esc>/ChangeTableName
+    nnoremap <silent> ,rmfk a{ to_table: 'ChangeTableName' }<esc>/ChangeTableName<return>
     " Ruby Models Up Down
     nnoremap <silent> ,rmud adef up<return># Deletethis - insert migration methods for up<return><backspace><backspace>end<return><return>def down<return># Deletethis - insert migration methods for down<return><backspace><backspace>end<esc>/Deletethis<return>
     " Ruby Models Add Column
@@ -818,11 +829,11 @@
     " Ruby Models Validates Uniqueness
     nnoremap <silent> ,rmvu avalidates :ChangeAttribute, uniqueness: { message: 'this ChangeAttribute has already been taken' }<esc>/ChangeAttribute<return>
     " Ruby Models Validates Uniqueness
-    nnoremap <silent> ,rmvU avalidates :ChangeAttribute, uniqueness: { case_sensitive: false, scope: [:ChangeAttribute2, :ChangeAttribute3], message: 'this ChangeAttribute has already been taken' }<esc>/case_sensitive: false, \\|ChangeAttribute2\\|ChangeAttribute3\\|ChangeAttribute<return>
+    nnoremap <silent> ,rmvU avalidates :ChangeAttribute, uniqueness: { case_sensitive: false, scope: %i[ChangeAttributes], message: 'this ChangeAttribute has already been taken' }<esc>/case_sensitive: false, \\|ChangeAttributes\\|ChangeAttribute<return>
     " Ruby Models Validates Numericality
     nnoremap <silent> ,rmvn avalidates :ChangeAttribute, numericality: { only_integer: true, allow_nil: true, less_than: 100, less_than_or_eqaul_to: 100; equal_to: 100, greater_than: 100, greater_than_or_equal_to: 100, other_than: 100, odd: true, even: true, message: 'ChangeAttribute must be a number' }<esc>/ChangeAttribute<return>
     " Ruby Models Validates Dependent_on
-    nnoremap <silent> ,rmvd avalidates :ChangeAttribute, dependent_on: { independent_path: [], dependent_path: [<OPTIONAL FIELD>], if_independent_is: [], if_independent_is_not: [], dependent_can_be: [], dependent_cannot_be: [], equal_values: true, not_equal_values: true, message: 'ChangeMessage' }<return># DeleteThis - can only have if_independent_is OR if_independent_is_not<return>DeleteThis - can only have dependent_can_be OR dependent_cannot_be OR equal_values OR not_equal_values<return>DeleteThis - custom message is optional<esc>/ChangeAttribute\\|ChangeMessage\\|DeleteThis<return>
+    nnoremap <silent> ,rmvd avalidates :ChangeAttribute, dependent_on: { independent_path: %i[ChangeMethods], dependent_path: %i[ChangeMethods], if_independent_is: %i[ChangeValues], if_independent_is_not: %i[ChangeValues], dependent_can_be: %i[ChangeValues], dependent_cannot_be: %i[ChangeValues], equal_values: true, not_equal_values: true, message: 'ChangeMessage' }<return># DeleteThis - dependent_path is optional<return>DeleteThis - can only have if_independent_is OR if_independent_is_not<return>DeleteThis - can only have dependent_can_be OR dependent_cannot_be OR equal_values OR not_equal_values<return>DeleteThis - custom message is optional<esc>/ChangeAttribute\\|ChangeMethods\\|ChangeValues\\|ChangeMessage\\|DeleteThis<return>
     " Ruby Models Validates Attachment
     nnoremap <silent> ,rmva avalidates :ChangeAttachmenName, size: { less_than: ChangeSize.megabytes, message: 'ChangeMessage' }<return>validates :ChangeAttachmenName, attached: { message: 'ChangeAttribute is too large (ChangeSize MB max)' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<return>validates :ChangeAttachmenName, content_type: { in: %w[image/jpeg image/gif image/png application/pdf], message: "Attached must be a valid format. Valid formats are: jpeg, gif, png, pdf" }<return>validates :ChangeAttachmenName, content_type: { in: %w[video/quicktime video/mp4 video/webm audio/ogg], message: "Attached must be a valid image video format. Valid formats are:  mp4, mov, webm, ogg" }<esc>/ChangeAttachmenName\\|ChangeSize\\|MB\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
     " Ruby Models Validates Custom
@@ -1077,7 +1088,7 @@
     nnoremap <silent> ,tbuf :read ../templates/tests/misc/upload_fixture_file.rb<return><esc>/ChangeVariable\\|ChangePath\\|ChangeContentType\\|DeleteThisPls\\|ChangeObject\\|ChangeAttachment<return>
   " Controller
     " Tests Controller BAse
-    nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
+    nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel\\|DeleteThis<return>
     " Tests Controller Scenarios Base
     nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeAction\\|ChangeAction\\|ChangeMethodUrlAndParams\\|ChangeUserWithPermission<return>
     " Tests Controller Test Base
@@ -1102,29 +1113,31 @@
     nnoremap <silent> ,tcde adelete ChangeUrlHelper_path(ChangeModel)<esc>/ChangeUrlHelper\\|ChangeModel<return>
   " Helper
     " Tests Helper BAse
-    nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+    nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
   " Integration
     " Tests Integration BAse
-    nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThisIfNotNecessary<return>
+    nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThisIfNotNecessary<return>
   " Jobs
     " Tests Job BAse
-    nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls<return>
+    nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls<return>
   " Mailers
     " Tests mAiler BAse
-    nmap <silent> ,taba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
+    nmap <silent> ,taba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
     " Tests mAiler Test Base
     nmap <silent> ,tatb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
   " Models
     " Tests Model BAse
-    nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccvvfp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
+    nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
     " Tests Models Belongs To
-    nnoremap <silent> ,tmbt atest "ChangeChild should belong to ChangeParent" do<return>assert_equal @ChangeParent, @ChangeChild.ChangeParent<return>end<esc>/ChangeParent\\|ChangeChild<return>
+    nnoremap <silent> ,tmbt atest 'ChangeChild should belong to ChangeParent' do<return>assert_equal @ChangeParent, @ChangeChild.ChangeParent<return>end<esc>/ChangeParent\\|ChangeChild<return>
     " Tests Models Had One
-    nnoremap <silent> ,tmho atest "ChangeParent should have one ChangeChild" do<return>assert_equal @ChangeChild, @ChangeParent.ChangeChild<return>end<esc>/ChangeParent\\|ChangeChild<return>
+    nnoremap <silent> ,tmho atest 'ChangeParent should have one ChangeChild' do<return>assert_equal @ChangeChild, @ChangeParent.ChangeChild<return>end<esc>/ChangeParent\\|ChangeChild<return>
     " Tests Models Has Many
-    nnoremap <silent> ,tmhm atest "ChangeParent should have many ChangeChildren" do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>/ChangeParent\\|ChangeChildren\\|ChangeChildModel<return>
-    " Tests Models VAlication
-    nnoremap <silent> ,tmva atest "ChangeModel ChangeAttribute should be ChangeValidation" do<return>@ChangeObject.ChangeAttribute = ChangeInvalidValue<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.first.attribute<return>end<esc>/ChangeModel\\|ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeInvalidValue<return>
+    nnoremap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>/ChangeParent\\|ChangeChildren\\|ChangeChildModel<return>
+    " Tests Models VAlidation
+    nnoremap <silent> ,tmva atest 'ChangeModel ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.ChangeAttribute = ChangeInvalidValue<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>/ChangeModel\\|ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeInvalidValue<return>
+    " Tests Models Validation Unique with scope
+    nnoremap <silent> ,tmva atest 'ChangeModel ChangeAttribute should be unique scope to ChangeAttributes - testing ChangeAttribute' do<return>@ChangeObject.ChangeAttribute = ChangeInvalidValue<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>/ChangeModel\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue<return>
     " Tests Models scopes
     " Tests Models Callbacks
     " Tests Models Class Methods
@@ -1134,7 +1147,7 @@
     " Tests Test Helpers Base
     nnoremap <silent> ,tthb :read ../templates/tests/test_helper_base.rb<return>ggdd/ChangeThis<return>
     " Tests Test Helpers Test
-    nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccPvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+    nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
     nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can easily change (ie text in source code)<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break<esc>
 
 " Packages
