@@ -84,7 +84,7 @@
     
     
     nnoremap <silent> f V
-    vnoremap <silent> f V
+    vnoremap <silent> f y
     nnoremap <silent> F Vy
 
   " retrain d-pad
