@@ -85,7 +85,7 @@
     
     nnoremap <silent> f V
     vnoremap <silent> f y
-    nnoremap <silent> F Vy
+    nnoremap <silent> F Vp
 
   " retrain d-pad
     " up
@@ -171,7 +171,7 @@
     " File Copy Current Path
     nnoremap ,fccp :let @+ = expand('%:h') . '/'<return>
     " File Copy Partial Path
-    nnoremap ,fcpp :let @+ = expand('%:h')<return>o<esc>p0/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>
+    nnoremap ,fcpp :let @+ = expand('%:h')<return>o<esc>p<up>/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>
     " File Copy Partial File
     nnoremap ,fcpf :let @+ = expand('%')<return>o<esc>p<up>/app\/views\/<return>cgn<esc>dd
     " File Paste Partial Path
