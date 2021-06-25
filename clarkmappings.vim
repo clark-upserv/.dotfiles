@@ -165,6 +165,7 @@
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
   nnoremap <silent> ,mmno_href_comment a<%# DeleteThis - if styling like link, keep "no-href-link" class %><return><%# DeleteThis - if styling like icon, keep "no-href-icon" and add standard icon classes %><return><%# DeleteThis - if styling like button, remove both classes above and add standard button classes %>
   nnoremap <silent> ,mmdir_notes a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace><esc>
+  nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can easily change (ie text in source code)<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break<esc>
 
 " File mappings
   " File Copy
@@ -259,7 +260,7 @@
     " File Edit View to Helper
     nnoremap ,fevh :let @+ = expand('%:h')<return>o<esc>p0/views<return>cgnhelpers<esc>A_helper.rb<esc>dd:e <C-R><C-R>+
     " File Edit View to Javascript pack
-    nnoremap ,fevj :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnjavascript/packs<esc>A/<esc><up>dddd:e <C-R><C-R>+
+    nnoremap ,fevj :let @+ = expand('%')<return>o<esc>p<up><esc>/views<return>cgnjavascript/packs<esc>/html\.erb<return>cgnjs<esc>dd:e <C-R><C-R>+
     " File Edit View to mAiler
     nnoremap ,feva :let @+ = expand('%:h')<return>o<esc>pO<esc>/views<return>cgnmailers<esc>A.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit View to mailer Preview
@@ -470,6 +471,8 @@
     nnoremap <silent> ,eren a<% end %><esc>
     " Embedded Ruby Link To
     nnoremap <silent> ,erlt a<%= link_to(ChangeDisplay, ChangePath_path) %><esc>/ChangeDisplay\\|ChangePath<return>
+    " Embedded Ruby Link to with Class
+    nnoremap <silent> ,erlc a<%= link_to(ChangeDisplay, ChangePath_path, class: 'ChangeClass') %><esc>/ChangeDisplay\\|ChangePath\\|ChangeClass<return>
     " Embedded Ruby Link to Icon (classes only)
     nnoremap <silent> ,erli aicon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
     " Embedded Ruby Link to Icon (full)
@@ -488,12 +491,14 @@
     nnoremap <silent> ,erlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
     " Embedded Ruby Link to Remote (full)
     nnoremap <silent> ,erlR a<%= link_to(ChangeDisplay, ChangePath_path, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangePath\\|ChangeMethod<return>
+    " Embedded Ruby Link to Dropdown Item
+    nnoremap <silent> ,erld a<%= link_to(ChangeDisplay, ChangePath_path, class: 'dropdown-item') %><esc>/ChangeDisplay\\|ChangePath<return>
+    " Html Elements DropDown (full)
+    nmap <silent> ,erlD a<<delete>%# DeleteThis - see bootstrap docs for customizing dropdown %><return><div class="dropdown"><return><%= content_tag(<return>  'A',<return>ChangeDisplay,<return>id: 'ChangeId',<return>class: "no-href-link no-href-icon dropdown-toggle",<return>data: { toggle: 'dropdown' },<return>aria: { haspopup: 'true', expanded: 'false' }) %><return><esc>,mmno_href_comment<return><div class="dropdown-menu" aria-labelledby="ChangeId"><return><%= link_to(ChangeDisplay, ChangePath_path, class: 'dropdown-item') %><return></div><return></div><esc>/ChangeDisplay\\|ChangeId\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangePath<return>
     " Embedded Ruby Image Tag
     nnoremap <silent> ,erit a<%= image_tag(ChangeThisPls, alt: 'ChangeThisPls', width: 'ChangeThisPls', height: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
     " Embedded Ruby Javascript Tag
     nnoremap <silent> ,erjt a<%= javascript_include_tag('ChangePath') %><esc>/ChangePath<return>
-    " Embedded Ruby Javascript Pack
-    nnoremap <silent> ,erjp a<%= javascript_pack_tag('ChangePath', 'data-turbolinks-track': 'reload') %><esc>/ChangePath<return>
     " Embedded Ruby StyleSheet
     nnoremap <silent> ,erss a<%= stylesheet_link_tag('ChangeThisPls') %><esc>/ChangeThisPls<return>
     " Embedded Ruby PArtial
@@ -556,7 +561,6 @@
     nnoremap <silent> ,heul a<ul><return><li>ChangeThisPls</li><return></ul><esc>/ChangeThisPls<return>
     " Html Elements CUstom
     nnoremap <silent> ,hecu a<ChangeThisPls></ChangeThisPls><esc>/ChangeThisPls<return>
-
 
   " Html Form
     " Html Form BAse
@@ -797,7 +801,7 @@
     " Ruby Models foreign key
     nnoremap <silent> ,rmfk a{ to_table: 'ChangeTableName' }<esc>/ChangeTableName<return>
     " Ruby Models Up Down
-    nnoremap <silent> ,rmud adef up<return># Deletethis - insert migration methods for up<return><backspace><backspace>end<return><return>def down<return># Deletethis - insert migration methods for down<return><backspace><backspace>end<esc>/Deletethis<return>
+    nnoremap <silent> ,rmud adef up<return># Deletethis - insert migration methods for up<return><backspace><backspace>end<return><return>def down<return># Deletethis - insert migration methods for down<return># DeleteThis - NOTE: if dropping table, no need to remove columns or indexes because they will be removed when dropping table<return># DeleteThis - NOTE if removing column, no need to remove index for that column, because they will be removed whyen removing column<return><backspace><backspace>end<esc>/Deletethis<return>
     " Ruby Models Add Column
     nnoremap <silent> ,rmac aadd_column :ChangeTableName, :ChangeColumn, :ChangeColumnType, ChangeOptions<esc>/ChangeTableName\\|ChangeColumnType\\|ChangeColumn\\|ChangeOptions<return>
     " Ruby Models Add Reference
@@ -808,6 +812,12 @@
     nnoremap <silent> ,rmai a# DeleteThis - remove "unique: true," if index does not need to be unique<return><backspace><backspace>add_index :ChangeTableName, %i[ChangeAttributeOrAttributesIfMultiple], unique: true, name: 'index_ChangeTableName_on_ChangeAttributeOrAttributesIfMultiple'<esc>/ChangeTableName\\|ChangeAttributeOrAttributesIfMultiple\\| unique: true,\\|DeleteThis<return>
     " Ruby Models Add Index (case insensitive)
     nnoremap <silent> ,rmaI a# DeleteThis - Change migration to Up / Down if not already changed<return><backspace><backspace>execute <<-SQL<return><tab>CREATE UNIQUE INDEX index_ChangeTableName_on_lower_ChangeCaseInsensitiveAttribute_and_ChangeAdditionalAttributesIfAny ON ChangeTableName(LOWER(ChangeCaseInsensitiveAttribute), ChangeAdditionalAttributesIfAny);<return><C-d>SQL<return># DeleteThis - move code below to down method (index must be removed in down method)<return>DeleteThis - if a table is created, simply drop table (dropping table will remove index)<return><backspace><backspace>drop_table :ChangeTableName<return># DeleteThis - if tabe was not created, remove table explicitly<return><backspace><backspace>remove_index :index_ChangeTableName_on_lower_ChangeCaseInsensitiveAttribute_and_ChangeAdditionalAttributesIfAny<esc>/DeleteThis\\|ChangeCaseInsensitiveAttribute\\|ChangeAdditionalAttributesIfAny\\|ChangeTableName<return>
+    " Ruby Models Remove Column
+    nnoremap <silent> ,rmrc aremove_column :ChangeTableName, :ChangeColumn<esc>/ChangeTableName\\|ChangeColumn<return>
+    " Ruby Models Remove Index
+    nnoremap <silent> ,rmri aremove_index :ChangeTableName, name: ChangeIndexName<esc>/ChangeTableName\\|ChangeIndexName<return>
+    " Ruby Models Drop Table
+    nnoremap <silent> ,rmdt adrop_table :ChangeTableName<esc>/ChangeTableName<return>
     " Ruby Models Cancancan Model based (feature specific)
     nnoremap <silent> ,rmcm acan %i[ChangeNamespace_ChangePermission], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
     " Ruby Models Cancancan Model based (granular / controller action specific)
@@ -1197,7 +1207,6 @@
     nnoremap <silent> ,tthb :read ../templates/tests/test_helper_base.rb<return>ggdd/ChangeThis<return>
     " Tests Test Helpers Test
     nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
-    nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can easily change (ie text in source code)<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break<esc>
 
 " Packages
   " Sortable Table positions
