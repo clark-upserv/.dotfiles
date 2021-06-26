@@ -272,7 +272,10 @@
     " File Edit View to (controller) Test
     nnoremap ,fevt :let @+ = expand('%:h')<return>o<esc>pO<esc>/app\/views<return>cgntest/controllers<esc>A_controller_test.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit View to (mailer) tEst
-    nnoremap ,feve :let @+ = expand('%:h')<return>o<esc>p<esc><up>/app\/views<return>cgntest/mailers<esc>A_test.rb<esc>dd:e <C-R><C-R>+
+    nnoremap ,feve :let @+ = expand('%:h')<return>o<esc>p<up>/app\/views<return>cgntest/mailers<esc>A_test.rb<esc>dd:e <C-R><C-R>+
+    
+    " File Edit tasK to Test
+    nnoremap ,fekt :let @+ = expand('%')<return>o<esc>p<up>/lib<return>cgntest<esc>/\.rake<return>cgn_task_test.rb<esc>dd:e <C-R><C-R>+
 
     " File Edit Test to Controller
     nnoremap ,fetc :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc>ncgn<backspace><esc>dd:e <c-r><c-r>+
@@ -290,7 +293,8 @@
     nnoremap ,fetp :let @+ = expand("%")<return>o<esc>po<esc>/mailers<return>Ncgnmailers/previews<esc>/_test<return>cgn_preview<esc><down>dd<up>dd:e <C-R><C-R>+
     " File Edit (model) Test to fixture
     nnoremap ,fetf :let @+ = expand("%:h")<return>o<esc>p0/test<return>Ncgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
-    ""<esc>/mailers<return>Ncgnmailers/previews<esc>/_test<return>cgn_preview<esc><down>dd<up>dd:e <C-R><C-R>+
+    " File Edit (task) Test to tasK
+    nnoremap ,fetk :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnlib<esc>/_task_test\.rb<return>cgn.rake<esc>dd:e <C-R><C-R>+
 
     " File Edit Preview to View
     nnoremap ,fepv :let @+ = expand("%")<return>o<esc>pO<esc>/test\/mailers\/previews<return>cgnapp/views<esc>/_preview.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
@@ -1136,6 +1140,7 @@
     nnoremap <silent> ,tbat :read ../templates/tests/assertions_and_tools.rb<return>
     " Tests Base Upload fixture File
     nnoremap <silent> ,tbuf :read ../templates/tests/misc/upload_fixture_file.rb<return><esc>/ChangeVariable\\|ChangePath\\|ChangeContentType\\|DeleteThisPls\\|ChangeObject\\|ChangeAttachment<return>
+
   " Controller
     " Tests Controller BAse
     nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel<return>
@@ -1171,21 +1176,26 @@
     nnoremap <silent> ,tcpA apatch ChangeUrlHelper_path(ChangeModel), params: ChangeAction_params, headers{ ChangeHeaders }, env: ChangeEnvironment, xhr: true, as: :json<esc>/ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeAction\\|ChangeHeaders\\|ChangeEnvironment\\|:json<return>
     " Tests Controller DElete
     nnoremap <silent> ,tcde adelete ChangeUrlHelper_path(ChangeModel)<esc>/ChangeUrlHelper\\|ChangeModel<return>
+
   " Helper
     " Tests Helper BAse
     nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+
   " Integration
     " Tests Integration BAse
-    nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThisIfNotNecessary<return>
+    nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThis<return>
+
   " Jobs
     " Tests Job BAse
     nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeObject\\|ChangeTableName\\|ChangeFixtureName<return>
     nnoremap <silent> ,tjtb :read ../templates/tests/job_test_base.rb<return>/ChangeDescription\\|ChangeJobName\\|DeleteThis\\|ChangeJob\\|ChangeArgs\\|ChangeObject<return>
+
   " Mailers
     " Tests mAiler BAse
     nmap <silent> ,taba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
     " Tests mAiler Test Base
     nmap <silent> ,tatb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
+
   " Models
     " Tests Model BAse
     nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
@@ -1205,11 +1215,13 @@
     " Tests Models Class Methods
     " Tests Models Instance Methods
 
+  " Test Tasks
+    " Test Tasks Base
+    nmap <silent> ,ttba :read ../templates/tests/task_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/ChangeThisPls\\|ChangeExpectedAction\\|ChangeTaskName\\|ChangeObject\\|ChangeTableName\\|ChangeFixtureName\\|DeleteThis\\|ChangeApplicationName<return>
+
   " Test Helpers
     " Tests Test Helpers Base
-    nnoremap <silent> ,tthb :read ../templates/tests/test_helper_base.rb<return>ggdd/ChangeThis<return>
-    " Tests Test Helpers Test
-    nmap <silent> ,ttht :read ../templates/tests/test_helper_test_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+    nmap <silent> ,tthb :read ../templates/tests/test_helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
 
 " Packages
   " Sortable Table positions
