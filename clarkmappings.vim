@@ -758,7 +758,7 @@
     " Ruby Basic puts Json pretty Generate
     nnoremap <silent> ,rbjp aJSON.parse(ChangeNonHash)<esc>/ChangeNonHash<return>
 
-    nnoremap <silent> ,rbde adef <esc>oend<esc>kla
+    nnoremap <silent> ,rbde a# ChangeDescription<return><backspace><backspace>def ChangeMethod<return>end<esc>/ChangeDescription\\|ChangeMethod<return>
 
     nnoremap <silent> ,rbdo ado<return>end<esc>O
     " Ruby Basic Cancancan Model based (feature specific)
