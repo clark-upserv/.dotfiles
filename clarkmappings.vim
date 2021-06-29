@@ -68,8 +68,10 @@
     nnoremap <silent> * C
     " paste word and keep orignal 
     nmap <silent> - vvpvvy
+    vmap <silent> - pvvy
     " paste word and copy word just replaced
     nmap <silent> = vvp
+    vmap <silent> = p
     " redo
     nnoremap mu <C-r>
     " remap o and O
@@ -761,14 +763,16 @@
     nnoremap <silent> ,rbde a# ChangeDescription<return><backspace><backspace>def ChangeMethod<return>end<esc>/ChangeDescription\\|ChangeMethod<return>
 
     nnoremap <silent> ,rbdo ado<return>end<esc>O
-    " Ruby Basic Cancancan Model based (feature specific)
-    nnoremap <silent> ,rbcm acan?(:ChangeNamespace_ChangePermission, @ChangeModel)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel<return>
-    " Ruby Basic Cancancan Model based (granular / controller action specific)
-    nnoremap <silent> ,rbcM acan?(:ChangeAction_ChangeController, @ChangeModel)<esc>/ChangeAction\\|ChangeController\\|ChangeModel<return>
-    " Ruby Basic Cancancan Non-mmodel Model based (feature specific)
-    nnoremap <silent> ,rbcn acan?(:ChangeNamespace_ChangePermission, :ChangeObjects)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeObjects<return>
+    " 
+    " 
+    " 
+    
+    
+    
+    " Ruby Basic Cancancan Model based
+    nnoremap <silent> ,rbcm acan?(:ChangeAbility, @ChangeObject)<esc>/ChangeAbility\\|ChangeObject<return>
     " Ruby Basic Cancancan Non-mmodel Model based (granular / controller action specific)
-    nnoremap <silent> ,rbcN acan?(:ChangeAction, :ChangeController)<esc>/ChangeAction\\|ChangeController<return>
+    nnoremap <silent> ,rbcn acan?(:ChangeAction, :ChangeChangeControllerOrFeature)<esc>/ChangeAction\\|ChangeChangeControllerOrFeature<return>
     " Ruby Basic Interpolated String
     nnoremap <silent> ,rbis a#{}<esc>i
 
@@ -824,14 +828,10 @@
     nnoremap <silent> ,rmri aremove_index :ChangeTableName, name: ChangeIndexName<esc>/ChangeTableName\\|ChangeIndexName<return>
     " Ruby Models Drop Table
     nnoremap <silent> ,rmdt adrop_table :ChangeTableName<esc>/ChangeTableName<return>
-    " Ruby Models Cancancan Model based (feature specific)
-    nnoremap <silent> ,rmcm acan %i[ChangeNamespace_ChangePermission], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
-    " Ruby Models Cancancan Model based (granular / controller action specific)
-    nnoremap <silent> ,rmcM acan %i[ChangeAction_ChangeController], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeAction\\|ChangeController\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
-    " Ruby Models Cancancan Non-model based (feature specific)
-    nnoremap <silent> ,rmcn acan %i[ChangeNamespace_ChangePermission], :ChangeObjects<esc>/ChangeNamespace\\|ChangePermission\\|ChangeObjects<enter>
-    " Ruby Models Cancancan Non-model based (granular / controller action specific)
-    nnoremap <silent> ,rmcN acan %i[ChangeAction], :ChangeController<esc>/ChangeAction\\|ChangeController<enter>
+    " Ruby Models Cancancan Model based
+    nnoremap <silent> ,rmcm acan %i[ChangeAction_ChangeChangeControllerOrFeature], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeAction\\|ChangeChangeControllerOrFeature\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
+    " Ruby Models Cancancan Non-model based
+    nnoremap <silent> ,rmcn acan %i[ChangeAction], :ChangeChangeControllerOrFeature<esc>/ChangeAction\\|ChangeChangeControllerOrFeature<enter>
     " Ruby Models Belongs To association
     nnoremap <silent> ,rmbt abelongs_to :ChangeParentName, class_name: 'ChangeParentModel', inverse_of: :ChangeChildrenNameIfHasManyOrChildNameIfHasOne, optional: true, autosave: false<esc>/ChangeParentName\\|ChangeParentModel\\|ChangeChildrenNameIfHasManyOrChildNameIfHasOne<return>
     " Ruby Models Has Many association
@@ -852,10 +852,16 @@
     nnoremap <silent> ,rmoa ahas_one_attached :ChangeAttribute<esc>/ChangeAttribute<return>
     " Ruby Models has Many Attached
     nnoremap <silent> ,rmma ahas_many_attached :ChangeAttributes<esc>/ChangeAttributes<return>
-    " Ruby Models SCope
-    nnoremap <silent> ,rmsc ascope :ChangeName, -> { ChangeLogic }<esc>/ChangeName\\|ChangeLogic<return>
-    " Ruby Models SCope
-    nnoremap <silent> ,rmsC ascope :ChangeName, ->(ChangeArgument) { ChangeLogic }<esc>/ChangeName\\|ChangeArgument\\|ChangeLogic<return>
+    " Ruby Models Scope Base
+    nnoremap <silent> ,rmsb ascope :ChangeName, -> { ChangeLogic }<esc>/ChangeName\\|ChangeLogic<return>
+    " Ruby Models Scope with Argument(s)
+    nnoremap <silent> ,rmsa ascope :ChangeName, ->(ChangeArgument) { ChangeLogic }<esc>/ChangeName\\|ChangeArgument\\|ChangeLogic<return>
+    " Ruby Models Scope Order
+    nnoremap <silent> ,rmso ascope :ChangeName_order, -> { ChangeOrder }<esc>/ChangeName\\|ChangeOrder<return>
+    " Ruby Models Scope Order
+    nnoremap <silent> ,rmsO ascope :order_and_distinct_on_ChangeAttributes, -> { select('DISTINCT ON (ChangeTable.ChangeAttribute, LOWER(ChangeTable.ChangeCaseInsensitiveAttribute)) ChangeTableToAccessAllAttributes.*').order('LOWER(ChangeTable.ChangeAttribute)') }<esc>/ChangeAttributes\\|ChangeTableToAccessAllAttributes\\|ChangeTable\\|ChangeAttribute\\|ChangeCaseInsensitiveAttribute<return>
+    " Ruby Models Scope Query
+    nnoremap <silent> ,rmsq ascope :ChangeName_query, -> (query) { where("CONCAT_WS(' ', ChangeTable.ChangeAttribute, ChangeTable.ChangeAttribute) ILIKE :queiry OR ChangeTable.ChangeAttribute ILIKE :queiry", queiry: "%#{queiry}%") }<esc>/ChangeName\\|ChangeTable\\|ChangeAttribute<return>
     " Ruby Models Validates Base
     nnoremap <silent> ,rmvb avalidates :ChangeAttribute, ChangeValidation: { message: 'ChangeMessage' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
     " Ruby Models Validates Presence
@@ -925,14 +931,10 @@
     nnoremap <silent> ,rcsp adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute)<return># DeleteThis - insert logic to restrict or clean params if necessary<return><backspace><backspace>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|DeleteThis<return>
     " Ruby Controller Strong Params full
     nnoremap <silent> ,rcsP adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute,<return>ChangeArrayAttribute: [],<return>ChangeChildName: [:ChangeAttribute],<return>ChangeChildrenName: [ChangeChildName: [:ChangeAttribute]])<return>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|ChangeArrayAttribute\\|ChangeChildrenName\\|ChangeChildName<return>
-    " Ruby Controller Cancancan authorize Model based (feature specific)
-    nnoremap <silent> ,rccm aauthorize!(:ChangeNamespace_ChangePermission, @ChangeModel)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeModel<return>
-    " Ruby Controller Cancancan authorize Model based (granular / controller action specific)
-    nnoremap <silent> ,rccM aauthorize!(:ChangeAction_ChangeController, @ChangeModel)<esc>/ChangeAction\\|ChangeController\\|ChangeModel<return>
+    " Ruby Controller Cancancan authorize Model based
+    nnoremap <silent> ,rccm aauthorize!(:ChangeAbility, @ChangeObject)<esc>/ChangeAbility\\|ChangeObject<return>
     " Ruby Controller Cancancan authorize Non-model based (feature specific)
-    nnoremap <silent> ,rccn aauthorize!(:ChangeNamespace_ChangePermission, :ChangeObjects)<esc>/ChangeNamespace\\|ChangePermission\\|ChangeObjects<return>
-    " Ruby Controller Cancancan authorize Non-model based (granular / controller action pecific)
-    nnoremap <silent> ,rccN aauthorize!(:ChangeAction, :ChangeController)<esc>/ChangeAction\\|ChangeController<return>
+    nnoremap <silent> ,rccn aauthorize!(:ChangeAction, :ChangeChangeControllerOrFeature)<esc>/ChangeAction\\|ChangeChangeControllerOrFeature<return>
     " Ruby Controller Accessible By
     nnoremap <silent> ,rcab aChangeModel.accessible_by(current_ability, :ChangeNameSpace_ChangePermission)<esc>/ChangeModel\\|ChangeNameSpace\\|ChangePermission<enter>
     " Ruby Controller Accessible By full
