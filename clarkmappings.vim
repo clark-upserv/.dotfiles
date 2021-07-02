@@ -802,7 +802,7 @@
     nnoremap <silent> ,rmba :read ../templates/models/base/base.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models Base Virtual
     nnoremap <silent> ,rmbv :read ../templates/models/base/virtual.rb<return>ggdd/ChangeThisPls<return>
-    " Ruby Models CLass
+    " Ruby Models Base Class
     nnoremap <silent> ,rmbc :read ../templates/models/base/class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
     " Ruby Models Sub Class
     nnoremap <silent> ,rmbs :read ../templates/models/base/sub_class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
