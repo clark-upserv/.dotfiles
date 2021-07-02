@@ -2,7 +2,7 @@
 "   [some random one off stuff]
 "   single key comma (o, comments)
 "   Misc
-"   Viles / Create
+"   Files / Create
 "   View templates
 "   Erb
 "   Html
@@ -24,6 +24,8 @@
 "     Stylesheets Base
 "   Tests
 "   Packages
+"   Database
+"     Seeds
 "
 "
 " truly random one off stuff
@@ -437,7 +439,7 @@
     " View Models Contents Destroy
     nnoremap <silent> ,vmcd :read ../templates/views/modals/contents_destroy.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeAttribute\\|ChangeName\\|ChangeUrl\\|SetToTrueOrRemove<return>
     " View Models Contents Image
-    nnoremap <silent> ,vmci :read ../templates/views/modals/contents_image.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeProcessedAttribute<return>
+    nnoremap <silent> ,vmci :read ../templates/views/modals/contents_image.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeProcessedAttribute\\|100%\\|auto<return>
     " View Mdoels Header Base
     nnoremap <silent> ,vmhb :read ../templates/views/modals/header_base.html.erb<return>/ChangeIconColor\\|DeleteThis\\|ChangeIconType\\|ChangeTitle<return>
     " View Mdoels Close button Group
@@ -494,7 +496,7 @@
     " Embedded Ruby Link to No href
     nmap <silent> ,erln a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon") %><return><esc>,mmno_href_comment<esc>/ChangeDisplay\\|no-href-link\\|no-href-icon\\|DeleteThis<return>
     " Embedded Ruby Link to Modal
-    nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon", data: { toggle: "modal", target: "#ChangeModalId_modal" }) %><return><esc>,mmno_href_comment<esc>a<return><div class="modal fade" id="ChangeModalId_modal" tabindex="-1" role="dialog"><return><%= render('ChangePath/ChangeModal_modal', ChangeLocals) %><return></div><esc>/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
+    nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon", data: { toggle: "modal", target: "#ChangeModalId_modal" }) %><return><esc>,mmno_href_comment<esc>a<return><div id="ChangeModalId_modal" class="modal fade" tabindex="-1" role="dialog"><return><%= render('ChangePath/ChangeModal_modal', ChangeLocals) %><return></div><esc>/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
     " Embedded Ruby Link to Remote (attributes only)
     nnoremap <silent> ,erlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
     " Embedded Ruby Link to Remote (full)
@@ -614,7 +616,7 @@
     " Html Show element SImple
     nnoremap <silent> ,hssi a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
     " Html Show Date Base
-    nnoremap <silent> ,hsdb astrftime("%B %-d, %Y")
+    nnoremap <silent> ,hsdb aotrftime("%B %-d, %Y")
     " Html Show Date with Day of week
     nnoremap <silent> ,hsdd astrftime("%A, %B %-e, %Y")
     " Html Show Edit swap edit button - Button
@@ -1231,3 +1233,9 @@
     nnoremap <silent> ,pstc :read ../templates/packages/sortable_table_positions/controller.rb<return>/ChangeParentModel\\|ChangeParent\\|ChangeAuth\\|DeleteThis\\|ChangeChildren\\|ChangeChild\\|ChangeStpId<return>
     " View
     nnoremap <silent> ,pstv :read ../templates/packages/sortable_table_positions/view.html.erb<return>/ChangeStpId\\|ChangePath\\|ChangeStpIdForm\\|ChangeParent\\|ChangeChildren\\|ChangeChild\\|DeleteThis\\|ChangeFinalHiddenRowHeight<return>
+    
+" Database
+  " Seeds
+    " BAse
+    nnoremap <silent> ,dsba a# frozen_string_literal: true<return><backspace><backspace><return># Clear used values for all generators<return><backspace><backspace>Faker::UniqueGenerator.clear<return><return># Setup<return><backspace><backspace>account = Core::Account.first<return>user = Core::User.first<return><return>puts 'ChangeName ChangeItems completed'<esc>/ChangeName\\|ChangeItems<return>
+    
