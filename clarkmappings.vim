@@ -763,14 +763,8 @@
     nnoremap <silent> ,rbjp aJSON.parse(ChangeNonHash)<esc>/ChangeNonHash<return>
 
     nnoremap <silent> ,rbde a# ChangeDescription<return><backspace><backspace>def ChangeMethod<return>end<esc>/ChangeDescription\\|ChangeMethod<return>
-
-    nnoremap <silent> ,rbdo ado<return>end<esc>O
-    " 
-    " 
-    " 
-    
-    
-    
+    " Ruby Basic Attach File
+    nnoremap <silent> ,rbaf aattach(io: File.open(Rails.root.join(ChangePath)), filename: 'ChangeFileName', content_type: 'ChangeContentType')<return># DeleteThis - common file types: application/pdf, image/jpeg, image/gif, image/png, video/quicktime, video/mp4, video/webm, audio/ogg<esc>/ChangePath\\|ChangeFileName\\|ChangeContentType<return>
     " Ruby Basic Cancancan Model based
     nnoremap <silent> ,rbcm acan?(:ChangeAbility, @ChangeObject)<esc>/ChangeAbility\\|ChangeObject<return>
     " Ruby Basic Cancancan Non-mmodel Model based (granular / controller action specific)
