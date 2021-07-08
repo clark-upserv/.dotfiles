@@ -216,11 +216,12 @@
     nnoremap ,fech :let @+ = expand("%")<return>o<esc>pO<esc>/controllers<return>cgnhelpers<esc>/_controller.rb<return>cgn_helper.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit Controller to Javascript pack
     "
+    " File Edit Controller to Model
+    nnoremap ,fecm :let @+ = expand("%")<return>o<esc>p<up>/controllers<return>cgnmodels<esc><up>/_controller.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Controller to View
     nnoremap ,fecv :let @+ = expand("%")<return>o<esc>p<up>/controllers<return>cgnviews<esc><up>/_controller.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Controller to (controller) Test
     nnoremap ,fect :let @+ = expand("%")<return>o<esc>p<up>/app<return>cgntest<esc><up>/_controller.rb<return>cgn_controller_test.rb<esc>dd:e <C-R><C-R>+
-    "
 
     " File Edit Helper to Stylesheet
     "
@@ -253,7 +254,8 @@
     nnoremap ,feat :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/.rb<return>cgn_test.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit mAiler to Preview
     nnoremap ,feap :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
-
+    " File Edit Model to sub Model
+    nnoremap ,fems :let @+ = expand("%")<return>o<esc>p<up>$/\.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Model to (model) Test
     nnoremap ,femt :let @+ = expand("%")<return>o<esc>p0/app<return>cgntest<esc>/.rb<return>cgn_test.rb<esc>dd:e <C-R><C-R>+
     " File Edit Model to Fixture
@@ -1231,5 +1233,5 @@
 " Database
   " Seeds
     " BAse
-    nnoremap <silent> ,dsba a# frozen_string_literal: true<return><backspace><backspace><return># Clear used values for all generators<return><backspace><backspace>Faker::UniqueGenerator.clear<return><return># Setup<return><backspace><backspace>account = Core::Account.first<return>user = Core::User.first<return><return>puts 'ChangeName ChangeItems completed'<esc>/ChangeName\\|ChangeItems<return>
+    nnoremap <silent> ,dsba a# frozen_string_literal: true<return><backspace><backspace><return>puts 'Loading ChangeName ChangeItems...'<return><return># Clear used values for all generators<return><backspace><backspace>Faker::UniqueGenerator.clear<return><return># Setup<return><backspace><backspace>account = Core::Account.first<return>user = Core::User.first<return><return>puts 'ChangeName ChangeItems completed'<esc>/ChangeName\\|ChangeItems<return>
     
