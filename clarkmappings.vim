@@ -154,9 +154,6 @@
 " Misc. mapping / messages
   " Misc. Reload Source
   nnoremap <silent> ,mrs :so ~/.dotfiles/clarkmappings.vim<return>
-  " temp for helping with robot font in app/assets/beagle_lib/beagle.scss.erb
-  vmap <silent> ,mrr xi<%= asset_path(ChangePath) %><esc>/ChangePath<return>vvp0/\.\.\/lib\/<return>cgn<esc>/url(<return>
-  vmap <silent> ,mrt xi<%= "#{asset_path(ChangePath)}" %><esc>/ChangePath<return>vvp0/\.\.\/lib\/<return>cgn<esc>
   " Misc. DD but combine to previous line instead of delete line  (I<tab>
   " makes sure there is at least something on the line because vvx on empty
   " line deletes entire file contents...)
