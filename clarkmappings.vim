@@ -416,6 +416,8 @@
     nnoremap <silent> ,vccb :read ../templates/views/card/contents_base.html.erb<return>/DeleteThis<return>
     " View Card Contents WIde
     nnoremap <silent> ,vccw :read ../templates/views/card/contents_wide.html.erb<return>/DeleteThis<return>
+    " View Card Contents Full
+    nnoremap <silent> ,vccw :read ../templates/views/card/contents_full.html.erb<return>/DeleteThis<return>
     " View Card Contents Non-Card
     nnoremap <silent> ,vccn :read ../templates/views/card/contents_non_card.html.erb<return>/DeleteThis<return>
     " View Card Header Base
@@ -767,7 +769,7 @@
     " Ruby Basic Cancancan Model based
     nnoremap <silent> ,rbcm acan?(:ChangeAbility, @ChangeObject)<esc>/ChangeAbility\\|ChangeObject<return>
     " Ruby Basic Cancancan Non-mmodel Model based (granular / controller action specific)
-    nnoremap <silent> ,rbcn acan?(:ChangeAction, :ChangeChangeControllerOrFeature)<esc>/ChangeAction\\|ChangeChangeControllerOrFeature<return>
+    nnoremap <silent> ,rbcn acan?(:ChangeAbility, :ChangeControllerOrFeature)<esc>/ChangeAbility\\|ChangeControllerOrFeature<return>
     " Ruby Basic Interpolated String
     nnoremap <silent> ,rbis a#{}<esc>i
 
@@ -806,7 +808,7 @@
     " Ruby Models foreign key
     nnoremap <silent> ,rmfk a{ to_table: 'ChangeTableName' }<esc>/ChangeTableName<return>
     " Ruby Models Up Down
-    nnoremap <silent> ,rmud adef up<return># Deletethis - insert migration methods for up<return><backspace><backspace>end<return><return>def down<return># Deletethis - insert migration methods for down<return># DeleteThis - NOTE: if dropping table, no need to remove columns or indexes because they will be removed when dropping table<return># DeleteThis - NOTE if removing column, no need to remove index for that column, because they will be removed whyen removing column<return><backspace><backspace>end<esc>/Deletethis<return>
+    nnoremap <silent> ,rmud adef up<return># Deletethis - insert migration methods for up<return><backspace><backspace>end<return><return>def down<return># Deletethis - insert migration methods for down<return>DeleteThis - NOTE: if dropping table, no need to remove columns or indexes because they will be removed when dropping table<return>DeleteThis - NOTE if removing column, no need to remove index for that column, because they will be removed whyen removing column<return><backspace><backspace>end<esc>/Deletethis<return>
     " Ruby Models Add Column
     nnoremap <silent> ,rmac aadd_column :ChangeTableName, :ChangeColumn, :ChangeColumnType, ChangeOptions<esc>/ChangeTableName\\|ChangeColumnType\\|ChangeColumn\\|ChangeOptions<return>
     " Ruby Models Add Reference
@@ -824,13 +826,13 @@
     " Ruby Models Drop Table
     nnoremap <silent> ,rmdt adrop_table :ChangeTableName<esc>/ChangeTableName<return>
     " Ruby Models Cancancan Model based
-    nnoremap <silent> ,rmcm acan %i[ChangeAction_ChangeChangeControllerOrFeature], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeAction\\|ChangeChangeControllerOrFeature\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
+    nnoremap <silent> ,rmcm acan %i[ChangeControllerOrFeature], ChangeModel, ChangeMethod: user.ChangeValue<esc>/ChangeAbility\\|ChangeControllerOrFeature\\|ChangeModel\\|ChangeMethod\\|ChangeValue<enter>
     " Ruby Models Cancancan Non-model based
-    nnoremap <silent> ,rmcn acan %i[ChangeAction], :ChangeChangeControllerOrFeature<esc>/ChangeAction\\|ChangeChangeControllerOrFeature<enter>
+    nnoremap <silent> ,rmcn acan %i[ChangeAbility], :ChangeControllerOrFeature<esc>/ChangeAbility\\|ChangeControllerOrFeature<enter>
     " Ruby Models Belongs To association
     nnoremap <silent> ,rmbt abelongs_to :ChangeParentName, class_name: 'ChangeParentModel', inverse_of: :ChangeChildrenNameIfHasManyOrChildNameIfHasOne, optional: true, autosave: false<esc>/ChangeParentName\\|ChangeParentModel\\|ChangeChildrenNameIfHasManyOrChildNameIfHasOne<return>
     " Ruby Models Has Many association
-    nnoremap <silent> ,rmhm ahas_many :ChangeChildrenName, class_name: 'ChangeChildModel', inverse_of: :ChangeParentName, dependent: :destroy, autosave: false<esc>/ChangeChildrenName\\|ChangeChildModel\\|ChangeParentName<return>
+    nnoremap <silent> ,rmhm ahas_many :ChangeChildrenName, class_name: 'ChangeChildModel', foreign_key: 'ChangeParentName_id', inverse_of: :ChangeParentName, dependent: :destroy, autosave: false<esc>/ChangeChildrenName\\|ChangeChildModel\\|ChangeParentName<return>
     " Ruby Models has Many Through association
     nnoremap <silent> ,rmhM ahas_many :ChangeChildrenName, through: :ChangeConnectingAssociationName, source: :ChangeChildrenName, inverse_of: :ChangeTopParentModel, autosave: false<esc>/ChangeChildrenName\\|ChangeChildrenName\\|ChangeConnectingAssociationName\\|ChangeTopParentModel<return>
     " Ruby Models Has One association
@@ -868,9 +870,9 @@
     " Ruby Models Validates Uniqueness
     nnoremap <silent> ,rmvU avalidates :ChangeAttribute, uniqueness: { case_sensitive: false, scope: %i[ChangeAttributes], message: 'this ChangeAttribute has already been taken' }<esc>/case_sensitive: false, \\|ChangeAttributes\\|ChangeAttribute<return>
     " Ruby Models Validates Numericality
-    nnoremap <silent> ,rmvn avalidates :ChangeAttribute, numericality: { only_integer: true, allow_nil: true, less_than: 100, less_than_or_eqaul_to: 100; equal_to: 100, greater_than: 100, greater_than_or_equal_to: 100, other_than: 100, odd: true, even: true, message: 'ChangeAttribute must be a number' }<esc>/ChangeAttribute<return>
+    nnoremap <silent> ,rmvn avalidates :ChangeAttribute, numericality: { only_integer: true, allow_nil: true, less_than: 100, less_than_or_eqaul_to: 100, equal_to: 100, greater_than: 100, greater_than_or_equal_to: 100, other_than: 100, odd: true, even: true, message: 'ChangeAttribute must be a number' }<esc>/ChangeAttribute<return>
     " Ruby Models Validates Dependent_on
-    nnoremap <silent> ,rmvd avalidates :ChangeAttribute, dependent_on: { independent_path: %i[ChangeMethods], dependent_path: %i[ChangeMethods], if_independent_is: %i[ChangeValues], if_independent_is_not: %i[ChangeValues], dependent_can_be: %i[ChangeValues], dependent_cannot_be: %i[ChangeValues], equal_values: true, not_equal_values: true, message: 'ChangeMessage' }<return># DeleteThis - dependent_path is optional<return>DeleteThis - can only have if_independent_is OR if_independent_is_not<return>DeleteThis - can only have dependent_can_be OR dependent_cannot_be OR equal_values OR not_equal_values<return>DeleteThis - custom message is optional<esc>/ChangeAttribute\\|ChangeMethods\\|ChangeValues\\|ChangeMessage\\|DeleteThis<return>
+    nnoremap <silent> ,rmvd avalidates :ChangeAttribute, dependent_on: { independent_path: %i[ChangeMethods], dependent_path: %i[ChangeMethods], if_independent_is: [ChangeValues], if_independent_is_not: [ChangeValues], dependent_can_be: [ChangeValues], dependent_cannot_be: [ChangeValues], equal_values: true, not_equal_values: true, message: 'ChangeMessage' }<return># DeleteThis - dependent_path is optional<return>DeleteThis - can only have if_independent_is OR if_independent_is_not<return>DeleteThis - can only have dependent_can_be OR dependent_cannot_be OR equal_values OR not_equal_values<return>DeleteThis - custom message is optional<esc>/ChangeAttribute\\|ChangeMethods\\|, dependent_path: %i[ChangeMethods\]\\|, if_independent_is: [ChangeValues\]\\|, if_independent_is_not: [ChangeValues\]\\|, dependent_can_be: [ChangeValues\]\\|, dependent_cannot_be: [ChangeValues\]\\|, equal_values: true\\|, not_equal_values: true\\|, message: 'ChangeMessage'\\|DeleteThis<return>
     " Ruby Models Validates Attachment
     nnoremap <silent> ,rmva avalidates :ChangeAttachmenName, size: { less_than: ChangeSize.megabytes, message: 'ChangeMessage' }<return>validates :ChangeAttachmenName, attached: { message: 'ChangeAttribute is too large (ChangeSize MB max)' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<return>validates :ChangeAttachmenName, content_type: { in: %w[image/jpeg image/gif image/png application/pdf], message: "Attached must be a valid format. Valid formats are: jpeg, gif, png, pdf" }<return>validates :ChangeAttachmenName, content_type: { in: %w[video/quicktime video/mp4 video/webm audio/ogg], message: "Attached must be a valid image video format. Valid formats are:  mp4, mov, webm, ogg" }<esc>/ChangeAttachmenName\\|ChangeSize\\|MB\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
     " Ruby Models Validates Custom
@@ -880,6 +882,14 @@
     " Ruby Models Process Attributes
     nnoremap <silent> ,rmpa :read ../templates/models/misc/process_attributes.rb<return>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
     nnoremap <silent> ,rmpA o# DeleteThis - this goes in callbacks section<return><backspace><backspace>before_validation :process_attributes<return># DeleteThis - this goes in callback methods section<return><backspace><backspace>def process_attributes<esc>:read ../templates/models/misc/process_attributes.rb<return>10<down>oend<esc>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
+    " Ruby Models Attributes Enum
+    nnoremap <silent> ,rmae aenum ChangeAttribute: { ChangeOption: ChangeInteger }<esc>/ChangeAttribute\\|ChangeOption\\|ChangeInteger<return>
+    nnoremap <silent> ,rmaE aenum ChangeAttribute: { ChangeOption: ChangeInteger }, _prefix: ChangeToTrueOrCustomSymbol, _suffix: ChangeToTrueOrCustomSymbol<esc>/ChangeAttribute\\|ChangeOption\\|ChangeInteger\\|, _prefix: ChangeToTrueOrCustomSymbol\\|, _suffix: ChangeToTrueOrCustomSymbol<return>
+    " Ruby Models Attributes Array
+    nnoremap <silent> ,rmaa aserialize :ChangeAttribute, Array
+    " Ruby Models Attributes Hash
+    nnoremap <silent> ,rmah aserialize :ChangeAttribute, Hash
+    
 
   " Ruby Routes
     " main routes
@@ -929,11 +939,11 @@
     " Ruby Controller Cancancan authorize Model based
     nnoremap <silent> ,rccm aauthorize!(:ChangeAbility, @ChangeObject)<esc>/ChangeAbility\\|ChangeObject<return>
     " Ruby Controller Cancancan authorize Non-model based (feature specific)
-    nnoremap <silent> ,rccn aauthorize!(:ChangeAction, :ChangeChangeControllerOrFeature)<esc>/ChangeAction\\|ChangeChangeControllerOrFeature<return>
+    nnoremap <silent> ,rccn aauthorize!(:ChangeAbility, :ChangeControllerOrFeature)<esc>/ChangeAbility\\|ChangeControllerOrFeature<return>
     " Ruby Controller Accessible By
-    nnoremap <silent> ,rcab aChangeModel.accessible_by(current_ability, :ChangeNameSpace_ChangePermission)<esc>/ChangeModel\\|ChangeNameSpace\\|ChangePermission<enter>
+    nnoremap <silent> ,rcab aChangeModel.accessible_by(current_ability, :ChangeAbility)<esc>/ChangeModel\\|ChangeAbility<enter>
     " Ruby Controller Accessible By full
-    nnoremap <silent> ,rcaB a@pagy, @ChangeLoads = pagy(ChangeModel.accessible_by(current_ability, :ChangeNamespace_ChangePermission).search(params[:ChangeLoads_search]).index_scope)<esc>/ChangeLoads\\|ChangeModel\\|ChangeNameSpace\\|ChangePermission<enter>
+    nnoremap <silent> ,rcaB a@pagy, @ChangeLoads = pagy(ChangeModel.accessible_by(current_ability, :ChangeAbility).search(params[:ChangeLoads_search]).index_scope)<esc>/ChangeLoads\\|ChangeModel\\|ChangeAbility<enter>
     " Ruby Controller REnder
     nnoremap <silent> ,rcre arender 'ChangeTemplate'<esc>/ChangeTemplate<return>
     " Ruby Controller Redirect To
@@ -947,31 +957,29 @@
     " Ruby Controllers BAse
     nnoremap <silent> ,rcba :read ../templates/controllers/base_controller.rb<return>ggdd/ChangeThisPls\\|ChangeDescription\\|DeleteThis<return>
     " Ruby Controllers Index Base
-    nnoremap <silent> ,rcib :read ../templates/controllers/actions/index_base.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeVerb\\|ChangeObjects\\|DeleteThis<return>
-    " Ruby Controllers Index Simple
-    nnoremap <silent> ,rcis :read ../templates/controllers/actions/index_simple.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeVerb\\|ChangeObjects\\|DeleteThis<return>
+    nnoremap <silent> ,rcib :read ../templates/controllers/actions/index_base.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis<return>
     " Ruby Controllers Show Base
-    nnoremap <silent> ,rcsb :read ../templates/controllers/actions/show_base.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis<return>
+    nnoremap <silent> ,rcsb :read ../templates/controllers/actions/show_base.rb<return>/ChangeLoad\\|ChangeModel\\|DeleteThis<return>
     " Ruby Controllers Show Tab Router
-    nnoremap <silent> ,rcsr :read ../templates/controllers/actions/show_router.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeUrl\\|DeleteThis<return>
+    nnoremap <silent> ,rcsr :read ../templates/controllers/actions/show_router.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeUrl\\|DeleteThis<return>
     " Ruby Controllers Show for Tab
-    nnoremap <silent> ,rcst :read ../templates/controllers/actions/show_tab.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeTab\\|DeleteThis<return>
+    nnoremap <silent> ,rcst :read ../templates/controllers/actions/show_tab.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeTab\\|DeleteThis<return>
     " Ruby Controllers New Base
-    nmap <silent> ,rcnb ,rcsb/show<return>cgnnew<esc>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis<return>
+    nmap <silent> ,rcnb ,rcsb/show<return>cgnnew<esc>/ChangeLoad\\|ChangeAbility\\|DeleteThis<return>
     " Ruby Controllers Create Ajax
-    nnoremap <silent> ,rcca :read ../templates/controllers/actions/create_ajax.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeAttributes\\|DeleteThis\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    nnoremap <silent> ,rcca :read ../templates/controllers/actions/create_ajax.rb<return>/ChangeLoad\\|ChangeObject\\|ChangeAttributes\\|DeleteThis\\|ChangeAbility\\|ChangeUrlHelper\\|ChangeTemplate<return>
     " Ruby Controllers Create Html
-    nnoremap <silent> ,rcch :read ../templates/controllers/actions/create_html.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeAttributes\\|DeleteThis\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    nnoremap <silent> ,rcch :read ../templates/controllers/actions/create_html.rb<return>/ChangeLoad\\|ChangeAttributes\\|DeleteThis\\|ChangeAbility\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
     " Ruby Controllers Edit Base
-    nmap <silent> ,rceb ,rcsb/show<return>cgnedit<esc>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis<return>
+    nmap <silent> ,rceb ,rcsb/show<return>cgnedit<esc>/ChangeLoad\\|ChangeModel\\|DeleteThis<return>
     " Ruby Controllers Update Ajax
-    nnoremap <silent> ,rcua :read ../templates/controllers/actions/update_ajax.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    nnoremap <silent> ,rcua :read ../templates/controllers/actions/update_ajax.rb<return>/ChangeLoad\\|ChangeAbility\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
     " Ruby Controllers Update Html
-    nnoremap <silent> ,rcuh :read ../templates/controllers/actions/update_html.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    nnoremap <silent> ,rcuh :read ../templates/controllers/actions/update_html.rb<return>/ChangeLoad\\|ChangeAbility\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
     " Ruby Controllers Destroy Atml
-    nnoremap <silent> ,rcdh :read ../templates/controllers/actions/destroy_html.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
+    nnoremap <silent> ,rcdh :read ../templates/controllers/actions/destroy_html.rb<return>/ChangeLoad\\|ChangeAbility\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
     " Ruby Controllers Destroy Ajax
-    nnoremap <silent> ,rcda :read ../templates/controllers/actions/destroy_ajax.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeNamespace\\|ChangePermission\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
+    nnoremap <silent> ,rcda :read ../templates/controllers/actions/destroy_ajax.rb<return>/ChangeLoad\\|ChangeAbility\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
     " Ruby Controllers FLash
     nnoremap <silent> ,rcfl aflash[:ChangeFlashType] = ChangeMessage<esc>/ChangeFlashType\\|ChangeMessage<return>
     " Ruby Controllers Flash Success
@@ -1203,9 +1211,9 @@
     " Tests Models Has Many
     nnoremap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>/ChangeParent\\|ChangeChildren\\|ChangeChildModel<return>
     " Tests Models VAlidation
-    nnoremap <silent> ,tmva atest 'ChangeModel ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.ChangeAttribute = ChangeInvalidValue<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>/ChangeModel\\|ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeInvalidValue<return>
+    nnoremap <silent> ,tmva atest 'ChangeModel ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>/ChangeModel\\|ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeInvalidValue<return>
     " Tests Models Validation Unique with scope
-    nnoremap <silent> ,tmva atest 'ChangeModel ChangeAttribute should be unique scope to ChangeAttributes - testing ChangeAttribute' do<return>@ChangeObject.ChangeAttribute = ChangeInvalidValue<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>/ChangeModel\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue<return>
+    nnoremap <silent> ,tmvu atest 'ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - make it valid by changing main attribute. Then repeat for all other attributes on scope<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return># Deletethis - repeat for all other attributes on scope<return><backspace><backspace>end<esc>/DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue<return>
     " Tests Models scopes
     " Tests Models Callbacks
     " Tests Models Process Attributes
