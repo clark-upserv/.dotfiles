@@ -428,6 +428,10 @@
     nnoremap <silent> ,vcbS :read ../templates/views/card/body_single_show_edit_swap.html.erb<return>/ChangeThisPls\\|ChangeSesId\\|ChangePath\\|ChangeLocals<return>
     " View Card Body Table
     nnoremap <silent> ,vcbt :read ../templates/views/card/body_table.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
+    " View Card Body Query (ie search) for table
+    nnoremap <silent> ,vcbq :read ../templates/views/card/body_search_for_table.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
+    " View Card Body Filters for table
+    nnoremap <silent> ,vcbf :read ../templates/views/card/body_filters_for_table.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
   " View Show edit swap
     " View Show edit swap BAse
     nnoremap <silent> ,vsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/show', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/edit', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
@@ -860,7 +864,9 @@
     " Ruby Models Scope Order
     nnoremap <silent> ,rmsO ascope :order_and_distinct_on_ChangeAttributes, -> { select('DISTINCT ON (ChangeTable.ChangeAttribute, LOWER(ChangeTable.ChangeCaseInsensitiveAttribute)) ChangeTableToAccessAllAttributes.*').order('LOWER(ChangeTable.ChangeAttribute)') }<esc>/ChangeAttributes\\|ChangeTableToAccessAllAttributes\\|ChangeTable\\|ChangeAttribute\\|ChangeCaseInsensitiveAttribute<return>
     " Ruby Models Scope Query
-    nnoremap <silent> ,rmsq ascope :ChangeName_query, -> (query) { where("CONCAT_WS(' ', ChangeTable.ChangeAttribute, ChangeTable.ChangeAttribute) ILIKE :queiry OR ChangeTable.ChangeAttribute ILIKE :queiry", queiry: "%#{queiry}%") }<esc>/ChangeName\\|ChangeTable\\|ChangeAttribute<return>
+    nnoremap <silent> ,rmsq ascope :query, -> (query) { where("ChangeTable.ChangeAttribute ILIKE :query", query: "%#{query}%") }<esc>/ChangeTable\\|ChangeAttribute<return>
+    " Ruby Models WHere (full)
+    nnoremap <silent> ,rmwh awhere("CONCAT_WS(' ', ChangeTable.ChangeAttribute, ChangeTable.ChangeAttribute) ILIKE :ChangeSequence OR ChangeTable.ChangeAttribute ILIKE :ChangeSequence OR ChangeTable.ChangeAttribute IN (:ChangeArray) OR ChangeTable.ChangeAttribute = :ChangeThis OR ChangeTable.ChangeAttribute IS NULL OR ChangeTable.ChangeAttribute IS NOT NULL", ChangeSequence: "%#{ChangeSequence}%", ChangeArray: ChangeArray, ChangeThis: ChangeThis)<esc>/ChangeTable\\|ChangeAttribute<return>
     " Ruby Models Validates Base
     nnoremap <silent> ,rmvb avalidates :ChangeAttribute, ChangeValidation: { message: 'ChangeMessage' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
     " Ruby Models Validates Presence
