@@ -856,15 +856,15 @@
     " Ruby Models has Many Attached
     nnoremap <silent> ,rmma ahas_many_attached :ChangeAttributes<esc>/ChangeAttributes<return>
     " Ruby Models Scope Base
-    nnoremap <silent> ,rmsb ascope :ChangeName, -> { ChangeLogic }<esc>/ChangeName\\|ChangeLogic<return>
+    nnoremap <silent> ,rmsb ascope :ChangeName, ->{ ChangeLogic }<esc>/ChangeName\\|ChangeLogic<return>
     " Ruby Models Scope with Argument(s)
     nnoremap <silent> ,rmsa ascope :ChangeName, ->(ChangeArgument) { ChangeLogic }<esc>/ChangeName\\|ChangeArgument\\|ChangeLogic<return>
     " Ruby Models Scope Order
-    nnoremap <silent> ,rmso ascope :ChangeName_order, -> { ChangeOrder }<esc>/ChangeName\\|ChangeOrder<return>
+    nnoremap <silent> ,rmso ascope :ChangeName_order, ->{ ChangeOrder }<esc>/ChangeName\\|ChangeOrder<return>
     " Ruby Models Scope Order
-    nnoremap <silent> ,rmsO ascope :order_and_distinct_on_ChangeAttributes, -> { select('DISTINCT ON (ChangeTable.ChangeAttribute, LOWER(ChangeTable.ChangeCaseInsensitiveAttribute)) ChangeTableToAccessAllAttributes.*').order('LOWER(ChangeTable.ChangeAttribute)') }<esc>/ChangeAttributes\\|ChangeTableToAccessAllAttributes\\|ChangeTable\\|ChangeAttribute\\|ChangeCaseInsensitiveAttribute<return>
+    nnoremap <silent> ,rmsO ascope :order_and_distinct_on_ChangeAttributes, ->{ select('DISTINCT ON (ChangeTable.ChangeAttribute, LOWER(ChangeTable.ChangeCaseInsensitiveAttribute)) ChangeTableToAccessAllAttributes.*').order('LOWER(ChangeTable.ChangeAttribute)') }<esc>/ChangeAttributes\\|ChangeTableToAccessAllAttributes\\|ChangeTable\\|ChangeAttribute\\|ChangeCaseInsensitiveAttribute<return>
     " Ruby Models Scope Query
-    nnoremap <silent> ,rmsq ascope :query, -> (query) { where("ChangeTable.ChangeAttribute ILIKE :query", query: "%#{query}%") }<esc>/ChangeTable\\|ChangeAttribute<return>
+    nnoremap <silent> ,rmsq ascope :query, ->(query) { where("ChangeTable.ChangeAttribute ILIKE :query", query: "%#{query}%") }<esc>/ChangeTable\\|ChangeAttribute<return>
     " Ruby Models WHere (full)
     nnoremap <silent> ,rmwh awhere("CONCAT_WS(' ', ChangeTable.ChangeAttribute, ChangeTable.ChangeAttribute) ILIKE :ChangeSequence OR ChangeTable.ChangeAttribute ILIKE :ChangeSequence OR ChangeTable.ChangeAttribute IN (:ChangeArray) OR ChangeTable.ChangeAttribute = :ChangeThis OR ChangeTable.ChangeAttribute IS NULL OR ChangeTable.ChangeAttribute IS NOT NULL", ChangeSequence: "%#{ChangeSequence}%", ChangeArray: ChangeArray, ChangeThis: ChangeThis)<esc>/ChangeTable\\|ChangeAttribute<return>
     " Ruby Models Validates Base
@@ -887,6 +887,8 @@
     nnoremap <silent> ,rmvc avalidate :ChangeCustomValidation<return># DeleteThis - move method to custom validations section of model<return><backspace><backspace>def ChangeCustomValidation<return># DeleteThis - insert logic<return><backspace><backspace>end<esc>/ChangeCustomValidation\\|DeleteThis<return>
     " Ruby Models Validates if / unless
     nnoremap <silent> ,rmvi a, if proc { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/if\\|ChangeObject\\|ChangeAttribute\\|ChangeLogic<return> 
+    " Ruby Models Validates Strip
+    nnoremap <silent> ,rmvs avalidates :ChangeAttribute, strip: true<esc>/ChangeAttribute<return>
     " Ruby Models Process Attributes
     nnoremap <silent> ,rmpa :read ../templates/models/misc/process_attributes.rb<return>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
     nnoremap <silent> ,rmpA o# DeleteThis - this goes in callbacks section<return><backspace><backspace>before_validation :process_attributes<return># DeleteThis - this goes in callback methods section<return><backspace><backspace>def process_attributes<esc>:read ../templates/models/misc/process_attributes.rb<return>10<down>oend<esc>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
@@ -1214,18 +1216,24 @@
     nmap <silent> ,tatb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
 
   " Models
+    " Models Search
+    nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation<return>
     " Tests Model BAse
     nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
     " Tests Models Belongs To
-    nnoremap <silent> ,tmbt atest 'ChangeChild should belong to ChangeParent' do<return>assert_equal @ChangeParent, @ChangeChild.ChangeParent<return>end<esc>/ChangeParent\\|ChangeChild<return>
+    nmap <silent> ,tmbt atest 'ChangeChild should belong to ChangeParent' do<return>assert_equal @ChangeParent, @ChangeChild.ChangeParent<return>end<esc>,mmtest_model_search
     " Tests Models Had One
-    nnoremap <silent> ,tmho atest 'ChangeParent should have one ChangeChild' do<return>assert_equal @ChangeChild, @ChangeParent.ChangeChild<return>end<esc>/ChangeParent\\|ChangeChild<return>
+    nmap <silent> ,tmho atest 'ChangeParent should have one ChangeChild' do<return>assert_equal @ChangeChild, @ChangeParent.ChangeChild<return>end<esc>/,mmtest_model_search
     " Tests Models Has Many
-    nnoremap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>/ChangeParent\\|ChangeChildren\\|ChangeChildModel<return>
+    nmap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>,mmtest_model_search
     " Tests Models VAlidation
-    nnoremap <silent> ,tmva atest 'ChangeModel ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>/ChangeModel\\|ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeInvalidValue<return>
+    nmap <silent> ,tmva atest 'ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
     " Tests Models Validation Unique with scope
-    nnoremap <silent> ,tmvu atest 'ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - make it valid by changing main attribute. Then repeat for all other attributes on scope<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return># Deletethis - repeat for all other attributes on scope<return><backspace><backspace>end<esc>/DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue<return>
+    nmap <silent> ,tmvu atest 'ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - make it valid by changing main attribute. Then repeat for all other attributes on scope<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return># Deletethis - repeat for all other attributes on scope<return><backspace><backspace>end<esc>,mmtest_model_search
+    " Tests Model Validation Strip
+    nmap <silent> ,tmvs atest 'ChangeObject name should be stripped' do<return>@ChangeObject.assign_attributes(name: '    a     ')<return>assert @ChangeObject.valid?<return>assert_equal 'a', @ChangeObject.name<return>end<esc>,mmtest_model_search
+
+
     " Tests Models scopes
     " Tests Models Callbacks
     " Tests Models Process Attributes
