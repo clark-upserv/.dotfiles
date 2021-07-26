@@ -976,8 +976,6 @@
     nnoremap <silent> ,rcsb :read ../templates/controllers/actions/show_base.rb<return>/ChangeLoad\\|ChangeModel\\|DeleteThis<return>
     " Ruby Controllers Show Tab Router
     nnoremap <silent> ,rcsr :read ../templates/controllers/actions/show_router.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeUrl\\|DeleteThis<return>
-    " Ruby Controllers Show for Tab
-    nnoremap <silent> ,rcst :read ../templates/controllers/actions/show_tab.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeTab\\|DeleteThis<return>
     " Ruby Controllers New Base
     nmap <silent> ,rcnb ,rcsb/show<return>cgnnew<esc>/ChangeLoad\\|ChangeAbility\\|DeleteThis<return>
     " Ruby Controllers Create Ajax
