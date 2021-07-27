@@ -886,7 +886,7 @@
     " Ruby Models Validates Custom
     nnoremap <silent> ,rmvc avalidate :ChangeCustomValidation<return># DeleteThis - move method to custom validations section of model<return><backspace><backspace>def ChangeCustomValidation<return># DeleteThis - insert logic<return><backspace><backspace>end<esc>/ChangeCustomValidation\\|DeleteThis<return>
     " Ruby Models Validates if / unless
-    nnoremap <silent> ,rmvi a, if proc { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/if\\|ChangeObject\\|ChangeAttribute\\|ChangeLogic<return> 
+    nnoremap <silent> ,rmvi a, if: proc { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/if\\|ChangeObject\\|ChangeAttribute\\|ChangeLogic<return> 
     " Ruby Models Validates Strip
     nnoremap <silent> ,rmvs avalidates :ChangeAttribute, strip: true<esc>/ChangeAttribute<return>
     " Ruby Models Process Attributes
@@ -1215,7 +1215,7 @@
 
   " Models
     " Models Search
-    nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation<return>
+    nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnection\\|ChangeConnectionModel<return>
     " Tests Model BAse
     nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
     " Tests Models Belongs To
@@ -1224,6 +1224,8 @@
     nmap <silent> ,tmho atest 'ChangeParent should have one ChangeChild' do<return>assert_equal @ChangeChild, @ChangeParent.ChangeChild<return>end<esc>/,mmtest_model_search
     " Tests Models Has Many
     nmap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>,mmtest_model_search
+    " Tests Models Has Many through
+    nmap <silent> ,tmhM atest 'ChangeParent should have many ChangeChildren through ChangeConnection' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChildrenid).sort<return>end<esc>,mmtest_model_search
     " Tests Models VAlidation
     nmap <silent> ,tmva atest 'ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
     " Tests Models Validation Unique with scope
