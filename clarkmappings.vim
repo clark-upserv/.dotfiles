@@ -52,6 +52,8 @@
     inoremap <silent> <bar><bar>= <bar><bar>=
     " ruby interpolation
     inoremap <silent> ## #{}<left>
+    " erb entered
+    inoremap <silent> << <%=  %><left><left><left>
 
 " single key non-comma
   " non leader key mappings
@@ -88,10 +90,12 @@
     nnoremap <silent> s r
     vnoremap <silent> s r
     
-    
+    " remap v-esc feature to f which is easier than v
     nnoremap <silent> f V
     vnoremap <silent> f y
-    nnoremap <silent> F Vp
+
+    " paste line over current line
+    nnoremap <silent> F VpVy
 
   " retrain d-pad
     " up
@@ -165,7 +169,7 @@
   nnoremap <silent> ,mss a<lt>backspace><lt>backspace><lt>backspace>
 
   " Misc. Messages
-  nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Form input %><esc>/DeleteThis<return>
+  nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Input %><esc>/DeleteThis<return>
   nnoremap <silent> ,mmno_href_comment a<%# DeleteThis - if styling like link, keep "no-href-link" class %><return><%# DeleteThis - if styling like icon, keep "no-href-icon" and add standard icon classes %><return><%# DeleteThis - if styling like button, remove both classes above and add standard button classes %>
   nnoremap <silent> ,mmdir_notes a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace><esc>
   nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can easily change (ie text in source code)<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break<esc>
@@ -174,28 +178,26 @@
   " File Copy
     " File Copy Current Path
     nnoremap ,fccp :let @+ = expand('%:h') . '/'<return>
+    " File Copy Current File
+    nnoremap ,fccf :let @+ = expand('%')<return>
     " File Copy Partial Path
     nnoremap ,fcpp :let @+ = expand('%:h')<return>o<esc>p<up>/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>
     " File Copy Partial File
     nnoremap ,fcpf :let @+ = expand('%')<return>o<esc>p<up>/app\/views\/<return>cgn<esc>dd
-    " File Paste Partial Path
-    nnoremap ,fppp :let @+ = expand('%:h')<return>p/app\/views\/<return>cgn<esc>
-    " File Copy Current Path and File
-    nnoremap ,fccf :let @+ = expand('%')<return>
     " File Copy Rails Test
     nnoremap ,fcrt :let @+ = expand('%')<return>o<esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>
-  " File Edit
+
+  " File Edit basics
     " File Edit SEarch
     nnoremap ,fese :e **/*
     " File Edit Current Path
     nnoremap ,fecp :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
-    " File Edit Current path and File name
+    " File Edit Current File
     nnoremap ,fecf :let @+ = expand('%')<return>:e <C-R><C-R>+
     " File Edit CLipboard
     nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
-    " File Edit Clipboard and return
-    nnoremap ,fecL :e <C-R><C-R>+<return>
 
+  " File Edit Stylesheet
     " File Edit Stylesheet to Controller
     "
     " File Edit Stylesheet to Helper
@@ -206,7 +208,7 @@
     nnoremap ,fesv :let @+ = expand("%")<return>o<esc>po<esc>/assets\/stylesheets<return>cgnviews<esc>/scss<return>cgnhtml.erb<esc><up>dddd:e <c-r><c-r>+
     " File Edit Stylesheet to (controller) Test
     "
-
+  " File Edit Controller
     " File Edit Controller to Stylesheet
     "
     " File Edit Controller to Helper
@@ -220,6 +222,7 @@
     " File Edit Controller to (controller) Test
     nnoremap ,fect :let @+ = expand("%")<return>o<esc>p<up>/app<return>cgntest<esc><up>/_controller.rb<return>cgn_controller_test.rb<esc>dd:e <C-R><C-R>+
 
+  " File Edit Helper
     " File Edit Helper to Stylesheet
     "
     " File Edit Helper to Controller
@@ -231,6 +234,7 @@
     " File Edit Helper to (helper) Test
     "
 
+  " File Edit Javascript
     " File Edit Javascript pack to Stylesheet
     "
     " File Edit Javascript pack to Controller
@@ -242,15 +246,19 @@
     " File Edit Javascript pack to (controller) Test
     "
 
+  " File Edit Job
     " File Edit Job to (job) Test
     nnoremap ,fejt :let @+ = expand("%")<return>o<esc>p<up>/app<return>cgntest<esc><up>/_job.rb<return>cgn_job_test.rb<esc>dd:e <C-R><C-R>+
 
+  " File Edit mAiler
     " File Edit mAiler to View
     nnoremap ,feav :let @+ = expand("%")<return>o<esc>pO<esc>/mailers<return>cgnviews<esc>/.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
     " File Edit mAiler to Test
     nnoremap ,feat :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/.rb<return>cgn_test.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit mAiler to Preview
     nnoremap ,feap :let @+ = expand("%")<return>o<esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
+    
+  " File Edit Model
     " File Edit Model to sub Model
     nnoremap ,fems :let @+ = expand("%")<return>o<esc>p<up>$/\.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Model to (model) Test
@@ -258,6 +266,7 @@
     " File Edit Model to Fixture
     nnoremap ,femf :let @+ = expand("%:h")<return>o<esc>p0/app<return>cgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
 
+  " File Edit View
     " File Edit View to Stylesheet
     nnoremap ,fevs :let @+ = expand('%')<return>o<esc>p0/views<return>cgnassets/stylesheets<esc>0/html.erb<return>cgnscss<esc>dd:e <C-R><C-R>+
     " File Edit View to Controller
@@ -277,9 +286,11 @@
     " File Edit View to (mailer) tEst
     nnoremap ,feve :let @+ = expand('%:h')<return>o<esc>p<up>/app\/views<return>cgntest/mailers<esc>A_test.rb<esc>dd:e <C-R><C-R>+
     
+  " File Edit tasK
     " File Edit tasK to Test
     nnoremap ,fekt :let @+ = expand('%')<return>o<esc>p<up>/lib<return>cgntest<esc>/\.rake<return>cgn_task_test.rb<esc>dd:e <C-R><C-R>+
 
+  " File Edit Test
     " File Edit Test to Controller
     nnoremap ,fetc :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnapp<esc>ncgn<backspace><esc>dd:e <c-r><c-r>+
     " File Edit Test to Model
@@ -299,6 +310,7 @@
     " File Edit (task) Test to tasK
     nnoremap ,fetk :let @+ = expand("%")<return>o<esc>p<up>/test<return>cgnlib<esc>/_task_test\.rb<return>cgn.rake<esc>dd:e <C-R><C-R>+
 
+  " File Edit Preview
     " File Edit Preview to View
     nnoremap ,fepv :let @+ = expand("%")<return>o<esc>pO<esc>/test\/mailers\/previews<return>cgnapp/views<esc>/_preview.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
     " File Edit Preview to mAiler
@@ -306,80 +318,87 @@
     " File Edit Preview to Test
     nnoremap ,fept :let @+ = expand("%")<return>o<esc>p<up>/\/previews<return>cgn<esc><up>/_preview<return>cgn_test<esc>dd:e <C-R><C-R>+
     
+  " File Edit Fixtture
     " File Edit Fixture to Model
     nnoremap ,fefm :let @+ = expand("%:h")<return>o<esc>p0/test\/fixtures<return>cgnapp/models<esc>dd:e <C-R><C-R>+/
     " File Edit Fixture to (model) Test
     nnoremap ,feft :let @+ = expand("%:h")<return>o<esc>p0/fixtures<return>cgnmodels<esc>dd:e <C-R><C-R>+/
-  "
-  nmap <silent> ,faas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
-  nnoremap <silent> ,caas :edit app/assets/<space><backspace>
+
+  " File edit specific files and paths (NEEDS CLEANING)
+  nmap <silent> ,ftaas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
+  nnoremap <silent> ,faas :edit app/assets/<space><backspace>
   " Edit App Assets Css (stylesheets)
-  nmap <silent> ,faac <space>fT/app<return><return>/assets<return><return>/stylesheets<return><return><esc>:noh<return>
-  nnoremap <silent> ,caac :edit app/assets/stylesheets/<space><backspace>
+  nmap <silent> ,ftaac <space>fT/app<return><return>/assets<return><return>/stylesheets<return><return><esc>:noh<return>
+  nnoremap <silent> ,faac :edit app/assets/stylesheets/<space><backspace>
   "
-  nmap <silent> ,fach <space>fT/app<return><return>/channels<return><return><esc>:noh<return>
-  nnoremap <silent> ,cach :edit app/channels/<space><backspace>
+  nmap <silent> ,ftach <space>fT/app<return><return>/channels<return><return><esc>:noh<return>
+  nnoremap <silent> ,fach :edit app/channels/<space><backspace>
   "
-  "nmap <silent> ,faco <space>fT/app<return><return>/controllers<return><return><esc>:noh<return>
-  nmap <silent> ,faco :e app/controllers/
-  nnoremap <silent> ,caco :edit app/controllers/<space><backspace>
+  "nmap <silent> ,ftaco <space>fT/app<return><return>/controllers<return><return><esc>:noh<return>
+  nmap <silent> ,ftaco :e app/controllers/
+  nnoremap <silent> ,faco :edit app/controllers/<space><backspace>
   "
-  nmap <silent> ,fahe <space>fT/app<return><return>/helpers<return><return><esc>:noh<return>
-  nnoremap <silent> ,cahe :edit app/helpers/<space><backspace>
+  nmap <silent> ,ftahe <space>fT/app<return><return>/helpers<return><return><esc>:noh<return>
+  nnoremap <silent> ,fahe :edit app/helpers/<space><backspace>
   "
-  nmap <silent> ,faja <space>fT/app<return><return>/javascript<return><return><esc>:noh<return>
-  nnoremap <silent> ,caja :edit app/javascript/<space><backspace>
+  nmap <silent> ,ftaja <space>fT/app<return><return>/javascript<return><return><esc>:noh<return>
+  nnoremap <silent> ,faja :edit app/javascript/<space><backspace>
   "
-  nmap <silent> ,fajp <space>fT/app<return><return>/javascript<return><return>/packs<return><return><esc>:noh<return>
-  nnoremap <silent> ,cajp :edit app/javascript/packs/<space><backspace>
+  nmap <silent> ,ftajp <space>fT/app<return><return>/javascript<return><return>/packs<return><return><esc>:noh<return>
+  nnoremap <silent> ,fajp :edit app/javascript/packs/<space><backspace>
+  nnoremap <silent> ,fajs :edit app/javascript/packs/lib/show_edit_swap.js.erb<return>
+  
   "
-  nmap <silent> ,fajo <space>fT/app<return><return>/jobs<return><return><esc>:noh<return>
-  nnoremap <silent> ,cajo :edit app/jobs/<space><backspace>
+  nmap <silent> ,ftajo <space>fT/app<return><return>/jobs<return><return><esc>:noh<return>
+  nnoremap <silent> ,fajo :edit app/jobs/<space><backspace>
   " Edit App/MAilers
-  nmap <silent> ,fama <space>fT/app<return><return>/mailers<return><return><esc>:noh<return>
-  nnoremap <silent> ,cama :edit app/mailers/<space><backspace>
+  nmap <silent> ,ftama <space>fT/app<return><return>/mailers<return><return><esc>:noh<return>
+  nnoremap <silent> ,fama :edit app/mailers/<space><backspace>
   " Edit App/MOddels
-  nmap <silent> ,famo <space>fT/app<return><return>/models<return><return><esc>:noh<return>
-  nnoremap <silent> ,camo :edit app/models/<space><backspace>
+  nmap <silent> ,ftamo <space>fT/app<return><return>/models<return><return><esc>:noh<return>
+  nnoremap <silent> ,famo :edit app/models/<space><backspace>
   " Edit App/Mddels/aBility.rb Cancancan
   nmap <silent> ,famc :e app/models/ability.rb<return>
   "
-  nmap <silent> ,favi <space>fT/app<return><return>/views<return><return><esc>:noh<return>
-  nnoremap <silent> ,cavi :edit app/views/<space><backspace>
+  nmap <silent> ,ftavi <space>fT/app<return><return>/views<return><return><esc>:noh<return>
+  nnoremap <silent> ,favi :edit app/views/<space><backspace>
   "
-  nmap <silent> ,fcon <space>fT/config<return><return><esc>:noh<return>
-  nnoremap <silent> ,ccon :edit config/<space><backspace>
+  nmap <silent> ,ftcon <space>fT/config<return><return><esc>:noh<return>
+  nnoremap <silent> ,fcon :edit config/<space><backspace>
   "
   nnoremap <silent> ,fcro :edit config/routes.rb<return>
   "
   nnoremap <silent> ,fdsc :edit db/schema.rb<return>
   "
-  nmap <silent> ,fdmi <space>fT/db<return><return>/migrate<return><return><esc>:noh<return>
-  nnoremap <silent> ,cdmi :edit db/migrate/<space><backspace>
+  nmap <silent> ,ftdse <space>fT/db<return><return>/seeds<return><return><esc>:noh<return>
+  nnoremap <silent> ,fdse :edit db/seeds.rb<return>
   "
-  nmap <silent> ,flib <space>fT/lib<return><return><esc>:noh<return>
-  nnoremap <silent> ,clib :edit lib/<space><backspace>
+  nmap <silent> ,ftdmi <space>fT/db<return><return>/migrate<return><return><esc>:noh<return>
+  nnoremap <silent> ,fdmi :edit db/migrate/<space><backspace>
   "
-  nmap <silent> ,ftes <space>fT/test<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctes :edit test/<space><backspace>
+  nmap <silent> ,ftlib <space>fT/lib<return><return><esc>:noh<return>
+  nnoremap <silent> ,flib :edit lib/<space><backspace>
   "
-  nmap <silent> ,ftco <space>fT/test<return><return>/controllers<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctco :edit test/controllers/<space><backspace>
+  nmap <silent> ,fttes <space>fT/test<return><return><esc>:noh<return>
+  nnoremap <silent> ,ftes :edit test/<space><backspace>
   "
-  nmap <silent> ,ftmo <space>fT/test<return><return>/models<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctmo :edit test/models/<space><backspace>
+  nmap <silent> ,fttco <space>fT/test<return><return>/controllers<return><return><esc>:noh<return>
+  nnoremap <silent> ,ftco :edit test/controllers/<space><backspace>
+  "
+  nmap <silent> ,fttmo <space>fT/test<return><return>/models<return><return><esc>:noh<return>
+  nnoremap <silent> ,ftmo :edit test/models/<space><backspace>
   " File Test FIxtures
-  nmap <silent> ,ftfi <space>fT/test<return><return>/fixtures<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctfi :edit test/fixtures/<space><backspace>
+  nmap <silent> ,fttfi <space>fT/test<return><return>/fixtures<return><return><esc>:noh<return>
+  nnoremap <silent> ,ftfi :edit test/fixtures/<space><backspace>
   " File Test Mailers
-  nmap <silent> ,ftma <space>fT/test<return><return>/mailers<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctma :edit test/fixtures/mailers/<space><backspace>
+  nmap <silent> ,fttma <space>fT/test<return><return>/mailers<return><return><esc>:noh<return>
+  nnoremap <silent> ,ftma :edit test/fixtures/mailers/<space><backspace>
   " File Test Mailers Previews
-  nmap <silent> ,ftmp <space>fT/test<return><return>/mailers<return><return>/previews<return><return><esc>:noh<return>
-  nnoremap <silent> ,ctmp :edit test/fixtures/mailers/previews/<space><backspace>
+  nmap <silent> ,fttmp <space>fT/test<return><return>/mailers<return><return>/previews<return><return><esc>:noh<return>
+  nnoremap <silent> ,ftmp :edit test/fixtures/mailers/previews/<space><backspace>
   "
-  nmap <silent> ,fven <space>fT/vendor<return><return><esc>:noh<return>
-  nnoremap <silent> ,cven :edit vendor/<space><backspace>
+  nmap <silent> ,ftven <space>fT/vendor<return><return><esc>:noh<return>
+  nnoremap <silent> ,fven :edit vendor/<space><backspace>
   " Edit GEMfile
   nmap <silent> ,fgem <space>fT/Gemfile<return><return><esc>:noh<return>
   " Edit REAdme
@@ -637,9 +656,9 @@
 
   " Html form Inputs
     " Html form Input Left Label wrapper
-    nmap <silent> ,hill o<%#<delete> Left label for ChangeAttribute %><return><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Input Group %><return></div><return></div><return></div><return><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
+    nmap <silent> ,hill a<%#<delete> Left label for ChangeAttribute %><return><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html form Input Group %><return></div><return></div><return></div><return><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
     " Html form Input Left label Cancel and submit buttons
-    nmap <silent> ,hilc o<%#<delete> Left label cancel and submit buttons %><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return></div><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
+    nmap <silent> ,hilc a<%#<delete> Left label cancel and submit buttons %><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return></div><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
     " Html form Top Label
     nmap <silent> ,hitl a<%#<delete> Top label for ChangeAttribute %><return><div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Input Group %><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
     " Html form Top label Cancel and submit buttons
@@ -676,17 +695,21 @@
     nnoremap <silent> ,hief a<%= ChangeForm_form.email_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'email',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>size: 'ChangeSize',<return>maxlength: 'ChangeMaxLength'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|true\\|'email'\\|ChangePlaceholder\\|ChangeSize\\|ChangeMaxLength<return>
 
     " Html form Input Checkbox Stacked
-    nmap <silent> ,hics a<div><esc>,,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,,o,hicw<down><down><down>o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
+    nmap <silent> ,hics a<div><esc>,,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,,o,hicw<down><down><down>,o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
     " Html form Input Checkbox Inline (exact same as hics but add d-flex to parent div)
-    nmap <silent> ,hici a<div class="d-flex"><esc>,,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,,o,hicw<down><down><down>o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
+    nmap <silent> ,hici a<div class="d-flex"><esc>,,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,,o,hicw<down><down><down>,o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
     " Html form Input Checkbox Wrapper
     " this is used by by ,hics and ,hici so if you change this you might
     " need to change those as well
-    nmap <silent> ,hicw a<div class="pr-2 custom-control custom-checkbox"><esc>,,o,hicb<esc>,,o,hflc<esc><down><down>o</div><esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>
+    nmap <silent> ,hicw a<div class="pr-2 custom-control custom-checkbox"><esc>,,o,hicb<esc>,,o,hflc<esc><down><down>,o</div><esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>
     " Html form Input CheckBox
     " this is used by ,hicw so if you change this you might need to change
     " ,hicw as well
     nnoremap <silent> ,hicb a<%= ChangeForm_form.check_box(:ChangeAttribute, class: 'custom-control-input') %><esc>/ChangeForm\\|ChangeAttribute<return>
+    " Html form Input Radio Inline
+    nnoremap <silent> ,hiri a<label class="custom-control custom-radio custom-control-inline"><return><%= ChangeForm_form.radio_button(:ChangeAttribute, ChangeValue, class: 'custom-control-input') %><return><span class="custom-control-label text-label">ChangeDisplay</span><return></label><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|ChangeDisplay<return>
+    " Html form Input Radio Stacked
+    nnoremap <silent> ,hirs a<label class="custom-control custom-radio"><return><%= ChangeForm_form.radio_button(:ChangeAttribute, ChangeValue, class: 'custom-control-input') %><return><span class="custom-control-label text-label">ChangeDisplay</span><return></label><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|ChangeDisplay<return>
     " Html form Input CheckBox full
     nnoremap <silent> ,hicB a<%= ChangeThisPls_form.check_box(:ChangeThisPls, { class: 'custom-control-input' }, ChangeThisPls, false) %><esc>/ChangeThisPls<return>
     " Html form Input Toggle Wrapper
@@ -989,9 +1012,9 @@
     " Ruby Controllers Update Html
     nnoremap <silent> ,rcuh :read ../templates/controllers/actions/update_html.rb<return>/ChangeLoad\\|ChangeAbility\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
     " Ruby Controllers Destroy Atml
-    nnoremap <silent> ,rcdh :read ../templates/controllers/actions/destroy_html.rb<return>/ChangeLoad\\|ChangeAbility\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
+    nnoremap <silent> ,rcdh :read ../templates/controllers/actions/destroy_html.rb<return>/ChangeLoad\\|ChangeAbility\\|ChangeObject\\|ChangeModel\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
     " Ruby Controllers Destroy Ajax
-    nnoremap <silent> ,rcda :read ../templates/controllers/actions/destroy_ajax.rb<return>/ChangeLoad\\|ChangeAbility\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
+    nnoremap <silent> ,rcda :read ../templates/controllers/actions/destroy_ajax.rb<return>/ChangeLoad\\|ChangeAbility\\|ChangeObject\\|ChangeModel\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
     " Ruby Controllers FLash
     nnoremap <silent> ,rcfl aflash[:ChangeFlashType] = ChangeMessage<esc>/ChangeFlashType\\|ChangeMessage<return>
     " Ruby Controllers Flash Success
