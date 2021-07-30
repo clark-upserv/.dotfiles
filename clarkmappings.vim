@@ -917,8 +917,8 @@
     nnoremap <silent> ,rmpa :read ../templates/models/misc/process_attributes.rb<return>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
     nnoremap <silent> ,rmpA o# DeleteThis - this goes in callbacks section<return><backspace><backspace>before_validation :process_attributes<return># DeleteThis - this goes in callback methods section<return><backspace><backspace>def process_attributes<esc>:read ../templates/models/misc/process_attributes.rb<return>10<down>oend<esc>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
     " Ruby Models Attributes Enum
-    nnoremap <silent> ,rmae aenum ChangeAttribute: { ChangeOption: ChangeInteger }<esc>/ChangeAttribute\\|ChangeOption\\|ChangeInteger<return>
-    nnoremap <silent> ,rmaE aenum ChangeAttribute: { ChangeOption: ChangeInteger }, _prefix: ChangeToTrueOrCustomSymbol, _suffix: ChangeToTrueOrCustomSymbol<esc>/ChangeAttribute\\|ChangeOption\\|ChangeInteger\\|, _prefix: ChangeToTrueOrCustomSymbol\\|, _suffix: ChangeToTrueOrCustomSymbol<return>
+    nnoremap <silent> ,rmae aenum ChangeAttribute: { 'ChangeDisplay': ChangeInteger }<esc>/ChangeAttribute\\|ChangeDisplay\\|ChangeInteger<return>
+    nnoremap <silent> ,rmaE aenum ChangeAttribute: { 'ChangeDisplay': ChangeInteger }, _prefix: ChangeToTrueOrCustomSymbol, _suffix: ChangeToTrueOrCustomSymbol<esc>/ChangeAttribute\\|ChangeDisplay\\|ChangeInteger\\|, _prefix: ChangeToTrueOrCustomSymbol\\|, _suffix: ChangeToTrueOrCustomSymbol<return>
     " Ruby Models Attributes Array
     nnoremap <silent> ,rmaa aserialize :ChangeAttribute, Array
     " Ruby Models Attributes Hash
@@ -967,7 +967,7 @@
 
   " Ruby Controller mappings
     " Ruby Controller Strong Params
-    nnoremap <silent> ,rcsp adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute)<return># DeleteThis - insert logic to restrict or clean params if necessary<return><backspace><backspace>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|DeleteThis<return>
+    nnoremap <silent> ,rcsp adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute)<return># DeleteThis - insert logic to restrict or clean params if necessary (example, enums will need "to_i" because param will be string but assign_attributes needs integer)<return><backspace><backspace>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|DeleteThis<return>
     " Ruby Controller Strong Params full
     nnoremap <silent> ,rcsP adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute,<return>ChangeArrayAttribute: [],<return>ChangeChildName: [:ChangeAttribute],<return>ChangeChildrenName: [ChangeChildName: [:ChangeAttribute]])<return>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|ChangeArrayAttribute\\|ChangeChildrenName\\|ChangeChildName<return>
     " Ruby Controller Cancancan authorize Model based
@@ -997,21 +997,23 @@
     " Ruby Controllers Index with Filters
     nnoremap <silent> ,rcif :read ../templates/controllers/actions/index_with_filters.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis\\|ChangeLoadClass<return>
     " Ruby Controllers Show Base
-    nnoremap <silent> ,rcsb :read ../templates/controllers/actions/show_base.rb<return>/ChangeLoad\\|ChangeModel\\|DeleteThis<return>
+    nmap <silent> ,rcsb :read ../templates/controllers/actions/show_base.rb<return>,mmrcsb_search
+    nnoremap <silent> ,mmrcsb_search /ChangeLoad\\|ChangeModel\\|DeleteThis<return>
     " Ruby Controllers Show Tab Router
     nnoremap <silent> ,rcsr :read ../templates/controllers/actions/show_router.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeUrl\\|DeleteThis<return>
     " Ruby Controllers New Base
-    nmap <silent> ,rcnb ,rcsb/show<return>cgnnew<esc>/ChangeLoad\\|ChangeAbility\\|DeleteThis<return>
+    nmap <silent> ,rcnb ,rcsb/show<return>cgnnew<esc>,mmrcsb_search
     " Ruby Controllers Create Ajax
-    nnoremap <silent> ,rcca :read ../templates/controllers/actions/create_ajax.rb<return>/ChangeLoad\\|ChangeObject\\|ChangeAttributes\\|DeleteThis\\|ChangeAbility\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    nnoremap <silent> ,rcca :read ../templates/controllers/actions/create_ajax.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeObject\\|ChangeAttributes\\|DeleteThis\\|ChangeAbility\\|ChangeUrlHelper\\|ChangeTemplate<return>
     " Ruby Controllers Create Html
-    nnoremap <silent> ,rcch :read ../templates/controllers/actions/create_html.rb<return>/ChangeLoad\\|ChangeAttributes\\|DeleteThis\\|ChangeAbility\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    nnoremap <silent> ,rcch :read ../templates/controllers/actions/create_html.rb<return>/ChangeLoad\\|ChangeModel\\|ChangeAttributes\\|DeleteThis\\|ChangeAbility\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
     " Ruby Controllers Edit Base
-    nmap <silent> ,rceb ,rcsb/show<return>cgnedit<esc>/ChangeLoad\\|ChangeModel\\|DeleteThis<return>
+    nmap <silent> ,rceb ,rcsb/show<return>cgnedit<esc>,mmrcsb_search
     " Ruby Controllers Update Ajax
-    nnoremap <silent> ,rcua :read ../templates/controllers/actions/update_ajax.rb<return>/ChangeLoad\\|ChangeAbility\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    nmap <silent> ,rcua :read ../templates/controllers/actions/update_ajax.rb<return>,rcu_search
+    nnoremap  <silent> ,rcu_search /ChangeLoad\\|ChangeModel\\|ChangeAbility\\|DeleteThis\\|ChangeUrl\\|ChangeTemplate<return>
     " Ruby Controllers Update Html
-    nnoremap <silent> ,rcuh :read ../templates/controllers/actions/update_html.rb<return>/ChangeLoad\\|ChangeAbility\\|DeleteThis\\|ChangeObject\\|ChangeUrlHelper\\|ChangeTemplate<return>
+    nmap <silent> ,rcuh :read ../templates/controllers/actions/update_html.rb<return>,rcu_search
     " Ruby Controllers Destroy Atml
     nnoremap <silent> ,rcdh :read ../templates/controllers/actions/destroy_html.rb<return>/ChangeLoad\\|ChangeAbility\\|ChangeObject\\|ChangeModel\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
     " Ruby Controllers Destroy Ajax
