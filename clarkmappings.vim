@@ -517,7 +517,7 @@
     " Embedded Ruby Link to No href
     nmap <silent> ,erln a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon") %><return><esc>,mmno_href_comment<esc>/ChangeDisplay\\|no-href-link\\|no-href-icon\\|DeleteThis<return>
     " Embedded Ruby Link to Modal
-    nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon", data: { toggle: "modal", target: "#ChangeModalId_modal" }) %><return><esc>,mmno_href_comment<esc>a<return><div id="ChangeModalId_modal" class="modal fade" tabindex="-1" role="dialog"><return><%= render('ChangePath/ChangeModal_modal', ChangeLocals) %><return></div><esc>/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
+    nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: 'no-href-link no-href-icon', data: { toggle: 'modal', target: '#ChangeModalId_modal' }) %><return><esc>,mmno_href_comment<esc>a<return><div id="ChangeModalId_modal" class="modal fade" tabindex="-1" role="dialog"><return><%= render('ChangePath/ChangeModal_modal', ChangeLocals) %><return></div><esc>/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
     " Embedded Ruby Link to Remote (attributes only)
     nnoremap <silent> ,erlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
     " Embedded Ruby Link to Remote (full)
@@ -1130,7 +1130,7 @@
     " Javascript Vanilla Inner Html
     nnoremap <silent> ,jvih ainnerHTML = "ChangeHTML"<esc>/ChangeHTML<return>
     " Javascript Vanilla Inner Html (full)
-    nnoremap <silent> ,jviH ainnerHTML = "<%= escape_javascript(render('ChangePath', ChangeLocals)) %>"<esc>/ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,jviH ainnerHTML = "<%= escape_javascript(render(ChangeRender)) %>"<esc>/ChangeRender<return>
     " Javascript Vanilla Append Html
     nnoremap <silent> ,jvah ainnerHTML += "ChangeHTML"<esc>/ChangeHTML<return>
     " Javascript Vanilla Prepend Html
@@ -1145,19 +1145,19 @@
     " Javascript Ajax BAse
     nnoremap <silent> ,jaba :read ../templates/javascript/ajax/base.js.erb<return>ggdd/DeleteThis<return>
     " Javascript Ajax SUccess
-    nnoremap <silent> ,jasu :read ../templates/javascript/ajax/success.js.erb<return>/ChangeThisPls\\|CopyIdFromView\\|CopyPathFromView\\|ChangeLocals\\|DeleteThis<return>
+    nnoremap <silent> ,jasu :read ../templates/javascript/ajax/success.js.erb<return>/ChangeThisPls\\|CopyIdFromView\\|ChangeRender\\|DeleteThis<return>
     " Javascript Ajax CReate
-    nnoremap <silent> ,jacr :read ../templates/javascript/ajax/create.js.erb<return>/DeleteThis\\|CHANGEELEMENTTYPE\\|ChangeId\\|ChangeClass\\|ChangePath\\|ChangeLocals\\|ChangeSibling\\|CopyIdFromView<return>
+    nnoremap <silent> ,jacr :read ../templates/javascript/ajax/create.js.erb<return>/DeleteThis\\|CHANGEELEMENTTYPE\\|ChangeId\\|ChangeClass\\|ChangeRender\\|ChangeSibling\\|CopyIdFromView<return>
     " Javascript Ajax UPdate
-    nnoremap <silent> ,jaup :read ../templates/javascript/ajax/success.js.erb<return>/ChangeThisPls\\|CopyIdFromView\\|CopyPathFromView\\|ChangeLocals\\|DeleteThis<return>
+    nmap <silent> ,jaup ,jasu
     " Javascript Ajax DEstroy
-    nnoremap <silent> ,jade :read ../templates/javascript/ajax/success.js.erb<return>/ChangeThisPls\\|CopyIdFromView\\|CopyPathFromView\\|ChangeLocals\\|DeleteThis<return>
+    nmap <silent> ,jade ,jasu
     " Javascript Ajax Invalid Create
-    nnoremap <silent> ,jaic :read ../templates/javascript/ajax/invalid_create.js.erb<return>/ChangeSesId\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls\\|ChangeModel<return>
+    nnoremap <silent> ,jaic :read ../templates/javascript/ajax/invalid_create.js.erb<return>/ChangeSesId\\|ChangeRender\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls\\|ChangeModel<return>
     " Javascript Ajax Invalid Update
-    nnoremap <silent> ,jaiu :read ../templates/javascript/ajax/invalid_update.js.erb<return>/ChangeSesId\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls<return>
+    nnoremap <silent> ,jaiu :read ../templates/javascript/ajax/invalid_update.js.erb<return>/ChangeSesId\\|ChangeRender\\|block\\|DeleteThisPls<return>
     " Javascript Ajax Invalid Destroy
-    nnoremap <silent> ,jaid :read ../templates/javascript/ajax/success.js.erb<return>/ChangeThisPls\\|CopyIdFromView\\|CopyPathFromView\\|ChangeLocals\\|DeleteThis<return>
+    nmap <silent> ,jaid ,jasu
     " Javascript Ajax Window Location replace
     nnoremap <silent> ,jawl awindow.location.replace("<%= ChangeUrl %>")<esc>/ChangeUrl<return>
     " Javascript Ajax Errors
