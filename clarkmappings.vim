@@ -917,8 +917,10 @@
     nnoremap <silent> ,rmpa :read ../templates/models/misc/process_attributes.rb<return>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
     nnoremap <silent> ,rmpA o# DeleteThis - this goes in callbacks section<return><backspace><backspace>before_validation :process_attributes<return># DeleteThis - this goes in callback methods section<return><backspace><backspace>def process_attributes<esc>:read ../templates/models/misc/process_attributes.rb<return>10<down>oend<esc>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
     " Ruby Models Attributes Enum
-    nnoremap <silent> ,rmae aenum ChangeAttribute: { 'ChangeDisplay': ChangeInteger }<esc>/ChangeAttribute\\|ChangeDisplay\\|ChangeInteger<return>
-    nnoremap <silent> ,rmaE aenum ChangeAttribute: { 'ChangeDisplay': ChangeInteger }, _prefix: ChangeToTrueOrCustomSymbol, _suffix: ChangeToTrueOrCustomSymbol<esc>/ChangeAttribute\\|ChangeDisplay\\|ChangeInteger\\|, _prefix: ChangeToTrueOrCustomSymbol\\|, _suffix: ChangeToTrueOrCustomSymbol<return>
+    nnoremap <silent> ,rmae aenum ChangeAttribute: { 'ChangeDisplay': ChangeInteger }, _prefix: true<return># DeleteThis - use string for key (this way display does not require processing). If display changes down the road, refactor to symbol with class method for displays (and opitons for select) and instance method for display (use ,rmas for example)<esc>/ChangeAttribute\\|ChangeDisplay\\|ChangeInteger\\|DeleteThis<return>
+    " Ruby Models Attributes enum Symbol example
+    nnoremap <silent> ,rmas aclass << self<return>def status_displays<return>{ 'It is pending' => 0, 'Officially active' => 1 }<return>end<return>end<return>enum status: { pending: 0, active: 1 }, _prefix: true<return>def display_status<return>self.class.status_displays.key(status_for_database)<return>end<return>end<esc>
+    nnoremap <silent> ,rmaE aenum ChangeAttribute: ChangeClass::SOMECONSTANT, _prefix: ChangeToTrueOrCustomSymbol, _suffix: ChangeToTrueOrCustomSymbol<return># DeleteThis - you can add custom methods to ChangeClass and then use them in ths model, example:<return><backspace><backspace>def ChangeAttribute_data<return>@ChangeAttribute_data \|\|= ChangeClass.new(ChangeAttribute)<return>end<esc>/ChangeAttribute\\|ChangeClass\:\:SOMECONSTANT\\|, _prefix: ChangeToTrueOrCustomSymbol\\|, _suffix: ChangeToTrueOrCustomSymbol\\|DeleteThis\\|ChangeClass<return>
     " Ruby Models Attributes Array
     nnoremap <silent> ,rmaa aserialize :ChangeAttribute, Array
     " Ruby Models Attributes Hash
