@@ -594,6 +594,8 @@
     nnoremap <silent> ,hecu a<ChangeThisPls></ChangeThisPls><esc>/ChangeThisPls<return>
 
   " Html Show edit swap
+    " Html Show edit swap ASets
+    nnoremap <silent> ,hsas a<% add_javascript_packs('lib/show_edit_swap') %><return><return><%= content_for :stylesheets do %><return><%= stylesheet_link_tag('lib/show_edit_swap') %><return><% end %><return><esc>
     " Html Show edit swap BAse
     nnoremap <silent> ,hsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/show', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/edit', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
     " Html Show edit swap Base New
@@ -615,13 +617,13 @@
     " Html Show ROw
     nmap <silent> ,hsro a<div class="form-row"><return></div><esc>,,O
     " Html Show Group 1
-    nmap <silent> ,hsg1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssi$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return>
+    nmap <silent> ,hsg1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label tag if top label %><return><esc>,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return>
     " Html Show Group 2
-    nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssi$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yP
+    nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yP
     " Html Show Group 3
-    nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssi$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPP
+    nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPP
     " Html Show Group 4
-    nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssi$a<returreturn></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
+    nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssc$a<returreturn></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
     " Html Show Simple Container
     nnoremap <silent> ,hssc a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
     " Html Show Date Base
@@ -724,15 +726,15 @@
     " Html Input Password Confirmation
     nnoremap <silent> ,hipc a<%= ChangeThisPls_form.password_field(:password_confirmation, class: 'form-control') %><esc>/ChangeThisPls<return>
     " Html Input SElect
-    nnoremap <silent> ,hise a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>ChangeOptionsArray,<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|autofocus\\|required<return>
+    nnoremap <silent> ,hise a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>ChangeOptionsArray,<return>{ include_blank: 'Select' },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|autofocus\\|required<return>
     " Html Input Select Options for select
-    nnoremap <silent> ,hiso a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>options_for_select(ChangeOptionsArray, ChangeSelectedOption),<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><bacut<down>space>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|ChangeSelectedOption\\|autofocus\\|required<return>
+    nnoremap <silent> ,hiso a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>options_for_select(ChangeOptionsArray, ChangeSelectedOption),<return>{ include_blank: 'Select' },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|ChangeSelectedOption\\|autofocus\\|required<return>
     " Html Input Select Grouped options for select
-    nnoremap <silent> ,hisg a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>grouped_options_for_select(ChangeOptionsHash, ChangeSelectedOption),<return>{ include_blank: "Select" },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsHash\\|ChangeSelectedOption\\|autofocus\\|required<return>
+    nnoremap <silent> ,hisg a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>grouped_options_for_select(ChangeOptionsHash, ChangeSelectedOption),<return>{ include_blank: 'Select' },<return>{ class: 'form-control',<return>  autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsHash\\|ChangeSelectedOption\\|autofocus\\|required<return>
     " Html Input Select Multiple
     nnoremap <silent> ,hism a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>ChangeOptionsArray,<return>{ include_hidden: false,<return>  include_blank: "Select"<return><backspace>},<return>{ class: 'form-control',<return>  multiple: true,<return>autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|autofocus\\|required<return>
     " Html Input Select Block
-    nnoremap <silent> ,hisb a<%= ChangeThisPls_form.select(:ChangeThisPls , [], { include_blank: "Select" }, { class: 'form-control' }) do %><esc>o<% end %><esc>/ChangeThisPls<return>
+    nnoremap <silent> ,hisb a<%= ChangeThisPls_form.select(:ChangeThisPls , [], { include_blank: 'Select' }, { class: 'form-control' }) do %><esc>o<% end %><esc>/ChangeThisPls<return>
     " Html Input OPtion
     nnoremap <silent> ,hiop a<option <%= "selected='true'" if ChangeThisPls %> value="<%= ChangeThisPls %>">ChangeThisPls</option><esc>/ChangeThisPls<return>
     " Html Input Errors
@@ -936,7 +938,7 @@
       " Ruby Routes REsources
       nnoremap <silent> ,rrre aresources :ChangeController, only: %i[index show create update destroy]<esc><up>/ChangeController\\|index \\|show \\|create \\|update \\|destroy<return>
       " Ruby Routes Resources Nested
-      nnoremap <silent> ,rrrn aget ':id/ChangeThisPls', to: 'ChangeThisPls#index', as: :ChangeThisPls<esc>opost ':id/ChangeThisPls', to: 'ChangeThisPls#create'<esc>oresources :ChangeThisPls, only: %i[show update destroy]<esc>/ChangeThisPls<return>
+      nnoremap <silent> ,rrrn aget ':id/ChangeController', to: 'ChangeController#index', as: :ChangeController<esc>opost ':id/ChangeController', to: 'ChangeController#create', as: :ChangeController<return># DeleteThis - remove as: :ChangeController in post method if already included in get method above (including it in both will cause error because rails tries to create the same url helper twice)<return><backspace><backspace>resources :ChangeController, only: %i[show update destroy]<esc>/ChangeController\\|DeleteThis<return>
       " Ruby Routes Member Get
       nnoremap <silent> ,rrmg aget ':id/ChangeMemberInUrl', to: 'ChangeMemberController#show', as: :ChangeMemberSingular<esc>/ChangeMemberInUrl\\|ChangeMemberController\\|ChangeMemberSingular<return>
       " Ruby Routes GEt (for non-restful routes)
@@ -971,7 +973,7 @@
 
   " Ruby Controller mappings
     " Ruby Controller Strong Params
-    nnoremap <silent> ,rcsp adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute)<return># DeleteThis - insert logic to restrict or clean params if necessary (example, enums will need "to_i" because param will be string but assign_attributes needs integer)<return><backspace><backspace>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|DeleteThis<return>
+    nnoremap <silent> ,rcsp adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttributes)<return># DeleteThis - insert logic to restrict or clean params if necessary (example, enums will need "to_i" because param will be string but assign_attributes needs integer)<return><backspace><backspace>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttributes\\|DeleteThis<return>
     " Ruby Controller Strong Params full
     nnoremap <silent> ,rcsP adef ChangeName_params<return>params.require('ChangeRequire').permit(:ChangeAttribute,<return>ChangeArrayAttribute: [],<return>ChangeChildName: [:ChangeAttribute],<return>ChangeChildrenName: [ChangeChildName: [:ChangeAttribute]])<return>end<esc>/ChangeName\\|ChangeRequire\\|ChangeAttribute\\|ChangeArrayAttribute\\|ChangeChildrenName\\|ChangeChildName<return>
     " Ruby Controller Cancancan authorize Model based
