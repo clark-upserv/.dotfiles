@@ -436,7 +436,7 @@
     " View Card Contents WIde
     nnoremap <silent> ,vccw :read ../templates/views/card/contents_wide.html.erb<return>/DeleteThis<return>
     " View Card Contents Full
-    nnoremap <silent> ,vccw :read ../templates/views/card/contents_full.html.erb<return>/DeleteThis<return>
+    nnoremap <silent> ,vccf :read ../templates/views/card/contents_full.html.erb<return>/DeleteThis<return>
     " View Card Contents Non-Card
     nnoremap <silent> ,vccn :read ../templates/views/card/contents_non_card.html.erb<return>/DeleteThis<return>
     " View Card Header Base
@@ -626,10 +626,6 @@
     nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssc$a<returreturn></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
     " Html Show Simple Container
     nnoremap <silent> ,hssc a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
-    " Html Show Date Base
-    nnoremap <silent> ,hsdb astrftime('%B %-d, %Y')
-    " Html Show Date with Day of week
-    nnoremap <silent> ,hsdd astrftime('%A, %B %-e, %Y')
 
   " Html Form
     " Html Form BAse
@@ -740,9 +736,9 @@
     " Html Input OPtion
     nnoremap <silent> ,hiop a<option <%= "selected='true'" if ChangeThisPls %> value="<%= ChangeThisPls %>">ChangeThisPls</option><esc>/ChangeThisPls<return>
     " Html Input CAlendar
-    nmap <silent> ,hica a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control datetimepicker',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-e, %Y'),<return>autocomplete: 'off',<return>data: { 'min-view': '2', 'date-format': 'MM d, yyyy' },<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>,hiat) %><return><esc>,mmessagehtmlinputcalendar<esc>/ChangeForm\\|ChangeAttribute\\|ChangeObject\\|ChangeValue\\|true\\|DeleteThis<return>
+    nmap <silent> ,hica a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control datetimepicker',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>autocomplete: 'off',<return>data: { 'min-view': '2', 'date-format': 'MM d, yyyy' },<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>,hiat) %><return><esc>,mmessagehtmlinputcalendar<esc>/ChangeForm\\|ChangeAttribute\\|ChangeObject\\|ChangeValue\\|true\\|DeleteThis<return>
     " Html Input Calendar with Button
-    nmap <silent> ,hicb a<div class="input-group date datetimepicker" data-min-view="2" data-date-format="DD, MM d, yyyy"><return><%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-e, %Y'),<return>autocomplete: 'off',<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>,hiat) %><return><space><space><div class="input-group-append"><return><a class="btn btn-primary cal-button do-not-disable" onclick="removeInlineCalendarsAfterAjax()"><i class="icon-th mdi mdi-calendar"></i></a><return></div><return></div><return><esc>,mmessagehtmlinputcalendar<esc>/ChangeForm\\|ChangeAttribute\\|ChangeObject\\|ChangeValue\\|true\\|DeleteThis<return>
+    nmap <silent> ,hicb a<div class="input-group date datetimepicker" data-min-view="2" data-date-format="DD, MM d, yyyy"><return><%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>autocomplete: 'off',<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>,hiat) %><return><space><space><div class="input-group-append"><return><a class="btn btn-primary cal-button do-not-disable" onclick="removeInlineCalendarsAfterAjax()"><i class="icon-th mdi mdi-calendar"></i></a><return></div><return></div><return><esc>,mmessagehtmlinputcalendar<esc>/ChangeForm\\|ChangeAttribute\\|ChangeObject\\|ChangeValue\\|true\\|DeleteThis<return>
     nnoremap <silent> ,mmessagehtmlinputcalendar a<%# DeleteThis - value of nil or if value is excluded, text box will be blank and calendar defaults to today. If a value is included, make sure it is a date, not a date time and include correct strftime %><return><%# DeleteThis - min-view: 0 is 5 minutes; 1 is hour; 2 is date %><return><%# DeleteThis - date-format: MM is January; mm is 01; m is 1 (no preceding 0); DD is Monday (day of week); dd is 01 (day of month); d is 1 (no preceding 0) %><return><%# DeleteThis - see https://xdsoft.net/jqplugins/datetimepicker/ for more options %>
     " Html Input Errors
     nnoremap <silent> ,hier a<div id="ChangeId_errors"><return><%# DeleteThis - if using a single error message for repeat block of many objects with ajax form, remove render from html and fill div contents with errors partial on ajax instead %><return><%= render('shared/errors', object: ChangeObject) %><return></div><esc>/ChangeId\\|DeleteThis\\|ChangeObject<return>
@@ -814,23 +810,16 @@
     " Ruby Basic Interpolated String
     nnoremap <silent> ,rbis a#{}<esc>i
 
-    " this should be moved to ruby model and needs updating for distinct...
-    " Ruby Basic ORder
-    nnoremap <silent> ,rbor aorder(:ChangeAttribute)<esc>/ChangeAttribute<return>
-    " Ruby Basic Order Descending
-    nnoremap <silent> ,rbod aorder(ChangeAttribute: :desc)<esc>/ChangeAttribute<return>
-    " Ruby Basic Order Case insensitive
-    nnoremap <silent> ,rboc aorder("LOWER(ChangeAttribute)")<esc>/ChangeAttribute<return>
-    " Ruby Basic ORder (full)
-    nnoremap <silent> ,rboR aorder("LOWER(ChangeAttribute) DESC")<esc>/ChangeAttribute<return>
     " Ruby Basic Dir
     nmap <silent> ,rbdi ,mmdir_notesaDir['app/ChangePath/**/*.ChangeExtension*'].each do \|path\|<return># DeleteThisNote: add logic here...<return>DeleteThisNote: use this to clean file name: path.remove('<delete>app/ChangePath/').split('<delete>.ChangeExtension').first<return><backspace><backspace>end<esc>/DeleteThisNote\\|ChangePath\\|ChangeExtension<return>
     " Ruby basic Rails Root
     nnoremap <silent> ,rbrr aRails.root.join('ChangeThis', 'ChangeThis', 'Etc.')<esc>/ChangeThis\\|Etc.<return>
     " Ruby Basic BEgin
-    noremap <silent> ,rbbe arescue StandardError => e<return># DeleteThis - some exception handling<return><backspace><backspace>else<return># DeleteThis - add logic to run only when no errors occur<return><backspace><backspace>ensure<return># DeleteThis - add logic to run whether there are error or not<esc>/DeleteThis<return>
+    nnoremap <silent> ,rbbe arescue StandardError => e<return># DeleteThis - some exception handling<return><backspace><backspace>else<return># DeleteThis - add logic to run only when no errors occur<return><backspace><backspace>ensure<return># DeleteThis - add logic to run whether there are error or not<esc>/DeleteThis<return>
     " Ruby Basic BEgin (full)
-    noremap <silent> ,rbbE abegin<return># DeleteThis - have code that could possibly error<return><backspace><backspace>rescue StandardError => e<return># DeleteThis - some exception handling<return><backspace><backspace>else<return># DeleteThis - add logic to run only when no errors occur<return><backspace><backspace>ensure<return># DeleteThis - add logic to run whether there are error or not<return><backspace><backspace>end<esc>/DeleteThis<return>
+    nnoremap <silent> ,rbbE abegin<return># DeleteThis - have code that could possibly error<return><backspace><backspace>rescue StandardError => e<return># DeleteThis - some exception handling<return><backspace><backspace>else<return># DeleteThis - add logic to run only when no errors occur<return><backspace><backspace>ensure<return># DeleteThis - add logic to run whether there are error or not<return><backspace><backspace>end<esc>/DeleteThis<return>
+    " Ruby Basic String from Time
+    nnoremap <silent> ,rbst astrftime('%A, %B %-d, %Y')<return># DeleteThis - %A gets day spelled out - "Sunday"; %a gets day spelled out abbreviated - "Sun"<return>DeleteThis - %B gets month spelled out - "January"; %b gets month spelled out abbreviated - "Jan"<return>DeleteThis - %d gets day of month (ex 01-31); %-d gets day of month with blank instead of 0 padding (ex 1-31)<return>DeleteThis - %Y gets full year - 2021; %y gets last 2 digits of year - 21<return>DeleteThis - see here for more https://apidock.com/ruby/DateTime/strftime<esc>/%A, %B %-d, %Y\\|DeleteThis<return>
 
 
   " Ruby model mappings
@@ -936,6 +925,14 @@
     nnoremap <silent> ,rmaa aserialize :ChangeAttribute, Array
     " Ruby Models Attributes Hash
     nnoremap <silent> ,rmah aserialize :ChangeAttribute, Hash
+    " Ruby Models ORder
+    nnoremap <silent> ,rmor aorder(:ChangeAttribute)<esc>/ChangeAttribute<return>
+    " Ruby Models Order Descending
+    nnoremap <silent> ,rmod aorder(ChangeAttribute: :desc)<esc>/ChangeAttribute<return>
+    " Ruby Models Order Case insensitive
+    nnoremap <silent> ,rmoc aorder("LOWER(ChangeAttribute)")<esc>/ChangeAttribute<return>
+    " Ruby Models ORder (full)
+    nnoremap <silent> ,rmoR aorder("LOWER(ChangeAttribute) DESC")<esc>/ChangeAttribute<return>
     
 
   " Ruby Routes
@@ -1002,7 +999,7 @@
     " Ruby Controller Model impersonator add Error Message
     nnoremap <silent> ,rcme a@ChangeThisPls.add_error_message(:ChangeAttribute, ChangeMessage)<esc>/ChangeAttribute\\|ChangeMessage<return>
     " Ruby Controllers BAse
-    nnoremap <silent> ,rcba :read ../templates/controllers/base_controller.rb<return>ggdd/ChangeThisPls\\|ChangeDescription\\|DeleteThis<return>
+    nnoremap <silent> ,rcba :read ../templates/controllers/base_controller.rb<return>ggdd/ChangeThisPls\\|ChangeDescription\\|DeleteThis\\|ChangeHelpers\\|ChangeTemplateController<return>
     " Ruby Controllers Index Base
     nnoremap <silent> ,rcib :read ../templates/controllers/actions/index_base.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis<return>
     " Ruby Controllers Index with Search
@@ -1254,7 +1251,7 @@
 
   " Models
     " Models Search
-    nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnection\\|ChangeConnectionModel<return>
+    nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel<return>
     " Tests Model BAse
     nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
     " Tests Models Belongs To
@@ -1264,7 +1261,7 @@
     " Tests Models Has Many
     nmap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>,mmtest_model_search
     " Tests Models Has Many through
-    nmap <silent> ,tmhM atest 'ChangeParent should have many ChangeChildren through ChangeConnection' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChildrenid).sort<return>end<esc>,mmtest_model_search
+    nmap <silent> ,tmhM atest 'ChangeParent should have many ChangeChildren' do<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChildrenid).sort<return># DeleteThis - use this for all other has many through<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id), ChangeChildModel.where(ChangeAttributes)<return>end<esc>,mmtest_model_search
     " Tests Models VAlidation
     nmap <silent> ,tmva atest 'ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
     " Tests Models Validation Unique with scope
