@@ -999,13 +999,14 @@
     " Ruby Controller Model impersonator add Error Message
     nnoremap <silent> ,rcme a@ChangeThisPls.add_error_message(:ChangeAttribute, ChangeMessage)<esc>/ChangeAttribute\\|ChangeMessage<return>
     " Ruby Controllers BAse
-    nnoremap <silent> ,rcba :read ../templates/controllers/base_controller.rb<return>ggdd/ChangeThisPls\\|ChangeDescription\\|DeleteThis\\|ChangeHelpers\\|ChangeTemplateController<return>
+    nnoremap <silent> ,rcbt :read ../templates/controllers/base_template_controller.rb<return>ggdd/ChangeThisPls\\|ChangeDescription\\|DeleteThis\\|ChangeHelpers<return>
+    nnoremap <silent> ,rcba :read ../templates/controllers/base_ajax_controller.rb<return>ggdd/ChangeThisPls\\|ChangeDescription\\|DeleteThis\\|ChangeTemplateController<return>
     " Ruby Controllers Index Base
     nnoremap <silent> ,rcib :read ../templates/controllers/actions/index_base.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis<return>
     " Ruby Controllers Index with Search
     nnoremap <silent> ,rcis :read ../templates/controllers/actions/index_with_search.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis<return>
     " Ruby Controllers Index with Filters
-    nnoremap <silent> ,rcif :read ../templates/controllers/actions/index_with_filters.rb<return>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis\\|ChangeLoadClass<return>
+    nnoremap <silent> ,rcif :read ../templates/controllers/actions/index_with_filters.rb<return>/ChangeAbility\\|ChangeControllerOrFeature\\|ChangeLoads\\|DeleteThis\\|ChangeModules\\|ChangeController\\|ChangeArgsWithParamsAndOftenCurrentAbility<return>
     " Ruby Controllers Show Base
     nmap <silent> ,rcsb :read ../templates/controllers/actions/show_base.rb<return>,mmrcsb_search
     nnoremap <silent> ,mmrcsb_search /ChangeLoad\\|ChangeModel\\|DeleteThis<return>
