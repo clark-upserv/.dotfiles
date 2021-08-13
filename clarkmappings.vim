@@ -1282,6 +1282,7 @@
     " Tests Model Process attributes Nil Blank
     nmap <silent> ,tmpn atest 'ChangeObject ChangeAttribute should be nil if blank' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '')<return>assert_not_nil @ChangeObject.ChangeAttribute<return>@ChangeObject.valid?<return>assert_nil @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
 
+
   " Test Tasks
     " Test Tasks Base
     nmap <silent> ,ttba :read ../templates/tests/task_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/ChangeThisPls\\|ChangeExpectedAction\\|ChangeTaskName\\|ChangeObject\\|ChangeTableName\\|ChangeFixtureName\\|DeleteThis\\|ChangeApplicationName<return>
