@@ -153,6 +153,8 @@
   nnoremap <silent> ,,// I<delete><delete><esc>0
   nnoremap <silent> ,/* O/*<esc>o*/<esc>Vx0
   nnoremap <silent> ,< O<!--<esc>o--><esc>Vx0
+  nnoremap <silent> ," /'<return>cgn"<esc>N.:noh<return>
+  nnoremap <silent> ,' /"<return>cgn'<esc>N.:noh<return>
   "nnoremap <silent>
 
 " Misc. mapping / messages
@@ -250,10 +252,10 @@
     " File Edit Job to (job) Test
     nnoremap ,fejt :let @+ = expand("%")<return>$a<return><esc>p<up>/app<return>cgntest<esc><up>/_job.rb<return>cgn_job_test.rb<esc>dd:e <C-R><C-R>+
 
-  " File Edit mAiler
-    " File Edit mAiler to View
+  " File Edit Mailer
+    " File Edit Mailer to View
     nnoremap ,feMv :let @+ = expand("%")<return>$a<return><esc>pO<esc>/mailers<return>cgnviews<esc>/.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
-    " File Edit mAiler to Test
+    " File Edit Mailer to Test
     nnoremap ,feMt :let @+ = expand("%")<return>$a<return><esc>pO<esc>/app<return>cgntest<esc>/.rb<return>cgn_test.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit Mailer to Preview
     nnoremap ,feMp :let @+ = expand("%")<return>$a<return><esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
@@ -275,8 +277,8 @@
     nnoremap ,fevh :let @+ = expand('%:h')<return>$a<return><esc>p0/views<return>cgnhelpers<esc>A_helper.rb<esc>dd:e <C-R><C-R>+
     " File Edit View to Javascript pack
     nnoremap ,fevj :let @+ = expand('%')<return>$a<return><esc>p<up><esc>/views<return>cgnjavascript/packs<esc>/html\.erb<return>cgnjs<esc>dd:e <C-R><C-R>+
-    " File Edit View to mAiler
-    nnoremap ,feva :let @+ = expand('%:h')<return>$a<return><esc>pO<esc>/views<return>cgnmailers<esc>A.rb<esc><up>dddd:e <C-R><C-R>+
+    " File Edit View to Mailer
+    nnoremap ,fevM :let @+ = expand('%:h')<return>$a<return><esc>pO<esc>/views<return>cgnmailers<esc>A.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit View to mailer Preview
     nnoremap ,fevp :let @+ = expand('%:h')<return>$a<return><esc>pO<esc>/app\/views<return>cgntest/mailers/previews<esc>A_preview.rb<esc><up>dddd:e <C-R><C-R>+
     " File Edit View to View
@@ -303,8 +305,8 @@
     "
     " File Edit Test to Job
     nnoremap ,fetj :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnapp<esc><up>/_test<return>cgn<esc>dd:e <c-r><c-r>+
-    " File Edit Test to mAiler
-    nnoremap ,feta :let @+ = expand("%")<return>$a<return><esc>p$a<return><esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><down>dd<up>dd:e <C-R><C-R>+
+    " File Edit Test to Mailer
+    nnoremap ,fetM :let @+ = expand("%")<return>$a<return><esc>p$a<return><esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><down>dd<up>dd:e <C-R><C-R>+
     " File Edit Test to View (for controller and mailer tests)
     nnoremap ,fetv :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnapp<esc><up>/controllers\\|mailers<return>cgnviews<esc><up>/_controller_test.rb<return>cgn/<esc>dd:e <C-R><C-R>+
     " File Edit Test to mailer Preview
@@ -319,8 +321,8 @@
   " File Edit Preview
     " File Edit Preview to View
     nnoremap ,fepv :let @+ = expand("%")<return>$a<return><esc>pO<esc>/test\/mailers\/previews<return>cgnapp/views<esc>/_preview.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
-    " File Edit Preview to mAiler
-    nnoremap ,fepa :let @+ = expand("%")<return>$a<return><esc>pO<esc>/test\/mailers\/previews<return>cgnapp/mailers<esc>/_preview<return>cgn<esc><up>dddd:e <C-R><C-R>+
+    " File Edit Preview to Mailer
+    nnoremap ,fepM :let @+ = expand("%")<return>$a<return><esc>pO<esc>/test\/mailers\/previews<return>cgnapp/mailers<esc>/_preview<return>cgn<esc><up>dddd:e <C-R><C-R>+
     " File Edit Preview to Test
     nnoremap ,fept :let @+ = expand("%")<return>$a<return><esc>p<up>/\/previews<return>cgn<esc><up>/_preview<return>cgn_test<esc>dd:e <C-R><C-R>+
     
@@ -1068,7 +1070,7 @@
     " Ruby Jobs BAse
     nmap <silent> ,rjba :read ../templates/jobs/base.rb<return>/DeleteThis\\|ChangeArguments\\|ChangeObject\\|ChangeModel\\|ChangeAttribute<return>
 
-  " Ruby mAilers
+  " Ruby Mailers
     " Ruby Mailers BAse
     nmap <silent> ,rMba :read ../templates/mailers/base.rb<return>/@to_user\\|ChangeObject\\|ChangeModel\\|ChangeId\\|ChangeVariable\\|ChangeOption\\|DeleteThis\\|ChangeGuardLogic\\|ChangeToEmail\\|ChangeFromEmail\\|ChangeSubject<return>
     " Ruby Mailers Html Email
@@ -1253,10 +1255,10 @@
     nnoremap <silent> ,tjtb :read ../templates/tests/job_test_base.rb<return>/ChangeDescription\\|ChangeJobName\\|DeleteThis\\|ChangeJob\\|ChangeArgs\\|ChangeObject<return>
 
   " Mailers
-    " Tests mAiler BAse
-    nmap <silent> ,taba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
-    " Tests mAiler Test Base
-    nmap <silent> ,tatb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
+    " Tests Mailer BAse
+    nmap <silent> ,tMba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
+    " Tests Mailer Test Base
+    nmap <silent> ,tMtb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
 
   " Models
     " Models Search
@@ -1275,8 +1277,10 @@
     nmap <silent> ,tmva atest 'ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
     " Tests Models Validation Unique with scope
     nmap <silent> ,tmvu atest 'ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - make it valid by changing main attribute. Then repeat for all other attributes on scope<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return># Deletethis - repeat for all other attributes on scope (if any)<return><backspace><backspace>end<esc>,mmtest_model_search
-    " Tests Model Validation Strip
-    nmap <silent> ,tmvs atest 'ChangeObject name should be stripped' do<return>@ChangeObject.assign_attributes(name: '    a     ')<return>assert @ChangeObject.valid?<return>assert_equal 'a', @ChangeObject.name<return>end<esc>,mmtest_model_search
+    " Tests Model Process attributes Strip
+    nmap <silent> ,tmps atest 'ChangeObject ChangeAttribute should be stripped' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '    a     ')<return>@ChangeObject.valid?<return>assert_equal 'a', @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
+    " Tests Model Process attributes Nil Blank
+    nmap <silent> ,tmpn atest 'ChangeObject ChangeAttribute should be nil if blank' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '')<return>assert_not_nil @ChangeObject.ChangeAttribute<return>@ChangeObject.valid?<return>assert_nil @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
 
   " Test Tasks
     " Test Tasks Base
