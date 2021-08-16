@@ -1,5 +1,4 @@
 alias rs='source ~/.zshrc'
-
 alias gs='git status'
 
 gacp(){
