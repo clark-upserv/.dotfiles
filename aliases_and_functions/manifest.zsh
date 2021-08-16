@@ -3,6 +3,13 @@ alias gs='git status'
 alias gpwip='git add -A; git commit -am "wip"; git push; git status'
 alias gcwm='git commit -am'
 alias testy='f() { echo Your arg was $1. };f'
+gacp(){
+  local msg=${1:-wip}
+  git add -A
+  git commit -am "$msg"
+  git push
+  git status
+}
 
 # find and replace all - find / replace / file type (optional)
 fara() {
