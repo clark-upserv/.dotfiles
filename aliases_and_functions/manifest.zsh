@@ -2,6 +2,7 @@ alias rs='source ~/.zshrc'
 alias gs='git status'
 alias gcwm='git commit -am'
 alias testy='f() { echo Your arg was $1. };f'
+
 gacp(){
   local msg=${1:-wip}
   git add -A
