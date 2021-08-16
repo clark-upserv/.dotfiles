@@ -1,6 +1,5 @@
 alias rs='source ~/.zshrc'
 alias gs='git status'
-alias gpwip='git add -A; git commit -am "wip"; git push; git status'
 alias gcwm='git commit -am'
 alias testy='f() { echo Your arg was $1. };f'
 gacp(){
