@@ -1,0 +1,30 @@
+alias rs='source ~/.zshrc'
+alias gs='git status'
+alias gpwip='git add -A; git commit -am "wip"; git push; git status'
+alias gcwm='git commit -am'
+alias testy='f() { echo Your arg was $1. };f'
+
+# find and replace all - find / replace / file type (optional)
+fara() {
+  local wd=$(pwd)
+  if [ -z $3 ]; then
+    printf "You are about to find and replace all instances of \"$1\" with \"$2\" withhin $wd. Are you sure? [y/n]: "
+  else
+    printf "You are about to find and replace all instances of \"$1\" with \"$2\" withhin .$3 files in $wd. Are you sure? [y/n]: "
+  fi
+  read -r response
+  if [ $response = "y" ]; then
+    # if files have non-english characters, there will be an error message but the function still works
+    echo "Please ignore any \"illegal byte sequence\" errors (if any)"
+    if [ -z $3 ]; then
+      find . -type f -name "*.*" | xargs sed -i '' "s/$1/$2/g"
+    else
+      find . -type f -name "*.$3" | xargs sed -i '' "s/$1/$2/g"
+    fi
+    echo "All instances of $1 have been replaced with $2"
+  else
+    echo "Find and replace aborted"
+  fi
+}
+
+# agagagagagaga
