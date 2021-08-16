@@ -2,7 +2,7 @@ alias rs='source ~/.zshrc'
 alias gs='git status'
 
 gacp(){
-  local msg=${1:-wip}
+  msg=${1:-wip}
   git add -A
   git commit -am "$msg"
   git push
