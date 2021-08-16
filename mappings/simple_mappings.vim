@@ -13,9 +13,9 @@
     " ruby interpolation
     inoremap <silent> ## #{}<left>
     " erb
-    inoremap <silent> <> <%  %><left><left><left>
+    inoremap <silent> <><space> <%  %><left><left><left>
     " erb entered
-    inoremap <silent> >< <%=  %><left><left><left>
+    inoremap <silent> ><<space> <%=  %><left><left><left>
     " J Query Select
     inoremap <silent> $$ $()<left>
 
@@ -38,14 +38,19 @@
     vmap <silent> = p
     " redo
     nnoremap du <C-r>
-    " remap o and O
-    nnoremap <silent> o o <backspace><esc>
-    nnoremap <silent> O O <backspace><esc>
+    " o and O but remain in normal mode
     nnoremap <silent> b o <backspace><esc>
     nnoremap <silent> B O <backspace><esc>
-    " these are the same as o and O but are used in nmaps... so if these need
-    " to be changed, make sure to search / reaplace all ,,o and ,,O (keeping
-    " these because ,,o and ,,O is easier to search than o and O)
+    " previously o and O were re-mapped and then several recursive mappigns
+    " used this new mapping. But that became almost impossible to track
+    " (because /o<return> is not helpful) so ,,o and ,,O were used
+    " instead because they are easier to find. They replicate 
+    " the original functionaligy of the remapped o and O and are easioer to
+    " search. However, each instance of ,,o and ,,O in any mapping file should probably
+    " be replaced with $a<return><space><backspace><esc>
+    " original remapping of o and O (jsut for reference): 
+    "nnoremap <silent> o o <backspace><esc>
+    "nnoremap <silent> O O <backspace><esc>
     nnoremap <silent> ,,o o <backspace><esc>
     nnoremap <silent> ,,O O <backspace><esc>
     " remap r to s (r is used by new dpad)
@@ -98,13 +103,9 @@
     nnoremap <silent> <S-up> 4<up>
     nnoremap <silent> <S-down> 4<down>
     
-
 " single key comma mappings
   " visual mode
   nnoremap ,v <C-v>
-  " get back o and O since they are remapped
-  nnoremap <silent> ,o o
-  nnoremap <silent> ,O O
   " various comments and uncomments
   nnoremap <silent> ,# I#<esc>0
   nnoremap <silent> ,,# I<delete><esc>0
@@ -112,7 +113,6 @@
   nnoremap <silent> ,,// I<delete><delete><esc>0
   nnoremap <silent> ,/* O/*<esc>o*/<esc>Vx0
   nnoremap <silent> ,< O<!--<esc>o--><esc>Vx0
-  nnoremap <silent> ," /'<return>cgn"<esc>N.:noh<return>
+  " replace single quite with double quote and vice versa
   nnoremap <silent> ,' /"<return>cgn'<esc>N.:noh<return>
-  "nnoremap <silent>
-
+  nnoremap <silent> ," /'<return>cgn"<esc>N.:noh<return>
