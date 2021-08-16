@@ -33,6 +33,7 @@ so ~/.dotfiles/mappings/simple_mappings.vim
 so ~/.dotfiles/mappings/file_mappings.vim
 so ~/.dotfiles/mappings/view_mappings.vim
 so ~/.dotfiles/mappings/embedded_ruby_mappings.vim
+so ~/.dotfiles/mappings/test_mappings.vim
 
 " truly random one off stuff
   " Caps lock in insert mode (press ctrl - ^ to toggle)
@@ -61,7 +62,6 @@ so ~/.dotfiles/mappings/embedded_ruby_mappings.vim
   nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Input %><esc>/DeleteThis<return>
   nnoremap <silent> ,mmno_href_comment a<%# DeleteThis - if styling like link, keep "no-href-link" class %><return><%# DeleteThis - if styling like icon, keep "no-href-icon", add standard icon classes and make nil %><return><%# DeleteThis - if styling like button, remove both classes above and add standard button classes %>
   nnoremap <silent> ,mmdir_notes a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace><esc>
-  nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can easily change (ie text in source code)<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break<esc>
 
 
 
@@ -146,7 +146,7 @@ so ~/.dotfiles/mappings/embedded_ruby_mappings.vim
     " Html Show Group 3
     nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPP
     " Html Show Group 4
-    nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssc$a<returreturn></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
+    nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
     " Html Show Simple Container
     nnoremap <silent> ,hssc a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
 
@@ -249,7 +249,7 @@ so ~/.dotfiles/mappings/embedded_ruby_mappings.vim
     " Html Input SElect
     nmap <silent> ,hise a<%=<delete> ChangeForm_form.select(<delete><return>  :ChangeAttribute,<return>ChangeOptionsArray,<return>{ include_blank: 'Select' },<return>{<delete><return><tab>class: 'form-control',<return><esc>,hiat<backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|ChangeValue\\|true<return>
     " Html Input Select Options for select
-    nnoremap <silent> ,hiso aoptions_for_select(ChangeOptionsArray, ChangeSelectedOption),<esc>/ChangeOptionsArray\\|ChangeSelectedOption<return>
+    nnoremap <silent> ,hiso aoptions_for_select(ChangeOptionsArrayDisplayFirstValueSecond, ChangeSelectedOption),<esc>/ChangeOptionsArrayDisplayFirstValueSecond\\|ChangeSelectedOption<return>
     " Html Input Select Grouped options for select
     nnoremap <silent> ,hisg agrouped_options_for_select(ChangeOptionsHash, ChangeSelectedOption),<esc>/ChangeOptionsHash\\|ChangeSelectedOption<return>
     " Html Input Select Multiple
@@ -708,106 +708,6 @@ so ~/.dotfiles/mappings/embedded_ruby_mappings.vim
     nnoremap <silent> ,sbio amdi-edit mdi-delete mdi-more mdi-plus-circle-o mdi-check mdi-info-outline mdi-alert-triangle mdi-close-circle-o mdi-close mdi-plus
     " Stylesheet Base Text Colors
     nnoremap <silent> ,sbtc atext-primary text-secondary text-danger text-warning text-warning-2
-
-
-
-" Tests
-  " Base
-    " Tests Base Test Base
-    nnoremap <silent> ,tbtb atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
-    " Tests Base Assertions and Tools
-    nnoremap <silent> ,tbat :read ../templates/tests/assertions_and_tools.rb<return>
-    " Tests Base Upload fixture File
-    nnoremap <silent> ,tbuf :read ../templates/tests/misc/upload_fixture_file.rb<return><esc>/ChangeVariable\\|ChangePath\\|ChangeContentType\\|DeleteThisPls\\|ChangeObject\\|ChangeAttachment<return>
-
-  " Controller
-    " Tests Controller BAse
-    nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel<return>
-    " Tests Controller Scenarios Base
-    nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeValueForDifferentAccount\\|ChangeValue\\|ChangeHtmlMethod\\|ChangeUrlHelper\\|(id: @ChangeObject.id)\\|, params: ChangeAction_params\\|, xhr: true\\|ChangeUserWithPermission\\|ChangeInvalidValue<return>
-    " Tests Controller Test Base
-    nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/DeleteThis\\|ChangeAction\\|ChangeUserWithPermission\\|ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeId\\|, xhr: true\\|:success\\|ChangeTemplate\\|:redirect\\|ChangePath<return>
-    " Tests Controller Test Index
-    nnoremap <silent> ,tcti :read ../templates/tests/controller_test_index.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeModel\\|ChangeQuery\\|:id\\|ChangeLoad\\|ChangeDifAccountObject<return>
-    " Tests Controller Test Show
-    nnoremap <silent> ,tcts :read ../templates/tests/controller_test_show.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeObject\\|ChangeModel\\|ChangeLoad<return>
-    " Tests Controller Test New
-    nnoremap <silent> ,tctn o# DeleteThis - refactor test for show to fit new<esc>:read ../templates/tests/controller_test_show.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeObject\\|ChangeModel\\|ChangeLoad<return>
-    " Tests Controller Test Create
-    nnoremap <silent> ,tctc :read ../templates/tests/controller_test_create.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeModel\\|ChangePath\\|, xhr: true\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|:success\\|ChangeTemplate\\|:redirect\\|ChangeObject\\|ChangeChainToCoreAccountId<return>
-    " Tests Controller Test Edit
-    nnoremap <silent> ,tcte o# DeleteThis - refactor test for show to fit edit<esc>:read ../templates/tests/controller_test_show.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeObject\\|ChangeModel\\|ChangeLoad<return>
-    " Tests Controller Test Update
-    nnoremap <silent> ,tctu :read ../templates/tests/controller_test_update.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangePath\\|ChangeObject\\|, xhr: true\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|:success\\|ChangeTemplate\\|:redirect<return>
-    " Tests Controller Test Destroy
-    nnoremap <silent> ,tctd :read ../templates/tests/controller_test_destroy.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeModel\\|ChangePath\\|ChangeObject\\|, xhr: true\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|:success\\|ChangeTemplate\\|:redirect<return>
-    " Tests Controller REquest
-    nnoremap <silent> ,tcre  aChangeHtmlMethod ChangeUrlHelper_path(id: @ChangeObject.id), params: ChangeAction_params, headers{ ChangeHeaders }, xhr: true<esc>/ChangeHtmlMethod\\|ChangeUrlHelper\\|(id: @ChangeObject.id)\\|, params: ChangeAction_params\\|, headers{ ChangeHeaders }\\|, xhr: true<return>
-    " Tests Controller GEt (index)
-    nnoremap <silent> ,tcge aget ChangeUrlHelper_path<esc>/ChangeUrlHelper<return>
-    " Tests Controller GEt full (show or new or edit)
-    nnoremap <silent> ,tcgE aget ChangeUrlHelper_path(id: @ChangeModel.id)<esc>/ChangeUrlHelper\\|ChangeModel<return>
-    " Tests Controller POst
-    nnoremap <silent> ,tcpo apost ChangeUrlHelper_path, params: ChangeAction_params<esc>/ChangeUrlHelper\\|ChangeAction<return>
-    " Tests Controller PAtch
-    nnoremap <silent> ,tcpa apatch ChangeUrlHelper_path(ChangeModel), params: ChangeAction_params<esc>/ChangeUrlHelper\\|ChangeModel\\|ChangeAction<return>
-    " Tests Controller PAtch (full)
-    nnoremap <silent> ,tcpA apatch ChangeUrlHelper_path(ChangeModel), params: ChangeAction_params, headers{ ChangeHeaders }, env: ChangeEnvironment, xhr: true, as: :json<esc>/ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeAction\\|ChangeHeaders\\|ChangeEnvironment\\|:json<return>
-    " Tests Controller DElete
-    nnoremap <silent> ,tcde adelete ChangeUrlHelper_path(ChangeModel)<esc>/ChangeUrlHelper\\|ChangeModel<return>
-
-  " Helper
-    " Tests Helper BAse
-    nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
-
-  " Integration
-    " Tests Integration BAse
-    nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThis<return>
-
-  " Jobs
-    " Tests Job BAse
-    nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeObject\\|ChangeTableName\\|ChangeFixtureName<return>
-    nnoremap <silent> ,tjtb :read ../templates/tests/job_test_base.rb<return>/ChangeDescription\\|ChangeJobName\\|DeleteThis\\|ChangeJob\\|ChangeArgs\\|ChangeObject<return>
-
-  " Mailers
-    " Tests Mailer BAse
-    nmap <silent> ,tMba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
-    " Tests Mailer Test Base
-    nmap <silent> ,tMtb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
-
-  " Models
-    " Models Search
-    nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel<return>
-    " Tests Model BAse
-    nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
-    " Tests Models Belongs To
-    nmap <silent> ,tmbt atest 'ChangeChild should belong to ChangeParent' do<return>assert_equal @ChangeParent, @ChangeChild.ChangeParent<return>end<esc>,mmtest_model_search
-    " Tests Models Had One
-    nmap <silent> ,tmho atest 'ChangeParent should have one ChangeChild' do<return>assert_equal @ChangeChild, @ChangeParent.ChangeChild<return>end<esc>/,mmtest_model_search
-    " Tests Models Has Many
-    nmap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>,mmtest_model_search
-    " Tests Models Has Many through
-    nmap <silent> ,tmhM atest 'ChangeParent should have many ChangeChildren' do<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChildrenid).sort<return># DeleteThis - use this for all other has many through<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id), ChangeChildModel.where(ChangeAttributes)<return>end<esc>,mmtest_model_search
-    " Tests Models VAlidation
-    nmap <silent> ,tmva atest 'ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
-    " Tests Models Validation Unique with scope
-    nmap <silent> ,tmvu atest 'ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - make it valid by changing main attribute. Then repeat for all other attributes on scope<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return># Deletethis - repeat for all other attributes on scope (if any)<return><backspace><backspace>end<esc>,mmtest_model_search
-    " Tests Model Process attributes Strip
-    nmap <silent> ,tmps atest 'ChangeObject ChangeAttribute should be stripped' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '    a     ')<return>@ChangeObject.valid?<return>assert_equal 'a', @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
-    " Tests Model Process attributes Nil Blank
-    nmap <silent> ,tmpn atest 'ChangeObject ChangeAttribute should be nil if blank' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '')<return>assert_not_nil @ChangeObject.ChangeAttribute<return>@ChangeObject.valid?<return>assert_nil @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
-
-  " Test Tasks
-    " Test Tasks Base
-    nmap <silent> ,ttba :read ../templates/tests/task_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/ChangeThisPls\\|ChangeExpectedAction\\|ChangeTaskName\\|ChangeObject\\|ChangeTableName\\|ChangeFixtureName\\|DeleteThis\\|ChangeApplicationName<return>
-    
-  " Test Lib files
-    " Test Lib files BAse
-    nmap <silent> ,tlba :read ../templates/tests/lib_file_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|change_model_name\\|ChangeObject\\|ChangeFixture<return>
-
-  " Test Helpers
-    " Tests Test Helpers Base
-    nmap <silent> ,tthb :read ../templates/tests/test_helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangePathToTestHelpeBeingTested\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
 
 " Packages
   " Sortable Table positions

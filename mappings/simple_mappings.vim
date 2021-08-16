@@ -13,9 +13,9 @@
     " ruby interpolation
     inoremap <silent> ## #{}<left>
     " erb
-    inoremap <silent> <><space> <%  %><left><left><left>
+    inoremap <silent> <> <%  %><left><left><left>
     " erb entered
-    inoremap <silent> ><<space> <%=  %><left><left><left>
+    inoremap <silent> >< <%=  %><left><left><left>
     " J Query Select
     inoremap <silent> $$ $()<left>
 
@@ -37,7 +37,7 @@
     nmap <silent> = vvp
     vmap <silent> = p
     " redo
-    nnoremap du <C-r>
+    nnoremap <S-u> <C-r>
     " o and O but remain in normal mode
     nnoremap <silent> b o <backspace><esc>
     nnoremap <silent> B O <backspace><esc>
