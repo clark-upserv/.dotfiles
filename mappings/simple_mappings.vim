@@ -25,6 +25,10 @@
   " select word in visual mode (spacevim does this but I want to get rid of
   " spacevim_
   vnoremap v iw
+  " select entire page
+  vnoremap aa <esc>ggVG
+  " copy entire page
+  vnoremap ay <esc>ggVGy
   " copy word
   nnoremap <silent> y viwy
   " copy and search

@@ -140,7 +140,7 @@
   " File Edit (task) Test to Task
   nnoremap ,fetT :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnlib<esc>/_task_test\.rb<return>cgn.rake<esc>dd:e <C-R><C-R>+
   " File Edit Test to Lib file
-  nnoremap ,fetl :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnlib<esc>/_task_test\.rb<return>cgn.rake<esc>dd:e <C-R><C-R>+
+  nnoremap ,fetl :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnlib<esc>/_test<return>cgn<esc>dd:e <C-R><C-R>+
 
 " File Edit Preview
   " File Edit Preview to View

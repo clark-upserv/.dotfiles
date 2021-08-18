@@ -355,12 +355,10 @@ so ~/.dotfiles/mappings/window_management_mappings.vim
     nnoremap <silent> ,rmbv :read ../templates/models/base/virtual.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models Base Class
     nnoremap <silent> ,rmbc :read ../templates/models/base/class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
-    " Ruby Models Sub Class
-    nnoremap <silent> ,rmbs :read ../templates/models/base/sub_class.rb<return>ggdd/ChangeThisPls\\|change_args<return>
+    " Ruby Models Base Service
+    nnoremap <silent> ,rmbs :read ../templates/models/base/service.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models MOdule
     nnoremap <silent> ,rmbm :read ../templates/models/base/module.rb<return>ggdd/ChangeThisPls<return>
-    " Ruby Models SErvice
-    nnoremap <silent> ,rmbs :read ../templates/models/base/service.rb<return>ggdd/ChangeThisPls<return>
     " Ruby Models foreign key
     nnoremap <silent> ,rmfk a{ to_table: 'ChangeTableName' }<esc>/ChangeTableName<return>
     " Ruby Models Up Down

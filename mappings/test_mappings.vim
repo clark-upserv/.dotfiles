@@ -109,3 +109,5 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
   " Test Lib files BAse
   nmap <silent> ,tlba :read ../templates/tests/lib_file_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeType\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>
 
+  " Test Lib files BAse
+  nmap <silent> ,tsba :read ../templates/tests/services_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>
