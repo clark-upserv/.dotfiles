@@ -19,10 +19,10 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
   nnoremap <silent> ,tane aassert_no_enqueued_emails<esc>
   nnoremap <silent> ,tanE aassert_empty enqueued_emails('ChangeMailerAndEmail')<esc>/ChangeMailerAndEmail<return>
   " Tests Assert Enqueued Jobs
-  nnoremap <silent> ,taej aassert_enqueued_jobs ChangeCount, only: ChangeJob<esc>/ChangeCount\\|ChangeJob<return>
+  nnoremap <silent> ,taej aassert_enqueued_jobs ChangeCount, only: ::ChangeJob<esc>/ChangeCount\\|ChangeJob<return>
   " Tests Assert No enqueued Jobs
   nnoremap <silent> ,tanj aassert_no_enqueued_jobs
-  nnoremap <silent> ,tanJ aassert_no_enqueued_jobs only: ChangeJob<esc>/ChangeJob<return>
+  nnoremap <silent> ,tanJ aassert_no_enqueued_jobs only: ::ChangeJob<esc>/ChangeJob<return>
 
 " Controller
   " Tests Controller BAse

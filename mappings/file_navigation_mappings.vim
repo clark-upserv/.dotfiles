@@ -100,7 +100,7 @@
   " File Edit View to Helper
   nnoremap ,fevh :let @+ = expand('%:h')<return>$a<return><esc>p0/views<return>cgnhelpers<esc>A_helper.rb<esc>dd:e <C-R><C-R>+
   " File Edit View to Javascript pack
-  nnoremap ,fevj :let @+ = expand('%')<return>$a<return><esc>p<up><esc>/views<return>cgnjavascript/packs<esc>/html\.erb<return>cgnjs<esc>dd:e <C-R><C-R>+
+  nnoremap ,fevJ :let @+ = expand('%')<return>$a<return><esc>p<up><esc>/views<return>cgnjavascript/packs<esc>/html\.erb<return>cgnjs<esc>dd:e <C-R><C-R>+
   " File Edit View to Mailer
   nnoremap ,fevM :let @+ = expand('%:h')<return>$a<return><esc>pO<esc>/views<return>cgnmailers<esc>A.rb<esc><up>dddd:e <C-R><C-R>+
   " File Edit View to mailer Preview
@@ -115,6 +115,10 @@
 " File Edit Task
   " File Edit Task to Test
   nnoremap ,feTt :let @+ = expand('%')<return>$a<return><esc>p<up>$/lib<return>cgntest<esc>/\.rake<return>cgn_task_test.rb<esc>dd:e <C-R><C-R>+
+
+" File Edit Service
+  " File Edit Service to Test
+  nmap ,fest ,felt
 
 " File Edit Lib files
   " File Edit Libe file to Test
@@ -139,6 +143,8 @@
   nnoremap ,fetf :let @+ = expand("%:h")<return>$a<return><esc>p0/test<return>Ncgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
   " File Edit (task) Test to Task
   nnoremap ,fetT :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnlib<esc>/_task_test\.rb<return>cgn.rake<esc>dd:e <C-R><C-R>+
+  " File Edit Test to Service
+  nmap ,fets ,fetl
   " File Edit Test to Lib file
   nnoremap ,fetl :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnlib<esc>/_test<return>cgn<esc>dd:e <C-R><C-R>+
 
@@ -173,12 +179,12 @@ nnoremap <silent> ,faco :edit app/controllers/<space><backspace>
 nmap <silent> ,ftahe <space>fT/app<return><return>/helpers<return><return><esc>:noh<return>
 nnoremap <silent> ,fahe :edit app/helpers/<space><backspace>
 "
-nmap <silent> ,ftaja <space>fT/app<return><return>/javascript<return><return><esc>:noh<return>
-nnoremap <silent> ,faja :edit app/javascript/<space><backspace>
+nmap <silent> ,ftaJa <space>fT/app<return><return>/javascript<return><return><esc>:noh<return>
+nnoremap <silent> ,faJa :edit app/javascript/<space><backspace>
 "
-nmap <silent> ,ftajp <space>fT/app<return><return>/javascript<return><return>/packs<return><return><esc>:noh<return>
-nnoremap <silent> ,fajp :edit app/javascript/packs/<space><backspace>
-nnoremap <silent> ,fajs :edit app/javascript/packs/lib/show_edit_swap.js.erb<return>
+nmap <silent> ,ftaJp <space>fT/app<return><return>/javascript<return><return>/packs<return><return><esc>:noh<return>
+nnoremap <silent> ,faJp :edit app/javascript/packs/<space><backspace>
+nnoremap <silent> ,faJs :edit app/javascript/packs/lib/show_edit_swap.js.erb<return>
 "
 nmap <silent> ,ftajo <space>fT/app<return><return>/jobs<return><return><esc>:noh<return>
 nnoremap <silent> ,fajo :edit app/jobs/<space><backspace>
