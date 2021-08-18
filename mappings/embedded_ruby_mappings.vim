@@ -45,7 +45,7 @@ nnoremap <silent> ,erla a<%= link_to(ChangeDisplay, ChangePath_path, method: :Ch
 " Embedded Ruby Link to No href
 nmap <silent> ,erln a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon") %><return><esc>,mmno_href_comment<esc>/ChangeDisplay\\|no-href-link\\|no-href-icon\\|DeleteThis<return>
 " Embedded Ruby Link to Modal
-nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: 'no-href-link no-href-icon', data: { toggle: 'modal', target: '#ChangeModalId_modal' }) %><return><esc>,mmno_href_comment<esc>a<return><div id="ChangeModalId_modal" class="modal fade" tabindex="-1" role="dialog"><return><%= render('ChangePath/ChangeModal_modal', ChangeLocals) %><return></div><esc>/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeModal\\|ChangeLocals<return>
+nmap <silent> ,erlm a<%= content_tag('A', ChangeDisplay, class: 'no-href-link no-href-icon', data: { toggle: 'modal', target: '#ChangeModalId_modal' }) %><return><esc>,mmno_href_comment<esc>a<return><div id="ChangeModalId_modal" class="modal fade" tabindex="-1" role="dialog"><return><%= render('ChangePartialPath/ChangeModal_modal', ChangeLocals) %><return></div><esc>/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePartialPath\\|ChangeModal\\|ChangeLocals<return>
 " Embedded Ruby Link to Remote (attributes only)
 nnoremap <silent> ,erlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
 " Embedded Ruby Link to Remote (full)
@@ -61,13 +61,13 @@ nnoremap <silent> ,erjt a<%= javascript_include_tag('ChangePath') %><esc>/Change
 " Embedded Ruby StyleSheet
 nnoremap <silent> ,erss a<%= stylesheet_link_tag('ChangeThisPls') %><esc>/ChangeThisPls<return>
 " Embedded Ruby PArtial
-nnoremap <silent> ,erpa a<%= render('ChangePath', ChangeLocals) %><esc>/ChangePath\\|ChangeLocals<return>
+nnoremap <silent> ,erpa a<%= render('ChangePartialPath', ChangeLocals) %><esc>/ChangePartialPath\\|ChangeLocals<return>
 " Embedded Ruby PArtial (full)
-nnoremap <silent> ,erpA a<div id="ChangeId_container"><return><%= render('ChangePath', ChangeLocals) %><return></div><esc>/ChangeId\\|ChangePath\\|ChangeLocals<return>
+nnoremap <silent> ,erpA a<div id="ChangeId_container"><return><%= render('ChangePartialPath', ChangeLocals) %><return></div><esc>/ChangeId\\|ChangePartialPath\\|ChangeLocals<return>
 " Embedded Ruby Partials for Show edit swap
 nmap <silent> ,erps ,vsba
 " Embedded Ruby Puts Debugger
 nnoremap <silent> ,erpd a<% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW' %><return><% puts nil %><return><% puts 'ChangeLabel:' %><return><% puts ChangeThisPls %><esc>/ChangeLabel\\|ChangeThisPls<return>
 " Html Ruby Escape Javascript with partial
-nnoremap <silent> ,erej a<%= escape_javascript(render('ChangePath', ChangeLocals)) %><esc>/ChangePath\\|ChangeLocals<return>
+nnoremap <silent> ,erej a<%= escape_javascript(render(ChangeRender)) %><esc>/ChangeRender<return>
 

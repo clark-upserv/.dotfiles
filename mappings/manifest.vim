@@ -30,10 +30,13 @@
 "
 
 so ~/.dotfiles/mappings/simple_mappings.vim
-so ~/.dotfiles/mappings/file_mappings.vim
+so ~/.dotfiles/mappings/file_navigation_mappings.vim
 so ~/.dotfiles/mappings/view_mappings.vim
 so ~/.dotfiles/mappings/embedded_ruby_mappings.vim
 so ~/.dotfiles/mappings/test_mappings.vim
+so ~/.dotfiles/mappings/file_management_mappings.vim
+so ~/.dotfiles/mappings/buffer_management_mappings.vim
+so ~/.dotfiles/mappings/window_management_mappings.vim
 
 " truly random one off stuff
   " Caps lock in insert mode (press ctrl - ^ to toggle)
@@ -49,9 +52,9 @@ so ~/.dotfiles/mappings/test_mappings.vim
   " Misc. Reload Source
   nnoremap <silent> ,mrs :so ~/.dotfiles/mappings/manifest.vim<return>
   " Misc. DD but combine to previous line instead of delete line  (I<tab>
-  " makes sure there is at least something on the line because vvx on empty
-  " line deletes entire file contents...)
-  nmap <silent> ,mdd I<tab><esc>0vvxi<backspace><esc><right>
+  " makes sure there is at least something on the line because viwx on empty
+  " line deletes entire line and then grabs following line)
+  nmap <silent> ,mdd I<tab><esc>0viwxi<backspace><esc><right>
   " Misc. Dd but combine to Forward line instead of delete line
   nmap <silent> ,mdf $<down>,mdd
   nmap <silent> ,mde $<down>,mddi<lt>return><esc>
@@ -120,9 +123,9 @@ so ~/.dotfiles/mappings/test_mappings.vim
     " Html Show edit swap ASets
     nnoremap <silent> ,hsas a<% add_javascript_packs('lib/show_edit_swap') %><return><return><%= content_for :stylesheets do %><return><%= stylesheet_link_tag('lib/show_edit_swap') %><return><% end %><return><esc>
     " Html Show edit swap BAse
-    nnoremap <silent> ,hsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/show', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/edit', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,hsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePartialPath/show', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePartialPath/edit', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePartialPath\\|ChangeLocals<return>
     " Html Show edit swap Base New
-    nnoremap <silent> ,hsbn a<div id="ChangeSesId-ses-new-show"><return><%= render('ChangePath/show_new', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-new-ses-edit"><return><%= render('ChangePath/edit_new', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
+    nnoremap <silent> ,hsbn a<div id="ChangeSesId-ses-new-show"><return><%= render('ChangePartialPath/show_new', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-new-ses-edit"><return><%= render('ChangePartialPath/edit_new', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePartialPath\\|ChangeLocals<return>
     " Html Show edit swap Edit button - Button
     nnoremap <silent> ,hseb a<a class="btn btn-primary ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
     " Html Show edit swap Edit button - Icon
@@ -334,7 +337,7 @@ so ~/.dotfiles/mappings/test_mappings.vim
     nnoremap <silent> ,rbis a#{}<esc>i
 
     " Ruby Basic Dir
-    nmap <silent> ,rbdi ,mmdir_notesaDir['app/ChangePath/**/*.ChangeExtension*'].each do \|path\|<return># DeleteThisNote: add logic here...<return>DeleteThisNote: use this to clean file name: path.remove('<delete>app/ChangePath/').split('<delete>.ChangeExtension').first<return><backspace><backspace>end<esc>/DeleteThisNote\\|ChangePath\\|ChangeExtension<return>
+    nmap <silent> ,rbdi ,mmdir_notesaDir[Rails.root.join('app', 'ChangePath', '**', '*.ChangeExtension')].each do \|path\|<return># DeleteThisNote: add logic here...<return>DeleteThisNote: use this to clean file name: path.remove(Rails.root.join('app', 'ChangePath')).split('<delete>.ChangeExtension').first<return><backspace><backspace>end<esc>/DeleteThisNote\\|ChangePath\\|ChangeExtension<return>
     " Ruby basic Rails Root
     nnoremap <silent> ,rbrr aRails.root.join('ChangeThis', 'ChangeThis', 'Etc.')<esc>/ChangeThis\\|Etc.<return>
     " Ruby Basic BEgin
@@ -620,7 +623,7 @@ so ~/.dotfiles/mappings/test_mappings.vim
     " Javascript jQiery html
     nnoremap <silent> ,jqht ahtml("ChangeHtml")<esc>/ChangeHtml<return>
     " Javascript jQiery html (full)
-    nmap <silent> ,jqhT ahtml("<%= escape_javascript(render('ChangePath', ChangeLocals)) %>")<esc>/ChangePath\\|ChangeLocals<return><n
+    nmap <silent> ,jqhT ahtml("<%= escape_javascript(render(ChangeRender)) %>")<esc>/ChangeRender<return><n
     " Javascript jQiery EAch
     nmap <silent> ,jqea aeach(function(index){<return>})<esc>,,O
 
@@ -676,7 +679,7 @@ so ~/.dotfiles/mappings/test_mappings.vim
     " 
     nnoremap <silent> ,jvcd aconsole.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW1')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW2')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW3')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW4')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW5')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW6')<return>console.log(ChangeThis)<esc>/ChangeThis<return>
     " Javascript Vanilla Create Element
-    nnoremap <silent> ,jvce a// DeleteThis - create element<return><esc>0Cvar div = document.createElement('CHANGEELEMENTTYPE')<return>div.id = 'ChangeId'<return>div.classList.add('ChangeClass')<return>div.innerHTML = "<%= escape_javascript(render('ChangePath', ChangeLocals)) %>"<return><return>// DeleteThis - get parent if inserting at beginning or end of parent<return><esc>0Cvar parent = document.getElementById('ChangeId')<return>// DeleteThis - if inserting at beginning of parent<return><esc>0Cparent.prepend(div)<return>// DeleteThis - if inserting at end of parent<return><esc>0Cparent.append(div)<return><return>// DeleteThis - get sibling if inserting before or after sibling<return><esc>0Cvar sibling = document.getElementById('#ChangeSibling')<return>// DeleteThis - if inserting before sibling<return><esc>0Csibling.before(div)<return>// DeleteThis - if inserting after sibling<return><esc>0Csibling.after(div)<esc>/DeleteThis\\|CHANGEELEMENTTYPE\\|ChangeId\\|ChangeClass\\|ChangePath\\|ChangeLocals\\|ChangeSibling<return>
+    nnoremap <silent> ,jvce a// DeleteThis - create element<return><esc>0Cvar div = document.createElement('CHANGEELEMENTTYPE')<return>div.id = 'ChangeId'<return>div.classList.add('ChangeClass')<return>div.innerHTML = "<%= escape_javascript(render(ChangeRender)) %>"<return><return>// DeleteThis - get parent if inserting at beginning or end of parent<return><esc>0Cvar parent = document.getElementById('ChangeId')<return>// DeleteThis - if inserting at beginning of parent<return><esc>0Cparent.prepend(div)<return>// DeleteThis - if inserting at end of parent<return><esc>0Cparent.append(div)<return><return>// DeleteThis - get sibling if inserting before or after sibling<return><esc>0Cvar sibling = document.getElementById('#ChangeSibling')<return>// DeleteThis - if inserting before sibling<return><esc>0Csibling.before(div)<return>// DeleteThis - if inserting after sibling<return><esc>0Csibling.after(div)<esc>/DeleteThis\\|CHANGEELEMENTTYPE\\|ChangeId\\|ChangeClass\\|ChangeRender\\|ChangeSibling<return>
   " Javascript Ajax
     " Javascript Ajax BAse
     nnoremap <silent> ,jaba :read ../templates/javascript/ajax/base.js.erb<return>ggdd/DeleteThis<return>
@@ -719,5 +722,5 @@ so ~/.dotfiles/mappings/test_mappings.vim
 " Database
   " Seeds
     " BAse
-    nnoremap <silent> ,dsba a# frozen_string_literal: true<return><backspace><backspace><return>puts 'Loading ChangeName ChangeItems...'<return><return># Clear used values for all generators<return><backspace><backspace>Faker::UniqueGenerator.clear<return><return># Setup<return><backspace><backspace>account = Core::Account.first<retur>dif_account = Core::Account.second<return>user = Core::User.first<return>dif_account_user = dif_account.users.first<return><return>puts 'ChangeName ChangeItems completed'<esc>/ChangeName\\|ChangeItems<return>
+    nnoremap <silent> ,dsba a# frozen_string_literal: true<return><backspace><backspace><return>puts 'Loading ChangeName ChangeItems...'<return><return># Clear used values for all generators<return><backspace><backspace>Faker::UniqueGenerator.clear<return><return># Setup<return><backspace><backspace>account = Core::Account.first<return>dif_account = Core::Account.second<return>user = Core::User.first<return>dif_account_user = dif_account.users.first<return><return>puts 'ChangeName ChangeItems completed'<esc>/ChangeName\\|ChangeItems<return>
     

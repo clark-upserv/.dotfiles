@@ -14,19 +14,19 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 
 " Tests Assert
   " Tests Assert Enqueued Emails
-  nnoremap <silent> ,taee aassert_equal ChangeCount, enqueued_emails(ChangeMailer, :ChangeEmail)<esc>/ChangeCount\\|ChangeMailer\\|ChangeEmail<return>
+  nnoremap <silent> ,taee aassert_equal ChangeCount, enqueued_emails('ChangeMailerAndEmail').size<esc>/ChangeCount\\|ChangeMailerAndEmail<return>
   " Tests Assert No enqueued Emails
   nnoremap <silent> ,tane aassert_no_enqueued_emails<esc>
-  nnoremap <silent> ,tanE aassert_empty enqueued_emails(ChangeMailer, :ChangeEmail)<esc>/ChangeMailer\\|ChangeEmail<return>
+  nnoremap <silent> ,tanE aassert_empty enqueued_emails('ChangeMailerAndEmail')<esc>/ChangeMailerAndEmail<return>
   " Tests Assert Enqueued Jobs
-  nnoremap <silent> ,taej aassert_enqueued_jobs ChangeCount, only: ::ChangeJob<esc>/ChangeCount\\|ChangeJob<return>
+  nnoremap <silent> ,taej aassert_enqueued_jobs ChangeCount, only: ChangeJob<esc>/ChangeCount\\|ChangeJob<return>
   " Tests Assert No enqueued Jobs
   nnoremap <silent> ,tanj aassert_no_enqueued_jobs
-  nnoremap <silent> ,tanJ aassert_no_enqueued_jobs only: ::ChangeJob<esc>/ChangeJob<return>
+  nnoremap <silent> ,tanJ aassert_no_enqueued_jobs only: ChangeJob<esc>/ChangeJob<return>
 
 " Controller
   " Tests Controller BAse
-  nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel<return>
+  nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel<return>
   " Tests Controller Scenarios Base
   nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeValueForDifferentAccount\\|ChangeValue\\|ChangeHtmlMethod\\|ChangeUrlHelper\\|(id: @ChangeObject.id)\\|, params: ChangeAction_params\\|, xhr: true\\|ChangeUserWithPermission\\|ChangeInvalidValue<return>
   " Tests Controller Test Base
@@ -62,28 +62,28 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 
 " Helper
   " Tests Helper BAse
-  nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+  nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
 
 " Integration
   " Tests Integration BAse
-  nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThis<return>
+  nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThis<return>
 
 " Jobs
   " Tests Job BAse
-  nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeObject\\|ChangeTableName\\|ChangeFixtureName<return>
+  nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeObject\\|ChangeTableName\\|ChangeFixtureName<return>
   nnoremap <silent> ,tjtb :read ../templates/tests/job_test_base.rb<return>/ChangeDescription\\|ChangeJobName\\|DeleteThis\\|ChangeJob\\|ChangeArgs\\|ChangeObject<return>
 
 " Mailers
   " Tests Mailer BAse
-  nmap <silent> ,tMba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
+  nmap <silent> ,tMba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
   " Tests Mailer Test Base
   nmap <silent> ,tMtb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
 
 " Models
   " Models Search
-  nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel<return>
+  nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel\\|ChangeAssociation<return>
   " Tests Model BAse
-  nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
+  nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
   " Tests Models Belongs To
   nmap <silent> ,tmbt atest 'ChangeChild should belong to ChangeParent' do<return>assert_equal @ChangeParent, @ChangeChild.ChangeParent<return>end<esc>,mmtest_model_search
   " Tests Models Had One
@@ -91,7 +91,7 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
   " Tests Models Has Many
   nmap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>,mmtest_model_search
   " Tests Models Has Many through
-  nmap <silent> ,tmhM atest 'ChangeParent should have many ChangeChildren' do<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChildrenid).sort<return># DeleteThis - use this for all other has many through<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id), ChangeChildModel.where(ChangeAttributes)<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmhM atest 'ChangeParent should have many ChangeChildren' do<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChildrenid).sort<return># DeleteThis - use this for all other has many through<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.joins(:ChangeAssociation).where(ChangeAttributes).distinct.pluck(:id).sort<return>end<esc>,mmtest_model_search
   " Tests Models VAlidation
   nmap <silent> ,tmva atest 'ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
   " Tests Models Validation Unique with scope
@@ -103,9 +103,9 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 
 " Test Tasks
   " Test Tasks Base
-  nmap <silent> ,tTba :read ../templates/tests/task_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/ChangeThisPls\\|ChangeTestType\\|ChangeFile\\|ChangeExpectedAction\\|ChangeTaskName\\|DeleteThis\\|ChangeApplicationName<return>
+  nmap <silent> ,tTba :read ../templates/tests/task_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/ChangeThisPls\\|ChangeTestType\\|ChangeFile\\|ChangeExpectedAction\\|ChangeTaskName\\|DeleteThis\\|ChangeApplicationName<return>
   
 " Test Lib files
   " Test Lib files BAse
-  nmap <silent> ,tlba :read ../templates/tests/lib_file_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfvvp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeType\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>
+  nmap <silent> ,tlba :read ../templates/tests/lib_file_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeType\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>
 

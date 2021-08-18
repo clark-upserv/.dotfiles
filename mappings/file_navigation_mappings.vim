@@ -1,3 +1,6 @@
+" File Paste
+  " File Paste Partial Path
+  nnoremap ,fppp :let @+ = expand('%:h')<return>$a<return><esc>p<up>$/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>0/ChangePartialPath<return>viwp
 " File Copy
   " File Copy Current Path
   nnoremap ,fccp :let @+ = expand('%:h') . '/'<return>
@@ -55,7 +58,7 @@
   " File Edit Helper to View
   nnoremap ,fehv :let @+ = expand("%")<return>$a<return><esc>pO<esc>/helpers<return>cgnviews<esc>/_helper.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
   " File Edit Helper to (helper) Test
-  "
+  nnoremap ,feht :let @+ = expand("%")<return>$a<return><esc>p<up>$/app<return>cgntest<esc>/_helper.rb<return>cgn_helper_test.rb<esc>dd:e <C-R><C-R>+
 
 " File Edit Javascript
   " File Edit Javascript pack to Stylesheet
@@ -176,13 +179,12 @@ nnoremap <silent> ,faja :edit app/javascript/<space><backspace>
 nmap <silent> ,ftajp <space>fT/app<return><return>/javascript<return><return>/packs<return><return><esc>:noh<return>
 nnoremap <silent> ,fajp :edit app/javascript/packs/<space><backspace>
 nnoremap <silent> ,fajs :edit app/javascript/packs/lib/show_edit_swap.js.erb<return>
-
 "
 nmap <silent> ,ftajo <space>fT/app<return><return>/jobs<return><return><esc>:noh<return>
 nnoremap <silent> ,fajo :edit app/jobs/<space><backspace>
 " Edit App/MAilers
-nmap <silent> ,ftama <space>fT/app<return><return>/mailers<return><return><esc>:noh<return>
-nnoremap <silent> ,fama :edit app/mailers/<space><backspace>
+nmap <silent> ,ftaMa <space>fT/app<return><return>/mailers<return><return><esc>:noh<return>
+nnoremap <silent> ,faMa :edit app/mailers/<space><backspace>
 " Edit App/MOddels
 nmap <silent> ,ftamo <space>fT/app<return><return>/models<return><return><esc>:noh<return>
 nnoremap <silent> ,famo :edit app/models/<space><backspace>
