@@ -3,6 +3,8 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 " Base
   " Tests Base Test Base
   nnoremap <silent> ,tbtb atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
+  " Tests Base Test Method
+  nnoremap <silent> ,tbtm atest 'ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
   " Tests Base Perform enqueued Jobs
   nnoremap <silent> ,tbpj aperform_enqueued_jobs<esc>
 
@@ -96,7 +98,7 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
   nmap <silent> ,tmva atest 'ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
   " Tests Models Validation Unique with scope
   nmap <silent> ,tmvu atest 'ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - make it valid by changing main attribute. Then repeat for all other attributes on scope<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return># Deletethis - repeat for all other attributes on scope (if any)<return><backspace><backspace>end<esc>,mmtest_model_search
-  " Tests Model Process attributes Strip
+  " Tests ModelProcess attributes Strip
   nmap <silent> ,tmps atest 'ChangeObject ChangeAttribute should be stripped' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '    a     ')<return>@ChangeObject.valid?<return>assert_equal 'a', @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
   " Tests Model Process attributes Nil Blank
   nmap <silent> ,tmpn atest 'ChangeObject ChangeAttribute should be nil if blank' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '')<return>assert_not_nil @ChangeObject.ChangeAttribute<return>@ChangeObject.valid?<return>assert_nil @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search

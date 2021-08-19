@@ -2,6 +2,8 @@
   " File Paste Partial Path
   nnoremap ,fppp :let @+ = expand('%:h')<return>$a<return><esc>p<up>$/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>0/ChangePartialPath<return>viwp
 " File Copy
+  " File Copy File Name
+  nnoremap ,fcfn :let @+ = expand("%:t:r")<return>
   " File Copy Current Path
   nnoremap ,fccp :let @+ = expand('%:h') . '/'<return>
   " File Copy Current File
