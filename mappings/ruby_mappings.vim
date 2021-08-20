@@ -49,26 +49,22 @@
   nnoremap <silent> ,rbst astrftime('%A, %B %-d, %Y')<return># DeleteThis - %A gets day spelled out - "Sunday"; %a gets day spelled out abbreviated - "Sun"<return>DeleteThis - %B gets month spelled out - "January"; %b gets month spelled out abbreviated - "Jan"<return>DeleteThis - %d gets day of month (ex 01-31); %-d gets day of month with blank instead of 0 padding (ex 1-31)<return>DeleteThis - %Y gets full year - 2021; %y gets last 2 digits of year - 21<return>DeleteThis - see here for more https://apidock.com/ruby/DateTime/strftime<esc>/%A, %B %-d, %Y\\|DeleteThis<return>
 
 " Ruby Block
-  " Ruby Block EAch block
+  " Ruby Block EAch
   nnoremap <silent> ,rbea aeach do \|ChangeThisPls\|<return>end<esc>/ChangeThisPls<return>cgn
-  inoremap <silent> .each .each do \|\|<return>end<esc><up>$i
-  " Ruby Block EAch inline
   nnoremap <silent> ,rbeA aeach { \|ChangeThisPls\| ChangeThisPls }<esc>/ChangeThisPls<return>
-  " Ruby Block Each With index block
+  inoremap <silent> .eachb .each do \|\|<return>end<esc><up>$i
+  " Ruby Block Each With index
   nnoremap <silent> ,rbew aeach_with_index do \|ChangeThisPls, index\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
-  " Ruby Block Each With index inline
   nnoremap <silent> ,rbeW aeach_with_index { \|ChangeThisPls, index\| ChangeThisPls }<esc>/ChangeThisPls<return>
-  " Ruby Block MAp block
+  " Ruby Block MAp
   nnoremap <silent> ,rbma amap do \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
-  " Ruby Block MAp inline
   nnoremap <silent> ,rbmA amap { <bar>ChangeThisPls<bar> ChangeThisPls }<esc>/ChangeThisPls<return>
-  " Ruby Block SElect block
+  " Ruby Block SElect
   nnoremap <silent> ,rbse aselect <bar>ChangeThisPls<bar><return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
-  " Ruby Block SElect inline
   nnoremap <silent> ,rbsE aselect { <bar>ChangeThisPls<bar> ChangeThisPls }<esc>/ChangeThisPls<return>
   " Ruby Block SOrt
   nnoremap <silent> ,rbso asort { <bar>ChangeThisPls, ChangeThisPls<bar> ChangeThisPls <=> ChangeThisPls }<esc>/ChangeThisPls<return>
-  inoremap <silent> ..sort .sort { <bar>a, b<bar> a.ChangeThisPls <=> b.ChangeThisPls }<esc>/ChangeThisPls<return>
+  inoremap <silent> .sorti .sort { <bar>a, b<bar> a.ChangeThisPls <=> b.ChangeThisPls }<esc>/ChangeThisPls<return>cgn
 
 " Ruby model mappings
   " Ruby Models BAse
