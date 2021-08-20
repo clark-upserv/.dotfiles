@@ -4,7 +4,7 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
   " Tests Base Test Base
   nnoremap <silent> ,tbtb atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
   " Tests Base Test Method
-  nnoremap <silent> ,tbtm atest 'ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
+  nnoremap <silent> ,tbtm atest 'ChangeMethodName method' do<return>end<esc>/ChangeMethodName<return>
   " Tests Base Perform enqueued Jobs
   nnoremap <silent> ,tbpj aperform_enqueued_jobs<esc>
 
@@ -83,17 +83,19 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 
 " Models
   " Models Search
-  nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel\\|ChangeAssociation<return>
+  nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel\\|ChangeAssociation\\|ChangeTable\\|ChangeFixture\\|ChangeScope\\|ChangeClass<return>
   " Tests Model BAse
   nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
   " Tests Models Belongs To
-  nmap <silent> ,tmbt atest 'ChangeChild should belong to ChangeParent' do<return>assert_equal @ChangeParent, @ChangeChild.ChangeParent<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmbt atest 'ChangeChild should belong to ChangeParent' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeChild.ChangeParent<return>end<esc>,mmtest_model_search
   " Tests Models Had One
-  nmap <silent> ,tmho atest 'ChangeParent should have one ChangeChild' do<return>assert_equal @ChangeChild, @ChangeParent.ChangeChild<return>end<esc>/,mmtest_model_search
+  nmap <silent> ,tmho atest 'ChangeParent should have one ChangeChild' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeParent.ChangeChild<return>end<esc>/,mmtest_model_search
   " Tests Models Has Many
-  nmap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>assert_equal samples = [ChangeTable(:ChangeFixture)], @ChangeParent.ChangeChildren & samples<return>assert_empty [ChangeTable(:ChangeFixture)] & @ChangeParent.ChangeChildren<return>end<esc>,mmtest_model_search
   " Tests Models Has Many through
-  nmap <silent> ,tmhM atest 'ChangeParent should have many ChangeChildren' do<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChildrenid).sort<return># DeleteThis - use this for all other has many through<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.joins(:ChangeAssociation).where(ChangeAttributes).distinct.pluck(:id).sort<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmhM atest 'ChangeParent should have many ChangeChildren' do<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChildrenid).sort<return># DeleteThis - use this if there is an inverse<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.distinct.pluck(:id).sort, ChangeChildModel.joins(:ChangeAssociation).where(id: @ChangeParent.id).distinct.pluck(:id).sort<return>assert_equal samples = [ChangeTable(:ChangeFixture)], @ChangeParent.ChangeChildren & samples<return>assert_empty [ChangeTable(:ChangeFixture)] & @ChangeParent.ChangeChildren<return>end<esc>,mmtest_model_search
+  " Tests Models SCope
+  nmap <silent> ,tmhm atest 'ChangeScope scope' do<return>assert_equal samples = [ChangeTable(:ChangeFixture)], ChagneClass.ChangeScope & samples<return>assert_empty [ChangeTable(:ChangeFixture)] & ChagneClass.ChangeScope<return># DeleteThis - idk how to test sort...tbd!<return><backspace><backspace>end<esc>,mmtest_model_search
   " Tests Models VAlidation
   nmap <silent> ,tmva atest 'ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
   " Tests Models Validation Unique with scope

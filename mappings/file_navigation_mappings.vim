@@ -96,7 +96,7 @@
 
 " File Edit View
   " File Edit View to Stylesheet
-  nnoremap ,fevs :let @+ = expand('%')<return>$a<return><esc>p0/views<return>cgnassets/stylesheets<esc>0/html.erb<return>cgnscss<esc>dd:e <C-R><C-R>+
+  nnoremap ,fevS :let @+ = expand('%')<return>$a<return><esc>p0/views<return>cgnassets/stylesheets<esc>0/html.erb<return>cgnscss<esc>dd:e <C-R><C-R>+
   " File Edit View to Controller
   nnoremap ,fevc :let @+ = expand('%:h')<return>$a<return><esc>p<up>/views<return>cgncontrollers<esc>A_controller.rb<esc>dd:e <C-R><C-R>+
   " File Edit View to Helper
@@ -168,8 +168,8 @@
 nmap <silent> ,ftaas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
 nnoremap <silent> ,faas :edit app/assets/<space><backspace>
 " Edit App Assets Css (stylesheets)
-nmap <silent> ,ftaac <space>fT/app<return><return>/assets<return><return>/stylesheets<return><return><esc>:noh<return>
-nnoremap <silent> ,faac :edit app/assets/stylesheets/<space><backspace>
+nmap <silent> ,ftaaS <space>fT/app<return><return>/assets<return><return>/stylesheets<return><return><esc>:noh<return>
+nnoremap <silent> ,faaS :edit app/assets/stylesheets/<space><backspace>
 "
 nmap <silent> ,ftach <space>fT/app<return><return>/channels<return><return><esc>:noh<return>
 nnoremap <silent> ,fach :edit app/channels/<space><backspace>

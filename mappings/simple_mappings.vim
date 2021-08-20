@@ -15,9 +15,9 @@
   " ruby interpolation
   inoremap <silent> ## #{}<left>
   " erb
-  inoremap <silent> <> <%  %><left><left><left>
+  inoremap <silent> <<< <%  %><left><left><left>
   " erb entered
-  inoremap <silent> >< <%=  %><left><left><left>
+  inoremap <silent> >>> <%=  %><left><left><left>
   " J Query Select
   inoremap <silent> $$ $()<left>
 
