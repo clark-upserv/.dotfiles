@@ -52,19 +52,34 @@
   " Ruby Block EAch
   nnoremap <silent> ,rbea aeach do \|ChangeThisPls\|<return>end<esc>/ChangeThisPls<return>cgn
   nnoremap <silent> ,rbeA aeach { \|ChangeThisPls\| ChangeThisPls }<esc>/ChangeThisPls<return>
-  inoremap <silent> .eachb .each do \|\|<return>end<esc><up>$i
+  " [shorthand]
+  inoremap <silent> eachb each do \|\|<return>end<esc><up>$i
+  inoremap <silent> eachi each { \|\| ChangeThisPls }<esc>/ChangeThisPls<return>2<left>i
+  inoremap <silent> eachs each(&:)<left>
   " Ruby Block Each With index
   nnoremap <silent> ,rbew aeach_with_index do \|ChangeThisPls, index\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
   nnoremap <silent> ,rbeW aeach_with_index { \|ChangeThisPls, index\| ChangeThisPls }<esc>/ChangeThisPls<return>
+  inoremap <silent> eachwb each_with_index do \|, index\|<return>end<esc><up>$7<left>i
+  inoremap <silent> eachwi each_with_index { \|, index\| ChangeThisPls }<esc>/ChangeThisPls<return>9<left>i
   " Ruby Block MAp
   nnoremap <silent> ,rbma amap do \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
-  nnoremap <silent> ,rbmA amap { <bar>ChangeThisPls<bar> ChangeThisPls }<esc>/ChangeThisPls<return>
+  nnoremap <silent> ,rbmA amap { \|ChangeThisPls\| ChangeThisPls }<esc>/ChangeThisPls<return>
+  inoremap <silent> mapb map do \|\|<return>end<esc><up>$i
+  inoremap <silent> mapi map { \|\| ChangeThisPls }<esc>/ChangeThisPls<return>2<left>i
+  inoremap <silent> maps map(&:)<left>
   " Ruby Block SElect
-  nnoremap <silent> ,rbse aselect <bar>ChangeThisPls<bar><return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
-  nnoremap <silent> ,rbsE aselect { <bar>ChangeThisPls<bar> ChangeThisPls }<esc>/ChangeThisPls<return>
+  nnoremap <silent> ,rbse aselect \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
+  nnoremap <silent> ,rbsE aselect { \|ChangeThisPls\| ChangeThisPls }<esc>/ChangeThisPls<return>
+  " [shorthand]
+  inoremap <silent> selectb select do \|\|<return>end<esc><up>$i
+  inoremap <silent> selecti select { \|\| ChangeThisPls }<esc>/ChangeThisPls<return>2<left>i
+  inoremap <silent> selects select(&:)<left>
   " Ruby Block SOrt
-  nnoremap <silent> ,rbso asort { <bar>ChangeThisPls, ChangeThisPls<bar> ChangeThisPls <=> ChangeThisPls }<esc>/ChangeThisPls<return>
-  inoremap <silent> .sorti .sort { <bar>a, b<bar> a.ChangeThisPls <=> b.ChangeThisPls }<esc>/ChangeThisPls<return>cgn
+  nnoremap <silent> ,rbso asort do \|a, b\|<retrun>a.ChangeThisPls <=> b.ChangeThisPls<return>end<esc>/ChangeThisPls<return>
+  nnoremap <silent> ,rbsO asort { \|a, b\| a.ChangeThisPls <=> b.ChangeThisPls }<esc>/ChangeThisPls<return>
+  " [block]
+  inoremap <silent> sortb sort do \|a, b\|<return>a.ChangeThisPls <=> b.ChangeThisPls<return>end<esc>/ChangeThisPls<return>cgn
+  inoremap <silent> sorti sort { \|a, b\| a.ChangeThisPls <=> b.ChangeThisPls }<esc>/ChangeThisPls<return>cgn
 
 " Ruby model mappings
   " Ruby Models BAse

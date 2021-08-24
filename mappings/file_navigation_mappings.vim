@@ -1,6 +1,7 @@
 " File Paste
   " File Paste Partial Path
   nnoremap ,fppp :let @+ = expand('%:h')<return>$a<return><esc>p<up>$/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>0/ChangePartialPath<return>viwp
+
 " File Copy
   " File Copy File Name
   nnoremap ,fcfn :let @+ = expand("%:t:r")<return>
@@ -13,7 +14,7 @@
   " File Copy Partial File
   nnoremap ,fcpf :let @+ = expand('%')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>dd
   " File Copy Rails Test
-  nnoremap ,fcrt :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>
+  nnoremap ,fcrt :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>:w<return>
 
 " File Edit basics
   " File Edit SEarch
@@ -33,7 +34,7 @@
   " File Edit Stylesheet to Javascript pack
   "
   " File Edit Stylesheet to View
-  nnoremap ,feSv :let @+ = expand("%")<return>$a<return><esc>p$a<return><esc>/assets\/stylesheets<return>cgnviews<esc>/scss<return>cgnhtml.erb<esc><up>dddd:e <c-r><c-r>+
+  nnoremap ,feSv :let @+ = expand("%")<return>$a<return><esc>p$a<return><esc>/assets\/stylesheets<return>cgnviews<esc>/scss<return>cgnhtml.erb<esc><up>dddd:e <C-R><C-R>+
   " File Edit Stylesheet to (controller) Test
   "
 " File Edit Controller

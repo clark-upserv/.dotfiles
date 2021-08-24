@@ -4,10 +4,14 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
   " Tests Base Test Base
   nnoremap <silent> ,tbtb atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
   " Tests Base Test Method
-  nnoremap <silent> ,tbtm atest 'ChangeMethodName method' do<return>end<esc>/ChangeMethodName<return>
+  nnoremap <silent> ,tbtm atest 'method ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
   " Tests Base Perform enqueued Jobs
   nnoremap <silent> ,tbpj aperform_enqueued_jobs<esc>
+  " Tests Base Test File
+  nmap ,tbtf ,fcrt<space>wt<C-c><esc>p$a<return>
+  
 
+  
 " Tests Fixtures
   " Tests Fixtures BAse
   nnoremap <silent> @ChangeObject = ChangeTable(:ChangeFixture)<esc>/ChangeObject\\|ChangeTable\\|ChangeFixture<return>
@@ -83,27 +87,41 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 
 " Models
   " Models Search
-  nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel\\|ChangeAssociation\\|ChangeTable\\|ChangeFixture\\|ChangeScope\\|ChangeClass<return>
+  nnoremap <silent> ,mmtest_model_search /ChangeParentOrClass\\|ChangeParent\\|ChangeAssoctionaOrScope\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel\\|ChangeAssociation\\|ChangeTable\\|ChangeFixture\\|ChangeScope\\|ChangeClass\\|ChangeThisPls\\|ChangeDescription<return>
   " Tests Model BAse
   nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
   " Tests Models Belongs To
-  nmap <silent> ,tmbt atest 'ChangeChild should belong to ChangeParent' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeChild.ChangeParent<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmbt atest 'association ChangeParent - belongs to' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeChild.ChangeParent<return>end<esc>,mmtest_model_search
   " Tests Models Had One
-  nmap <silent> ,tmho atest 'ChangeParent should have one ChangeChild' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeParent.ChangeChild<return>end<esc>/,mmtest_model_search
+  nmap <silent> ,tmho atest 'association ChangeChild - has one' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeParent.ChangeChild<return>end<esc>/,mmtest_model_search
   " Tests Models Has Many
-  nmap <silent> ,tmhm atest 'ChangeParent should have many ChangeChildren' do<return>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort<return>assert_equal samples = [ChangeTable(:ChangeFixture)], @ChangeParent.ChangeChildren & samples<return>assert_empty [ChangeTable(:ChangeFixture)] & @ChangeParent.ChangeChildren<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmhm atest 'association ChangeChildren - has many' do<return>assert_equal ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort, @ChangeParent.ChangeChildren.pluck(:id).sort<return>end<esc>,mmtest_model_search
   " Tests Models Has Many through
-  nmap <silent> ,tmhM atest 'ChangeParent should have many ChangeChildren' do<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.pluck(:id).sort, ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChildrenid).sort<return># DeleteThis - use this if there is an inverse<return><backspace><backspace>assert_equal @ChangeParent.ChangeChildren.distinct.pluck(:id).sort, ChangeChildModel.joins(:ChangeAssociation).where(id: @ChangeParent.id).distinct.pluck(:id).sort<return>assert_equal samples = [ChangeTable(:ChangeFixture)], @ChangeParent.ChangeChildren & samples<return>assert_empty [ChangeTable(:ChangeFixture)] & @ChangeParent.ChangeChildren<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmhM atest 'association ChangeChildren - has many through' do<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChild_id).sort, @ChangeParent.ChangeChildren.pluck(:id).sort<return># DeleteThis - if not simple connection but does have inverse, use this<return><backspace><backspace>assert_equal ChangeChildModel.joins(:ChangeAssociation).where(id: @ChangeParent.id).distinct.pluck(:id).sort, @ChangeParent.ChangeChildren.distinct.pluck(:id).sort<return><esc>,tminend<esc>,mmtest_model_search
   " Tests Models SCope
-  nmap <silent> ,tmhm atest 'ChangeScope scope' do<return>assert_equal samples = [ChangeTable(:ChangeFixture)], ChagneClass.ChangeScope & samples<return>assert_empty [ChangeTable(:ChangeFixture)] & ChagneClass.ChangeScope<return># DeleteThis - idk how to test sort...tbd!<return><backspace><backspace>end<esc>,mmtest_model_search
-  " Tests Models VAlidation
-  nmap <silent> ,tmva atest 'ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
-  " Tests Models Validation Unique with scope
-  nmap <silent> ,tmvu atest 'ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - make it valid by changing main attribute. Then repeat for all other attributes on scope<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return># Deletethis - repeat for all other attributes on scope (if any)<return><backspace><backspace>end<esc>,mmtest_model_search
+  nmap <silent> ,tmsc atest 'scope ChangeScope' do<return>assert_equal ChangeClass.where(ChangeThisPls).pluck(:id).sort, ChangeClass.ChangeScope.pluck(:id).sort<return><space><backspace><esc>,tmin# DeleteThis - idk how to test sort...tbd!<return><backspace><backspace>end<esc>,mmtest_model_search
+  " Tests Models Included and Not included
+  nnoremap <silent> ,tmin a# DeleteThis - Use this for scopes and non-simeple connection table has many through<return><backspace><backspace>included = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_equal included, ChangeParentOrClass.ChangeAssoctionaOrScope & included<return>not_included = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>not_included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_empty not_included & ChangeParentOrClass.ChangeAssoctionaOrScope<return>
+  " Tests Models ATtribute
+  " Tests Models Attribute Enum
+  " Tests Models Attributes Hash
+  " Tests Models Attributes Array
+  " Tests Models CAllbacks
+  nnoremap <silent> ,tmme atest 'callback ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
   " Tests ModelProcess attributes Strip
-  nmap <silent> ,tmps atest 'ChangeObject ChangeAttribute should be stripped' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '    a     ')<return>@ChangeObject.valid?<return>assert_equal 'a', @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmps atest 'callback ChangeObject ChangeAttribute should be stripped' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '    a     ')<return>@ChangeObject.valid?<return>assert_equal 'a', @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
   " Tests Model Process attributes Nil Blank
-  nmap <silent> ,tmpn atest 'ChangeObject ChangeAttribute should be nil if blank' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '')<return>assert_not_nil @ChangeObject.ChangeAttribute<return>@ChangeObject.valid?<return>assert_nil @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmpn atest 'callback ChangeObject ChangeAttribute should be nil if blank' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '')<return>assert_not_nil @ChangeObject.ChangeAttribute<return>@ChangeObject.valid?<return>assert_nil @ChangeObject.ChangeAttribute<return>end<esc>,mmtest_model_search
+  " Tests Models VAlidation
+  nmap <silent> ,tmva atest 'validation ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>,mmtest_model_search
+  " Tests Models Validation Unique with scope
+  nmap <silent> ,tmvu atest 'validation ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - make it valid by changing main attribute. Then repeat for all other attributes on scope<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return># Deletethis - repeat for all other attributes on scope (if any)<return><backspace><backspace>end<esc>,mmtest_model_search
+  " Tests Models Attribute instance Method
+  nnoremap <silent> ,tmam atest 'attribute instance method ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
+  " Tests Models Query instance Method
+  nnoremap <silent> ,tmqm atest 'query instance method ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
+  " Tests Models Service instance Method
+  nnoremap <silent> ,tmsm atest 'service instance method ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
 
 " Test Tasks
   " Test Tasks Base
