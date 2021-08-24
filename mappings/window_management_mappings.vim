@@ -9,35 +9,27 @@ nnoremap <space>wm :only<return>
 " Window Terminal
 nmap <space>wt :call OpenTerminalInWindow()<return>
 " find if there is a terminal in a current window
+" need to fix this so that it opens first terminal not first zsh bucause 1)
+" some people might not use zsh and 2) there could be multiple terminal and /
+" or zsh buffers open
 function! OpenTerminalInWindow()
-  let l:blist = getbufinfo({'bufloaded': 1, 'buflisted': 1})
-  let l:result = []
+  let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1 && v:val.hidden == 0'), 'v:val.bufnr')
   for l:item in l:blist
-    "skip unnamed buffers; also skip hidden buffers?
-    if empty(l:item.name) || l:item.hidden
-        continue
+    if getbufvar(l:item, '&buftype') == 'terminal'
+      let windowNr = bufwinnr(l:item)
+      execute windowNr 'wincmd w'
+      return
+
     endif
-    "call add(l:result, shellescape(l:item.name))
-    call add(l:result, l:item.name)
   endfor
-  let a = join(l:result)
-  let b = substitute(a, "'", '', 'g')
-  let c = split(b, '/')
-  " if there is not a terminal in an active window, create new window
-  echo l:result
-  if index(c, 'zsh') == -1
-    execute ':bo sp'
-    " if terminal is present in a buffer, open that buffer (rather than 
-    " openning new buffer with new terminal) 
-    try
-      execute ":buffer zsh"
-    " else, open new buffer with new terminal
-    catch    
-      execute ":ter"
-    endtry
-  " if active, then switch to that window
-  else
-    let windowNr = bufwinnr('zsh')
-    execute windowNr 'wincmd w'
-  endif
+  execute ':bo sp'
+  let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1 && v:val.hidden == 1'), 'v:val.bufnr')
+  for l:item in l:blist
+    if getbufvar(l:item, '&buftype') == 'terminal'
+      execute ':buf' l:item
+      return
+
+    endif
+  endfor
+  execute ':ter'
 endfunction

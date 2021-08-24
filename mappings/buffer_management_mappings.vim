@@ -1,3 +1,51 @@
+nnoremap <silent> <A-right> :call GoToNextbuf(1)<return>
+inoremap <silent> <A-right> <esc>:call GoToNextbuf(1)<return>
+nnoremap <silent> <A-left> :call GoToNextbuf(0)<return>
+inoremap <silent> <A-left> <esc>:call GoToNextbuf(0)<return>
+function! GoToNextbuf(direction)
+  if a:direction == 1
+    let adj = 1
+  else
+    let adj = -1
+  end
+  let continue = 1
+  while continue 
+    let nbuf = NextBuf(adj)
+    if nbuf == bufnr()
+      let continue = 0
+    endif
+    if getbufvar(nbuf, '&buftype') == 'terminal'
+      if a:direction == 1
+        let adj = adj + 1
+      else
+        let adj = adj - 1
+      endif
+    else
+      let continue = 0
+    endif
+  endwhile
+  exec ':buf' nbuf 
+endfunction
+function! NextBuf(adj)
+  let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')
+  let l:len = len(l:blist)
+  let cbuf = bufnr()
+  let cpos = index(l:blist, cbuf)
+  let ncount = cpos + a:adj
+  while ncount > l:len
+    let ncount = ncount - l:len
+  endwhile
+  while ncount <= 0
+    let ncount = ncount + l:len
+  endwhile
+  if ncount == l:len
+    let nbuf = l:blist[0]
+  else
+    let nbuf = l:blist[ncount]
+  endif
+  return nbuf
+endfunction
+
 " Buffer Delete
 nnoremap <space>bd :call ClearBuffer()<return>
 function! ClearBuffer()
@@ -13,7 +61,7 @@ nnoremap <space>bc :call ClearBuffers()<return>
 function! ClearBuffers()
   " listed is buffers in tabs; loaded is basiclly listed + any loaded files
   " that are not in the tabs - only example I have of this is nerd tree.
-  " Not hidden is any loaded buffer in a window plus all non-loaded buffers.
+  " Not hidden is any loaded buffer in a window plus all other non-loaded buffers.
   " We want to clear the listed_hidden.
   let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1 && v:val.hidden == 1'), 'v:val.bufnr')
   for l:item in l:blist
@@ -46,10 +94,17 @@ endfunction
 nnoremap <space>bC :%bd!\|e#\|bd#<return>
 " Buffer Terminal 
 nnoremap <space>bt :call OpenTerminal()<return>
+" need to fix this so that it opens first terminal not first zsh bucause 1)
+" some people might not use zsh and 2) there could be multiple terminal and /
+" or zsh buffers open
 function! OpenTerminal()
-  try
-    execute ":buffer zsh"
-  catch    
-    execute ":ter"
-  endtry
+  let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')
+  for l:item in l:blist
+    if getbufvar(l:item, '&buftype') == 'terminal'
+      execute ':buf' l:item
+      return
+
+    endif
+  endfor
+  execute ':ter'
 endfunction

@@ -1,5 +1,5 @@
 # include custom zsh aliases
-source ~/.dotfiles/aliases_and_functions/manifest.zsh
+source ~/.dotfiles/zsh/manifest.zsh
 
 # use openssl 1.1 for downloading home-brew gems. This can cause issues with older versions of ruby that require openssl 1.0 (or earlier versions)
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
