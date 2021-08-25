@@ -34,7 +34,7 @@
   " File Edit Stylesheet to Javascript pack
   "
   " File Edit Stylesheet to View
-  nnoremap ,feSv :let @+ = expand("%")<return>$a<return><esc>p$a<return><esc>/assets\/stylesheets<return>cgnviews<esc>/scss<return>cgnhtml.erb<esc><up>dddd:e <C-R><C-R>+
+  nnoremap ,feSv :let @+ = expand("%")<return>$a<return><esc>p<up>$/assets\/stylesheets<return>cgnviews<esc>/scss<return>cgnhtml.erb<esc>dd:e <C-R><C-R>+
   " File Edit Stylesheet to (controller) Test
   "
 " File Edit Controller
@@ -164,6 +164,21 @@
   nnoremap ,fefm :let @+ = expand("%:h")<return>$a<return><esc>p0/test\/fixtures<return>cgnapp/models<esc>dd:e <C-R><C-R>+/
   " File Edit Fixture to (model) Test
   nnoremap ,feft :let @+ = expand("%:h")<return>$a<return><esc>p0/fixtures<return>cgnmodels<esc>dd:e <C-R><C-R>+/
+
+" File Test
+  " File Test Current File
+  nmap <silent> ,ftcf :let @+ = expand('%')<return>$a<return><esc>p<up>$/app\\|lib<return>cgn rails t test<esc>/\.rb<return>cgn_test.rb<esc>dd:noh<return>:w<return>,fmtp
+  " File Test Test File
+  nmap <silent> ,fttf :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>dd:noh<return>:w<return>,fmtp
+
+" File Misc.
+  " File Misc. Open Terminal in noremal mode
+  nmap <silent> ,fmot <space>wt<C-c><esc>
+  " File Misc. open Terminal and Paste clipboard
+  nmap <silent> ,fmtp ,fmotp$a<return>
+  " File Misc. Save and Push
+  nmap <silent> ,fmsp :wa<return>,fmotagacp<return>
+
 
 " File edit specific files and paths (NEEDS CLEANING)
 nmap <silent> ,ftaas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>

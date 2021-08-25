@@ -1,6 +1,7 @@
 " visual mode non-leader key mappings
   " coment
   vnoremap <silent> # I#<esc>
+  vnoremap <silent> " I"<esc>
 " insert mode non-leader key mappings
   " prevent return from autocomplete (very annoying because to return you have
   " to hit space then return. Now, tab does autocomplete and return does

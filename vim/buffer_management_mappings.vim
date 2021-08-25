@@ -50,7 +50,24 @@ endfunction
 nnoremap <space>bd :call ClearBuffer()<return>
 function! ClearBuffer()
   if &buftype == 'terminal'
-    execute ':bd!'
+    " close terminal window if there are multiple windows
+    if winnr() > 1
+      execute ':close'
+    " close terminal buffer if there are no other listed buffers and only one
+    " window
+    elseif len(map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')) == 1
+      execute ':bd!'
+    " if go to next buffer if there are multiple buffers
+    else
+      let buf = bufnr()
+      call GoToNextbuf(1)
+      " clsoe buffer if next buffer is the same buffer (ie all buffers are
+      " terminals
+      if buf == bufnr()
+        execute 'bd!'
+      endif
+    endif 
+  " close buffer if not terminal
   else
     execute ':bd'
   endif
@@ -65,9 +82,7 @@ function! ClearBuffers()
   " We want to clear the listed_hidden.
   let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1 && v:val.hidden == 1'), 'v:val.bufnr')
   for l:item in l:blist
-    if getbufvar(l:item, '&buftype') == 'terminal'
-      execute ':bd!' l:item
-    else
+    if getbufvar(l:item, '&buftype') != 'terminal'
       execute ':bd' l:item
     endif
   endfor

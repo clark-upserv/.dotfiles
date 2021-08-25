@@ -7,8 +7,6 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
   nnoremap <silent> ,tbtm atest 'method ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
   " Tests Base Perform enqueued Jobs
   nnoremap <silent> ,tbpj aperform_enqueued_jobs<esc>
-  " Tests Base Test File
-  nmap ,tbtf ,fcrt<space>wt<C-c><esc>p$a<return>
   
 
   

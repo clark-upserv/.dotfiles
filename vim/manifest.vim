@@ -28,17 +28,26 @@
 "     Seeds
 "
 "
-
-so ~/.dotfiles/mappings/simple_mappings.vim
-so ~/.dotfiles/mappings/file_navigation_mappings.vim
-so ~/.dotfiles/mappings/view_mappings.vim
-so ~/.dotfiles/mappings/embedded_ruby_mappings.vim
-so ~/.dotfiles/mappings/test_mappings.vim
-so ~/.dotfiles/mappings/file_management_mappings.vim
-so ~/.dotfiles/mappings/buffer_management_mappings.vim
-so ~/.dotfiles/mappings/window_management_mappings.vim
-so ~/.dotfiles/mappings/ruby_mappings.vim
-so ~/.dotfiles/mappings/html_mappings.vim
+augroup CustomVimEntry
+  autocmd!
+  autocmd VimEnter * :only
+  autocmd VimEnter * :vsp
+  autocmd VimEnter * :ter
+  autocmd VimEnter * :close
+  " even though this is sourced in vimrc, it needs to be called again form
+  " some of the simple mappings to work...???
+  autocmd VimEnter * :so ~/.dotfiles/vim/manifest.vim
+augroup END
+so ~/.dotfiles/vim/simple_mappings.vim
+so ~/.dotfiles/vim/file_navigation_mappings.vim
+so ~/.dotfiles/vim/view_mappings.vim
+so ~/.dotfiles/vim/embedded_ruby_mappings.vim
+so ~/.dotfiles/vim/test_mappings.vim
+so ~/.dotfiles/vim/file_management_mappings.vim
+so ~/.dotfiles/vim/buffer_management_mappings.vim
+so ~/.dotfiles/vim/window_management_mappings.vim
+so ~/.dotfiles/vim/ruby_mappings.vim
+so ~/.dotfiles/vim/html_mappings.vim
 
 
 " truly random one off stuff
@@ -53,7 +62,7 @@ so ~/.dotfiles/mappings/html_mappings.vim
 
 " Misc. mapping / messages
   " Misc. Reload Source
-  nnoremap <silent> ,mrs :so ~/.dotfiles/mappings/manifest.vim<return>
+  nnoremap <silent> ,mrs :so ~/.dotfiles/vim/manifest.vim<return>
   " Misc. DD but combine to previous line instead of delete line  (I<tab>
   " makes sure there is at least something on the line because viwx on empty
   " line deletes entire line and then grabs following line)
