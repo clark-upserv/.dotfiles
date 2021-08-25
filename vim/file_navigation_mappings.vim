@@ -172,12 +172,10 @@
   nmap <silent> ,fttf :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>dd:noh<return>:w<return>,fmtp
 
 " File Misc.
-  " File Misc. Open Terminal in noremal mode
+  " File Misc. Open Terminal in normal mode
   nmap <silent> ,fmot <space>wt<C-c><esc>
   " File Misc. open Terminal and Paste clipboard
   nmap <silent> ,fmtp ,fmotp$a<return>
-  " File Misc. Save and Push
-  nmap <silent> ,fmsp :wa<return>,fmotagacp<return>
 
 
 " File edit specific files and paths (NEEDS CLEANING)

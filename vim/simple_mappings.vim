@@ -110,7 +110,9 @@
   vnoremap <silent> hh G
   " go up and down fast
   nnoremap <silent> <S-up> 4<up>
+  vnoremap <silent> <S-up> 4<up>
   nnoremap <silent> <S-down> 4<down>
+  vnoremap <silent> <S-down> 4<down>
     
 " single key comma mappings
   " visual mode
