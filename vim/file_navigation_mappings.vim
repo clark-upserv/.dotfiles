@@ -167,9 +167,27 @@
 
 " File Test
   " File Test Current File
-  nmap <silent> ,ftcf :let @+ = expand('%')<return>$a<return><esc>p<up>$/app\\|lib<return>cgn rails t test<esc>/\.rb<return>cgn_test.rb<esc>dd:noh<return>:w<return>,fmtp
-  " File Test Test File
-  nmap <silent> ,fttf :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>dd:noh<return>:w<return>,fmtp
+  nnoremap <silent> ,ftcf :call FileTestCurrentFile(0)<return>
+  " File Test Current file in Terminal
+  nmap <silent> ,ftct :call FileTestCurrentFile(1)<return>,fmtp
+  " File Test All Files
+  nnoremap <silent> ,ftaf :! rails t
+  " File Test All files in Terminal
+  nmap <silent> ,ftat :let @+ = 'rails t'<return>,fmtp
+  function! FileTestCurrentFile(use_shell)
+    let file = expand('%')
+    " modify file name for non test files
+    if index(split(file, '/'), 'test') == -1
+      let file = substitute(file, '.rb', '_test.rb', '')
+    endif
+    " modify first directory to 'test' and add command 'rails t'
+    let command = substitute(file, 'app\|lib\|test', 'rails t test', '')
+    if a:use_shell == 0
+      execute ':!' command
+    else 
+      let @+ = command
+    endif
+  endfunction
 
 " File Misc.
   " File Misc. Open Terminal in normal mode
