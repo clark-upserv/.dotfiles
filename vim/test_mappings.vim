@@ -8,8 +8,6 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
   " Tests Base Perform enqueued Jobs
   nnoremap <silent> ,tbpj aperform_enqueued_jobs<esc>
   
-
-  
 " Tests Fixtures
   " Tests Fixtures BAse
   nnoremap <silent> @ChangeObject = ChangeTable(:ChangeFixture)<esc>/ChangeObject\\|ChangeTable\\|ChangeFixture<return>
@@ -85,7 +83,7 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 
 " Models
   " Models Search
-  nnoremap <silent> ,mmtest_model_search /ChangeParentOrClass\\|ChangeParent\\|ChangeAssoctionaOrScope\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel\\|ChangeAssociation\\|ChangeTable\\|ChangeFixture\\|ChangeScope\\|ChangeClass\\|ChangeThisPls\\|ChangeDescription<return>
+  nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel\\|ChangeAssociation\\|ChangeTable\\|ChangeFixture\\|ChangeScope\\|ChangeClass\\|ChangeThisPls\\|ChangeDescription\\|ChangeModel<return>
   " Tests Model BAse
   nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
   " Tests Models Belongs To
@@ -93,13 +91,13 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
   " Tests Models Had One
   nmap <silent> ,tmho atest 'association ChangeChild - has one' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeParent.ChangeChild<return>end<esc>/,mmtest_model_search
   " Tests Models Has Many
-  nmap <silent> ,tmhm atest 'association ChangeChildren - has many' do<return>assert_equal ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort, @ChangeParent.ChangeChildren.pluck(:id).sort<return>end<esc>,mmtest_model_search
+  nmap <silent> ,tmhm atest 'association ChangeChildren - has many' do<return>result = @ChangeParent.ChangeChildren<return>assert_equal ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort, result.map(&:id).sort<return><space><backspace><esc>,tmin<return>end<return>end<esc>,mmtest_model_search
   " Tests Models Has Many through
-  nmap <silent> ,tmhM atest 'association ChangeChildren - has many through' do<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChild_id).sort, @ChangeParent.ChangeChildren.pluck(:id).sort<return># DeleteThis - if not simple connection but does have inverse, use this<return><backspace><backspace>assert_equal ChangeChildModel.joins(:ChangeAssociation).where(id: @ChangeParent.id).distinct.pluck(:id).sort, @ChangeParent.ChangeChildren.distinct.pluck(:id).sort<return><esc>,tminend<esc>,mmtest_model_search
+  nmap <silent> ,tmhM atest 'association ChangeChildren - has many through' do<return>result = ChangeParent.ChangeAssociation<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChild_id).sort, resule.map(&:id).sort<return># DeleteThis - if not simple connection but does have inverse, use this<return><backspace><backspace>assert_equal ChangeChildModel.joins(:ChangeAssociation).where(id: @ChangeParent.id).distinct.pluck(:id).sort, result.map(&:id).uniq.sort<return><space><backspace><esc>,tmin<return>end<esc>,mmtest_model_search
   " Tests Models SCope
-  nmap <silent> ,tmsc atest 'scope ChangeScope' do<return>assert_equal ChangeClass.where(ChangeThisPls).pluck(:id).sort, ChangeClass.ChangeScope.pluck(:id).sort<return><space><backspace><esc>,tmin# DeleteThis - idk how to test sort...tbd!<return><backspace><backspace>end<esc>,mmtest_model_search
+  nmap <silent> ,tmsc atest 'scope ChangeScope' do<return>result = ChangeModel.ChangeScope<return>assert_equal ChangeClass.where(ChangeThisPls).pluck(:id).sort, result.pluck(:id).sort<return><space><backspace><esc>,tmin<return>assert_equal ChangeModel.order(ChangeThisPls).pluck(:id), result.map(&:id)<return>first = ChangeTable(:ChangeFixture)<return>second = ChangeTable(:ChangeFixture)<return>assert result.find_index(first) < result.find_index(second)<return>end<esc>,mmtest_model_search
   " Tests Models Included and Not included
-  nnoremap <silent> ,tmin a# DeleteThis - Use this for scopes and non-simeple connection table has many through<return><backspace><backspace>included = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_equal included, ChangeParentOrClass.ChangeAssoctionaOrScope & included<return>not_included = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>not_included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_empty not_included & ChangeParentOrClass.ChangeAssoctionaOrScope<return>
+  nnoremap <silent> ,tmin aincluded = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_equal included, result & included<return>not_included = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>not_included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_empty not_included & result
   " Tests Models ATtribute
   " Tests Models Attribute Enum
   " Tests Models Attributes Hash

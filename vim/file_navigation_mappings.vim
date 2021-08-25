@@ -26,6 +26,25 @@
   " File Edit CLipboard
   nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
 
+" File Edit (dynamic) - probaby everything needs to be refactored and put in
+" here
+  " File Edit Test File
+  nnoremap ,fetf :call FileEditTestFile()<return>
+  function FileEditTestFile()
+    execute ':e' GetTestFileName()
+  endfunction
+  "File Edit Source File (from test)
+  nnoremap ,fesf :call FileEditSourceFile()<return>
+  function FileEditSourceFile()
+    let file = substitute(expand('%'), '_test.rb', '.rb', '')
+    if match(file, 'controller\|helper\|job\|mailer\|model') != -1
+      let file = substitute(file, 'test', 'app', '')
+    else
+      let file = substitute(file, 'test', 'lib', '')
+    endif
+    execute ':e' file
+  endfunction
+
 " File Edit Stylesheet
   " File Edit Stylesheet to Controller
   "
@@ -143,7 +162,7 @@
   " File Edit Test to mailer Preview
   nnoremap ,fetp :let @+ = expand("%")<return>$a<return><esc>p$a<return><esc>/mailers<return>Ncgnmailers/previews<esc>/_test<return>cgn_preview<esc><down>dd<up>dd:e <C-R><C-R>+
   " File Edit (model) Test to fixture
-  nnoremap ,fetf :let @+ = expand("%:h")<return>$a<return><esc>p0/test<return>Ncgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
+  "nnoremap ,fetf :let @+ = expand("%:h")<return>$a<return><esc>p0/test<return>Ncgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
   " File Edit (task) Test to Task
   nnoremap ,fetT :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnlib<esc>/_task_test\.rb<return>cgn.rake<esc>dd:e <C-R><C-R>+
   " File Edit Test to Service
@@ -165,28 +184,34 @@
   " File Edit Fixture to (model) Test
   nnoremap ,feft :let @+ = expand("%:h")<return>$a<return><esc>p0/fixtures<return>cgnmodels<esc>dd:e <C-R><C-R>+/
 
+
 " File Test
   " File Test Current File
   nnoremap <silent> ,ftcf :call FileTestCurrentFile(0)<return>
   " File Test Current file in Terminal
   nmap <silent> ,ftct :call FileTestCurrentFile(1)<return>,fmtp
   " File Test All Files
-  nnoremap <silent> ,ftaf :! rails t
+  nnoremap <silent> ,ftaf :wa<return>:! rails t<return>
   " File Test All files in Terminal
-  nmap <silent> ,ftat :let @+ = 'rails t'<return>,fmtp
+  nmap <silent> ,ftat :wa<return>:let @+ = 'rails t'<return>,fmtp
   function! FileTestCurrentFile(use_shell)
-    let file = expand('%')
-    " modify file name for non test files
-    if index(split(file, '/'), 'test') == -1
-      let file = substitute(file, '.rb', '_test.rb', '')
-    endif
-    " modify first directory to 'test' and add command 'rails t'
-    let command = substitute(file, 'app\|lib\|test', 'rails t test', '')
+    execute ':wa'
+    let test_file = GetTestFileName()
+    let command = substitute(test_file, 'test', 'rails t test', '')
     if a:use_shell == 0
       execute ':!' command
     else 
       let @+ = command
     endif
+  endfunction
+
+  function! GetTestFileName()
+    let file = expand('%')
+    " modify file name for non test files
+    if index(split(file, '/'), 'test') == -1
+      let file = substitute(file, '.rb', '_test.rb', '')
+    endif
+    return substitute(file, 'app\|lib\|test', 'test', '')
   endfunction
 
 " File Misc.
