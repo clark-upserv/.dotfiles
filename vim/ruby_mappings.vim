@@ -50,36 +50,55 @@
 
 " Ruby Block
   " Ruby Block EAch
-  nnoremap <silent> ,rbea aeach do \|ChangeThisPls\|<return>end<esc>/ChangeThisPls<return>cgn
-  nnoremap <silent> ,rbeA aeach { \|ChangeThisPls\| ChangeThisPls }<esc>/ChangeThisPls<return>
+  nnoremap <silent> ,rbea aeach do \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>cgn
+  nnoremap <silent> ,rbeA aeach { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   " [shorthand]
-  inoremap <silent> eachb each do \|\|<return>end<esc><up>$i
-  inoremap <silent> eachi each { \|\| ChangeThisPls }<esc>/ChangeThisPls<return>2<left>i
+  inoremap <silent> eachb each <esc>:call RubyBlockBlockInsertMode()<return>i
+  inoremap <silent> eachi each { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> eachs each(&:)<left>
   " Ruby Block Each With index
-  nnoremap <silent> ,rbew aeach_with_index do \|ChangeThisPls, index\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
-  nnoremap <silent> ,rbeW aeach_with_index { \|ChangeThisPls, index\| ChangeThisPls }<esc>/ChangeThisPls<return>
+  nnoremap <silent> ,rbew aeach_with_index do \|ChangeArgs, index\|<return>end<esc>/ChangeArgs<return>
+  nnoremap <silent> ,rbeW aeach_with_index { \|ChangeArgs, index\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   inoremap <silent> eachwb each_with_index do \|, index\|<return>end<esc><up>$7<left>i
-  inoremap <silent> eachwi each_with_index { \|, index\| ChangeThisPls }<esc>/ChangeThisPls<return>9<left>i
+  inoremap <silent> eachwi each_with_index { \|, index\| ChangeLogic }<esc>/ChangeLogic<return>9<left>i
   " Ruby Block MAp
-  nnoremap <silent> ,rbma amap do \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
-  nnoremap <silent> ,rbmA amap { \|ChangeThisPls\| ChangeThisPls }<esc>/ChangeThisPls<return>
-  inoremap <silent> mapb map do \|\|<return>end<esc><up>$i
-  inoremap <silent> mapi map { \|\| ChangeThisPls }<esc>/ChangeThisPls<return>2<left>i
+  nnoremap <silent> ,rbma amap do \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
+  nnoremap <silent> ,rbmA amap { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
+  inoremap <silent> mapb map <esc>:call RubyBlockBlockInsertMode()<return>i
+  inoremap <silent> mapi map { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> maps map(&:)<left>
   " Ruby Block SElect
-  nnoremap <silent> ,rbse aselect \|ChangeThisPls\|<return>ChangeThisPls<return>end<esc>/ChangeThisPls<return>
-  nnoremap <silent> ,rbsE aselect { \|ChangeThisPls\| ChangeThisPls }<esc>/ChangeThisPls<return>
+  nnoremap <silent> ,rbse aselect \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
+  nnoremap <silent> ,rbsE aselect { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   " [shorthand]
-  inoremap <silent> selectb select do \|\|<return>end<esc><up>$i
-  inoremap <silent> selecti select { \|\| ChangeThisPls }<esc>/ChangeThisPls<return>2<left>i
+  inoremap <silent> selectb select <esc>:call RubyBlockBlockInsertMode()<return>i
+  inoremap <silent> selecti select { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> selects select(&:)<left>
   " Ruby Block SOrt
-  nnoremap <silent> ,rbso asort do \|a, b\|<retrun>a.ChangeThisPls <=> b.ChangeThisPls<return>end<esc>/ChangeThisPls<return>
-  nnoremap <silent> ,rbsO asort { \|a, b\| a.ChangeThisPls <=> b.ChangeThisPls }<esc>/ChangeThisPls<return>
+  nnoremap <silent> ,rbso asort do \|a, b\|<retrun>a.ChangeLogic <=> b.ChangeLogic<return>end<esc>/ChangeLogic<return>
+  nnoremap <silent> ,rbsO asort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>
   " [block]
-  inoremap <silent> sortb sort do \|a, b\|<return>a.ChangeThisPls <=> b.ChangeThisPls<return>end<esc>/ChangeThisPls<return>cgn
-  inoremap <silent> sorti sort { \|a, b\| a.ChangeThisPls <=> b.ChangeThisPls }<esc>/ChangeThisPls<return>cgn
+  inoremap <silent> sortb sort do \|a, b\|<return>a.ChangeLogic <=> b.ChangeLogic<return>end<esc>/ChangeLogic<return>cgn
+  inoremap <silent> sorti sort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>cgn
+  " Ruby Block Lambda
+  " [block]
+  " [inline]
+  " [shorthand]
+  inoremap <silent> lambdab lambda <esc>:call RubyBlockBlockInsertMode()<return>i
+  inoremap <silent> lambdaa lambda { \|\|<return>}<esc><up>$i
+  inoremap <silent> lambdai ->() { ChangeLogic }<esc>/ChangeLogic<return>4<left>i
+  inoremap <silent> lambdas lambda(&:ChangeMethod)<esc>/ChangeMethod<return>
+  " Ruby Block Proc
+  " [block]
+  " [inline]
+  " [shorthand]
+  inoremap <silent> procb proc <esc>:call RubyBlockBlockInsertMode()<return>i
+  inoremap <silent> proca proc { \|\|<return>}<esc><up>$i
+  inoremap <silent> proci proc { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
+  inoremap <silent> procs proc(&:ChangeMethod)<esc>/ChangeMethod<return>
+  function! RubyBlockBlockInsertMode()
+    execute "normal! ado \|\|\<return>end\<esc>\<up>$"
+  endfunction
 
 " Ruby model mappings
   " Ruby Models BAse
@@ -126,10 +145,6 @@
   nnoremap <silent> ,rmho ahas_one :ChangeChildName, class_name: 'ChangeChildModel', inverse_of: :ChangeParentName, dependent: :destroy, autosave: false<esc>/ChangeChildName\\|ChangeChildModel\\|ChangeParentName<return>
   " Ruby Models has One Through association
   nnoremap <silent> ,rmhO ahas_one :ChangeChildOrParentName, through: :ChangeConnectingAssociationName, source: :ChangeChildOrParentName, inverse_of: :ChangeBottomChildOrTopParentModel, autosave: false<esc>/ChangeChildOrParentName\\|ChangeChildOrParentName\\|ChangeConnectingAssociationName\\|ChangeBottomChildOrTopParentModel<return>
-  " Ruby Models accepts Nested attributes for has One
-  nnoremap <silent> ,rmno aaccepts_nested_attributes_for :ChangeChildName, allow_destroy: true,  reject_if: proc \{ \|attributes\| attributes['ChangeAttribute'].blank? \}, update_only: true<esc>/ChangeChildName\\|ChangeAttribute<return>
-  " Ruby Models accepts Nested attributes for has Many
-  nnoremap <silent> ,rmnm aaccepts_nested_attributes_for :ChangeChildrenName, allow_destroy: true,  reject_if: proc \{ \|attributes\| attributes['ChangeAttribute'].blank? \}<esc>/ChangeChildrenName\\|ChangeAttribute<return>
   " Ruby Models has Rich Text
   nnoremap <silent> ,rmrt ahas_rich_text :ChangeAttribute<esc>/ChangeAttribute<return>
   " Ruby Models has One Attached
@@ -141,38 +156,40 @@
   " Ruby Models Scope with Argument(s)
   nnoremap <silent> ,rmsa ascope :ChangeName, ->(ChangeArgument) { ChangeLogic }<esc>/ChangeName\\|ChangeArgument\\|ChangeLogic<return>
   " Ruby Models Scope Order
-  nnoremap <silent> ,rmso ascope :ChangeName_order, -> { ChangeOrder }<esc>/ChangeName\\|ChangeOrder<return>
-  " Ruby Models Scope Order
   nnoremap <silent> ,rmsO ascope :order_and_distinct_on_ChangeAttributes, -> { select('DISTINCT ON (ChangeTable.ChangeAttribute, LOWER(ChangeTable.ChangeCaseInsensitiveAttribute)) ChangeTableToAccessAllAttributes.*').order('LOWER(ChangeTable.ChangeAttribute)') }<esc>/ChangeAttributes\\|ChangeTableToAccessAllAttributes\\|ChangeTable\\|ChangeAttribute\\|ChangeCaseInsensitiveAttribute<return>
   " Ruby Models Scope Query
   nnoremap <silent> ,rmsq ascope :query, ->(query) { where("ChangeTable.ChangeAttribute ILIKE :query", query: "%#{query}%") }<esc>/ChangeTable\\|ChangeAttribute<return>
   " Ruby Models WHere (full)
-  nnoremap <silent> ,rmwh awhere("CONCAT_WS(' ', ChangeTable.ChangeAttribute, ChangeTable.ChangeAttribute) ILIKE :ChangeSequence OR ChangeTable.ChangeAttribute ILIKE :ChangeSequence OR ChangeTable.ChangeAttribute IN (:ChangeArray) OR ChangeTable.ChangeAttribute = :ChangeThis OR ChangeTable.ChangeAttribute IS NULL OR ChangeTable.ChangeAttribute IS NOT NULL", ChangeSequence: "%#{ChangeSequence}%", ChangeArray: ChangeArray, ChangeThis: ChangeThis)<esc>/ChangeTable\\|ChangeAttribute<return>
+  nnoremap <silent> ,rmwh awhere("CONCAT_WS(' ', ChangeTable.ChangeAttribute, ChangeTable.ChangeAttribute) ILIKE :ChangeSequence OR ChangeTable.ChangeAttribute ILIKE :ChangeSequence OR ChangeTable.ChangeAttribute IN (:ChangeArray) OR ChangeTable.ChangeAttribute = :ChangeThis OR ChangeTable.ChangeAttribute IS NULL OR ChangeTable.ChangeAttribute IS NOT NULL", ChangeSequence: "%#{ChangeSequence}%", ChangeArray: ChangeArray, ChangeThis: ChangeThis)<esc>/ChangeTable\\|ChangeAttributereturn
+  " Ruby Models Validates Options
+  function! RubyModlesValidatesOptions()
+    execute "normal! a,\<return>allow_nil: true,\<return>allow_blank: true,\<return>if: ChangeMethodOrProcOrArray,\<return>unless: ChangeMethodOrProcOrArray"
+  endfunction
+  " Ruby Models Validates Search
+  function! RubyModelsValidatesSearch()
+    let @/ = 'ChangeAttributes\|ChangeAttribute\|ChangeValidation\|%{model} %{attribute} %{value}\|ChangeMethodOrProcOrArray\|255ForStringOrSomeOtherLength\|ChangeThis\|ChangeRange\|DeleteThis\|ChangeAttachmenName\|ChangeMin\|ChangeMax\|ChangeSize\|ChangeDataSize\|ChangeWidthInteger\|ChangeHeightInteger\|DeleteThis'
+  endfunction
   " Ruby Models Validates Base
-  nnoremap <silent> ,rmvb avalidates :ChangeAttribute, ChangeValidation: { message: 'ChangeMessage' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/ChangeAttribute\\|ChangeValidation\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
+  nnoremap <silent> ,rmvb avalidates :ChangeAttribute, ChangeValidation: {<return>message: '%{model} %{attribute} %{value}'<return>}<esc>:call RubyModlesValidatesOptions()<return>:call RubyModelsValidatesSearch()<return>n
   " Ruby Models Validates Presence
-  nnoremap <silent> ,rmvp avalidates :ChangeAttribute, presence: { message: 'please add ChangeAttribute' }<esc>/ChangeAttribute<return>
+  nnoremap <silent> ,rmvp a# DeleteThis - for boolean, use `validates :attribute, exclusion: [nil]` becasuse presence checks `blank?` and `false.blank?` is true<return><backspace><backspace>validates :ChangeAttribute, presence: {<return>message: '%{model} %{attribute} %{value}'<return>}<esc>:call RubyModlesValidatesOptions()<return>:call RubyModelsValidatesSearch()<return>n
+  " Ruby Models Validates Absence
+  nnoremap <silent> ,rmva a# DeleteThis - for boolean, use `validates :attribute, inclusion: [nil]` becasuse absence checks `blank?` and `false.blank?` is true<return><backspace><backspace>validates :ChangeAttribute, absence: {<return>message: '%{model} %{attribute} %{value}'<return>}<esc>:call RubyModlesValidatesOptions()<return>:call RubyModelsValidatesSearch()<return>n
   " Ruby Models Validates Length
-  nnoremap <silent> ,rmvl avalidates :ChangeAttribute, length: { maximum: 255, message: 'ChangeAttribute is too long (maximum is 255 characters' }<esc>/ChangeAttribute\\|255<return>
+  nnoremap <silent> ,rmvl avalidates :ChangeAttribute, length: {<return>is: ChangeThis,<return>minimum: ChangeThis,<return>maximum: 255ForStringOrSomeOtherLength,<return>in: ChangeRange,<return>message: '%{model} %{attribute} %{value}'<return>message: '%{attribute} is too long (maximum is 255ForStringOrSomeOtherLength characters)'}<esc>:call RubyModlesValidatesOptions()<return>:call RubyModelsValidatesSearch()<return>n
   " Ruby Models Validates Uniqueness
-  nnoremap <silent> ,rmvu avalidates :ChangeAttribute, uniqueness: { message: 'this ChangeAttribute has already been taken' }<esc>/ChangeAttribute<return>
-  " Ruby Models Validates Uniqueness
-  nnoremap <silent> ,rmvU avalidates :ChangeAttribute, uniqueness: { case_sensitive: false, scope: %i[ChangeAttributes], message: 'this ChangeAttribute has already been taken' }<esc>/case_sensitive: false, \\|ChangeAttributes\\|ChangeAttribute<return>
+  nnoremap <silent> ,rmvu avalidates :ChangeAttribute, uniqueness: {<return>case_sensitive: false,<return>scope: %i[ChangeAttributes]<return>message: '%{model} %{attribute} %{value}'<return>message: 'this %{attribute} has already been taken'<return>}<esc>/:call RubyModlesValidatesOptions()<return>:call RubyModelsValidatesSearch()<return>n
   " Ruby Models Validates Numericality
-  nnoremap <silent> ,rmvn avalidates :ChangeAttribute, numericality: { only_integer: true, allow_nil: true, less_than: 100, less_than_or_eqaul_to: 100, equal_to: 100, greater_than: 100, greater_than_or_equal_to: 100, other_than: 100, odd: true, even: true, message: 'ChangeAttribute must be a number' }<esc>/ChangeAttribute<return>
-  " Ruby Models Validates Dependent_on
-  nnoremap <silent> ,rmvd a# DeleteThis - independent_path is required; use symbols; can be a<esc>V22>$a<return>single method, an array of methods, or an array of arrays each with a method and it's arguments<esc>V22>$a<return><backspace><backspace>validates :ChangeAttribute, dependent_on: { independent_path: ChangeMethods,<return># DeleteThis - dependent_path is optional; use symbols; can be a single<return>method, an array of methods, or an array of arrays each with a method and it's arguments<return><backspace><backspace>dependent_path: ChangeMethods,<return># DeleteThis - one of the below is required if using specific values<return>(can only pick one) <return><backspace><backspace>if_independent_is: [ChangeValues],<return>if_independent_is_not: [ChangeValues],<return>if_independent_is_greater_than: ChangeValue,<return>if_independent_is_greater_than_or_equal_to: ChangeValue,<return>if_independent_is_less_than: ChangeValue,<return>if_independent_is_less_than_or_equal_to: ChangeValue,<return># DeleteThis - one of the below is required if using specific values<return>(can only pick one)<return><backspace><backspace>dependent_must_be: [ChangeValues],<return>dependent_cannot_be: [ChangeValues],<return># DeleteThis - one of the below is required if simply comparing to each<return>other (can only pick one)<return><backspace><backspace>equal_values: true,<return>not_equal_values: true,<return>depenent_greater_than_or_equal_to_independent: true,<return>depenent_less_than_or_equal_to_independent: true,<return># DeleteThis - message is optional<return><backspace><backspace>message: 'ChangeMessage' }<esc>/ChangeAttribute\\|ChangeMethods\\|ChangeValues\\|ChangeValue\\|ChangeMessage\\|DeleteThis<return>
+  nnoremap <silent> ,rmvn avalidates :ChangeAttribute, numericality: {<return>only_integer: true,<return>allow_nil: true,<return>less_than: 100,<return>less_than_or_eqaul_to: 100,<return>equal_to: 100,<return>greater_than: 100,<return>greater_than_or_equal_to: 100,<return>other_than: 100,<return>odd: true,<return>even: true,<return>message: '%{model} %{attribute} %{value}'<return>message: '%{attribute} must be a number'<return>}<esc>:call RubyModlesValidatesOptions()<return>:call RubyModelsValidatesSearch()<return>n
   " Ruby Models Validates Attachment
-  nnoremap <silent> ,rmva avalidates :ChangeAttachmenName, size: { less_than: ChangeSize.megabytes, message: 'ChangeMessage' }<return>validates :ChangeAttachmenName, attached: { message: 'ChangeAttribute is too large (ChangeSize MB max)' }, if: Proc.new { \|ChangeObject\| ChangeObject.ChangeLogic }<return>validates :ChangeAttachmenName, content_type: { in: %w[image/jpeg image/gif image/png application/pdf], message: "Attached must be a valid format. Valid formats are: jpeg, gif, png, pdf" }<return>validates :ChangeAttachmenName, content_type: { in: %w[video/quicktime video/mp4 video/webm audio/ogg], message: "Attached must be a valid image video format. Valid formats are:  mp4, mov, webm, ogg" }<esc>/ChangeAttachmenName\\|ChangeSize\\|MB\\|ChangeObject\\|ChangeLogic\\|ChangeMessage<return>
-  " Ruby Models Validates Custom
-  nnoremap <silent> ,rmvc avalidate :ChangeCustomValidation<return># DeleteThis - move method to private section of model<return><backspace><backspace>def ChangeCustomValidation<return># DeleteThis - insert logic<return><backspace><backspace>errors.add(:ChangeAttribute, 'ChangeMessage')<return>end<esc>/ChangeCustomValidation\\|DeleteThis\\|ChangeAttribute\\|ChangeMessage<return>
-  " Ruby Models Validates if / unless
-  nnoremap <silent> ,rmvi a, if: proc { \|ChangeObject\| ChangeObject.ChangeLogic }<esc>/if\\|ChangeObject\\|ChangeAttribute\\|ChangeLogic<return> 
-  " Ruby Models Validates Strip
-  nnoremap <silent> ,rmvs avalidates :ChangeAttribute, strip: true<esc>/ChangeAttribute<return>
+  nnoremap <silent> ,rmvA avalidates :ChangeAttachmenName, attached: {<return>message: '%{model} %{attribute} %{value}'<return>}<esc>:call RubyModlesValidatesOptions()<return>$a<return>validates :ChangeAttachmenName, content_type: {<return>in: %w[image/jpeg image/gif image/png application/pdf],<return>message: 'Attached must be a valid format. Valid formats are: jpeg, gif, png, pdf'<return>in: %w[video/quicktime video/mp4 video/webm audio/ogg],<return>message: 'Attached must be a valid image video format. Valid formats are:  mp4, mov, webm, ogg'<return>}<esc>:call RubyModlesValidatesOptions()<return>$a<return>validates :ChangeAttachmenName, size: {<return># DeleteThis - Can be "kilobytes", "megabytes" and probably others:<return><backspace><backspace> less_than: ChangeSize.ChangeDataSize,<return>message: '%{model} %{attribute} %{value}'<return>message: '%{attribute} is too large (ChangeSize MB max)'<return>}<esc>:call RubyModlesValidatesOptions()<return>$a<return>validates :ChangeAttachmenName, dimension: {<return>width: { min: ChangeMin, max: ChangeMax },<return>height: { min: ChangeMin, max: ChangeMax },<return>message: '%{model} %{attribute} %{value}'<return>}<esc>:call RubyModlesValidatesOptions()<return>$a<return>validates :ChangeAttachmenName, aspect_ratio:<return># DeleteThis - Choose one:<return><backspace><backspace>:square<return>:portrate<return>:landscape<return>:is_16_9<return># DeleteThis - Or add a dynamic aspect ratio:<return><backspace><backspace>:is_ChangeWidthInteger_ChangeHeightInteger{<return>message: '%{model} %{attribute} %{value}'<return>}<esc>:call RubyModlesValidatesOptions()<return>:call RubyModelsValidatesSearch()<return>n
+  " Ruby Models Validates Inclusion
+  " Ruby Models Validates Exclusion
+  " Ruby Models Validates Each
+  " ....
+
   " Ruby Models Process Attributes
-  nnoremap <silent> ,rmpa :read ../templates/models/misc/process_attributes.rb<return>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
-  nnoremap <silent> ,rmpA o# DeleteThis - this goes in callbacks section<return><backspace><backspace>before_validation :process_attributes<return># DeleteThis - this goes in callback methods section<return><backspace><backspace>def process_attributes<esc>:read ../templates/models/misc/process_attributes.rb<return>10<down>oend<esc>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
+  nnoremap <silent> ,rmpa o# DeleteThis - this goes in callbacks section<return><backspace><backspace>before_validation :process_attributes<return># DeleteThis - this goes in callback methods section<return><backspace><backspace><esc><up>:read ../templates/models/misc/process_attributes.rb<return>/DeleteThis\\|ChangeAttribute\\|ChangeValue\\|ChangeIndedependentAttribute<return>
   " Ruby Models Attributes Enum
   nnoremap <silent> ,rmae aenum ChangeAttribute: { ChangeValueSymbolOrString: ChangeInteger }, _prefix: true<return># DeleteThis -  If attribute will not be displayed, use symbol. If attribute will be displayed (esp. in options for select), use string (this way display does not require processing). If display changes down the road, you may want to refactor to symbol with class method for displays (and opitons for select) and instance method for display (use ,rmas for example)<esc>/ChangeAttribute\\|ChangeValueSymbolOrString\\|ChangeInteger\\|DeleteThis<return>
   " Ruby Models Attributes enum Symbol example
