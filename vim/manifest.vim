@@ -69,7 +69,7 @@ so ~/.dotfiles/vim/html_mappings.vim
   nmap <silent> ,mdd I<tab><esc>0viwxi<backspace><esc><right>
   " Misc. Dd but combine to Forward line instead of delete line
   nmap <silent> ,mdf $<down>,mdd
-  nmap <silent> ,mde $<down>,mddi<lt>return><esc>
+  nmap <silent> ,mdr $<down>,mddi<lt>return><esc>
   " temp for whatever
   nnoremap <silent> ,mss a<lt>backspace><lt>backspace><lt>backspace>
 
