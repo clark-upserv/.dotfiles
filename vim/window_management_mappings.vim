@@ -7,7 +7,7 @@ nnoremap <space>wc :close<return>
 " Window Maximize (close all others)
 nnoremap <space>wm :only<return>
 " Window Terminal
-nmap <space>wt :call OpenTerminalInWindow()<return>
+nnoremap <space>wt :call OpenTerminalInWindow()<return>
 " find if there is a terminal in a current window
 " need to fix this so that it opens first terminal not first zsh bucause 1)
 " some people might not use zsh and 2) there could be multiple terminal and /

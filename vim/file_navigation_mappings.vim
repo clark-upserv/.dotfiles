@@ -1,3 +1,60 @@
+" File Edit (dynamic) - probaby everything needs to be refactored and put in
+" here
+  " File Edit Test File
+  nnoremap ,fetf :call FileEditTestFile()<return>
+  function FileEditTestFile()
+    execute ':e' GetTestFileName()
+  endfunction
+  "File Edit Source File (from test)
+  nnoremap ,fesf :call FileEditSourceFile()<return>
+  function FileEditSourceFile()
+    let file = substitute(expand('%'), '_test.rb', '.rb', '')
+    if match(file, 'controller\|helper\|job\|mailer\|model') != -1
+      let file = substitute(file, 'test', 'app', '')
+    else
+      let file = substitute(file, 'test', 'lib', '')
+    endif
+    execute ':e' file
+  endfunction
+
+" File Test
+  " File Test Current File
+  nnoremap <silent> ,ftcf :call FileTestCurrentFile(0)<return>
+  " File Test Current File in terminal
+  nnoremap <silent> ,ftcF :call FileTestCurrentFile(1)<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
+  " File Test All Files
+  nnoremap <silent> ,ftaf :wa<return>:! rails t<return>
+  " File Test All Files in terminal
+  nmap <silent> ,ftaF :wa<return>:let @+ = 'rails t'<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
+  function! FileTestCurrentFile(use_shell)
+    execute ':wa'
+    let test_file = GetTestFileName()
+    let command = substitute(test_file, 'test', 'rails t test', '')
+    if a:use_shell == 0
+      execute ':!' command
+    else 
+      let @+ = command
+    endif
+  endfunction
+
+  function! GetTestFileName()
+    let file = expand('%')
+    " modify file name for non test files
+    if index(split(file, '/'), 'test') == -1
+      let file = substitute(file, '.rb', '_test.rb', '')
+    endif
+    return substitute(file, 'app\|lib\|test', 'test', '')
+  endfunction
+
+" Everything below here needs to be refactored
+  
+  
+
+
+
+
+  
+  
 " File Paste
   " File Paste Partial Path
   nnoremap ,fppp :let @+ = expand('%:h')<return>$a<return><esc>p<up>$/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>0/ChangePartialPath<return>viwp
@@ -26,24 +83,33 @@
   " File Edit CLipboard
   nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
 
-" File Edit (dynamic) - probaby everything needs to be refactored and put in
-" here
-  " File Edit Test File
-  nnoremap ,fetf :call FileEditTestFile()<return>
-  function FileEditTestFile()
-    execute ':e' GetTestFileName()
-  endfunction
-  "File Edit Source File (from test)
-  nnoremap ,fesf :call FileEditSourceFile()<return>
-  function FileEditSourceFile()
-    let file = substitute(expand('%'), '_test.rb', '.rb', '')
-    if match(file, 'controller\|helper\|job\|mailer\|model') != -1
-      let file = substitute(file, 'test', 'app', '')
-    else
-      let file = substitute(file, 'test', 'lib', '')
-    endif
-    execute ':e' file
-  endfunction
+" File Paste
+  " File Paste Partial Path
+  nnoremap ,fppp :let @+ = expand('%:h')<return>$a<return><esc>p<up>$/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>0/ChangePartialPath<return>viwp
+
+" File Copy
+  " File Copy File Name
+  nnoremap ,fcfn :let @+ = expand("%:t:r")<return>
+  " File Copy Current Path
+  nnoremap ,fccp :let @+ = expand('%:h') . '/'<return>
+  " File Copy Current File
+  nnoremap ,fccf :let @+ = expand('%')<return>
+  " File Copy Partial Path
+  nnoremap ,fcpp :let @+ = expand('%:h')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>
+  " File Copy Partial File
+  nnoremap ,fcpf :let @+ = expand('%')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>dd
+  " File Copy Rails Test
+  nnoremap ,fcrt :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>:w<return>
+
+" File Edit basics
+  " File Edit SEarch
+  nnoremap ,fese :e **/*
+  " File Edit Current Path
+  nnoremap ,fecp :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
+  " File Edit Current File
+  nnoremap ,fecf :let @+ = expand('%')<return>:e <C-R><C-R>+
+  " File Edit CLipboard
+  nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
 
 " File Edit Stylesheet
   " File Edit Stylesheet to Controller
@@ -184,41 +250,6 @@
   " File Edit Fixture to (model) Test
   nnoremap ,feft :let @+ = expand("%:h")<return>$a<return><esc>p0/fixtures<return>cgnmodels<esc>dd:e <C-R><C-R>+/
 
-
-" File Test
-  " File Test Current File
-  nnoremap <silent> ,ftcf :call FileTestCurrentFile(0)<return>
-  " File Test Current file in Terminal
-  nmap <silent> ,ftct :call FileTestCurrentFile(1)<return>,fmtp
-  " File Test All Files
-  nnoremap <silent> ,ftaf :wa<return>:! rails t<return>
-  " File Test All files in Terminal
-  nmap <silent> ,ftat :wa<return>:let @+ = 'rails t'<return>,fmtp
-  function! FileTestCurrentFile(use_shell)
-    execute ':wa'
-    let test_file = GetTestFileName()
-    let command = substitute(test_file, 'test', 'rails t test', '')
-    if a:use_shell == 0
-      execute ':!' command
-    else 
-      let @+ = command
-    endif
-  endfunction
-
-  function! GetTestFileName()
-    let file = expand('%')
-    " modify file name for non test files
-    if index(split(file, '/'), 'test') == -1
-      let file = substitute(file, '.rb', '_test.rb', '')
-    endif
-    return substitute(file, 'app\|lib\|test', 'test', '')
-  endfunction
-
-" File Misc.
-  " File Misc. Open Terminal in normal mode
-  nmap <silent> ,fmot <space>wt<C-c><esc>
-  " File Misc. open Terminal and Paste clipboard
-  nmap <silent> ,fmtp ,fmotp$a<return>
 
 
 " File edit specific files and paths (NEEDS CLEANING)
