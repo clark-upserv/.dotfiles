@@ -48,6 +48,7 @@ so ~/.dotfiles/vim/buffer_management_mappings.vim
 so ~/.dotfiles/vim/window_management_mappings.vim
 so ~/.dotfiles/vim/ruby_mappings.vim
 so ~/.dotfiles/vim/html_mappings.vim
+so ~/.dotfiles/vim/git_mappings.vim
 
 
 " truly random one off stuff

@@ -1,14 +1,64 @@
-" File Edit (dynamic) - probaby everything needs to be refactored and put in
-" here
-  " File Edit Test File
-  nnoremap ,fetf :call FileEditTestFile()<return>
-  function FileEditTestFile()
+" File Edit (and Explore)
+  " File Edit SEarch
+  nnoremap ,fese :e **/*
+  " File Edit Current Path
+  nnoremap ,fecp :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
+  " File Edit Current File
+  nnoremap ,fecf :let @+ = expand('%')<return>:e <C-R><C-R>+
+  " File Edit CLipboard
+  nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
+  " File Edit COntroller
+  nnoremap <silent> ,feco :call FileEditController()<return>
+  function FileEditController()
+    let current_file = expand('%')
+    if match(current_file, 'app/controllers') != -1
+      let file = 'on controller'
+    elseif match(current_file, 'app/views') != -1
+      let file = substitute(expand('%:h'), 'views', 'controllers', '') . '_controller.rb'
+    elseif match(current_file, 'app/helpers') != -1
+      let file = substitute(expand('%'), 'helpers', 'controllers', '')
+      let file = substitute(file, '_helper.rb', '_controller.rb', '')
+    else 
+      let file = 1
+    endif
+    if file == 'on controller'
+      echo 'Already on controller file'
+    elseif file == 1
+      echo 'Unable to find controller for' current_file
+    else
+      execute ':e' file
+    endif
+  endfunction
+  " File Edit VIew
+  nnoremap <silent> ,fevi :call FileEditView()<return>
+  function FileEditView()
+    let current_file = expand('%')
+    if match(current_file, 'app/views') != -1
+      let file = 'on view'
+    elseif match(current_file, 'app/controllers') != -1
+      let file = substitute(current_file, 'controllers', 'views', '')
+      let file = substitute(file, '_controller.rb', '', '')
+    else 
+      let file = 1
+    endif
+    if file == 'on view'
+      echo 'Already on view file'
+    elseif file == 1
+      echo 'Unable to find views for' current_file
+    else
+      execute ':Explore' file
+    endif
+  endfunction
+  " File Edit TEst
+  nnoremap <silent> ,fete :call FileEditTest()<return>
+  function FileEditTest()
     execute ':e' GetTestFileName()
   endfunction
-  "File Edit Source File (from test)
-  nnoremap ,fesf :call FileEditSourceFile()<return>
-  function FileEditSourceFile()
-    let file = substitute(expand('%'), '_test.rb', '.rb', '')
+  " File Edit Test Source
+  nnoremap <silent> ,fets :call FileEditTestSource()<return>
+  function FileEditTestSource()
+    let current_file = expand('%')
+    let file = substitute(current_file, '_test.rb', '.rb', '')
     if match(file, 'controller\|helper\|job\|mailer\|model') != -1
       let file = substitute(file, 'test', 'app', '')
     else
@@ -22,10 +72,6 @@
   nnoremap <silent> ,ftcf :call FileTestCurrentFile(0)<return>
   " File Test Current File in terminal
   nnoremap <silent> ,ftcF :call FileTestCurrentFile(1)<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
-  " File Test All Files
-  nnoremap <silent> ,ftaf :wa<return>:! rails t<return>
-  " File Test All Files in terminal
-  nmap <silent> ,ftaF :wa<return>:let @+ = 'rails t'<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
   function! FileTestCurrentFile(use_shell)
     execute ':wa'
     let test_file = GetTestFileName()
@@ -36,7 +82,6 @@
       let @+ = command
     endif
   endfunction
-
   function! GetTestFileName()
     let file = expand('%')
     " modify file name for non test files
@@ -45,12 +90,14 @@
     endif
     return substitute(file, 'app\|lib\|test', 'test', '')
   endfunction
+  " File Test All Files
+  nnoremap <silent> ,ftaf :wa<return>:! rails t<return>
+  " File Test All Files in terminal
+  nnoremap <silent> ,ftaF :wa<return>:let @+ = 'rails t'<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
 
 " Everything below here needs to be refactored
   
   
-
-
 
 
   
@@ -72,16 +119,6 @@
   nnoremap ,fcpf :let @+ = expand('%')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>dd
   " File Copy Rails Test
   nnoremap ,fcrt :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>:w<return>
-
-" File Edit basics
-  " File Edit SEarch
-  nnoremap ,fese :e **/*
-  " File Edit Current Path
-  nnoremap ,fecp :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
-  " File Edit Current File
-  nnoremap ,fecf :let @+ = expand('%')<return>:e <C-R><C-R>+
-  " File Edit CLipboard
-  nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
 
 " File Paste
   " File Paste Partial Path
@@ -120,8 +157,6 @@
   "
   " File Edit Stylesheet to View
   nnoremap ,feSv :let @+ = expand("%")<return>$a<return><esc>p<up>$/assets\/stylesheets<return>cgnviews<esc>/scss<return>cgnhtml.erb<esc>dd:e <C-R><C-R>+
-  " File Edit Stylesheet to (controller) Test
-  "
 " File Edit Controller
   " File Edit Controller to Stylesheet
   "
@@ -131,22 +166,14 @@
   "
   " File Edit Controller to Model
   nnoremap ,fecm :let @+ = expand("%")<return>$a<return><esc>p<up>/controllers<return>cgnmodels<esc><up>/_controller.rb<return>cgn/<esc>dd:e <C-R><C-R>+
-  " File Edit Controller to View
-  nnoremap ,fecv :let @+ = expand("%")<return>$a<return><esc>p<up>/controllers<return>cgnviews<esc><up>/_controller.rb<return>cgn/<esc>dd:e <C-R><C-R>+
-  " File Edit Controller to (controller) Test
-  nnoremap ,fect :let @+ = expand("%")<return>$a<return><esc>p<up>/app<return>cgntest<esc><up>/_controller.rb<return>cgn_controller_test.rb<esc>dd:e <C-R><C-R>+
 
 " File Edit Helper
   " File Edit Helper to Stylesheet
   "
-  " File Edit Helper to Controller
-  nnoremap ,fehc :let @+ = expand("%")<return>$a<return><esc>pO<esc>/helpers<return>cgncontrollers<esc>/_helper.rb<return>cgn_controller.rb<esc><up>dddd:e <C-R><C-R>+
   " File Edit Helper to Javascript
   "
   " File Edit Helper to View
   nnoremap ,fehv :let @+ = expand("%")<return>$a<return><esc>pO<esc>/helpers<return>cgnviews<esc>/_helper.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
-  " File Edit Helper to (helper) Test
-  nnoremap ,feht :let @+ = expand("%")<return>$a<return><esc>p<up>$/app<return>cgntest<esc>/_helper.rb<return>cgn_helper_test.rb<esc>dd:e <C-R><C-R>+
 
 " File Edit Javascript
   " File Edit Javascript pack to Stylesheet
@@ -157,34 +184,24 @@
   "
   " File Edit Javascript pack to View
   "
-  " File Edit Javascript pack to (controller) Test
-  "
 
 " File Edit Job
-  " File Edit Job to (job) Test
-  nnoremap ,fejt :let @+ = expand("%")<return>$a<return><esc>p<up>/app<return>cgntest<esc><up>/_job.rb<return>cgn_job_test.rb<esc>dd:e <C-R><C-R>+
 
 " File Edit Mailer
   " File Edit Mailer to View
   nnoremap ,feMv :let @+ = expand("%")<return>$a<return><esc>pO<esc>/mailers<return>cgnviews<esc>/.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
-  " File Edit Mailer to Test
-  nnoremap ,feMt :let @+ = expand("%")<return>$a<return><esc>pO<esc>/app<return>cgntest<esc>/.rb<return>cgn_test.rb<esc><up>dddd:e <C-R><C-R>+
   " File Edit Mailer to Preview
   nnoremap ,feMp :let @+ = expand("%")<return>$a<return><esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
   
 " File Edit Model
   " File Edit Model to sub Model
   nnoremap ,fems :let @+ = expand("%")<return>$a<return><esc>p<up>$/\.rb<return>cgn/<esc>dd:e <C-R><C-R>+
-  " File Edit Model to (model) Test
-  nnoremap ,femt :let @+ = expand("%")<return>$a<return><esc>p<up>$/app<return>cgntest<esc>/.rb<return>cgn_test.rb<esc>dd:e <C-R><C-R>+
   " File Edit Model to Fixture
   nnoremap ,femf :let @+ = expand("%:h")<return>$a<return><esc>p0/app<return>cgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
 
 " File Edit View
   " File Edit View to Stylesheet
   nnoremap ,fevS :let @+ = expand('%')<return>$a<return><esc>p0/views<return>cgnassets/stylesheets<esc>0/html.erb<return>cgnscss<esc>dd:e <C-R><C-R>+
-  " File Edit View to Controller
-  nnoremap ,fevc :let @+ = expand('%:h')<return>$a<return><esc>p<up>/views<return>cgncontrollers<esc>A_controller.rb<esc>dd:e <C-R><C-R>+
   " File Edit View to Helper
   nnoremap ,fevh :let @+ = expand('%:h')<return>$a<return><esc>p0/views<return>cgnhelpers<esc>A_helper.rb<esc>dd:e <C-R><C-R>+
   " File Edit View to Javascript pack
@@ -201,40 +218,18 @@
   nnoremap ,feve :let @+ = expand('%:h')<return>$a<return><esc>p<up>/app\/views<return>cgntest/mailers<esc>A_test.rb<esc>dd:e <C-R><C-R>+
   
 " File Edit Task
-  " File Edit Task to Test
-  nnoremap ,feTt :let @+ = expand('%')<return>$a<return><esc>p<up>$/lib<return>cgntest<esc>/\.rake<return>cgn_task_test.rb<esc>dd:e <C-R><C-R>+
 
 " File Edit Service
-  " File Edit Service to Test
-  nmap ,fest ,felt
 
 " File Edit Lib files
-  " File Edit Libe file to Test
-  nnoremap ,felt :let @+ = expand('%')<return>$a<return><esc>p<up>$/lib<return>cgntest<esc>/\.rb<return>cgn_test.rb<esc>dd:e <C-R><C-R>+
 
 " File Edit Test
-  " File Edit Test to Controller
-  nnoremap ,fetc :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnapp<esc>ncgn<backspace><esc>dd:e <c-r><c-r>+
-  " File Edit Test to Model
-  nnoremap ,fetm :let @+ = expand("%")<return>$a<return><esc>p0/test<return>Ncgnapp<esc>/_test<return>cgn<esc>dd:e <C-R><C-R>+
-  " File Edit Test to Helper
-  "
-  " File Edit Test to Job
-  nnoremap ,fetj :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnapp<esc><up>/_test<return>cgn<esc>dd:e <c-r><c-r>+
-  " File Edit Test to Mailer
-  nnoremap ,fetM :let @+ = expand("%")<return>$a<return><esc>p$a<return><esc>/test<return>NNcgnapp<esc>ncgn<backspace><esc><down>dd<up>dd:e <C-R><C-R>+
   " File Edit Test to View (for controller and mailer tests)
   nnoremap ,fetv :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnapp<esc><up>/controllers\\|mailers<return>cgnviews<esc><up>/_controller_test.rb<return>cgn/<esc>dd:e <C-R><C-R>+
   " File Edit Test to mailer Preview
   nnoremap ,fetp :let @+ = expand("%")<return>$a<return><esc>p$a<return><esc>/mailers<return>Ncgnmailers/previews<esc>/_test<return>cgn_preview<esc><down>dd<up>dd:e <C-R><C-R>+
   " File Edit (model) Test to fixture
   "nnoremap ,fetf :let @+ = expand("%:h")<return>$a<return><esc>p0/test<return>Ncgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
-  " File Edit (task) Test to Task
-  nnoremap ,fetT :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnlib<esc>/_task_test\.rb<return>cgn.rake<esc>dd:e <C-R><C-R>+
-  " File Edit Test to Service
-  nmap ,fets ,fetl
-  " File Edit Test to Lib file
-  nnoremap ,fetl :let @+ = expand("%")<return>$a<return><esc>p<up>/test<return>cgnlib<esc>/_test<return>cgn<esc>dd:e <C-R><C-R>+
 
 " File Edit Preview
   " File Edit Preview to View
