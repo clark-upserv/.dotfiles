@@ -7,6 +7,32 @@
   nnoremap ,fecf :let @+ = expand('%')<return>:e <C-R><C-R>+
   " File Edit CLipboard
   nnoremap ,fecl :e <C-R><C-R>+<space><backspace>
+  " File Edit Style Sheet
+  nnoremap <silent> ,fess :call FileEditStyleSheet()<return>
+  function FileEditStyleSheet()
+    let current_file = expand('%')
+    if match(current_file, 'app/assets/stylesheets') != -1
+      let file = 'on style sheet'
+    elseif match(current_file, 'app/controllers') != -1
+      let file = substitute(expand('%'), 'controllers', 'assets/stylesheets', '')
+      let file = substitute(file, '_controller.rb', '', '')
+    elseif match(current_file, 'app/views') != -1
+      let file = substitute(expand('%:h'), 'views', 'assets/stylesheets', '')
+    elseif match(current_file, 'app/helpers') != -1
+      let file = substitute(expand('%'), 'helpers', 'assets/stylesheets', '')
+      let file = substitute(file, '_helper.rb', '', '')
+    else 
+      let file = 1
+    endif
+    if file == 'on style sheet'
+      echo 'Already on style sheet file'
+    elseif file == 1
+      echo 'Unable to find controller for' current_file
+    else
+      execute ':e' file
+    endif
+  endfunction
+
   " File Edit COntroller
   nnoremap <silent> ,feco :call FileEditController()<return>
   function FileEditController()
@@ -29,21 +55,46 @@
       execute ':e' file
     endif
   endfunction
+  " File Edit HElper
+  nnoremap <silent> ,fehe :call FileEditHelper()<return>
+  function FileEditHelper()
+    let current_file = expand('%')
+    if match(current_file, 'app/helpers') != -1
+      let file = 'on helper'
+    elseif match(current_file, 'app/controllers') != -1
+      let file = substitute(current_file, 'controllers', 'helpers', '')
+      let file = substitute(file, '_controller.rb', '_helper.rb', '')
+    elseif match(current_file, 'app/views') != -1
+      let file = substitute(expand('%:h'), 'views', 'helpers', '') . '_helper.rb'
+    else 
+      let file = 1
+    endif
+    if file == 'on helper'
+      echo 'Already on helper file'
+    elseif file == 1
+      echo 'Unable to find helper for' current_file
+    else
+      execute ':e' file
+    endif
+  endfunction
   " File Edit VIew
   nnoremap <silent> ,fevi :call FileEditView()<return>
   function FileEditView()
     let current_file = expand('%')
     if match(current_file, 'app/views') != -1
-      let file = 'on view'
+      let file = expand('%:h')
+    elseif match(current_file, 'app/assets/stylesheets') != -1
+      let file = substitute(expand('%:h'), 'assets/stylesheets', 'views', '')
     elseif match(current_file, 'app/controllers') != -1
       let file = substitute(current_file, 'controllers', 'views', '')
       let file = substitute(file, '_controller.rb', '', '')
+    elseif match(current_file, 'app/helpers') != -1
+      let file = substitute(expand('%'), 'helpers', 'views', '')
+      let file = substitute(file, '_helper.rb', '', '')
     else 
       let file = 1
     endif
-    if file == 'on view'
-      echo 'Already on view file'
-    elseif file == 1
+    if file == 1
       echo 'Unable to find views for' current_file
     else
       execute ':Explore' file
@@ -155,13 +206,9 @@
   "
   " File Edit Stylesheet to Javascript pack
   "
-  " File Edit Stylesheet to View
-  nnoremap ,feSv :let @+ = expand("%")<return>$a<return><esc>p<up>$/assets\/stylesheets<return>cgnviews<esc>/scss<return>cgnhtml.erb<esc>dd:e <C-R><C-R>+
 " File Edit Controller
   " File Edit Controller to Stylesheet
   "
-  " File Edit Controller to Helper
-  nnoremap ,fech :let @+ = expand("%")<return>$a<return><esc>pO<esc>/controllers<return>cgnhelpers<esc>/_controller.rb<return>cgn_helper.rb<esc><up>dddd:e <C-R><C-R>+
   " File Edit Controller to Javascript pack
   "
   " File Edit Controller to Model
@@ -172,8 +219,6 @@
   "
   " File Edit Helper to Javascript
   "
-  " File Edit Helper to View
-  nnoremap ,fehv :let @+ = expand("%")<return>$a<return><esc>pO<esc>/helpers<return>cgnviews<esc>/_helper.rb<return>cgn/<esc><up>dddd:e <C-R><C-R>+
 
 " File Edit Javascript
   " File Edit Javascript pack to Stylesheet
@@ -200,10 +245,6 @@
   nnoremap ,femf :let @+ = expand("%:h")<return>$a<return><esc>p0/app<return>cgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
 
 " File Edit View
-  " File Edit View to Stylesheet
-  nnoremap ,fevS :let @+ = expand('%')<return>$a<return><esc>p0/views<return>cgnassets/stylesheets<esc>0/html.erb<return>cgnscss<esc>dd:e <C-R><C-R>+
-  " File Edit View to Helper
-  nnoremap ,fevh :let @+ = expand('%:h')<return>$a<return><esc>p0/views<return>cgnhelpers<esc>A_helper.rb<esc>dd:e <C-R><C-R>+
   " File Edit View to Javascript pack
   nnoremap ,fevJ :let @+ = expand('%')<return>$a<return><esc>p<up><esc>/views<return>cgnjavascript/packs<esc>/html\.erb<return>cgnjs<esc>dd:e <C-R><C-R>+
   " File Edit View to Mailer
