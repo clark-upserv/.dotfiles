@@ -1,5 +1,8 @@
 " Miscellaneous Messages Test
-nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can easily change (ie text in source code)<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break<esc>
+function! TestDisclaimer()
+  exe "normal! a# DeleteThis - do not test things that can easily change (ie text in source code)\<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break"
+endfunction
+
 " Base
   " Tests Base Test Base
   nnoremap <silent> ,tbtb atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
@@ -28,7 +31,7 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 
 " Controller
   " Tests Controller BAse
-  nmap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel<return>
+  nnoremap <silent> ,tcba :read ../templates/tests/controller_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeThisPls\\|ChangeUserWithPermission\\|ChangeObject\\|change_model_name\\|ChangeModel<return>
   " Tests Controller Scenarios Base
   nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeValueForDifferentAccount\\|ChangeValue\\|ChangeHtmlMethod\\|ChangeUrlHelper\\|(id: @ChangeObject.id)\\|, params: ChangeAction_params\\|ChangeUserWithPermission\\|ChangeInvalidValue<return>
   " Tests Controller Test Base
@@ -64,28 +67,28 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 
 " Helper
   " Tests Helper BAse
-  nmap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
+  nnoremap <silent> ,thba :read ../templates/tests/helper_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture<return>
 
 " Integration
   " Tests Integration BAse
-  nmap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThis<return>
+  nnoremap <silent> ,tiba :read ../templates/tests/integration_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeThisPls\\|change_model_name\\|ChangeFixture\\|DeleteThis<return>
 
 " Jobs
   " Tests Job BAse
-  nmap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangeObject\\|ChangeTableName\\|ChangeFixtureName<return>
+  nnoremap <silent> ,tjba :read ../templates/tests/job_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeThisPls\\|ChangeObject\\|ChangeTableName\\|ChangeFixtureName<return>
   nnoremap <silent> ,tjtb :read ../templates/tests/job_test_base.rb<return>/ChangeDescription\\|ChangeJobName\\|DeleteThis\\|ChangeJob\\|ChangeArgs\\|ChangeObject<return>
 
 " Mailers
   " Tests Mailer BAse
-  nmap <silent> ,tMba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
+  nnoremap <silent> ,tMba :read ../templates/tests/mailer_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|add mailer test<return>dd<up>,tatb/ChangeThisPls\\|ChangeThis\\|ChangeObject\\|change_model_name\\|ChangeFixture\\|ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
   " Tests Mailer Test Base
-  nmap <silent> ,tMtb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
+  nnoremap <silent> ,tMtb :read ../templates/tests/mailer_test_base.rb<return>/ChangeEmail\\|ChangeThis\\|DeleteThis\\|ChangeSubject\\|ChangeMailTo\\|ChangeMailFrom\\|ChangeSomeContent<return>
 
 " Models
   " Models Search
   nnoremap <silent> ,mmtest_model_search /ChangeParent\\|ChangeChildren\\|ChangeChildModel\\|ChangeChild\\|DeleteThis\\|ChangeAttributes\\|ChangeAttribute\\|ChangeObject\\|ChangeInvalidValue\\|ChangeValue\\|ChangeValidation\\|ChangeConnectionModel\\|ChangeAssociation\\|ChangeTable\\|ChangeFixture\\|ChangeScope\\|ChangeClass\\|ChangeThisPls\\|ChangeDescription\\|ChangeModel<return>
   " Tests Model BAse
-  nmap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
+  nnoremap <silent> ,tmba :read ../templates/tests/model_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
   " Tests Models Belongs To
   nmap <silent> ,tmbt atest 'association ChangeParent - belongs to' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeChild.ChangeParent<return>end<esc>,mmtest_model_search
   " Tests Models Had One
@@ -121,11 +124,11 @@ nnoremap <silent> ,mmtest_disclaimer a# DeleteThis - do not test things that can
 
 " Test Tasks
   " Test Tasks Base
-  nmap <silent> ,tTba :read ../templates/tests/task_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/ChangeThisPls\\|ChangeTestType\\|ChangeFile\\|ChangeExpectedAction\\|ChangeTaskName\\|DeleteThis\\|ChangeApplicationName<return>
+  nnoremap <silent> ,tTba :read ../templates/tests/task_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/ChangeThisPls\\|ChangeTestType\\|ChangeFile\\|ChangeExpectedAction\\|ChangeTaskName\\|DeleteThis\\|ChangeApplicationName<return>
   
 " Test Lib files
   " Test Lib files BAse
-  nmap <silent> ,tlba :read ../templates/tests/lib_file_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeType\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>
+  nnoremap <silent> ,tlba :read ../templates/tests/lib_file_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeType\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>
 
-  " Test Lib files BAse
-  nmap <silent> ,tsba :read ../templates/tests/services_base.rb<return>ggdd/ChangePathAndFileName<return>,fccfviwp/test disclaimer<return>cgn<esc>,mmtest_disclaimer/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>
+  " Test Services BAse
+  nnoremap <silent> ,tsba :read ../templates/tests/services_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>

@@ -49,6 +49,9 @@
   nnoremap <silent> ,rbst astrftime('%A, %B %-d, %Y')<return># DeleteThis - %A gets day spelled out - "Sunday"; %a gets day spelled out abbreviated - "Sun"<return>DeleteThis - %B gets month spelled out - "January"; %b gets month spelled out abbreviated - "Jan"<return>DeleteThis - %d gets day of month (ex 01-31); %-d gets day of month with blank instead of 0 padding (ex 1-31)<return>DeleteThis - %Y gets full year - 2021; %y gets last 2 digits of year - 21<return>DeleteThis - see here for more https://apidock.com/ruby/DateTime/strftime<esc>/%A, %B %-d, %Y\\|DeleteThis<return>
 
 " Ruby Block
+  function! RubyBlockBlockInsertMode()
+    execute "normal! ado \|\|\<return>end\<esc>\<up>$"
+  endfunction
   " Ruby Block EAch
   nnoremap <silent> ,rbea aeach do \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>cgn
   nnoremap <silent> ,rbeA aeach { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
@@ -61,6 +64,13 @@
   nnoremap <silent> ,rbeW aeach_with_index { \|ChangeArgs, index\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   inoremap <silent> eachwb each_with_index do \|, index\|<return>end<esc><up>$7<left>i
   inoremap <silent> eachwi each_with_index { \|, index\| ChangeLogic }<esc>/ChangeLogic<return>9<left>i
+  " Ruby Block TImes
+  " [block]
+  " [inline]
+  " [shorthand]
+  inoremap <silent> timesb times do \|index\|<return>end<esc>/index<return>
+  inoremap <silent> timesi times { \|index\| ChangeLogic }<esc>/index\\|ChangeLogic<return>
+  inoremap <silent> timess times(&:)<left>
   " Ruby Block MAp
   nnoremap <silent> ,rbma amap do \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
   nnoremap <silent> ,rbmA amap { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
@@ -96,9 +106,6 @@
   inoremap <silent> proca proc { \|\|<return>}<esc><up>$i
   inoremap <silent> proci proc { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> procs proc(&:ChangeMethod)<esc>/ChangeMethod<return>
-  function! RubyBlockBlockInsertMode()
-    execute "normal! ado \|\|\<return>end\<esc>\<up>$"
-  endfunction
 
 " Ruby model mappings
   " Ruby Models BAse

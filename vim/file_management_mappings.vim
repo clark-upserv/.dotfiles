@@ -3,14 +3,7 @@ nnoremap <silent> <space>fs :wa<return>
 " File Save (single)
 nnoremap <silent> <space>fS :w<return>
 " File Explore
-nnoremap <silent> <space>fe :Explore<return>
-" File Explore
-nnoremap <silent> <space>fe :Explore<return>
-
-
-
-
-
+nnoremap <silent> <space>fx :Explore<return>
 
 " File Edit (and Explore)
   " File Edit SEarch
@@ -178,24 +171,9 @@ nnoremap <silent> <space>fe :Explore<return>
   nnoremap <silent> <space>fccp :let @+ = expand('%:h') . '/'<return>
   " File Copy Current File
   nnoremap <silent> <space>fccf :let @+ = expand('%')<return>
-  " File Copy Partial Path
-  nnoremap <silent> <space>fcpp :let @+ = expand('%:h')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>
-  " File Copy Partial File
-  nnoremap <silent> <space>fcpf :let @+ = expand('%')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>dd
-  " File Copy Rails Test
-  nnoremap <silent> <space>fcrt :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>:w<return>
-
-" File Paste
-  " File Paste Partial Path
-  nnoremap <silent> <space>fppp :let @+ = expand('%:h')<return>$a<return><esc>p<up>$/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>0/ChangePartialPath<return>viwp
-
-" File Copy
-  " File Copy File Name
-  nnoremap <silent> <space>fcfn :let @+ = expand("%:t:r")<return>
-  " File Copy Current Path
-  nnoremap <silent> <space>fccp :let @+ = expand('%:h') . '/'<return>
-  " File Copy Current File
-  nnoremap <silent> <space>fccf :let @+ = expand('%')<return>
+  function! FileCopyCurrentFile()
+    let @+ = expand('%')
+  endfunction
   " File Copy Partial Path
   nnoremap <silent> <space>fcpp :let @+ = expand('%:h')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>
   " File Copy Partial File
