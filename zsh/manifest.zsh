@@ -31,4 +31,3 @@ fara() {
   fi
 }
 
-# agagagagagaga

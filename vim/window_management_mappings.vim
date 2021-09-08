@@ -8,28 +8,39 @@ nnoremap <space>wc :close<return>
 nnoremap <space>wm :only<return>
 " Window Terminal
 nnoremap <space>wt :call OpenTerminalInWindow()<return>
-" find if there is a terminal in a current window
-" need to fix this so that it opens first terminal not first zsh bucause 1)
-" some people might not use zsh and 2) there could be multiple terminal and /
-" or zsh buffers open
 function! OpenTerminalInWindow()
+  " find buffers in open windows and if terminlal is in an open window, switch
+  " to that window and skip the rest of the function
   let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1 && v:val.hidden == 0'), 'v:val.bufnr')
+  let termInWindow = 0
   for l:item in l:blist
-    if getbufvar(l:item, '&buftype') == 'terminal'
+    if getbufvar(l:item, '&buftype') == 'terminal' && termInWindow != 1
       let windowNr = bufwinnr(l:item)
       execute windowNr 'wincmd w'
-      return
-
+      let termInWindow = 1
     endif
   endfor
-  execute ':bo sp'
-  let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1 && v:val.hidden == 1'), 'v:val.bufnr')
-  for l:item in l:blist
-    if getbufvar(l:item, '&buftype') == 'terminal'
-      execute ':buf' l:item
-      return
-
+  " if none of the open windows include a terminal, continue 
+  if termInWindow == 0
+    " open a new window at the bottom of the screen
+    execute ':bo sp'
+    " if there is a terminal in a buffer, open that buffer in widnow at bottom
+    " of screen
+    let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1 && v:val.hidden == 1'), 'v:val.bufnr')
+    let termInBuffer = 0
+    for l:item in l:blist
+      if getbufvar(l:item, '&buftype') == 'terminal' && termInBuffer != 1
+        execute ':buf' l:item
+        let termInBuffer = 1
+      endif
+    endfor
+    " if no windows or buffers have terminal, open new terminal buffer in window
+    " at bottom of screen
+    if termInBuffer == 0
+      execute ':ter'
     endif
-  endfor
-  execute ':ter'
+  endif
+  " would be nice to run: execute "normal! \<esc>\<C-c>\<esc>"
+  " but that doesn't work from shell... so any mapping that uses this needs to
+  " have that in it... sad
 endfunction

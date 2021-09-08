@@ -49,6 +49,7 @@ so ~/.dotfiles/vim/window_management_mappings.vim
 so ~/.dotfiles/vim/ruby_mappings.vim
 so ~/.dotfiles/vim/html_mappings.vim
 so ~/.dotfiles/vim/git_mappings.vim
+so ~/.dotfiles/vim/commands.vim
 
 
 " truly random one off stuff

@@ -127,7 +127,7 @@ nnoremap <silent> <space>fx :Explore<return>
 
 " File Test
   " File Test Current File
-  nnoremap <silent> <space>ftcf :call FileTestCurrentFile(0)<return>
+  nnoremap <silent> <space>fthat doesn't work from shell... so any mapping that uses this needs to have that in it... sadtcf :call filetestcurrentfile(0)<return>
   " File Test Current File in terminal
   nnoremap <silent> <space>ftcF :call FileTestCurrentFile(1)<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
   function! FileTestCurrentFile(use_shell)
@@ -180,16 +180,6 @@ nnoremap <silent> <space>fx :Explore<return>
   nnoremap <silent> <space>fcpf :let @+ = expand('%')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>dd
   " File Copy Rails Test
   nnoremap <silent> <space>fcrt :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>:w<return>
-
-" File Edit basics
-  " File Edit SEarch
-  nnoremap <silent> <space>fese :e **/*
-  " File Edit Current Path
-  nnoremap <silent> <space>fecp :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
-  " File Edit Current File
-  nnoremap <silent> <space>fecf :let @+ = expand('%')<return>:e <C-R><C-R>+
-  " File Edit CLipboard
-  nnoremap <silent> <space>fecl :e <C-R><C-R>+<space><backspace>
 
 " File Edit Stylesheet
   " File Edit Stylesheet to Controller
