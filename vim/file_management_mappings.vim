@@ -34,6 +34,27 @@
   " File Explore
   nnoremap <silent> <space>fx :Explore<return>
 
+" File Paste
+  " File Paste Partial Path
+  nnoremap <silent> <space>fppp :let @+ = expand('%:h')<return>$a<return><esc>p<up>$/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>0/ChangePartialPath<return>viwp
+
+" File Copy
+  " File Copy File Name
+  nnoremap <silent> <space>fcfn :let @+ = expand("%:t:r")<return>
+  " File Copy Current Path
+  nnoremap <silent> <space>fccp :let @+ = expand('%:h') . '/'<return>
+  " File Copy Current File
+  nnoremap <silent> <space>fccf :let @+ = expand('%')<return>
+  function! FileCopyCurrentFile()
+    let @+ = expand('%')
+  endfunction
+  " File Copy Partial Path
+  nnoremap <silent> <space>fcpp :let @+ = expand('%:h')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>
+  " File Copy Partial File
+  nnoremap <silent> <space>fcpf :let @+ = expand('%')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>dd
+  " File Copy Rails Test
+  nnoremap <silent> <space>fcrt :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>:w<return>
+
 " File Edit (and Explore)
   " File Edit SEarch
   nnoremap <silent> <space>fese :e **/*
@@ -153,6 +174,17 @@
     endif
     execute ':e' file
   endfunction
+  " File Edit Schema
+  nnoremap <silent> <space>fesc :e db/schema.rb<return>
+  " File Edit ROutes
+  nnoremap <silent> <space>fero :e config/routes.rb<return>
+  " File Edit ABility
+  nnoremap <silent> <space>feab :e app/models/ability.rb<return>
+  " File Edit GEmfile
+  nnoremap <silent> <space>fege :e Gemfile<return>
+  " File Edit REadme
+  nnoremap <silent> <space>fere :e README.md<return>
+  "
 
 " File Test
   " File Test Current File
@@ -182,66 +214,13 @@
   " File Test All Files in terminal
   nnoremap <silent> <space>ftaF :wa<return>:let @+ = 'rails t'<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
 
+  
+  
+  
+  
+  
 " Everything below here needs to be refactored
   
-  
-
-
-  
-  
-" File Paste
-  " File Paste Partial Path
-  nnoremap <silent> <space>fppp :let @+ = expand('%:h')<return>$a<return><esc>p<up>$/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>0/ChangePartialPath<return>viwp
-
-" File Copy
-  " File Copy File Name
-  nnoremap <silent> <space>fcfn :let @+ = expand("%:t:r")<return>
-  " File Copy Current Path
-  nnoremap <silent> <space>fccp :let @+ = expand('%:h') . '/'<return>
-  " File Copy Current File
-  nnoremap <silent> <space>fccf :let @+ = expand('%')<return>
-  function! FileCopyCurrentFile()
-    let @+ = expand('%')
-  endfunction
-  " File Copy Partial Path
-  nnoremap <silent> <space>fcpp :let @+ = expand('%:h')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>
-  " File Copy Partial File
-  nnoremap <silent> <space>fcpf :let @+ = expand('%')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>dd
-  " File Copy Rails Test
-  nnoremap <silent> <space>fcrt :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>:w<return>
-
-" File Edit Stylesheet
-  " File Edit Stylesheet to Controller
-  "
-  " File Edit Stylesheet to Helper
-  "
-  " File Edit Stylesheet to Javascript pack
-  "
-" File Edit Controller
-  " File Edit Controller to Stylesheet
-  "
-  " File Edit Controller to Javascript pack
-  "
-  " File Edit Controller to Model
-  nnoremap <silent> <space>fecm :let @+ = expand("%")<return>$a<return><esc>p<up>/controllers<return>cgnmodels<esc><up>/_controller.rb<return>cgn/<esc>dd:e <C-R><C-R>+
-
-" File Edit Helper
-  " File Edit Helper to Stylesheet
-  "
-  " File Edit Helper to Javascript
-  "
-
-" File Edit Javascript
-  " File Edit Javascript pack to Stylesheet
-  "
-  " File Edit Javascript pack to Controller
-  "
-  " File Edit Javascript pack to Helper
-  "
-  " File Edit Javascript pack to View
-  "
-
-" File Edit Job
 
 " File Edit Mailer
   " File Edit Mailer to View
@@ -250,8 +229,6 @@
   nnoremap <silent> <space>feMp :let @+ = expand("%")<return>$a<return><esc>pO<esc>/app<return>cgntest<esc>/mailers<return>cgnmailers/previews<esc>/.rb<return>cgn_preview.rb<esc><up>dddd:e <C-R><C-R>+
   
 " File Edit Model
-  " File Edit Model to sub Model
-  nnoremap <silent> <space>fems :let @+ = expand("%")<return>$a<return><esc>p<up>$/\.rb<return>cgn/<esc>dd:e <C-R><C-R>+
   " File Edit Model to Fixture
   nnoremap <silent> <space>femf :let @+ = expand("%:h")<return>$a<return><esc>p0/app<return>cgntest/fixtures<esc>/models\/<return>cgn<esc>dd:e <C-R><C-R>+/
 
@@ -299,81 +276,81 @@
 
 
 
-" File edit specific files and paths (NEEDS CLEANING)
-nmap <silent> <space>ftaas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
-nnoremap <silent> <space>faas :edit app/assets/<space><backspace>
-" Edit App Assets Css (stylesheets)
-nmap <silent> <space>ftaaS <space>fT/app<return><return>/assets<return><return>/stylesheets<return><return><esc>:noh<return>
-nnoremap <silent> <space>faaS :edit app/assets/stylesheets/<space><backspace>
-"
-nmap <silent> <space>ftach <space>fT/app<return><return>/channels<return><return><esc>:noh<return>
-nnoremap <silent> <space>fach :edit app/channels/<space><backspace>
-"
-"nmap <silent> <space>ftaco <space>fT/app<return><return>/controllers<return><return><esc>:noh<return>
-nmap <silent> <space>ftaco :e app/controllers/
-nnoremap <silent> <space>faco :edit app/controllers/<space><backspace>
-"
-nmap <silent> <space>ftahe <space>fT/app<return><return>/helpers<return><return><esc>:noh<return>
-nnoremap <silent> <space>fahe :edit app/helpers/<space><backspace>
-"
-nmap <silent> <space>ftaJa <space>fT/app<return><return>/javascript<return><return><esc>:noh<return>
-nnoremap <silent> <space>faJa :edit app/javascript/<space><backspace>
-"
-nmap <silent> <space>ftaJp <space>fT/app<return><return>/javascript<return><return>/packs<return><return><esc>:noh<return>
-nnoremap <silent> <space>faJp :edit app/javascript/packs/<space><backspace>
-nnoremap <silent> <space>faJs :edit app/javascript/packs/lib/show_edit_swap.js.erb<return>
-"
-nmap <silent> <space>ftajo <space>fT/app<return><return>/jobs<return><return><esc>:noh<return>
-nnoremap <silent> <space>fajo :edit app/jobs/<space><backspace>
-" Edit App/MAilers
-nmap <silent> <space>ftaMa <space>fT/app<return><return>/mailers<return><return><esc>:noh<return>
-nnoremap <silent> <space>faMa :edit app/mailers/<space><backspace>
-" Edit App/MOddels
-nmap <silent> <space>ftamo <space>fT/app<return><return>/models<return><return><esc>:noh<return>
-nnoremap <silent> <space>famo :edit app/models/<space><backspace>
-" Edit App/Mddels/aBility.rb Cancancan
-nmap <silent> <space>famc :e app/models/ability.rb<return>
-"
-nmap <silent> <space>ftavi <space>fT/app<return><return>/views<return><return><esc>:noh<return>
-nnoremap <silent> <space>favi :edit app/views/<space><backspace>
-"
-nmap <silent> <space>ftcon <space>fT/config<return><return><esc>:noh<return>
-nnoremap <silent> <space>fcon :edit config/<space><backspace>
-"
-nnoremap <silent> <space>fcro :edit config/routes.rb<return>
-"
-nnoremap <silent> <space>fdsc :edit db/schema.rb<return>
-"
-nmap <silent> <space>ftdse <space>fT/db<return><return>/seeds<return><return><esc>:noh<return>
-nnoremap <silent> <space>fdse :edit db/seeds.rb<return>
-"
-nmap <silent> <space>ftdmi <space>fT/db<return><return>/migrate<return><return><esc>:noh<return>
-nnoremap <silent> <space>fdmi :edit db/migrate/<space><backspace>
-"
-nmap <silent> <space>ftlib <space>fT/lib<return><return><esc>:noh<return>
-nnoremap <silent> <space>flib :edit lib/<space><backspace>
-"
-nmap <silent> <space>fttes <space>fT/test<return><return><esc>:noh<return>
-nnoremap <silent> <space>ftes :edit test/<space><backspace>
-"
-nmap <silent> <space>fttco <space>fT/test<return><return>/controllers<return><return><esc>:noh<return>
-nnoremap <silent> <space>ftco :edit test/controllers/<space><backspace>
-"
-nmap <silent> <space>fttmo <space>fT/test<return><return>/models<return><return><esc>:noh<return>
-nnoremap <silent> <space>ftmo :edit test/models/<space><backspace>
-" File Test FIxtures
-nmap <silent> <space>fttfi <space>fT/test<return><return>/fixtures<return><return><esc>:noh<return>
-nnoremap <silent> <space>ftfi :edit test/fixtures/<space><backspace>
-" File Test Mailers
-nmap <silent> <space>fttma <space>fT/test<return><return>/mailers<return><return><esc>:noh<return>
-nnoremap <silent> <space>ftma :edit test/fixtures/mailers/<space><backspace>
-" File Test Mailers Previews
-nmap <silent> <space>fttmp <space>fT/test<return><return>/mailers<return><return>/previews<return><return><esc>:noh<return>
-nnoremap <silent> <space>ftmp :edit test/fixtures/mailers/previews/<space><backspace>
-"
-nmap <silent> <space>ftven <space>fT/vendor<return><return><esc>:noh<return>
-nnoremap <silent> <space>fven :edit vendor/<space><backspace>
-" Edit GEMfile
-nmap <silent> <space>fgem <space>fT/Gemfile<return><return><esc>:noh<return>
-" Edit REAdme
-nmap <silent> <space>frea <space>fT/README.md<return><return><esc>:noh<return>
+"" File edit specific files and paths (NEEDS CLEANING)
+"nmap <silent> <space>ftaas <space>fT/app<return><return>/assets<return><return><esc>:noh<return>
+"nnoremap <silent> <space>faas :edit app/assets/<space><backspace>
+"" Edit App Assets Css (stylesheets)
+"nmap <silent> <space>ftaaS <space>fT/app<return><return>/assets<return><return>/stylesheets<return><return><esc>:noh<return>
+"nnoremap <silent> <space>faaS :edit app/assets/stylesheets/<space><backspace>
+""
+"nmap <silent> <space>ftach <space>fT/app<return><return>/channels<return><return><esc>:noh<return>
+"nnoremap <silent> <space>fach :edit app/channels/<space><backspace>
+""
+""nmap <silent> <space>ftaco <space>fT/app<return><return>/controllers<return><return><esc>:noh<return>
+"nmap <silent> <space>ftaco :e app/controllers/
+"nnoremap <silent> <space>faco :edit app/controllers/<space><backspace>
+""
+"nmap <silent> <space>ftahe <space>fT/app<return><return>/helpers<return><return><esc>:noh<return>
+"nnoremap <silent> <space>fahe :edit app/helpers/<space><backspace>
+""
+"nmap <silent> <space>ftaJa <space>fT/app<return><return>/javascript<return><return><esc>:noh<return>
+"nnoremap <silent> <space>faJa :edit app/javascript/<space><backspace>
+""
+"nmap <silent> <space>ftaJp <space>fT/app<return><return>/javascript<return><return>/packs<return><return><esc>:noh<return>
+"nnoremap <silent> <space>faJp :edit app/javascript/packs/<space><backspace>
+"nnoremap <silent> <space>faJs :edit app/javascript/packs/lib/show_edit_swap.js.erb<return>
+""
+"nmap <silent> <space>ftajo <space>fT/app<return><return>/jobs<return><return><esc>:noh<return>
+"nnoremap <silent> <space>fajo :edit app/jobs/<space><backspace>
+"" Edit App/MAilers
+"nmap <silent> <space>ftaMa <space>fT/app<return><return>/mailers<return><return><esc>:noh<return>
+"nnoremap <silent> <space>faMa :edit app/mailers/<space><backspace>
+"" Edit App/MOddels
+"nmap <silent> <space>ftamo <space>fT/app<return><return>/models<return><return><esc>:noh<return>
+"nnoremap <silent> <space>famo :edit app/models/<space><backspace>
+"" Edit App/Mddels/aBility.rb Cancancan
+"nmap <silent> <space>famc :e app/models/ability.rb<return>
+""
+"nmap <silent> <space>ftavi <space>fT/app<return><return>/views<return><return><esc>:noh<return>
+"nnoremap <silent> <space>favi :edit app/views/<space><backspace>
+""
+"nmap <silent> <space>ftcon <space>fT/config<return><return><esc>:noh<return>
+"nnoremap <silent> <space>fcon :edit config/<space><backspace>
+""
+"nnoremap <silent> <space>fcro :edit config/routes.rb<return>
+""
+"nnoremap <silent> <space>fdsc :edit db/schema.rb<return>
+""
+"nmap <silent> <space>ftdse <space>fT/db<return><return>/seeds<return><return><esc>:noh<return>
+"nnoremap <silent> <space>fdse :edit db/seeds.rb<return>
+""
+"nmap <silent> <space>ftdmi <space>fT/db<return><return>/migrate<return><return><esc>:noh<return>
+"nnoremap <silent> <space>fdmi :edit db/migrate/<space><backspace>
+""
+"nmap <silent> <space>ftlib <space>fT/lib<return><return><esc>:noh<return>
+"nnoremap <silent> <space>flib :edit lib/<space><backspace>
+""
+"nmap <silent> <space>fttes <space>fT/test<return><return><esc>:noh<return>
+"nnoremap <silent> <space>ftes :edit test/<space><backspace>
+""
+"nmap <silent> <space>fttco <space>fT/test<return><return>/controllers<return><return><esc>:noh<return>
+"nnoremap <silent> <space>ftco :edit test/controllers/<space><backspace>
+""
+"nmap <silent> <space>fttmo <space>fT/test<return><return>/models<return><return><esc>:noh<return>
+"nnoremap <silent> <space>ftmo :edit test/models/<space><backspace>
+"" File Test FIxtures
+"nmap <silent> <space>fttfi <space>fT/test<return><return>/fixtures<return><return><esc>:noh<return>
+"nnoremap <silent> <space>ftfi :edit test/fixtures/<space><backspace>
+"" File Test Mailers
+"nmap <silent> <space>fttma <space>fT/test<return><return>/mailers<return><return><esc>:noh<return>
+"nnoremap <silent> <space>ftma :edit test/fixtures/mailers/<space><backspace>
+"" File Test Mailers Previews
+"nmap <silent> <space>fttmp <space>fT/test<return><return>/mailers<return><return>/previews<return><return><esc>:noh<return>
+"nnoremap <silent> <space>ftmp :edit test/fixtures/mailers/previews/<space><backspace>
+""
+"nmap <silent> <space>ftven <space>fT/vendor<return><return><esc>:noh<return>
+"nnoremap <silent> <space>fven :edit vendor/<space><backspace>
+"" Edit GEMfile
+"nmap <silent> <space>fgem <space>fT/Gemfile<return><return><esc>:noh<return>
+"" Edit REAdme
+"nmap <silent> <space>frea <space>fT/README.md<return><return><esc>:noh<return>

@@ -28,6 +28,11 @@ endfunction
   " Tests Assert No enqueued Jobs
   nnoremap <silent> ,tanj aassert_no_enqueued_jobs
   nnoremap <silent> ,tanJ aassert_no_enqueued_jobs only: ::ChangeJob<esc>/ChangeJob<return>
+  " common assertions
+  nnoremap <silent> ,tadi aassert_difference 'ChangeCountable', ChangeDifference do<return>end<esc>/ChangeCountable\\|ChangeDifference<return>
+  nnoremap <silent> ,taeq aassert_equal ChangeExpected, ChangeActual<esc>/ChangeExpected\\|ChangeActual<return>
+  nnoremap <silent> ,tani aassert_nil ChangeThis<esc>/ChangeThis<return>
+  nnoremap <silent> ,tann aassert_not_nil ChangeThis<esc>/ChangeThis<return>
 
 " Controller
   " Tests Controller BAse

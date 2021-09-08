@@ -1,4 +1,10 @@
 " visual mode non-leader key mappings
+  " prevent changing case on accident
+  vnoremap <silent> u <esc>u
+  vnoremap <silent> U <esc>U
+  " allow changing case
+  vnoremap <silent> ,u u
+  vnoremap <silent> ,U U
   " coment
   vnoremap <silent> # I#<esc>
   vnoremap <silent> " I"<esc>
