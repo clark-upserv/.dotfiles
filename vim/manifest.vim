@@ -38,8 +38,8 @@ augroup CustomVimEntry
   " some of the simple mappings to work...???
   autocmd VimEnter * :so ~/.dotfiles/vim/manifest.vim
 augroup END
+
 so ~/.dotfiles/vim/simple_mappings.vim
-so ~/.dotfiles/vim/file_navigation_mappings.vim
 so ~/.dotfiles/vim/view_mappings.vim
 so ~/.dotfiles/vim/embedded_ruby_mappings.vim
 so ~/.dotfiles/vim/test_mappings.vim
@@ -49,7 +49,6 @@ so ~/.dotfiles/vim/window_management_mappings.vim
 so ~/.dotfiles/vim/ruby_mappings.vim
 so ~/.dotfiles/vim/html_mappings.vim
 so ~/.dotfiles/vim/git_mappings.vim
-so ~/.dotfiles/vim/commands.vim
 
 
 " truly random one off stuff

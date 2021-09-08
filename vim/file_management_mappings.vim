@@ -1,9 +1,38 @@
-" File Save (all)
-nnoremap <silent> <space>fs :wa<return>
-" File Save (single)
-nnoremap <silent> <space>fS :w<return>
-" File Explore
-nnoremap <silent> <space>fx :Explore<return>
+" Simple File Mappings
+  " File Delete 
+  nnoremap <silent> <space>fd :call FileDelete()<return>
+  function! FileDelete()
+    let current_file = expand('%')
+    let confirmation = input("Delete file at: " . current_file . "\"? (y/n): ") 
+    if confirmation == 'y'
+      call delete(expand('%')) | bdelete!
+    endif
+  endfunction
+  " File Move
+  nnoremap <silent> <space>fm :call FileMove()<return>
+  function! FileMove()
+    wa
+    let current_file = expand('%')
+    let new_file = input("Move \"" . current_file . "\" to: ", current_file) 
+    if current_file == new_file
+      echo "\nDestination path be the same as current path. Please try again."
+    elseif filereadable(new_file)
+      echo "\nFile already exists at \"" . new_file '". Please try a different destination path.'
+    else
+      execute "e " . new_file
+      normal aa
+      w
+      execute "! mv " . current_file . ' ' . new_file
+      execute "bd " . current_file
+      wa
+    endif 
+  endfunction
+  " File Save (all)
+  nnoremap <silent> <space>fs :wa<return>
+  " File Save (single)
+  nnoremap <silent> <space>fS :w<return>
+  " File Explore
+  nnoremap <silent> <space>fx :Explore<return>
 
 " File Edit (and Explore)
   " File Edit SEarch
@@ -127,7 +156,7 @@ nnoremap <silent> <space>fx :Explore<return>
 
 " File Test
   " File Test Current File
-  nnoremap <silent> <space>fthat doesn't work from shell... so any mapping that uses this needs to have that in it... sadtcf :call filetestcurrentfile(0)<return>
+  nnoremap <silent> <space>ftcf :call FileTestCurrentFile(0)<return>
   " File Test Current File in terminal
   nnoremap <silent> <space>ftcF :call FileTestCurrentFile(1)<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
   function! FileTestCurrentFile(use_shell)

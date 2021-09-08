@@ -26,6 +26,7 @@ function! GoToNextbuf(direction)
   endwhile
   exec ':buf' nbuf 
 endfunction
+
 function! NextBuf(adj)
   let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')
   let l:len = len(l:blist)
