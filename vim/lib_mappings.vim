@@ -10,4 +10,4 @@
   
 " Lib Filter helper
   " Lib Filter herlper BAse
-  nnoremap <silent> ,lfba :call CreateBaseFile(1, 0, 1)<return>/inner_followup<return>dd<up>:read ../templates/lib/filter_helpers/base.rb<return>
+  nnoremap <silent> ,lfba :call CreateBaseFile(1, 0, 1)<return>/inner_followup<return>:read ../templates/lib/filter_helpers/base.rb<return>:call IndentTemplate()<return>/inner_followup<return>ddgg

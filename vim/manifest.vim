@@ -70,6 +70,10 @@ so ~/.dotfiles/vim/shared_functions.vim
 " Misc. mapping / messages
   " Misc. Reload Source
   nnoremap <silent> ,mrs :so ~/.dotfiles/vim/manifest.vim<return>
+  " Misc. Edit Template
+  nnoremap <silent> ,met :%s/###//g<return>:noh<return>gg
+  " Misc. Finish Template
+  nnoremap <silent> ,mft gg0<C-v>GI###<esc>
   " Misc. DD but combine to previous line instead of delete line  (I<tab>
   " makes sure there is at least something on the line because viwx on empty
   " line deletes entire line and then grabs following line)

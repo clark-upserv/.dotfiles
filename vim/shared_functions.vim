@@ -56,5 +56,15 @@ function! CreateBaseFile(class_or_module, include_outer_followup, include_inner_
   endif
   let @/ = 'ChangeTopLevelDocumentation\|ChangeArgs'
   normal! n
+  let @+ = (length - skip_levels)
 endfunction
 
+function! IndentTemplate()
+  let count = 0
+  let space = ""
+  while count < @+
+    let space = space . "  "
+    let count = count + 1
+  endwhile
+  execute ":%s/###/" . space . "/g"
+endfunction
