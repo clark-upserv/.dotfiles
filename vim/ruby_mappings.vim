@@ -1,7 +1,10 @@
 " ruby basics
   " Ruby Basic Frozen String
   nnoremap <silent> ,rbfs a# frozen_string_literal: true
-  
+  " Ruby Basic CLass
+  nnoremap <silent> ,rbcl :call CreateBaseFile(1)<return>
+  " Ruby Basic MOdule
+  nnoremap <silent> ,rbmo :call CreateBaseFile(0)<return>
   " Ruby Basic IF
   nnoremap <silent> ,rbif aif ChangeThisPls<return>end<esc>/ChangeThisPls<return>
   " Ruby Basic IF inline
@@ -139,9 +142,9 @@
   " Ruby Models Drop Table
   nnoremap <silent> ,rmdt adrop_table :ChangeTableName<esc>/ChangeTableName<return>
   " Ruby Models Cancancan Model based
-  nnoremap <silent> ,rmcm acan %i[ChangeControllerOrFeature], ChangeModel, ChangeMethod: user.ChangeValue<return># DeleteThis - review and delete notes below<return>Model based auth is typically used for controller actions that are tied to a singular specific model (typically show, create, update, destroy; also new and edit)<return>Abilities can be for specific controllers OR specific features<return>Abilities for accessible by need their own unique ability with "index_" prefix. These can only use attribute methods<return>Examples:<return>Controller Specific (Not Accesccible By): can %[manage_core_users], Core::User # only for app/controllers/core/users_controller.rb; can have non-attribute methods<return>Controller Specific & Accessible By: can %[index_core_users], Core::User # only for app/controllers/core/users_controller.rb; CAN ONLY have attribute methods<return>Feature Specific (Not Accesccible By): can %[manage_hr_time_off], Hr::Employee # for all controllers related to time off involving Hr::Employee; can have non-attribute methods<return>Feature Specific & Accessible By: can %[index_hr_time_off], Hr::Employee # for all controllers related to time off involving Hr::Employee; CAN ONLY have non-attribute methods<esc>/ChangeControllerOrFeature\\|ChangeModel\\|ChangeMethod\\|ChangeValue\\|DeleteThis<enter>
+  nnoremap <silent> ,rmcm acan %i[ChangeAbility_ChangeControllerOrFeature], ChangeModel, ChangeMethod: user.ChangeValue<return># DeleteThis - ChangeAbility for regular abilities - use "manage" or some specific controller action<return>DeleteThis - ChangeAbility for accessible_by - always use "index".<return>DeleteThis - NOTE: accessible_by ALWAYS gets its own unique ability because accessible_by errors when<return>non-attribute (ie not columns in db) methods are used. This way regular abilities can use any method and we<return>don't have to worry about accessible_by breaking.<return>DeleteThis - ChangeControllerOrFeature - a specific controller or a feature that describes a collection of<return>controllers. In either case, should always start with main namespace (ex. "core" or "hr", etc.)<esc>/ChangeAbility\\|ChangeControllerOrFeature\\|ChangeModel\\|ChangeMethod\\|ChangeValue\\|DeleteThis<enter>
   " Ruby Models Cancancan Non-model based
-  nnoremap <silent> ,rmcn acan %i[ChangeAbility], :ChangeControllerOrFeature<return># DeleteThis - review and delete notes below<return>Non-model based auth is typically used for controller actions not tied to a singular specific model (typically index pages or static pages)<return>Abilities can be for specific controllers OR specific features<return>Examples:<return>Controller Specific: can %[manage], :core_users # only for app/controllers/core/users_controller.rb<return>Feature Specific: can %[manage], :hr_time_off # for all controllers related to time off involving Hr::Employee<esc>/ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis<enter>
+  nnoremap <silent> ,rmcn acan %i[ChangeAbility], :ChangeControllerOrFeature<return># DeleteThis - ChangeAbility - use "manage" or some specific controller action<return>DeleteThis - ChangeControllerOrFeature - a specific controller or a feature that describes a collection of<return>controllers. In either case, should always start with main namespace (ex. "core" or "hr", etc.)<esc>/ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis<enter>
   " Ruby Models Belongs To association
   nnoremap <silent> ,rmbt abelongs_to :ChangeParentName, class_name: 'ChangeParentModel', inverse_of: :ChangeChildrenNameIfHasManyOrChildNameIfHasOne, optional: true, autosave: false<esc>/ChangeParentName\\|ChangeParentModel\\|ChangeChildrenNameIfHasManyOrChildNameIfHasOne<return>
   " Ruby Models Has Many association

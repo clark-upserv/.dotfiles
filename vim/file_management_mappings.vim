@@ -33,6 +33,7 @@
   nnoremap <silent> <space>fS :w<return>
   " File Explore
   nnoremap <silent> <space>fx :Explore<return>
+  nnoremap <silent> <space>fX :Explore .git/..<return>
 
 " File Paste
   " File Paste Partial Path
@@ -89,7 +90,6 @@
       execute ':e' file
     endif
   endfunction
-
   " File Edit COntroller
   nnoremap <silent> <space>feco :call FileEditController()<return>
   function FileEditController()
@@ -101,6 +101,9 @@
     elseif match(current_file, 'app/helpers') != -1
       let file = substitute(expand('%'), 'helpers', 'controllers', '')
       let file = substitute(file, '_helper.rb', '_controller.rb', '')
+    elseif match(current_file, 'lib/filter_helpers') != -1
+      let file = substitute(expand('%'), 'lib/filter_helpers', 'app/controllers', '')
+      let file = substitute(file, '_filter_helper.rb', '_controller.rb', '')
     else 
       let file = 1
     endif
@@ -148,6 +151,9 @@
     elseif match(current_file, 'app/helpers') != -1
       let file = substitute(expand('%'), 'helpers', 'views', '')
       let file = substitute(file, '_helper.rb', '', '')
+    elseif match(current_file, 'lib/filter_helpers') != -1
+      let file = substitute(current_file, 'lib/filter_helpers', 'app/views', '')
+      let file = substitute(file, '_filter_helper.rb', '', '')
     else 
       let file = 1
     endif
@@ -155,6 +161,28 @@
       echo 'Unable to find views for' current_file
     else
       execute ':Explore' file
+    endif
+  endfunction
+  " File Edit Filter Helper
+  nnoremap <silent> <space>fefh :call FileEditFilterHelper()<return>
+  function FileEditFilterHelper()
+    let current_file = expand('%')
+    if match(current_file, 'lib/filter_helpers') != -1
+      let file = 'on filter helper'
+    elseif match(current_file, 'app/controllers') != -1
+      let file = substitute(current_file, 'app/controllers', 'lib/filter_helpers', '')
+      let file = substitute(file, '_controller.rb', '_filter_helper.rb', '')
+    elseif match(current_file, 'app/views') != -1
+      let file = substitute(expand('%:h'), 'app/views', 'lib/filter_helpers', '') . '_filter_helper.rb'
+    else 
+      let file = 1
+    endif
+    if file == 'on filter helper'
+      echo 'Already on filter helper file'
+    elseif file == 1
+      echo 'Unable to find helper for' current_file
+    else
+      execute ':e' file
     endif
   endfunction
   " File Edit TEst
