@@ -1,4 +1,4 @@
-" Summary
+" Summary - this needs to be replaced with the 'so ~/' lines below
 "   [some random one off stuff]
 "   single key comma (o, comments)
 "   Misc
@@ -40,15 +40,20 @@ augroup CustomVimEntry
 augroup END
 
 so ~/.dotfiles/vim/simple_mappings.vim
-so ~/.dotfiles/vim/view_mappings.vim
-so ~/.dotfiles/vim/embedded_ruby_mappings.vim
-so ~/.dotfiles/vim/test_mappings.vim
+
+so ~/.dotfiles/vim/git_mappings.vim
 so ~/.dotfiles/vim/file_management_mappings.vim
 so ~/.dotfiles/vim/buffer_management_mappings.vim
 so ~/.dotfiles/vim/window_management_mappings.vim
+
 so ~/.dotfiles/vim/ruby_mappings.vim
+so ~/.dotfiles/vim/app_mappings.vim
+so ~/.dotfiles/vim/view_mappings.vim
 so ~/.dotfiles/vim/html_mappings.vim
-so ~/.dotfiles/vim/git_mappings.vim
+so ~/.dotfiles/vim/embedded_ruby_mappings.vim
+so ~/.dotfiles/vim/config_mappings.vim
+so ~/.dotfiles/vim/lib_mappings.vim
+so ~/.dotfiles/vim/test_mappings.vim
 so ~/.dotfiles/vim/shared_functions.vim
 
 
