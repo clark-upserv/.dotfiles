@@ -10,4 +10,4 @@
   
 " Lib Filter helper
   " Lib Filter herlper BAse
-  nnoremap <silent> ,lfba :call CreateBaseFile(1, 0, 1)<return>/inner_followup<return>:read ../templates/lib/filter_helpers/base.rb<return>:call IndentTemplate()<return>/inner_followup<return>ddgg
+  nnoremap <silent> ,lfba :call CreateBaseFile(1, 0, 1)<return>/inner_followup<return>:call IndentTemplate(@+, '../templates/lib/filter_helpers/base.rb')<return>/inner_followup<return>dd/ChangeTopLevelDocumentation<return><down>$viwy/ChangeTopLevelDocumentation<return>viwpviwu<esc>iFilter helper for <esc>A controller<esc>0/filterhelper<return>cgn<esc>gg/ChangeModel\\|ChangeAbility\\|ChangeQueryScope\\|DeleteThis\\|ChangeFilter\\|ChangeDisplay\\|ChangeScopeArg\\|ChangeChain\\|ChangeArgs\\|ChangeOption<return>

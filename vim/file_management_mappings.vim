@@ -142,25 +142,30 @@
   function FileEditView()
     let current_file = expand('%')
     if match(current_file, 'app/views') != -1
-      let file = expand('%:h')
+      let directory = expand('%:h')
     elseif match(current_file, 'app/assets/stylesheets') != -1
-      let file = substitute(expand('%:h'), 'assets/stylesheets', 'views', '')
+      let directory = substitute(expand('%:h'), 'assets/stylesheets', 'views', '')
     elseif match(current_file, 'app/controllers') != -1
-      let file = substitute(current_file, 'controllers', 'views', '')
-      let file = substitute(file, '_controller.rb', '', '')
+      let directory = substitute(current_file, 'controllers', 'views', '')
+      let directory = substitute(directory, '_controller.rb', '', '')
     elseif match(current_file, 'app/helpers') != -1
-      let file = substitute(expand('%'), 'helpers', 'views', '')
-      let file = substitute(file, '_helper.rb', '', '')
+      let directory = substitute(expand('%'), 'helpers', 'views', '')
+      let directory = substitute(directory, '_helper.rb', '', '')
     elseif match(current_file, 'lib/filter_helpers') != -1
-      let file = substitute(current_file, 'lib/filter_helpers', 'app/views', '')
-      let file = substitute(file, '_filter_helper.rb', '', '')
+      let directory = substitute(current_file, 'lib/filter_helpers', 'app/views', '')
+      let directory = substitute(directory, '_filter_helper.rb', '', '')
     else 
-      let file = 1
+      let directory = 1
     endif
-    if file == 1
+    if directory == 1
       echo 'Unable to find views for' current_file
     else
-      execute ':Explore' file
+      if isdirectory(directory)
+        execute ':Explore' directory
+      else
+        let new_file = input("There are no view files yet. Create the first one!: " . directory . "/", 'some_file.html.erb')
+        execute ":e " . directory . "/" . new_file
+      endif
     endif
   endfunction
   " File Edit Filter Helper

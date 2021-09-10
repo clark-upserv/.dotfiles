@@ -59,12 +59,7 @@ function! CreateBaseFile(class_or_module, include_outer_followup, include_inner_
   let @+ = (length - skip_levels)
 endfunction
 
-function! IndentTemplate()
-  let count = 0
-  let space = ""
-  while count < @+
-    let space = space . "  "
-    let count = count + 1
-  endwhile
-  execute ":%s/###/" . space . "/g"
+function! IndentTemplate(indentations, template)
+  execute "normal! :read " . a:template . " \<return>"
+  execute "normal! mt/# EndTemplate\<return>0v`t" . a:indentations . ">/# EndTemplate\<return>dd"
 endfunction

@@ -41,20 +41,27 @@ augroup END
 
 so ~/.dotfiles/vim/simple_mappings.vim
 
+" Shared
+so ~/.dotfiles/vim/shared_functions.vim
+
+" Vim / 'space' mappings
 so ~/.dotfiles/vim/git_mappings.vim
 so ~/.dotfiles/vim/file_management_mappings.vim
 so ~/.dotfiles/vim/buffer_management_mappings.vim
 so ~/.dotfiles/vim/window_management_mappings.vim
 
+" Language Specific / 'comma' mappings
 so ~/.dotfiles/vim/ruby_mappings.vim
+so ~/.dotfiles/vim/embedded_ruby_mappings.vim
+so ~/.dotfiles/vim/html_mappings.vim
+
+" Rails Specific / 'comma' mappings
 so ~/.dotfiles/vim/app_mappings.vim
 so ~/.dotfiles/vim/view_mappings.vim
-so ~/.dotfiles/vim/html_mappings.vim
-so ~/.dotfiles/vim/embedded_ruby_mappings.vim
 so ~/.dotfiles/vim/config_mappings.vim
+so ~/.dotfiles/vim/db_mappings.vim
 so ~/.dotfiles/vim/lib_mappings.vim
 so ~/.dotfiles/vim/test_mappings.vim
-so ~/.dotfiles/vim/shared_functions.vim
 
 
 " truly random one off stuff
