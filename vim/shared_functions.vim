@@ -56,10 +56,39 @@ function! CreateBaseFile(class_or_module, include_outer_followup, include_inner_
   endif
   let @/ = 'ChangeTopLevelDocumentation\|ChangeArgs'
   normal! n
-  let @+ = (length - skip_levels)
 endfunction
 
-function! IndentTemplate(indentations, template)
-  execute "normal! :read " . a:template . " \<return>"
-  execute "normal! mt/# EndTemplate\<return>0v`t" . a:indentations . ">/# EndTemplate\<return>dd"
+function! IndentTemplate(start, delete_start, indentations, template)
+  " indent by indendations argument. If 0, indent based on current
+  " cursor position
+  if a:indentations == 0
+    " go to starting point if there is one. Otherwise, starting point is current cursor position
+    if a:start != ''
+      let @/ = a:start
+      normal! n
+    endif 
+    let indentations = (col('.') - 1) /  2
+  else
+    let indentations = a:indentations
+  endif
+  " search for start / cursor position is reset after each execute command, so if there is a
+  " start, it must be searched again and it must be search again and all in
+  " one inline command
+  if a:start == ''
+    if indentations == 0
+      execute "normal! \<up>:read " . a:template . " \<return>"
+    else
+      execute "normal! mt\<up>:read " . a:template . " \<return>0v`t" . indentations . ">"
+    endif
+  else
+    if indentations == 0
+      execute "normal! /" . a:start . "\<return>\<up>:read " . a:template . " \<return>"
+    else
+      execute "normal! /" . a:start . "\<return>mt\<up>:read " . a:template . " \<return>0v`t" . indentations . ">"
+    endif
+    if a:delete_start == 1
+      execute "normal! /" . a:start . "\<return>dd"
+    endif
+  endif
+  normal! gg
 endfunction

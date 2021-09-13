@@ -54,11 +54,19 @@
   " File Copy Partial File
   nnoremap <silent> <space>fcpf :let @+ = expand('%')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>dd
   " File Copy Rails Test
-  nnoremap <silent> <space>fcrt :let @+ = expand('%')<return>$a<return><esc>p<up>$/test<return>cgn rails t test<esc>0C<backspace><esc>:noh<return>:w<return>
+  nnoremap <silent> <space>fcrt :call FileCopyRailsTest()<return>
+  function! FileCopyRailsTest()
+    wa
+    let @+ = 'rails t ' . expand('%')
+  endfunction
+
+" File Find
+  " File FINd
+  nnoremap <silent> <space>ffin :e **/*
+  " File Find MOdel
+  nnoremap <silent> <space>ffmo :e app/models/**/*
 
 " File Edit (and Explore)
-  " File Edit SEarch
-  nnoremap <silent> <space>fese :e **/*
   " File Edit Current Path
   nnoremap <silent> <space>fecp :let @+ = expand('%:h') . '/'<return>:e <C-R><C-R>+<space><backspace>
   " File Edit Current File
@@ -161,9 +169,14 @@
       echo 'Unable to find views for' current_file
     else
       if isdirectory(directory)
-        execute ':Explore' directory
+        let new_file = input("Create new view or press enter to view current files: " . directory . "/")
+        if new_file == ''
+          execute ':Explore' directory
+        else
+          execute ":e " . directory . "/" . new_file
+        endif
       else
-        let new_file = input("There are no view files yet. Create the first one!: " . directory . "/", 'some_file.html.erb')
+        let new_file = input("There are no view files yet. Create the first one!: " . directory . "/")
         execute ":e " . directory . "/" . new_file
       endif
     endif
@@ -219,6 +232,37 @@
   nnoremap <silent> <space>fere :e README.md<return>
   "
 
+  " File Edit Service
+  nnoremap <silent> <space>fese :call FileEditService()<return>
+  function FileEditService()
+    let current_file = expand('%')
+    if match(current_file, 'lib/services') != -1
+      let directory = expand('%:h')
+    elseif match(current_file, 'app/controllers') != -1
+      let directory = substitute(current_file, 'app/controllers', 'lib/services', '')
+      let directory = substitute(directory, '_controller.rb', '', '')
+    elseif match(current_file, 'app/models') != -1
+      let directory = substitute(current_file, 'app/models', 'lib/services', '')
+      let directory = substitute(directory, '.rb', '', '')
+    else 
+      let directory = 1
+    endif
+    if directory == 1
+      echo 'Unable to find services for' current_file
+    else
+      if isdirectory(directory)
+        let new_file = input("Create new service or press enter to view current files: " . directory . "/")
+        if new_file == ''
+          execute ':Explore' directory
+        else
+          execute ":e " . directory . "/" . new_file
+        endif
+      else
+        let new_file = input("There are no service files yet. Create the first one!: " . directory . "/")
+        execute ":e " . directory . "/" . new_file
+      endif
+    endif
+  endfunction
 " File Test
   " File Test Current File
   nnoremap <silent> <space>ftcf :call FileTestCurrentFile(0)<return>

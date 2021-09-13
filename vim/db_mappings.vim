@@ -2,7 +2,7 @@
   " Db Migration Foreign Key
   nnoremap <silent> ,dmfk a{ to_table: 'ChangeTableName' }<esc>/ChangeTableName<return>
   " Db Migration Up Down
-  nnoremap <silent> ,dmud adef up<return># Deletethis - insert migration methods for up<return><backspace><backspace>end<return><return>def down<return># Deletethis - insert migration methods for down<return>DeleteThis - NOTE: if dropping table, no need to remove columns or indexes because they will be removed when dropping table<return>DeleteThis - NOTE if removing column, no need to remove index for that column, because they will be removed whyen removing column<return><backspace><backspace>end<esc>/Deletethis<return>
+  nnoremap <silent> ,dmud adef up<return># DeleteThis - insert migration methods for up<return><backspace><backspace>end<return><return>def down<return># DeleteThis - insert migration methods for down<return>DeleteThis - NOTE: if dropping table, no need to remove columns or indexes because they will be removed when dropping table<return>DeleteThis - NOTE if removing column, no need to remove index for that column, because they will be removed whyen removing column<return><backspace><backspace>end<esc>/DeleteThis<return>
   " Db Migration Add Column
   nnoremap <silent> ,dmac aadd_column :ChangeTableName, :ChangeColumn, :ChangeColumnType, ChangeOptions<esc>/ChangeTableName\\|ChangeColumnType\\|ChangeColumn\\|ChangeOptions<return>
   " Db Migration Add Reference

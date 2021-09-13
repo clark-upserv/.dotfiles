@@ -37,7 +37,7 @@
   endfunction
   " Ruby Models Validates Search
   function! AppModelsValidatesSearch()
-    let @/ = 'ChangeAttributes\|ChangeAttribute\|ChangeValidation\|%{model} %{attribute} %{value}\|ChangeMethodOrProcOrArray\|255ForStringOrSomeOtherLength\|ChangeThis\|ChangeRange\|DeleteThis\|ChangeAttachmenName\|ChangeMin\|ChangeMax\|ChangeSize\|ChangeDataSize\|ChangeWidthInteger\|ChangeHeightInteger\|ChangeItems\|Changemessage\|ChangeLogic\|ChangeValue\|ChangeMessage'
+    let @/ = 'ChangeAttributes\|ChangeAttribute\|ChangeValidation\|%{model} %{attribute} %{value}\|ChangeMethodOrProcOrArray\|255ForStringOrSomeOtherLength\|ChangeThis\|ChangeRange\|DeleteThis\|ChangeAttachmenName\|ChangeMin\|ChangeMax\|ChangeSize\|ChangeDataSize\|ChangeWidthInteger\|ChangeHeightInteger\|ChangeItems\|Changemessage\|ChangeLogic\|ChangeValue\|ChangeMessage\|ChangeDescription'
     normal! n
   endfunction
   function! AppModelsValidatesMessage()
@@ -62,7 +62,7 @@
   " Ruby Models Validates Exclusion
   nnoremap <silent> ,amve avalidates :ChangeAttribute, exclusion: {<return>in: [ChangeItems],<return><space><backspace><esc>:call AppModelsValidatesMessage()<return>a}<esc>:call RubyModlesValidatesOptions()<return>:call AppModelsValidatesSearch()<return>
   " Ruby Models Validates Each
-  nnoremap <silent> ,amvE avalidates_each :ChangeAttribute do \|record, attr, value\|<return>record.errors.add(attr, 'ChangeMessage') if ChangeLogic<return>end<esc>:call AppModelsValidatesSearch()<return>
+  nnoremap <silent> ,amvE a# ChangeDescription<return><backspace><backspace>validates_each :ChangeAttribute do \|record, attr, value\|<return>record.errors.add(attr, 'ChangeMessage') if ChangeLogic<return>end<esc>:call AppModelsValidatesSearch()<return>
   " ....
 
   " Ruby Models Process Attributes
