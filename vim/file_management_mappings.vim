@@ -14,7 +14,9 @@
     wa
     let current_file = expand('%')
     let new_file = input("Move \"" . current_file . "\" to: ", current_file) 
-    if current_file == new_file
+    if new_file == ''
+      "do nothing
+    elseif current_file == new_file
       echo "\nDestination path be the same as current path. Please try again."
     elseif filereadable(new_file)
       echo "\nFile already exists at \"" . new_file '". Please try a different destination path.'

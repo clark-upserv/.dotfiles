@@ -56,7 +56,11 @@ so ~/.dotfiles/vim/embedded_ruby_mappings.vim
 so ~/.dotfiles/vim/html_mappings.vim
 
 " Rails Specific / 'comma' mappings
-so ~/.dotfiles/vim/app_mappings.vim
+so ~/.dotfiles/vim/app_controller_mappings.vim
+so ~/.dotfiles/vim/app_helper_mappings.vim
+so ~/.dotfiles/vim/app_job_mappings.vim
+so ~/.dotfiles/vim/app_mailer_mappings.vim
+so ~/.dotfiles/vim/app_model_mappings.vim
 so ~/.dotfiles/vim/view_mappings.vim
 so ~/.dotfiles/vim/config_mappings.vim
 so ~/.dotfiles/vim/db_mappings.vim
