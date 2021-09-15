@@ -3,6 +3,33 @@ function! TestDisclaimer()
   exe "normal! a# DeleteThis - do not test things that can easily change (ie text in source code)\<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break"
 endfunction
 
+" Test Run
+  " File Test Current File
+  nnoremap <silent> ,trcf :call FileTestCurrentFile(0)<return>
+  " File Test Current File in terminal
+  nnoremap <silent> ,trcF :call FileTestCurrentFile(1)<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
+  function! FileTestCurrentFile(use_shell)
+    execute ':wa'
+    let test_file = GetTestFileName()
+    let command = substitute(test_file, 'test', 'rails t test', '')
+    if a:use_shell == 0
+      execute ':!' command
+    else 
+      let @+ = command
+    endif
+  endfunction
+  function! GetTestFileName()
+    let file = expand('%')
+    " modify file name for non test files
+    if index(split(file, '/'), 'test') == -1
+      let file = substitute(file, '.rb', '_test.rb', '')
+    endif
+    return substitute(file, 'app\|lib\|test', 'test', '')
+  endfunction
+  " File Test All Files
+  nnoremap <silent> ,traf :wa<return>:! rails t<return>
+  " File Test All Files in terminal
+  nnoremap <silent> ,traF :wa<return>:let @+ = 'rails t'<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
 " Base
   " Tests Base Test Base
   nnoremap <silent> ,tbtb atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
