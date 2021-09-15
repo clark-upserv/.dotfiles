@@ -1,7 +1,7 @@
-nnoremap <silent> <A-right> :call GoToNextbuf(1)<return>
-inoremap <silent> <A-right> <esc>:call GoToNextbuf(1)<return>
-nnoremap <silent> <A-left> :call GoToNextbuf(0)<return>
-inoremap <silent> <A-left> <esc>:call GoToNextbuf(0)<return>
+noremap <silent> <A-left> :call GoToNextbuf(0)<return>
+noremap <silent> <A-right> :call GoToNextbuf(1)<return>
+noremap <silent> <C-k> :call GoToNextbuf(0)<return>
+noremap <silent> <C-l> :call GoToNextbuf(1)<return>
 function! GoToNextbuf(direction)
   if a:direction == 1
     let adj = 1
