@@ -222,6 +222,8 @@
     endif
     execute ':e' file
   endfunction
+  " File Edit FIxtures
+  nnoremap <silent> <space>fefi :e test/fixtures/
   " File Edit Schema
   nnoremap <silent> <space>fesc :e db/schema.rb<return>
   " File Edit ROutes

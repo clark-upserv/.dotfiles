@@ -7,15 +7,15 @@ endfunction
   " File Test Current File
   nnoremap <silent> ,trcf :call FileTestCurrentFile(0)<return>
   " File Test Current File in terminal
-  nnoremap <silent> ,trcF :call FileTestCurrentFile(1)<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
+  nnoremap <silent> ,trcF :call FileTestCurrentFile(1)<return>:call OpenTerminalInWindow()<return><C-c><C-\><C-n>pa<return>
   function! FileTestCurrentFile(use_shell)
     execute ':wa'
     let test_file = GetTestFileName()
-    let command = substitute(test_file, 'test', 'rails t test', '')
+    let test_command = substitute(test_file, 'test', 'rails t test', '')
     if a:use_shell == 0
-      execute ':!' command
+      execute ':!' test_command
     else 
-      let @+ = command
+      let @+ = test_command
     endif
   endfunction
   function! GetTestFileName()
@@ -29,20 +29,21 @@ endfunction
   " File Test All Files
   nnoremap <silent> ,traf :wa<return>:! rails t<return>
   " File Test All Files in terminal
-  nnoremap <silent> ,traF :wa<return>:let @+ = 'rails t'<return>:call OpenTerminalInWindow()<return><C-c><esc>p$a<return>
-" Base
+  nnoremap <silent> ,traF :wa<return>:call OpenTerminalInWindow()<return><C-c>rails t<return>
+" Test Base
   " Tests Base Test Base
   nnoremap <silent> ,tbtb atest 'Should ChangeThisPls when ChangeThisPls' do<return>end<esc>/ChangeThisPls<return>
   " Tests Base Test Method
   nnoremap <silent> ,tbtm atest 'method ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
   " Tests Base Perform enqueued Jobs
   nnoremap <silent> ,tbpj aperform_enqueued_jobs<esc>
-  
-" Tests Fixtures
-  " Tests Fixtures BAse
-  nnoremap <silent> @ChangeObject = ChangeTable(:ChangeFixture)<esc>/ChangeObject\\|ChangeTable\\|ChangeFixture<return>
-  " Tests Fixtures Upload File
-  nnoremap <silent> ,tfuf :read ../templates/tests/misc/upload_fixture_file.rb<return><esc>/ChangeVariable\\|ChangePath\\|ChangeContentType\\|DeleteThisPls\\|ChangeObject\\|ChangeAttachment<return>
+  " Tests Base FIxtures
+  nnoremap <silent> ,tbfi @ChangeObject = ChangeTable(:ChangeFixture)<esc>/ChangeObject\\|ChangeTable\\|ChangeFixture<return>
+  " Tests Fixtures Attach File
+  nnoremap <silent> ,tbaf :call TestsBaseAttachFile()<return>/ChangeVariable\\|ChangePathAndExtension\\|ChangeContentType\\|DeleteThis\\|ChangeObject\\|ChangeAssociation<return>
+  function! TestsBaseAttachFile()
+    execute "normal! aChangeVariable = Rack::Test::UploadedFile.new(Rails.root.join('test', 'fixtures', 'files', 'ChangePathAndExtension'), 'ChangeContentType')\<return># DeleteThis - file type and subtypes:\<return>  application/pdf\<return>image/png image/gif image/jpeg\<return>video/mov video/mp4\<return>audio/mpeg audio/wave\<return>text/plain text/csv text/html\<return>see here for more examples: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types\<return>\<backspace>\<backspace>\<backspace>@ChangeObject.ChangeAssociation.attach(ChangeVariable)"
+  endfunction
 
 " Tests Assert
   " Tests Assert Enqueued Emails
@@ -119,40 +120,60 @@ endfunction
 " Models
   " Models Search
   function! TestModelSearch()
-    let @/ = 'ChangeParent\|ChangeChildren\|ChangeChildModel\|ChangeChild\|DeleteThis\|ChangeAttributes\|ChangeAttribute\|ChangeObject\|ChangeInvalidValue\|ChangeValue\|ChangeValidation\|ChangeConnectionModel\|ChangeAssociation\|ChangeTable\|ChangeFixture\|ChangeScope\|ChangeClass\|ChangeThisPls\|ChangeDescription\|ChangeModel\|ChangeNextAttribute\|ChangeOneOrMany\|ChangeAttachment'
+    let @/ = 'ChangeParent\|ChangeChildren\|ChangeChildModel\|ChangeChild\|DeleteThis\|ChangeAttributes\|ChangeAttribute\|ChangeObject\|ChangeInvalidValue\|ChangeValue\|ChangeValidation\|ChangeConnectionModel\|ChangeAssociation\|ChangeTable\|ChangeFixture\|ChangeScope\|ChangeClass\|ChangeThisPls\|ChangeDescription\|ChangeModel\|ChangeNextAttribute\|ChangeOneOrMany\|ChangeVariable\|ChangePathAndExtension\|ChangeContentType'
     normal! n
   endfunction
   " Tests Model BAse
   nnoremap <silent> ,tmba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<return>cgnrequire 'test_helper'<esc>o<esc>/class<return>A < ActiveSupport::TestCase<esc>:call IndentTemplate('inner_followup', 1, 0, '../templates/tests/model_base.rb')<return>/ChangeTopLevelDocumentation<return><down>^wviwy/ChangeTopLevelDocumentation<return>viwpbiTest for <esc>0/Test<return>ncgn model<esc>gg/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeThisPls\\|ChangePermission\\|ChangeUserWithPermission\\|change_model_name\\|ChangeModel<return>
-  " Tests Models Belongs To
-  nnoremap <silent> ,tmbt atest 'association ChangeParent - belongs to' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeChild.ChangeParent<return>end<esc>:call TestModelSearch()<return>
-  " Tests Models Had One
-  nnoremap <silent> ,tmho atest 'association ChangeChild - has one' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeParent.ChangeChild<return>end<esc>/:call TestModelSearch()<return>
-  " Tests Models Has Many
-  nnoremap <silent> ,tmhm atest 'association ChangeChildren - has many' do<return>result = @ChangeParent.ChangeChildren<return>assert_equal ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort, result.map(&:id).sort<return><space><backspace><esc>,tmin<return>end<esc>:call TestModelSearch()<return>
-  " Tests Models Has Many through
-  nnoremap <silent> ,tmhM atest 'association ChangeChildren - has many through' do<return>result = ChangeParent.ChangeAssociation<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChild_id).sort, resule.map(&:id).sort<return># DeleteThis - if not simple connection but does have inverse, use this<return><backspace><backspace>assert_equal ChangeChildModel.joins(:ChangeAssociation).where(id: @ChangeParent.id).distinct.pluck(:id).sort, result.map(&:id).uniq.sort<return><space><backspace><esc>,tmin<return>end<esc>:call TestModelSearch()<return>
-  " Tests Models Has Attached
-  nnoremap <silent> ,tmha atest 'association ChangeAttachment - has ChangeOneOrMany attached' do<return>end<esc>:call TestModelSearch()<return>
-  " Tests Models SCope
-  nnoremap <silent> ,tmsc atest 'scope ChangeScope' do<return>result = ChangeModel.ChangeScope<return>assert_equal ChangeClass.where(ChangeThisPls).pluck(:id).sort, result.pluck(:id).sort<return><space><backspace><esc>,tmin<return>assert_equal ChangeModel.order(ChangeThisPls).pluck(:id), result.map(&:id)<return>first = ChangeTable(:ChangeFixture)<return>second = ChangeTable(:ChangeFixture)<return>assert result.find_index(first) < result.find_index(second)<return>end<esc>:call TestModelSearch()<return>
-  " Tests Models Included and Not included
-  nnoremap <silent> ,tmin aincluded = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_equal included, result & included<return>not_included = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>not_included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_empty not_included & result
-  " Tests Models ATtribute
-  " Tests Models Attribute Enum
-  " Tests Models Attributes Hash
-  " Tests Models Attributes Array
-  " Tests Model Callbacks Process attributes
-  nnoremap <silent> ,tmcp atest 'callback process attributes' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '    a     ')<return>@ChangeObject.valid?<return>assert_equal 'a', @ChangeObject.ChangeAttribute<return>@ChangeObject.assign_attributes(ChangeAttribute: '')<return>@ChangeObject.valid?<return>assert_nil @ChangeObject.ChangeAttribute<return>end<esc>:call TestModelSearch()<return>
-  nnoremap <silent> ,tmme atest 'callback ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
-  " Tests Models VAlidation
-  nnoremap <silent> ,tmva atest 'validation ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>:call TestModelSearch()<return>
-  " Tests Models Validation Unique with scope
-  nnoremap <silent> ,tmvu atest 'validation ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - if there are additional attributes on scope, repeat for all other attribute by making it valid again and then invalid for next attribute until all attributes are covered<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeNextAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>end<esc>:call TestModelSearch()<return>
+
+  " Test Models Associations
+    " Tests Models Belongs To
+    nnoremap <silent> ,tmbt atest 'association ChangeParent - belongs to' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeChild.ChangeParent<return>end<esc>:call TestModelSearch()<return>
+    " Tests Models Had One
+    nnoremap <silent> ,tmho atest 'association ChangeChild - has one' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeParent.ChangeChild<return>end<esc>/:call TestModelSearch()<return>
+    " Tests Models Has Many
+    nnoremap <silent> ,tmhm atest 'association ChangeChildren - has many' do<return>result = @ChangeParent.ChangeChildren<return>assert_equal ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort, result.map(&:id).sort<return><space><backspace><esc>,tmin<return>end<esc>:call TestModelSearch()<return>
+    " Tests Models Has Many through
+    nnoremap <silent> ,tmhM atest 'association ChangeChildren - has many through' do<return>result = ChangeParent.ChangeAssociation<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChild_id).sort, resule.map(&:id).sort<return># DeleteThis - if not simple connection but does have inverse, use this<return><backspace><backspace>assert_equal ChangeChildModel.joins(:ChangeAssociation).where(id: @ChangeParent.id).distinct.pluck(:id).sort, result.map(&:id).uniq.sort<return><space><backspace><esc>,tmin<return>end<esc>:call TestModelSearch()<return>
+    " Tests Models Has Attached
+    nnoremap <silent> ,tmoa atest 'association ChangeAssociation - has one attached' do<return>assert_nil @ChangeObject.ChangeAssociation.attachment<return><space><backspace><esc>:call TestsFixturesUploadFile()<return>oassert_not_nil @ChangeObject.ChangeAssociation.attachment<return>end<esc>:call TestModelSearch()<return>
+    " Tests Models Has many Attached
+    nnoremap <silent> ,tmma atest 'association ChangeAssociation - has many attached' do<return>assert_empty @ChangeObject.ChangeAssociation<return><space><backspace><esc>:call TestsFixturesUploadFile()<return>oassert_not_empty @ChangeObject.ChangeAssociation<return>end<esc>:call TestModelSearch()<return>
+  
+  " Test Models Scopes
+    " Tests Models SCope
+    nnoremap <silent> ,tmsc atest 'scope ChangeScope' do<return>result = ChangeModel.ChangeScope<return>assert_equal ChangeClass.where(ChangeThisPls).pluck(:id).sort, result.pluck(:id).sort<return><space><backspace><esc>,tmin<return>assert_equal ChangeModel.order(ChangeThisPls).pluck(:id), result.map(&:id)<return>first = ChangeTable(:ChangeFixture)<return>second = ChangeTable(:ChangeFixture)<return>assert result.find_index(first) < result.find_index(second)<return>end<esc>:call TestModelSearch()<return>
+    " Tests Models Included and Not included
+    nnoremap <silent> ,tmin aincluded = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_equal included, result & included<return>not_included = [ChangeTable(:ChangeFixture)] # ChangeDescription<return>not_included << ChangeTable(:ChangeFixture) # ChangeDescription<return>assert_empty not_included & result
+
+  " Test Models Attributes
+    " Tests Models ATtribute
+    " Tests Models Attribute Enum
+    " Tests Models Attributes Hash
+    " Tests Models Attributes Array
+
+  " Test Models Callbacks
+    " Test Models CAllback
+    nnoremap <silent> ,tmca atest 'callback ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
+    " Tests Model Process attributes
+    nnoremap <silent> ,tmpa atest 'callback process attributes' do<return>@ChangeObject.assign_attributes(ChangeAttribute: '    a     ')<return>@ChangeObject.valid?<return>assert_equal 'a', @ChangeObject.ChangeAttribute<return>@ChangeObject.assign_attributes(ChangeAttribute: '')<return>@ChangeObject.valid?<return>assert_nil @ChangeObject.ChangeAttribute<return>end<esc>:call TestModelSearch()<return>
+    " Tests Model Nil Parent on orphanable childrend 
+    nnoremap <silent> ,tmnp atest 'callback nil parent id on orphanable children before destroying parent' do<return>ChangeChild = @ChangeObject.ChangeChildren.first<return>assert_equal @ChangeObject.id, ChangeChild.ChangeParent_id<return>@ChangeObject.destroy<return>assert_nil ChangeChild.reload.ChangeParent_id<return>end<esc>:call TestModelSearch()<return>
+
+  " Tests Models Validations
+    " Tests Models VAlidation
+    nnoremap <silent> ,tmva atest 'validation ChangeObject ChangeAttribute should be ChangeValidation' do<return>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>:call TestModelSearch()<return>
+    " Tests Models Validate Attachment
+    nnoremap <silent> ,tmvA atest 'validation ChangeObject ChangeAttribute should be ChangeValidation' do<return><space><backspace><esc>:call TestsBaseAttachFile()<return>oassert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>:call TestModelSearch()<return>
+    " Tests Models Validation Unique with scope
+    nnoremap <silent> ,tmvu atest 'validation ChangeObject ChangeAttribute should be unique scope to ChangeAttributes' do<return># DeleteThis - make it invalid<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return># DeleteThis - if there are additional attributes on scope, repeat for all other attribute by making it valid again and then invalid for next attribute until all attributes are covered<return><backspace><backspace>@ChangeObject.assign_attributes(ChangeAttribute: ChangeValue)<return>assert @ChangeObject.valid?<return>@ChangeObject.assign_attributes(ChangeNextAttribute: ChangeInvalidValue)<return>assert_not @ChangeObject.valid?<return>assert_equal 1, @ChangeObject.errors.errors.count<return>assert_equal :ChangeAttribute, @ChangeObject.errors.errors.first.attribute<return>end<esc>:call TestModelSearch()<return>
+
   " Tests Models Attribute instance Method
   nnoremap <silent> ,tmam atest 'attribute instance method ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
+
   " Tests Models Query instance Method
   nnoremap <silent> ,tmqm atest 'query instance method ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
+
   " Tests Models Service instance Method
   nnoremap <silent> ,tmsm atest 'service instance method ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
 
@@ -162,7 +183,4 @@ endfunction
   
 " Test Lib files
   " Test Lib files BAse
-  nnoremap <silent> ,tlba :read ../templates/tests/lib_file_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeType\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>
-
-  " Test Services BAse
-  nnoremap <silent> ,tsba :read ../templates/tests/services_base.rb<return>ggdd/ChangePathAndFileName<return>:call FileCopyCurrentFile()<return>viwp/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/DeleteThis\\|ChangeTopLevel\\|ChangeThisPls\\|ChangeFile\\|ChangeObject\\|change_model_name\\|ChangeFixture<return>
+  nnoremap <silent> ,tlba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<return>cgnrequire 'test_helper'<esc>o<esc>/class<return>A < ActionDispatch::IntegrationTest<esc>:call IndentTemplate('inner_followup', 1, 0, '../templates/tests/base.rb')<return>/ChangeTopLevelDocumentation<return><down>^wviwy/ChangeTopLevelDocumentation<return>viwpbiTest for <esc>$xxxx/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/ChangeObject\\|ChangeTable\\|ChangeFixture\\|DeleteThis<return>

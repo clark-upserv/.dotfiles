@@ -115,15 +115,15 @@
   nnoremap <silent> hh G
   vnoremap <silent> hh G
   " go up and down fast
-  nnoremap <silent> <S-l> 4<up>
-  vnoremap <silent> <S-l> 4<up>
-  nnoremap <silent> <S-up> 4<up>
-  vnoremap <silent> <S-up> 4<up>
+  nnoremap <silent> <S-l> 3<up>
+  vnoremap <silent> <S-l> 3<up>
+  nnoremap <silent> <S-up> 3<up>
+  vnoremap <silent> <S-up> 3<up>
 
-  nnoremap <silent> <S-k> 4<down>
-  vnoremap <silent> <S-k> 4<down>
-  nnoremap <silent> <S-down> 4<down>
-  vnoremap <silent> <S-down> 4<down>
+  nnoremap <silent> <S-k> 3<down>
+  vnoremap <silent> <S-k> 3<down>
+  nnoremap <silent> <S-down> 3<down>
+  vnoremap <silent> <S-down> 3<down>
     
 " single key comma mappings
   " visual mode
