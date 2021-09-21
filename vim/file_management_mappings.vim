@@ -39,7 +39,12 @@
 
 " File Paste
   " File Paste Partial Path
-  nnoremap <silent> <space>fppp :let @+ = expand('%:h')<return>$a<return><esc>p<up>$/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>0/ChangePartialPath<return>viwp
+  nnoremap <silent> <space>fppp :call FilePastePartialPath()<return>
+  function! FilePastePartialPath()
+    let @+ = substitute(expand('%:h'), 'app/views/', '', '')
+    let @/ = 'ChangePath'
+    normal! nviwp
+  endfunction
 
 " File Copy
   " File Copy File Name
@@ -52,7 +57,10 @@
     let @+ = expand('%')
   endfunction
   " File Copy Partial Path
-  nnoremap <silent> <space>fcpp :let @+ = expand('%:h')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>^v$<left>xi<backspace><esc>
+  nnoremap <silent> <space>fcpp :call FileCopyPartialPath()<return>
+  function! FileCopyPartialPath()
+    let @+ = substitute(expand('%:h'), 'app/views/', '', '')
+  endfunction
   " File Copy Partial File
   nnoremap <silent> <space>fcpf :let @+ = expand('%')<return>$a<return><esc>p<up>/app\/views\/<return>cgn<esc>dd
   " File Copy Rails Test
@@ -60,6 +68,15 @@
   function! FileCopyRailsTest()
     wa
     let @+ = 'rails t ' . expand('%')
+  endfunction
+
+" File Create
+  " File Create PArtial
+  nnoremap <silent> <space>fcpa :call FileCreatePartial()<return>
+  function! FileCreatePartial()
+    let directory = expand('%:h')
+    let new_file = input("Create new partial (prefix of \"_\" and extention of \".html.erb\" will be added automatically): ")
+    execute ':e ' . directory . '/_' . new_file . '.html.erb'
   endfunction
 
 " File Find
@@ -80,24 +97,29 @@
   function FileEditStyleSheet()
     let current_file = expand('%')
     if match(current_file, 'app/assets/stylesheets') != -1
-      let file = 'on style sheet'
+      let directory = 'on style sheet'
     elseif match(current_file, 'app/controllers') != -1
-      let file = substitute(expand('%'), 'controllers', 'assets/stylesheets', '')
-      let file = substitute(file, '_controller.rb', '', '')
+      let directory = substitute(expand('%'), 'controllers', 'assets/stylesheets', '')
+      let directory = substitute(directory, '_controller.rb', '', '')
     elseif match(current_file, 'app/views') != -1
-      let file = substitute(expand('%:h'), 'views', 'assets/stylesheets', '')
+      let directory = substitute(expand('%:h'), 'views', 'assets/stylesheets', '')
     elseif match(current_file, 'app/helpers') != -1
-      let file = substitute(expand('%'), 'helpers', 'assets/stylesheets', '')
-      let file = substitute(file, '_helper.rb', '', '')
+      let directory = substitute(expand('%'), 'helpers', 'assets/stylesheets', '')
+      let directory = substitute(directory, '_helper.rb', '', '')
     else 
-      let file = 1
+      let directory = 1
     endif
-    if file == 'on style sheet'
+    if directory == 'on style sheet'
       echo 'Already on style sheet file'
-    elseif file == 1
-      echo 'Unable to find controller for' current_file
+    elseif directory == 1
+      echo 'Unable to find stylesheet for' current_file
     else
-      execute ':e' file
+      if isdirectory(directory)
+        execute ':Explore' directory
+      else
+        let new_file = input("There are no style sheet files yet. Create the first one!: " . directory . "/")
+        execute ":e " . directory . "/" . new_file
+      endif
     endif
   endfunction
   " File Edit COntroller
@@ -152,7 +174,7 @@
   function FileEditView()
     let current_file = expand('%')
     if match(current_file, 'app/views') != -1
-      let directory = expand('%:h')
+      let directory = 'on view'
     elseif match(current_file, 'app/assets/stylesheets') != -1
       let directory = substitute(expand('%:h'), 'assets/stylesheets', 'views', '')
     elseif match(current_file, 'app/controllers') != -1
@@ -167,16 +189,13 @@
     else 
       let directory = 1
     endif
-    if directory == 1
+    if directory = 'on view'
+      echo 'Already on view file'
+    elseif directory == 1
       echo 'Unable to find views for' current_file
     else
       if isdirectory(directory)
-        let new_file = input("Create new view or press enter to view current files: " . directory . "/")
-        if new_file == ''
-          execute ':Explore' directory
-        else
-          execute ":e " . directory . "/" . new_file
-        endif
+        execute ':Explore' directory
       else
         let new_file = input("There are no view files yet. Create the first one!: " . directory . "/")
         execute ":e " . directory . "/" . new_file
@@ -234,14 +253,13 @@
   nnoremap <silent> <space>fege :e Gemfile<return>
   " File Edit REadme
   nnoremap <silent> <space>fere :e README.md<return>
-  "
 
   " File Edit Service
   nnoremap <silent> <space>fese :call FileEditService()<return>
   function FileEditService()
     let current_file = expand('%')
     if match(current_file, 'lib/services') != -1
-      let directory = expand('%:h')
+      let directory = 'on service'
     elseif match(current_file, 'app/controllers') != -1
       let directory = substitute(current_file, 'app/controllers', 'lib/services', '')
       let directory = substitute(directory, '_controller.rb', '', '')
@@ -251,16 +269,13 @@
     else 
       let directory = 1
     endif
-    if directory == 1
+    if directory = 'on service'
+      echo 'Already on service file'
+    elseif directory == 1
       echo 'Unable to find services for' current_file
     else
       if isdirectory(directory)
-        let new_file = input("Create new service or press enter to view current files: " . directory . "/")
-        if new_file == ''
-          execute ':Explore' directory
-        else
-          execute ":e " . directory . "/" . new_file
-        endif
+        execute ':Explore' directory
       else
         let new_file = input("There are no service files yet. Create the first one!: " . directory . "/")
         execute ":e " . directory . "/" . new_file
