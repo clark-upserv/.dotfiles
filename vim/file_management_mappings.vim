@@ -189,7 +189,7 @@
     else 
       let directory = 1
     endif
-    if directory = 'on view'
+    if directory == 'on view'
       echo 'Already on view file'
     elseif directory == 1
       echo 'Unable to find views for' current_file
@@ -269,7 +269,7 @@
     else 
       let directory = 1
     endif
-    if directory = 'on service'
+    if directory == 'on service'
       echo 'Already on service file'
     elseif directory == 1
       echo 'Unable to find services for' current_file

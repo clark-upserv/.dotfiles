@@ -70,7 +70,7 @@ endfunction
   " Tests Controller Test Base
   nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/DeleteThis\\|ChangeAction\\|ChangeUserWithPermission\\|ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeId\\|ChangeTemplate\\|:SuccessOrRedirect\\|ChangePath<return>
   " Tests Controller Test Index
-  nnoremap <silent> ,tcti :read ../templates/tests/controller_test_index.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeModel\\|ChangeQuery\\|:id\\|ChangeLoad\\|ChangeDifAccountObject<return>
+  nnoremap <silent> ,tcti :read ../templates/tests/controller_test_index.rb<return>/included_not_included<return>nD:call TestIncludedNotIncluded()<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeModel\\|ChangeQuery\\|ChangeLoad\\|ChangeDifAccountObject\\|ChangeFilter\\|ChangeTable\\|ChangeFixture\\|ChangeDescription<return>
   " Tests Controller Test Show
   nnoremap <silent> ,tcts :read ../templates/tests/controller_test_show.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeObject\\|ChangeModel\\|ChangeLoad<return>
   " Tests Controller Test New
@@ -132,9 +132,9 @@ endfunction
     " Tests Models Had One
     nnoremap <silent> ,tmho atest 'association ChangeChild - has one' do<return>assert_equal ChangeTable(:ChangeFixture), @ChangeParent.ChangeChild<return>end<esc>/:call TestModelSearch()<return>
     " Tests Models Has Many
-    nnoremap <silent> ,tmhm atest 'association ChangeChildren - has many' do<return>result = @ChangeParent.ChangeChildren_ids<return>assert_equal ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort, result.sort<return><space><backspace><esc>:call TestModelsIncludedNotIncluded()<return>oend<esc>:call TestModelSearch()<return>
+    nnoremap <silent> ,tmhm atest 'association ChangeChildren - has many' do<return>result = @ChangeParent.ChangeChildren_ids<return>assert_equal ChangeChildModel.where(ChangeParent_id: @ChangeParent.id).pluck(:id).sort, result.sort<return><space><backspace><esc>:call TestIncludedNotIncluded()<return>oend<esc>:call TestModelSearch()<return>
     " Tests Models Has Many through
-    nnoremap <silent> ,tmhM atest 'association ChangeChildren - has many through' do<return>result = ChangeParent.ChangeAssociation_ids<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChild_id).sort, resule.map(&:id).sort<return># DeleteThis - if not simple connection but does have inverse, use this<return><backspace><backspace>assert_equal ChangeChildModel.joins(:ChangeAssociation).where(id: @ChangeParent.id).distinct.pluck(:id).sort, result.uniq.sort<return><space><backspace><esc>:call TestModelsIncludedNotIncluded()<return>oend<esc>:call TestModelSearch()<return>
+    nnoremap <silent> ,tmhM atest 'association ChangeChildren - has many through' do<return>result = ChangeParent.ChangeAssociation_ids<return># DeleteThis - use this for simple connection table (many to many)<return><backspace><backspace>assert_equal ChangeConnectionModel.where(ChangeParent_id: @ChangeParent.id).pluck(:ChangeChild_id).sort, resule.map(&:id).sort<return># DeleteThis - if not simple connection but does have inverse, use this<return><backspace><backspace>assert_equal ChangeChildModel.joins(:ChangeAssociation).where(id: @ChangeParent.id).distinct.pluck(:id).sort, result.uniq.sort<return><space><backspace><esc>:call TestIncludedNotIncluded()<return>oend<esc>:call TestModelSearch()<return>
     " Tests Models Has Attached
     nnoremap <silent> ,tmoa atest 'association ChangeAssociation - has one attached' do<return>assert_nil @ChangeObject.ChangeAssociation.attachment<return><space><backspace><esc>:call TestsFixturesUploadFile()<return>oassert_not_nil @ChangeObject.ChangeAssociation.attachment<return>end<esc>:call TestModelSearch()<return>
     " Tests Models Has many Attached
@@ -142,11 +142,7 @@ endfunction
   
   " Test Models Scopes
     " Tests Models SCope
-    nnoremap <silent> ,tmsc atest 'scope ChangeScope' do<return>result = ChangeModel.ChangeScope.map(&:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id).sort, result.sort<return># DeleteThis - use this for scopes that filter (ie use "where")<return><backspace><backspace><esc>:call TestModelsIncludedNotIncluded()<return>o# DeleteThis - use this for scopes that sort (ie use "oder")<return><backspace><backspace>first = ChangeTable(:ChangeFixture).id<return>second = ChangeTable(:ChangeFixture).id<return>assert result.find_index(first) < result.find_index(second)<return>end<esc>:call TestModelSearch()<return>
-    " Tests Models Included and Not included
-    function! TestModelsIncludedNotIncluded()
-      execute "normal! aincluded = [ChangeTable(:ChangeFixture).id] # ChangeDescription\<return>included << ChangeTable(:ChangeFixture).id # ChangeDescription\<return>assert_equal included.sort, (result & included).sort\<return>not_included = [ChangeTable(:ChangeFixture).id] # ChangeDescription\<return>not_included << ChangeTable(:ChangeFixture).id # ChangeDescription\<return>assert_empty not_included & result"
-    endfunction
+    nnoremap <silent> ,tmsc atest 'scope ChangeScope' do<return>result = ChangeModel.ChangeScope.map(&:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id).sort, result.sort<return># DeleteThis - use this for scopes that filter (ie use "where")<return><backspace><backspace><esc>:call TestIncludedNotIncluded()<return>o# DeleteThis - use this for scopes that sort (ie use "oder")<return><backspace><backspace>first = ChangeTable(:ChangeFixture).id<return>second = ChangeTable(:ChangeFixture).id<return>assert result.find_index(first) < result.find_index(second)<return>end<esc>:call TestModelSearch()<return>
 
   " Test Models Attributes
     " Tests Models ATtribute

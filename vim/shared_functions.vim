@@ -1,3 +1,8 @@
+" Tests Included and Not included
+function! TestIncludedNotIncluded()
+  execute "normal! aincluded = [ChangeTable(:ChangeFixture).id] # ChangeDescription\<return>included << ChangeTable(:ChangeFixture).id # ChangeDescription\<return>assert_equal included.sort, (result & included).sort\<return>not_included = [ChangeTable(:ChangeFixture).id] # ChangeDescription\<return>not_included << ChangeTable(:ChangeFixture).id # ChangeDescription\<return>assert_empty not_included & result"
+endfunction
+
 function! CreateBaseFile(class_or_module, include_outer_followup, include_inner_followup)
   let current_file = expand('%:r')
 
