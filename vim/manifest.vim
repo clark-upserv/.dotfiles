@@ -21,19 +21,20 @@ so ~/.dotfiles/vim/file_management_mappings.vim
 so ~/.dotfiles/vim/buffer_management_mappings.vim
 so ~/.dotfiles/vim/window_management_mappings.vim
 
-" Language Specific / 'comma' mappings
+" Language specific / 'comma' mappings
 so ~/.dotfiles/vim/ruby_mappings.vim
-so ~/.dotfiles/vim/embedded_ruby_mappings.vim
-so ~/.dotfiles/vim/html_mappings.vim
 so ~/.dotfiles/vim/javascript_mappings.vim
 
-" Rails Specific / 'comma' mappings
+" Somewhat Rails specific / 'comma' mappings
 so ~/.dotfiles/vim/app_controller_mappings.vim
 so ~/.dotfiles/vim/app_helper_mappings.vim
 so ~/.dotfiles/vim/app_job_mappings.vim
 so ~/.dotfiles/vim/app_mailer_mappings.vim
 so ~/.dotfiles/vim/app_model_mappings.vim
 so ~/.dotfiles/vim/view_mappings.vim
+so ~/.dotfiles/vim/html_element_mappings.vim
+so ~/.dotfiles/vim/html_ruby_mappings.vim
+so ~/.dotfiles/vim/html_form_related_mappings.vim
 so ~/.dotfiles/vim/config_mappings.vim
 so ~/.dotfiles/vim/db_mappings.vim
 so ~/.dotfiles/vim/lib_mappings.vim

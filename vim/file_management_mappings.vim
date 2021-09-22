@@ -33,10 +33,10 @@
   nnoremap <silent> <space>fs :wa<return>
   " File Save (single)
   nnoremap <silent> <space>fS :w<return>
-  " File Explore
+  " File eXplore
   nnoremap <silent> <space>fx :Explore<return>
   nnoremap <silent> <space>fX :Explore .git/..<return>
-
+  
 " File Paste
   " File Paste Partial Path
   nnoremap <silent> <space>fppp :call FilePastePartialPath()<return>
@@ -70,15 +70,6 @@
     let @+ = 'rails t ' . expand('%')
   endfunction
 
-" File Create
-  " File Create PArtial
-  nnoremap <silent> <space>fcpa :call FileCreatePartial()<return>
-  function! FileCreatePartial()
-    let directory = expand('%:h')
-    let new_file = input("Create new partial (prefix of \"_\" and extention of \".html.erb\" will be added automatically): ")
-    execute ':e ' . directory . '/_' . new_file . '.html.erb'
-  endfunction
-
 " File Find
   " File FINd
   nnoremap <silent> <space>ffin :e **/*
@@ -92,6 +83,17 @@
   nnoremap <silent> <space>fecf :let @+ = expand('%')<return>:e <C-R><C-R>+
   " File Edit CLipboard
   nnoremap <silent> <space>fecl :e <C-R><C-R>+<space><backspace>
+  " File Edit PArtial
+  nnoremap <silent> <space>fepa :call FileCreatePartial()<return>
+  function! FileCreatePartial()
+    let directory = expand('%:h')
+    let new_file = input("Create new partial (prefix of \"_\" and extention of \".html.erb\" will be added automatically): ")
+    execute ':e ' . directory . '/_' . new_file . '.html.erb'
+  endfunction
+
+  " File Edit ASets
+  nnoremap <silent> <space>feas :Explore .git/../app/assets<return>
+
   " File Edit Style Sheet
   nnoremap <silent> <space>fess :call FileEditStyleSheet()<return>
   function FileEditStyleSheet()
@@ -122,6 +124,7 @@
       endif
     endif
   endfunction
+
   " File Edit COntroller
   nnoremap <silent> <space>feco :call FileEditController()<return>
   function FileEditController()

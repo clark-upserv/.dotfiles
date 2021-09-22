@@ -1,54 +1,3 @@
-" Html Elements
-  " Html Elements ATtributes
-  nnoremap <silent> ,heat a <return>id="ChangeThisPls" <return>class="ChangeThisPls" <return>style="ChangeThisPls" <return>data-ChangeThisPls="ChangeThisPls"<return><esc>/ChangeThisPls<return>
-  " Html Elements DIv
-  nnoremap <silent> ,hedi a<div><return></div><esc>k
-  " Html Elements Div with Class
-  nnoremap <silent> ,hedc a<div class="ChangeClass"><return></div><esc>/ChangeClass<return>
-  " Html Elements PAragraph
-  nnoremap <silent> ,hepa a<p><return>ChangeThisPls<return></p><esc>/ChangeThisPls<return>
-  " Html Elements SPan
-  nnoremap <silent> ,hesp a<span><return></span><esc><up>
-  nnoremap <silent> ,hesc a<span class="ChangeClass"><return></span><esc>/ChangeClass<return>
-  " Html Elements STrong
-  nnoremap <silent> ,hest a<strong>ChangeThisPls</strong><esc>/ChangeThisPls<return>
-  " Html Elements ICon
-  nnoremap <silent> ,heic a<i class="icon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon"></i><return>DeleteThis - common options include: edit delete more plus-circle-o check info-outline alert-triangle close-circle-o close plus<esc>/px-3\\|fs-4\\|ChangeColor\\|ChangeIcon\\|DeleteThis<return>
-  
-  " Html Elements BUtton
-  nnoremap <silent> ,hebu a<button class="btn btn-ChangeColor">ChangeText</button><esc>/ChangeColor\\|ChangeText<return>
-  " Html Elements Button Icon (classes only)
-  nnoremap <silent> ,hebi abtn-icon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
-  " Html Elements Button Icon (full)
-  nnoremap <silent> ,hebI a<button class="btn-icon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon"></button><esc>/ChangeColor\\|ChangeIcon<return>
-  " Html Elements Button Link (classes only)
-  nnoremap <silent> ,hebl abtn-link<esc>
-  " Html Elements Button Link (full)
-  nnoremap <silent> ,hebL a<button class="btn-link">ChangeText</button><esc>/ChangeText<return>
-  " Html Elements TAble
-  nnoremap <silent> ,heta a<table><esc>o</table><esc>k
-  " Html Elements TAble
-  " Html Elements TAble full
-  " Html Elements TAble really full
-  " Html Elements Table capsHead
-  nnoremap <silent> ,hetH a<thead><esc>o</thead><esc>k
-  " Html Elements Table Row
-  nnoremap <silent> ,hetr a<tr><esc>o</tr><esc>k
-  " Html Elements Table Header cell
-  nnoremap <silent> ,heth a<th><esc>o</th><esc>k
-  " Html Elements Table Body
-  nnoremap <silent> ,hetb a<tbody><esc>o</tbody><esc>k
-  " Html Elements Table Data cell
-  nnoremap <silent> ,hetd a<td><esc>o</td><esc>k
-  " Html Elements Table Footer
-  nnoremap <silent> ,hetf a<tfoot><esc>o</tfoot><esc>k
-  " Html Elements Ordered List
-  nnoremap <silent> ,heol a<ol><return><li>ChangeThisPls</li><return></ol><esc>/ChangeThisPls<return>
-  " Html Elements Unordered List
-  nnoremap <silent> ,heul a<ul><return><li>ChangeThisPls</li><return></ul><esc>/ChangeThisPls<return>
-  " Html Elements CUstom
-  nnoremap <silent> ,hecu a<ChangeThisPls></ChangeThisPls><esc>/ChangeThisPls<return>
-
 " Html Show edit swap
   " Html Show edit swap ASsets
   nnoremap <silent> ,hsas a<% add_javascript_packs('lib/show_edit_swap') %><return><return><%= content_for :stylesheets do %><return><%= stylesheet_link_tag('lib/show_edit_swap') %><return><% end %><return><esc>
@@ -85,7 +34,7 @@
 
 " Html Form
   " Html Form BAse
-  nnoremap <silent> ,hfba :read ../templates/views/forms/base.html.erb<return>/ChangeThisPls\\|DeleteThisPls<return>
+  nnoremap <silent> ,hfba a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><return><return><%# DeleteThisPls - insert errors if necessary (,hier) %><return><%# DeleteThisPls - insert hidden fields here if necessary %><return><%# DeleteThisPls - insert rows, fields for and non-stanard forms as needed %><return><%# DeleteThisPls - insert cancel and submit buttons if show edit swap %><return><return><% end %><esc>/ChangeThisPls\\|DeleteThisPls<return>
   " Html Form WIth
   nnoremap <silent> ,hfwi a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><esc>o<% end %><esc>/ChangeThisPls<return>
   " Html Form Single Item
@@ -110,10 +59,12 @@
   nnoremap <silent> ,hflt a<%= label_tag(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
 
 " Html Inputs
-  " Html Input Left Label wrapper
+  " Html Input Left Label
   nmap <silent> ,hill a<%#<delete> Left label for ChangeAttribute %><return><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html Input Group %><return></div><return></div><return></div><return><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
   " Html Input Top Label
   nmap <silent> ,hitl a<%#<delete> Top label for ChangeAttribute %><return><div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Html Input Group %><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
+  " Html Input Top label Modal
+  nmap <silent> ,hitm a<%#<delete> Top label modal for ChangeAttribute %><return><div class="form-row mb-2 d-flex justify-content-center"><return><div class="form-group-modal"><return><%#<delete> DeleteThis - insert Html Input Group %><return></div><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
   " Html Input ROw
   nmap <silent> ,hiro a<div class="form-row"><return><%#<delete> DeleteThis - insert Html Input Group %><return></div><esc>/DeleteThis<return>
   " Html Input Group 1
@@ -205,14 +156,14 @@
   endfunction
   " Html Input Errors
   nnoremap <silent> ,hier a<div id="ChangeId_errors"><return><%# DeleteThis - if using a single error message for repeat block of many objects with ajax form, remove render from html and fill div contents with errors partial on ajax instead %><return><%= render('shared/errors', object: ChangeObject) %><return></div><esc>/ChangeId\\|DeleteThis\\|ChangeObject<return>
-  " html form input inline errors
+  " Html input inline errors
   nnoremap <silent> ,hiie a<%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %><esc>/ChangeObject\\|ChangeAttribute<return>
-  " html form input inline errors
+  " Html input inline errors
   nnoremap <silent> ,hiiE a<div id="ChangeId_errors"><return><%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %><return></div><esc>/ChangeId\\|ChangeObject\\|ChangeAttribute<return>
   " Html Input SUbmit
-  nnoremap <silent> ,hisu a<%= ChangeForm_form.submit(:ChangeDisplay, class: 'btn btn-ChangeColor') %><esc>/ChangeForm\\|ChangeDisplay\\|ChangeColor<return>
+  nnoremap <silent> ,hisu a<%= ChangeForm_form.submit('ChangeDisplay', class: 'btn btn-ChangeColor') %><esc>/ChangeForm\\|ChangeDisplay\\|ChangeColor<return>
   " Html Input Submit Link
-  nnoremap <silent> ,hisl a<%= ChangeForm_form.submit(:ChangeDisplay, class: 'btn-link') %><esc>/ChangeForm\\|ChangeDisplay<return>
+  nnoremap <silent> ,hisl a<%= ChangeForm_form.submit('ChangeDisplay', class: 'btn-link') %><esc>/ChangeForm\\|ChangeDisplay<return>
   " Html Form Input Submit with Image
   nnoremap <silent> ,hisi a<%= image_submit_tag('ChangePathAndFileName', alt: 'ChangeAltText', width: 'ChangeWidth', height: 'auto') %><esc>/ChangePathAndFileName\\|ChangeAltText\\|ChangeWidth<return>
   " Html Form CUstom Field

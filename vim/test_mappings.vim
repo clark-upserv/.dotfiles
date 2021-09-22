@@ -1,3 +1,6 @@
+noremap <silent> <D-l> <D-right>
+" 
+" 
 " Miscellaneous Messages Test
 function! TestDisclaimer()
   exe "normal! a# DeleteThis - do not test things that can easily change (ie text in source code)\<return>DeleteThis - do not test things so that if one thing is changed in source code many tests will break"
@@ -68,7 +71,7 @@ endfunction
   " Tests Controller Scenarios Base
   nnoremap <silent> ,tcsb :read ../templates/tests/controller_scenarios_base.rb<return>/DeleteThis\\|ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeValueForDifferentAccount\\|ChangeValue\\|ChangeHtmlMethod\\|ChangeUrlHelper\\|(id: @ChangeObject.id)\\|, params: ChangeAction_params\\|ChangeUserWithPermission\\|ChangeInvalidValue<return>
   " Tests Controller Test Base
-  nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/DeleteThis\\|ChangeAction\\|ChangeUserWithPermission\\|ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeId\\|ChangeTemplate\\|:SuccessOrRedirect\\|ChangePath<return>
+  nnoremap <silent> ,tctb :read ../templates/tests/controller_test_base.rb<return>/DeleteThis\\|ChangeAction\\|ChangeUserWithPermission\\|ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeId\\|ChangeTemplate\\|SuccessOrRedirect\\|ChangePath<return>
   " Tests Controller Test Index
   nnoremap <silent> ,tcti :read ../templates/tests/controller_test_index.rb<return>/included_not_included<return>nD:call TestIncludedNotIncluded()<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeModel\\|ChangeQuery\\|ChangeLoad\\|ChangeDifAccountObject\\|ChangeFilter\\|ChangeTable\\|ChangeFixture\\|ChangeDescription<return>
   " Tests Controller Test Show
@@ -76,13 +79,13 @@ endfunction
   " Tests Controller Test New
   nnoremap <silent> ,tctn o# DeleteThis - refactor test for show to fit new<esc>:read ../templates/tests/controller_test_show.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeObject\\|ChangeModel\\|ChangeLoad<return>
   " Tests Controller Test Create
-  nnoremap <silent> ,tctc :read ../templates/tests/controller_test_create.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeModel\\|ChangePath\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|ChangeTemplate\\|:SuccessOrRedirect\\|ChangeObject\\|ChangeChainToCoreAccountId<return>
+  nnoremap <silent> ,tctc :read ../templates/tests/controller_test_create.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeModel\\|ChangePath\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|ChangeTemplate\\|SuccessOrRedirect\\|ChangeObject\\|ChangeChainToCoreAccountId<return>
   " Tests Controller Test Edit
   nnoremap <silent> ,tcte o# DeleteThis - refactor test for show to fit edit<esc>:read ../templates/tests/controller_test_show.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeUrlHelper\\|ChangeObject\\|ChangeModel\\|ChangeLoad<return>
   " Tests Controller Test Update
-  nnoremap <silent> ,tctu :read ../templates/tests/controller_test_update.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangePath\\|ChangeObject\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|ChangeTemplate\\|:SuccessOrRedirect<return>
+  nnoremap <silent> ,tctu :read ../templates/tests/controller_test_update.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangePath\\|ChangeObject\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|ChangeTemplate\\|SuccessOrRedirect<return>
   " Tests Controller Test Destroy
-  nnoremap <silent> ,tctd :read ../templates/tests/controller_test_destroy.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeModel\\|ChangePath\\|ChangeObject\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|ChangeTemplate\\|:SuccessOrRedirect<return>
+  nnoremap <silent> ,tctd :read ../templates/tests/controller_test_destroy.rb<return>/DeleteThis\\|ChangeUserWithPermission\\|ChangeModel\\|ChangePath\\|ChangeObject\\|ChangeValue\\|ChangeAttribute\\|ChangeScope\\|ChangeInvalidValue\\|ChangeTemplate\\|SuccessOrRedirect<return>
   " Tests Controller REquest
   nnoremap <silent> ,tcre  aChangeHtmlMethod ChangeUrlHelper_path(id: @ChangeObject.id),<return>params: ChangeAction_params,<return>headers{ ChangeHeaders },<return>xhr: true<esc>/ChangeHtmlMethod\\|ChangeUrlHelper\\|(id: @ChangeObject.id)\\|,<return>params: ChangeAction_params\\|,<return>headers{ ChangeHeaders }\\|,<return>xhr: true<return>
   " Tests Controller GEt (index)

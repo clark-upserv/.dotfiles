@@ -93,9 +93,9 @@
   " Javascript Ajax DEstroy
   nmap <silent> ,jade ,jasu
   " Javascript Ajax Invalid Create
-  nnoremap <silent> ,jaic :read ../templates/javascript/ajax/invalid_create.js.erb<return>/ChangeSesId\\|ChangeRender\\|CopyPathFromView\\|ChangeObject\\|block\\|DeleteThisPls\\|ChangeModel<return>
+  nnoremap <silent> ,jaic :read ../templates/javascript/ajax/invalid_create.js.erb<return>/ChangeSesId\\|ChangeRender\\|CopyPathFromView\\|ChangeObject\\|DeleteThis\\|ChangeModel\\|ChangeRender\\|CopyIdFromVie<return>
   " Javascript Ajax Invalid Update
-  nnoremap <silent> ,jaiu :read ../templates/javascript/ajax/invalid_update.js.erb<return>/ChangeSesId\\|ChangeRender\\|block\\|DeleteThisPls<return>
+  nnoremap <silent> ,jaiu :read ../templates/javascript/ajax/invalid_update.js.erb<return>/ChangeSesId\\|ChangeRender\\|ChangeObject\\|DeleteThis\\|ChangeRender\\|CopyIdFromView<return>
   " Javascript Ajax Invalid Destroy
   nmap <silent> ,jaid ,jasu
   " Javascript Ajax Window Location replace

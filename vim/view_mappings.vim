@@ -48,11 +48,13 @@
   " View Models BAse
   nnoremap <silent> ,vmba :read ../templates/views/modals/base.html.erb<return>/DeleteThis<return>
   " View Models Contents Base
-  nnoremap <silent> ,vmcb :read ../templates/views/modals/contents_base.html.erb<return>/DivOrP\\|DeleteThis\\|OK<return>
+  nnoremap <silent> ,vmcb :read ../templates/views/modals/contents_base.html.erb<return>/DeleteThis\\|OK<return>
   " View Models Contents Destroy
   nnoremap <silent> ,vmcd :read ../templates/views/modals/contents_destroy.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeAttribute\\|ChangeName\\|ChangeUrl\\|SetToTrueOrRemove<return>
   " View Models Contents Image
   nnoremap <silent> ,vmci :read ../templates/views/modals/contents_image.html.erb<return>/DeleteThis\\|ChangeObject\\|ChangeProcessedAttribute\\|100%\\|auto<return>
+  " View Models Contents Form
+  nnoremap <silent> ,vmcf :read ../templates/views/modals/contents_form.html.erb<return>/DeleteThis<return>
   " View Mdoels Header Base
   nnoremap <silent> ,vmhb :read ../templates/views/modals/header_base.html.erb<return>/ChangeIconColor\\|DeleteThis\\|ChangeIconType\\|ChangeTitle<return>
   " View Mdoels Close button Group
