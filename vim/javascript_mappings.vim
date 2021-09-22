@@ -105,3 +105,6 @@
   " Javascript Ajax Errors
   nnoremap <silent> ,jaie a$('#ChangeId').html("<%= escape_javascript(render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute])) %>")<esc>/ChangeId\\|ChangeObject\\|ChangeAttribute<return>
 
+" Javascript Ruby
+  " Javascript Ruby Escape Javascript with partial
+  nnoremap <silent> ,jrej a<%= escape_javascript(render(ChangeRender)) %><esc>/ChangeRender<return>
