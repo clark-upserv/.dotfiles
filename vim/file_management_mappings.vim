@@ -99,7 +99,7 @@
   function FileEditStyleSheet()
     let current_file = expand('%')
     if match(current_file, 'app/assets/stylesheets') != -1
-      let directory = 'on style sheet'
+      let directory = expand('%:h')
     elseif match(current_file, 'app/controllers') != -1
       let directory = substitute(expand('%'), 'controllers', 'assets/stylesheets', '')
       let directory = substitute(directory, '_controller.rb', '', '')
@@ -111,9 +111,7 @@
     else 
       let directory = 1
     endif
-    if directory == 'on style sheet'
-      echo 'Already on style sheet file'
-    elseif directory == 1
+    if directory == 1
       echo 'Unable to find stylesheet for' current_file
     else
       if isdirectory(directory)
@@ -131,11 +129,11 @@
     let current_file = expand('%')
     if match(current_file, 'app/controllers') != -1
       let file = 'on controller'
-    elseif match(current_file, 'app/views') != -1
-      let file = substitute(expand('%:h'), 'views', 'controllers', '') . '_controller.rb'
     elseif match(current_file, 'app/helpers') != -1
       let file = substitute(expand('%'), 'helpers', 'controllers', '')
       let file = substitute(file, '_helper.rb', '_controller.rb', '')
+    elseif match(current_file, 'app/views') != -1
+      let file = substitute(expand('%:h'), 'views', 'controllers', '') . '_controller.rb'
     elseif match(current_file, 'lib/filter_helpers') != -1
       let file = substitute(expand('%'), 'lib/filter_helpers', 'app/controllers', '')
       let file = substitute(file, '_filter_helper.rb', '_controller.rb', '')
@@ -150,6 +148,7 @@
       execute ':e' file
     endif
   endfunction
+
   " File Edit HElper
   nnoremap <silent> <space>fehe :call FileEditHelper()<return>
   function FileEditHelper()
@@ -172,12 +171,36 @@
       execute ':e' file
     endif
   endfunction
+
+  " File Edit MOdel
+  nnoremap <silent> <space>femo :call FileEditModel()<return>
+  function FileEditModel()
+    let current_file = expand('%')
+    if match(current_file, 'app/services') != -1
+      let file = 'on helper'
+    elseif match(current_file, 'test/controllers') != -1
+      let file = substitute(current_file, 'controllers', 'helpers', '')
+      let file = substitute(file, '_controller.rb', '_helper.rb', '')
+    elseif match(current_file, 'app/views') != -1
+      let file = substitute(expand('%:h'), 'views', 'helpers', '') . '_helper.rb'
+    else 
+      let file = 1
+    endif
+    if file == 'on helper'
+      echo 'Already on helper file'
+    elseif file == 1
+      echo 'Unable to find helper for' current_file
+    else
+      execute ':e' file
+    endif
+  endfunction
+
   " File Edit VIew
   nnoremap <silent> <space>fevi :call FileEditView()<return>
   function FileEditView()
     let current_file = expand('%')
     if match(current_file, 'app/views') != -1
-      let directory = 'on view'
+      let directory = expand('%:h')
     elseif match(current_file, 'app/assets/stylesheets') != -1
       let directory = substitute(expand('%:h'), 'assets/stylesheets', 'views', '')
     elseif match(current_file, 'app/controllers') != -1
@@ -192,9 +215,7 @@
     else 
       let directory = 1
     endif
-    if directory == 'on view'
-      echo 'Already on view file'
-    elseif directory == 1
+    if directory == 1
       echo 'Unable to find views for' current_file
     else
       if isdirectory(directory)
@@ -205,6 +226,7 @@
       endif
     endif
   endfunction
+
   " File Edit Filter Helper
   nnoremap <silent> <space>fefh :call FileEditFilterHelper()<return>
   function FileEditFilterHelper()
@@ -227,23 +249,26 @@
       execute ':e' file
     endif
   endfunction
+
   " File Edit TEst
   nnoremap <silent> <space>fete :call FileEditTest()<return>
   function FileEditTest()
     execute ':e' GetTestFileName()
   endfunction
+
   " File Edit Test Source
   nnoremap <silent> <space>fets :call FileEditTestSource()<return>
   function FileEditTestSource()
     let current_file = expand('%')
     let file = substitute(current_file, '_test.rb', '.rb', '')
-    if match(file, 'controller\|helper\|job\|mailer\|model') != -1
+    if match(file, 'channel\|controller\|helper\|job\|mailer\|model') != -1
       let file = substitute(file, 'test', 'app', '')
     else
       let file = substitute(file, 'test', 'lib', '')
     endif
     execute ':e' file
   endfunction
+
   " File Edit FIxtures
   nnoremap <silent> <space>fefi :e test/fixtures/
   " File Edit Schema
@@ -262,7 +287,7 @@
   function FileEditService()
     let current_file = expand('%')
     if match(current_file, 'lib/services') != -1
-      let directory = 'on service'
+      let directory = expand('%:h')
     elseif match(current_file, 'app/controllers') != -1
       let directory = substitute(current_file, 'app/controllers', 'lib/services', '')
       let directory = substitute(directory, '_controller.rb', '', '')
@@ -272,9 +297,7 @@
     else 
       let directory = 1
     endif
-    if directory == 'on service'
-      echo 'Already on service file'
-    elseif directory == 1
+    if directory == 1
       echo 'Unable to find services for' current_file
     else
       if isdirectory(directory)

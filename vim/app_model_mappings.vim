@@ -1,6 +1,6 @@
 " Base / Misc
   " App Models BAse
-  nnoremap <silent> ,amba :call CreateBaseFile(1, 0, 1)<return>/class<return>wviwy/ChangeTopLevelDocumentation<return>viwpa model<esc><down>A < ApplicationRecord<esc>/inner_followup<esc>ddO# Class Methods<return><backspace><backspace>class << self<return>end<return><return># Associations<esc>o<esc>x0Do# Scopes<return><backspace><backspace>scope :default_order, -> { order(ChangeOrder) }<esc>o<esc>x0Do# Attributes<esc>o<esc>x0Do# Callbacks<esc>o<esc>x0Do# Validations<esc>o<esc>x0Do# Attribute Instance Methods<esc>o<esc>x0Do# Query Instance Methods<esc>o<esc>x0Do# Service Instance Methods<esc>gg/ChangeOrder<return>
+  nnoremap <silent> ,amba :call CreateBaseFile(1, 0, 1)<return>/class<return>wviwy/ChangeTopLevelDocumentation<return>viwpa model<esc><down>A < ApplicationRecord<esc>/inner_followup<esc>ddO# Class Methods<return><backspace><backspace>class << self<return>end<return><return># Associations<esc>o<esc>x0Do# Scopes<return>DeleteThis - create default order (if necessary)<return><backspace><backspace>scope :by_ChangeDefault, -> { order(:ChangeOrder) }<esc>o<esc>x0Do# Attributes<esc>o<esc>x0Do# Callbacks<esc>o<esc>x0Do# Validations<esc>o<esc>x0Do# Attribute Instance Methods<esc>o<esc>x0Do# Query Instance Methods<esc>o<esc>x0Do# Service Instance Methods<esc>gg/DeleteThis\\|ChangeDefault\\|ChangeOrder<return>
   " App Models Cancancan Model based
   nnoremap <silent> ,amcm acan %i[ChangeAbility_ChangeControllerOrFeature], ChangeModel, ChangeMethod: user.ChangeValue<return># DeleteThis - ChangeAbility for regular abilities - use "manage" or some specific controller action<return>DeleteThis - ChangeAbility for accessible_by - always use "index".<return>DeleteThis - NOTE: accessible_by ALWAYS gets its own unique ability because accessible_by errors when<return>non-attribute (ie not columns in db) methods are used. This way regular abilities can use any method and we<return>don't have to worry about accessible_by breaking.<return>DeleteThis - ChangeControllerOrFeature - a specific controller or a feature that describes a collection of<return>controllers. In either case, should always start with main namespace (ex. "core" or "hr", etc.)<esc>/ChangeAbility\\|ChangeControllerOrFeature\\|ChangeModel\\|ChangeMethod\\|ChangeValue\\|DeleteThis<enter>
   " App Models Cancancan Non-model based
@@ -45,15 +45,16 @@
   nnoremap <silent> ,amoR aorder("LOWER(ChangeAttribute) DESC")<esc>/ChangeAttribute<return>
 
 " Attributes
-  " App Models Attributes Enum
-  nnoremap <silent> ,amae aenum ChangeAttribute: { ChangeValueSymbolOrString: ChangeInteger }, _prefix: true<return># DeleteThis -  If attribute will not be displayed, use symbol. If attribute will be displayed (esp. in options for select), use string (this way display does not require processing). If display changes down the road, you may want to refactor to symbol with class method for displays (and opitons for select) and instance method for display (use ,amas for example)<esc>/ChangeAttribute\\|ChangeValueSymbolOrString\\|ChangeInteger\\|DeleteThis<return>
-  " App Models Attributes enum Symbol example
-  nnoremap <silent> ,amas aclass << self<return>def status_displays<return>{ 'It is pending' => 0, 'Officially active' => 1 }<return>end<return>end<return>enum status: { pending: 0, active: 1 }, _prefix: true<return>def display_status<return>self.class.status_displays.key(status_for_database)<return>end<return>end<esc>
-  nnoremap <silent> ,amaE aenum ChangeAttribute: ChangeClass::SOMECONSTANT, _prefix: ChangeToTrueOrCustomSymbol, _suffix: ChangeToTrueOrCustomSymbol<return># DeleteThis - you can add custom methods to ChangeClass and then use them in ths model, example:<return><backspace><backspace>def ChangeAttribute_data<return>@ChangeAttribute_data \|\|= ChangeClass.new(ChangeAttribute)<return>end<esc>/ChangeAttribute\\|ChangeClass\:\:SOMECONSTANT\\|, _prefix: ChangeToTrueOrCustomSymbol\\|, _suffix: ChangeToTrueOrCustomSymbol\\|DeleteThis\\|ChangeClass<return>
-  " App Models Attributes Array
+  " App Models attributes ENum
+  nnoremap <silent> ,amen aenum ChangeAttribute: { ChangeValueSymbolOrString: ChangeInteger }, _prefix: true<return># DeleteThis - If attribute will not be displayed, use symbol. If attribute will be displayed (esp. in options for select), use string (this way display does not require processing). If display changes down the road, you may want to refactor to symbol with class method for displays (and opitons for select) and instance method for display (use ,ames for example)<esc>/ChangeAttribute\\|ChangeValueSymbolOrString\\|ChangeInteger\\|DeleteThis<return>
+  " App Models attributes ENum
+  nnoremap <silent> ,ameN aenum ChangeAttribute: ChangeClass::SOMECONSTANT, _prefix: ChangeToTrueOrCustomSymbol, _suffix: ChangeToTrueOrCustomSymbol<return># DeleteThis - you can add custom methods to ChangeClass and then use them in ths model, example:<return><backspace><backspace>def ChangeAttribute_data<return>@ChangeAttribute_data \|\|= ChangeClass.new(ChangeAttribute)<return>end<esc>/ChangeAttribute\\|ChangeClass\:\:SOMECONSTANT\\|, _prefix: ChangeToTrueOrCustomSymbol\\|, _suffix: ChangeToTrueOrCustomSymbol\\|DeleteThis\\|ChangeClass<return>
+  " App Models attributes Enum Symbol example
+  nnoremap <silent> ,ames aclass << self<return>def status_displays<return>{ 'It is pending' => 0, 'Officially active' => 1 }<return>end<return>end<return>enum status: { pending: 0, active: 1 }, _prefix: true<return>def display_status<return>self.class.status_displays.key(status_for_database)<return>end<esc>
+  " App Models attributes ARray
   nnoremap <silent> ,amaa aserialize :ChangeAttribute, Array
-  " App Models Attributes Hash
-  nnoremap <silent> ,amah aserialize :ChangeAttribute, Hash
+  " App Models attributes HAsh
+  nnoremap <silent> ,amha aserialize :ChangeAttribute, Hash
 
 " Callbacks
   " App Models Process Attributes
