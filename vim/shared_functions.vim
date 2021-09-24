@@ -72,12 +72,16 @@ function! IndentTemplate(start, delete_start, indentations, template)
   " indent by indendations argument. If 0, indent based on current
   " cursor position
   if a:indentations == 0
-    " go to starting point if there is one. Otherwise, starting point is current cursor position
+    " go to starting point if there is one.
     if a:start != ''
       let @/ = a:start
       normal! n
+      " when there is a starting point, the cursor is actually 1 column too
+      " far compared to when on an empty line so subtract 1
+      let indentations = (col('.') - 1) /  2
+    else
+      let indentations = col('.') /  2
     endif 
-    let indentations = (col('.') - 1) /  2
   else
     let indentations = a:indentations
   endif
