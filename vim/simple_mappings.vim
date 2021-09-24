@@ -25,6 +25,8 @@
   inoremap <silent> <<< <%  %><left><left><left>
   " erb entered
   inoremap <silent> >>> <%=  %><left><left><left>
+  " erb comment
+  inoremap <silent> <<> <%#  %><left><left><left>
   " J Query Select
   inoremap <silent> $$ $()<left>
 

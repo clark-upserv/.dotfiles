@@ -9,6 +9,9 @@ augroup CustomVimEntry
   autocmd VimEnter * :so ~/.dotfiles/vim/manifest.vim
 augroup END
 
+" mappings that help with vim
+so ~/.dotfiles/vim/vim_function_mappings.vim
+
 " this should be cleaned and / or clarified...
 so ~/.dotfiles/vim/simple_mappings.vim
 
@@ -39,7 +42,11 @@ so ~/.dotfiles/vim/config_mappings.vim
 so ~/.dotfiles/vim/db_mappings.vim
 so ~/.dotfiles/vim/lib_mappings.vim
 so ~/.dotfiles/vim/test_mappings.vim
+so ~/.dotfiles/vim/test_controller_mappings.vim
+so ~/.dotfiles/vim/test_model_mappings.vim
 
+" Rails specific misc process / 'comma' mappings
+so ~/.dotfiles/vim/misc_process_mappings.vim
 
 " truly random one off stuff
   " Caps lock in insert mode (press ctrl - ^ to toggle)
@@ -77,9 +84,3 @@ so ~/.dotfiles/vim/test_mappings.vim
     " Stylesheet Base Text Colors
     nnoremap <silent> ,sbtc atext-primary text-secondary text-danger text-warning text-warning-2
 
-" Packages
-  " Sortable Table positions
-    " Controller
-    nnoremap <silent> ,pstc :read ../templates/packages/sortable_table_positions/controller.rb<return>/ChangeParentModel\\|ChangeParent\\|ChangeAuth\\|DeleteThis\\|ChangeChildren\\|ChangeChild\\|ChangeStpId<return>
-    " View
-    nnoremap <silent> ,pstv :read ../templates/packages/sortable_table_positions/view.html.erb<return>/ChangeStpId\\|ChangePath\\|ChangeStpIdForm\\|ChangeParent\\|ChangeChildren\\|ChangeChild\\|DeleteThis\\|ChangeFinalHiddenRowHeight<return>
