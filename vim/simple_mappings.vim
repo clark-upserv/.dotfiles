@@ -8,6 +8,9 @@
   " coment
   vnoremap <silent> # I#<esc>
   vnoremap <silent> " I"<esc>
+  vnoremap <silent> / I//<esc>
+
+
 " insert mode non-leader key mappings
   " prevent return from autocomplete (very annoying because to return you have
   " to hit space then return. Now, tab does autocomplete and return does
@@ -130,13 +133,10 @@
 " single key comma mappings
   " visual mode
   nnoremap ,v <C-v>
-  " various comments and uncomments
-  nnoremap <silent> ,# I#<esc>0
-  nnoremap <silent> ,,# I<delete><esc>0
-  nnoremap <silent> ,// I//<esc>0
-  nnoremap <silent> ,,// I<delete><delete><esc>0
-  nnoremap <silent> ,/* O/*<esc>o*/<esc>Vx0
+  " various comments
   nnoremap <silent> ,< O<!--<esc>o--><esc>Vx0
+  
+  nnoremap <silent> ,,< /<!--<return>Nddmq/--><return>dd`q
   " replace single quite with double quote and vice versa
   nnoremap <silent> ,' /"<return>cgn'<esc>N.:noh<return>
   nnoremap <silent> ," /'<return>cgn"<esc>N.:noh<return>
