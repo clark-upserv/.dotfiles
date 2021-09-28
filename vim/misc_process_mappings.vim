@@ -8,3 +8,4 @@
   " View
   nnoremap <silent> ,pstv :call IndentTemplate('', 0, 0, '../templates/misc_processes/sortable_table_positions/view.html.erb')<return>/ChangeStpId\\|ChangePath\\|ChangeCamelCaseStpId\\|ChangeParent\\|ChangeChildren\\|ChangeChild\\|DeleteThis\\|ChangeFinalHiddenRowHeight<return>
 
+
