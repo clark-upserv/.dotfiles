@@ -41,6 +41,10 @@
   vnoremap aa <esc>ggVG
   " copy entire page
   vnoremap ay <esc>ggVGy
+  " paste over entire page
+  vnoremap ap <esc>ggVGp
+  " delete entire page
+  vnoremap ax <esc>ggVGx
   " copy word
   nnoremap <silent> y viwy
   " copy and search

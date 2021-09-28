@@ -80,14 +80,16 @@
   " 
   nnoremap <silent> ,jvcd aconsole.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW1')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW2')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW3')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW4')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW5')<return>console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW6')<return>console.log(ChangeThis)<esc>/ChangeThis<return>
   " Javascript Vanilla Create Element
-  nnoremap <silent> ,jvce a// DeleteThis - create element<return><esc>0Cvar div = document.createElement('CHANGEELEMENTTYPE')<return>div.id = 'ChangeId'<return>div.classList.add('ChangeClass')<return>div.innerHTML = "<%= escape_javascript(render(ChangeRender)) %>"<return><return>// DeleteThis - get parent if inserting at beginning or end of parent<return><esc>0Cvar parent = document.getElementById('ChangeId')<return>// DeleteThis - if inserting at beginning of parent<return><esc>0Cparent.prepend(div)<return>// DeleteThis - if inserting at end of parent<return><esc>0Cparent.append(div)<return><return>// DeleteThis - get sibling if inserting before or after sibling<return><esc>0Cvar sibling = document.getElementById('#ChangeSibling')<return>// DeleteThis - if inserting before sibling<return><esc>0Csibling.before(div)<return>// DeleteThis - if inserting after sibling<return><esc>0Csibling.after(div)<esc>/DeleteThis\\|CHANGEELEMENTTYPE\\|ChangeId\\|ChangeClass\\|ChangeRender\\|ChangeSibling<return>
+  nnoremap <silent> ,jvce a// DeleteThis - create element<return><esc>0Cvar ChangeNewElement = document.createElement('CHANGEELEMENTTYPE')<return>ChangeNewElement.id = 'ChangeId'<return>ChangeNewElement.classList.add('ChangeClass')<return>ChangeNewElement.innerHTML = "<%= escape_javascript(render(ChangeRender)) %>"<return><return>// DeleteThis - get parent if inserting at beginning or end of parent<return><esc>0Cvar ChangeParent = document.getElementById('ChangeId')<return>// DeleteThis - if inserting at beginning of parent<return><esc>0CChangeParent.prepend(ChangeNewElement)<return>// DeleteThis - if inserting at end of parent<return><esc>0CChangeParent.append(ChangeNewElement)<return><return>// DeleteThis - get sibling if inserting before or after sibling<return><esc>0Cvar ChangeSibling = document.getElementById('#ChangeId')<return>// DeleteThis - if inserting before sibling<return><esc>0CChangeSibling.before(ChangeNewElement)<return>// DeleteThis - if inserting after sibling<return><esc>0CChangeSibling.after(ChangeNewElement)<esc>/DeleteThis\\|ChangeNewElement\\|CHANGEELEMENTTYPE\\|ChangeId\\|ChangeClass\\|ChangeRender\\|ChangeParent\\|ChangeSibling<return>
 " Javascript Ajax
   " Javascript Ajax BAse
   nnoremap <silent> ,jaba :read ../templates/javascript/ajax/base.js.erb<return>ggdd/DeleteThis<return>
   " Javascript Ajax SUccess
   nnoremap <silent> ,jasu :read ../templates/javascript/ajax/success.js.erb<return>/ChangeThisPls\\|CopyIdFromView\\|ChangeRender\\|DeleteThis<return>
   " Javascript Ajax CReate
-  nnoremap <silent> ,jacr :read ../templates/javascript/ajax/create.js.erb<return>/DeleteThis\\|CHANGEELEMENTTYPE\\|ChangeId\\|ChangeClass\\|ChangeRender\\|ChangeSibling\\|CopyIdFromView<return>
+  nmap <silent> ,jacr ,jasu
+  " Javascript Ajax CReate by adding to end and re-rendering new
+  nnoremap <silent> ,jacR :read ../templates/javascript/ajax/create.js.erb<return>/DeleteThis\\|CHANGEELEMENTTYPE\\|ChangeId\\|ChangeClass\\|ChangeRender\\|ChangeSibling\\|CopyIdFromView<return>
   " Javascript Ajax UPdate
   nmap <silent> ,jaup ,jasu
   " Javascript Ajax DEstroy

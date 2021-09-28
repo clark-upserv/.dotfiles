@@ -2,7 +2,7 @@
   " View Page BAse
   nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThisPls\\|ChangeNavTypeOrDeleteThisLine\\|ChangeTemplate\\|ChangePath<return>
   " View Page STylesheets
-  nnoremap <silent> ,vpst :read ../templates/views/page/stylesheets.html.erb<return>/DeleteThisNote\\|ChangePath<return>
+  nnoremap <silent> ,vpss :read ../templates/views/page/stylesheets.html.erb<return>/DeleteThisNote\\|ChangePath<return>
   " View Page Javascript Packs
   nnoremap <silent> ,vpjp :read ../templates/views/page/javascript_packs.html.erb<return>/DeleteThisNote\\|ChangePath\\|Etc\.<return>
   " View Page  Non Pack javascriopts
