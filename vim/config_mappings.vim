@@ -1,25 +1,25 @@
-" Ruby Routes
+" Routes
   " main routes
-    " Ruby Routes NAmespace
+    " Routes NAmespace
     nnoremap <silent> ,crna anamespace :ChangeNamespace do<return>end<esc>/ChangeNamespace<return>
-    " Ruby Routes REsources
+    " Routes REsources
     nnoremap <silent> ,crre aresources :ChangeController, only: %i[index show create update destroy]<esc><up>/ChangeController\\|index \\|show \\|create \\|update \\|destroy<return>
-    " Ruby Routes Resources Nested
-    nnoremap <silent> ,crrn aget ':id/ChangeController', to: 'ChangeController#index', as: :ChangeController<esc>opost ':id/ChangeController', to: 'ChangeController#create', as: :ChangeController<return># DeleteThis - remove as: :ChangeController in post method if already included in get method above (including it in both will cause error because rails tries to create the same url helper twice)<return><backspace><backspace>resources :ChangeController, only: %i[show update destroy]<esc>/ChangeController\\|DeleteThis<return>
-    " Ruby Routes Member Get
+    " Routes Resources Nested
+    nnoremap <silent> ,crrn aget ':id/ChangeController', to: 'ChangeController#index', as: :ChangeController<esc>opost ':id/ChangeController', to: 'ChangeController#create', as: :ChangeController<return># DeleteThis - remove as: :ChangeController in post method for create action if already included in get method for index action above (including it in both will cause error because rails tries to create the same url helper twice)<return><backspace><backspace>resources :ChangeController, only: %i[show update destroy]<esc>/ChangeController\\|DeleteThis<return>
+    " Routes Member Get
     nnoremap <silent> ,crmg aget ':id/ChangeMemberInUrl', to: 'ChangeMemberController#show', as: :ChangeMemberSingular<esc>/ChangeMemberInUrl\\|ChangeMemberController\\|ChangeMemberSingular<return>
-    " Ruby Routes GEt (for non-restful routes)
+    " Routes GEt (for non-restful routes)
     nnoremap <silent> ,crge aget 'ChangeThisPls', to: 'ChangeThisPls#ChangeThisPls'<esc>/ChangeThisPls<return>
   " other routes
     "
     nnoremap <silent> ,crsc ascope path: :ChangeUrl, module: :ChangeFileNamespace, as: :ChangeUrlHelperPrefix do<return>end<esc>/ChangeUrlHelperPrefix\\|ChangeFileNamespace\\|ChangeUrl<return>
-    " Ruby Routes REsources full
+    " Routes REsources full
     nnoremap <silent> ,crrE aresources path: :ChangeThisPls, controller: :ChangeThisPls, as: :ChangeThisPls, only: %i[index show create update destroy]<esc>/ChangeThisPls<return>
 
     nnoremap <silent> ,crra aresources path: :ChangeThisPls, module: :ChangeThisPls, as: :ChangeThisPls, only: %i[] do<return>end<esc>/ChangeThisPls<return>
     "
     nnoremap <silent> ,crme amember do<return>end<esc>O <backspace><esc>
-    " Ruby Routes GEt full (for non-restful routes)
+    " Routes GEt full (for non-restful routes)
     nnoremap <silent> ,crgE aget 'ChangeThisPls', to: 'ChangeThisPls#ChangeThisPls', as: :ChangeThisPls<esc>/ChangeThisPls<return>
     "
     nnoremap <silent> ,crgn aget ':id/ChangeThisPls', to: 'ChangeThisPls#index', as: :ChangeThisPls<esc>/ChangeThisPls<return>

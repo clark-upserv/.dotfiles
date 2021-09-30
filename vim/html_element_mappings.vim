@@ -1,5 +1,3 @@
-" Html Elements ATtributes
-nnoremap <silent> ,heat a <return>id="ChangeThisPls" <return>class="ChangeThisPls" <return>style="ChangeThisPls" <return>data-ChangeThisPls="ChangeThisPls"<return><esc>/ChangeThisPls<return>
 " Html Elements DIv
 nnoremap <silent> ,hedi a<div><return></div><esc>k
 " Html Elements Div with Class

@@ -1,6 +1,7 @@
 " Base / Misc
   " App Models BAse
-  nnoremap <silent> ,amba :call CreateBaseFile(1, 0, 1)<return>/class<return>wviwy/ChangeTopLevelDocumentation<return>viwpa model<esc><down>A < ApplicationRecord<esc>/inner_followup<esc>ddO# Class Methods<return><backspace><backspace>class << self<return>end<return><return># Associations<esc>o<esc>x0Do# Scopes<return>DeleteThis - create default order (if necessary)<return><backspace><backspace>scope :by_ChangeDefault, -> { order(:ChangeOrder) }<esc>o<esc>x0Do# Attributes<esc>o<esc>x0Do# Callbacks<esc>o<esc>x0Do# Validations<esc>o<esc>x0Do# Attribute Instance Methods<esc>o<esc>x0Do# Query Instance Methods<esc>o<esc>x0Do# Service Instance Methods<esc>gg/DeleteThis\\|ChangeDefault\\|ChangeOrder<return>
+  nnoremap <silent> ,amba :call CreateBaseFile(1, 0, 1)<return>/class<return>wviwy/ChangeTopLevelDocumentation<return>viwpa model<esc><down>A < ApplicationRecord<esc>/inner_followup<esc>ddO# Class Methods<return><backspace><backspace>class << self<return>end<return><return># Associations<esc>o<esc>x0Do# Scopes<return>DeleteThis - create default order (if necessary). User LOWER if it should be case insensitive. Otherwise, use regulare order method.<return><backspace><backspace>scope :by_ChangeDefault, -> { order('LOWER(ChangeAttribute)') }<return>scope :by_ChangeDefault, -> { order(:ChangeAttribute) }<esc>o<esc>x0Do# Attributes<esc>o<esc>x0Do# Callbacks<esc>o<esc>x0Do# Validations<esc>o<esc>x0Do# Attribute Instance Methods<esc>o<esc>x0Do# Query Instance Methods<esc>o<esc>x0Do# Service Instance Methods<esc>gg/DeleteThis\\|ChangeDefault\\|ChangeAttribute<return>
+  
   " App Models Cancancan Model based
   nnoremap <silent> ,amcm acan %i[ChangeAbility_ChangeControllerOrFeature], ChangeModel, ChangeMethod: user.ChangeValue<return># DeleteThis - ChangeAbility for regular abilities - use "manage" or some specific controller action<return>DeleteThis - ChangeAbility for accessible_by - always use "index".<return>DeleteThis - NOTE: accessible_by ALWAYS gets its own unique ability because accessible_by errors when<return>non-attribute (ie not columns in db) methods are used. This way regular abilities can use any method and we<return>don't have to worry about accessible_by breaking.<return>DeleteThis - ChangeControllerOrFeature - a specific controller or a feature that describes a collection of<return>controllers. In either case, should always start with main namespace (ex. "core" or "hr", etc.)<esc>/ChangeAbility\\|ChangeControllerOrFeature\\|ChangeModel\\|ChangeMethod\\|ChangeValue\\|DeleteThis<enter>
   " App Models Cancancan Non-model based
@@ -40,7 +41,7 @@
   " App Models Order Descending
   nnoremap <silent> ,amod aorder(ChangeAttribute: :desc)<esc>/ChangeAttribute<return>
   " App Models Order Case insensitive
-  nnoremap <silent> ,amoc aorder("LOWER(ChangeAttribute)")<esc>/ChangeAttribute<return>
+  nnoremap <silent> ,amoc aorder('LOWER(ChangeAttribute)')<esc>/ChangeAttribute<return>
   " App Models ORder (full)
   nnoremap <silent> ,amoR aorder("LOWER(ChangeAttribute) DESC")<esc>/ChangeAttribute<return>
 

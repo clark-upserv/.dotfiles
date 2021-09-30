@@ -11,8 +11,6 @@
   nnoremap <silent> ,hsei a<a class="no-href-icon px-3 fs-4 text-primary mdi mdi-edit ChangeSesId-ses-edit-button"></a><esc>/ChangeSesId<return>
   " Html Show edit swap Edit button - Link
   nnoremap <silent> ,hsel a<a class="no-href-link ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
-  " Html Show edit swap Edit button Modal (data attribute only)
-  nnoremap <silent> ,hsem adata-toggle="modal" data-target="ChangeModalId-<% ChangeErbIfNecessary %>-modal"<esc>/ChangeModalId\\|ChangeErbIfNecessary<return>
   
 " Html Show
   " Html Show Left Label wrapper
@@ -34,7 +32,7 @@
 
 " Html Form
   " Html Form BAse
-  nnoremap <silent> ,hfba a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><return><return><%# DeleteThisPls - insert errors if necessary (,hier) %><return><%# DeleteThisPls - insert hidden fields here if necessary %><return><%# DeleteThisPls - insert rows, fields for and non-stanard forms as needed %><return><%# DeleteThisPls - insert cancel and submit buttons if show edit swap %><return><return><% end %><esc>/ChangeThisPls\\|DeleteThisPls<return>
+  nnoremap <silent> ,hfba a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><return><return><%# DeleteThisPls - insert errors if necessary (,hier) %><return><%# DeleteThisPls - insert hidden fields here if necessary %><return><%# DeleteThisPls - insert rows, fields for and non-stanard forms as needed %><return><%# DeleteThisPls - insert cancel and submit buttons if show edit swap or modal %><return><return><% end %><esc>/ChangeThisPls\\|DeleteThisPls<return>
   " Html Form WIth
   nnoremap <silent> ,hfwi a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><esc>o<% end %><esc>/ChangeThisPls<return>
   " Html Form Single Item
@@ -51,10 +49,6 @@
   nnoremap <silent> ,hfla a<%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
   " Html Form Label Block
   nnoremap <silent> ,hflb a<%= ChangeThisPls_form.label(:ChangeAttribute, class: 'col-form-label') do %>ChangeDisplay<% end %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
-  " Html Form Label for Checkboxes
-  " NOTE: this is used by the checkbox mappings so if you chnage this, you
-  " need to update those as well...
-  nnoremap <silent> ,hflc a<%= ChangeForm_form.label(:ChangeAttribute, 'ChangeDisplay', class: "custom-control-label form-text2") %><return><%# NOTE: for blank label, make this a block with a blank space (" ") between the do and end %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>
   " Html Form Label Tag
   nnoremap <silent> ,hflt a<%= label_tag(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
 
@@ -75,15 +69,15 @@
   nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label (,hfla) %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
   " Html Input Group 4
   nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label (,hfla) %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
-  " Html Input Cancel & submit Buttons
-  nmap <silent> ,higb :read ../templates/views/elements/buttons_and_links/cancel_and_submit_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
-  " Html Input Cancel & submit Icons
-  nmap <silent> ,higi :read ../templates/views/elements/buttons_and_links/cancel_and_submit_button_icons.html.erb<return>/ChangeSesId<return>
-  " Html Input Cancel & submit from Modal
-  nmap <silent> ,higm :read ../templates/views/elements/buttons_and_links/cancel_and_submit_modal_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
-  " Html Input Left label Cancel and submit buttons (usually not necessary
+  " Html Input Buttons (cancel & submit) - Buttons
+  nnoremap <silent> ,hibb :read ../templates/views/elements/buttons_and_links/cancel_and_submit_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
+  " Html Input Buttons (cancel & submit) - Icons
+  nnoremap <silent> ,hibi :read ../templates/views/elements/buttons_and_links/cancel_and_submit_button_icons.html.erb<return>/ChangeSesId<return>
+  " Html Input Buttons (cancel & submit) - Modal
+  nnoremap <silent> ,hibm a<div class="form-row mb-2 d-flex justify-content-center"><return><div class="form-group-modal mt-6 px-3 d-flex justify-content-between"><return><button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button><return><%= ChangeForm_form.submit 'Save', class: 'btn btn-primary' %><return></div><return></div><esc>/ChangeForm<return>
+  " Html Input Buttons (cancel & submit) - Left label (usually not necessary
   " but can be helpful if you want buttons to align not at end)
-  nmap <silent> ,hilc a<%#<delete> Left label cancel and submit buttons %><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return></div><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
+  nnoremap <silent> ,hibl a<%#<delete> Left label cancel and submit buttons %><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return></div><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
   " Htmo Input Main Attrubutes
   function! HtmlInputMainAttributes()
     execute "normal! avalue: ChangeObject.ChangeAttribute, # text Specifies the intial value for the control. If type = \"checkbox\" or type = \"radio\" this attribute is required. Not necessary for select.\<return>placeholder: 'ChangeValue', # html-5 text Specifies a short hint that describes the expected value.\<return>required: ChangeValue, # html-5 required Specifies that an input field must be filled out before submitting the form.\<return>alt: ChangeValue, # text This specifies text to be used in case the browser/user agent can't render the input control.\<return>autocomplete: ChangeValue, # html-5 on off Specifies for enabling or disabling of autocomplete in INPUT element.\<return>autofocus: ChangeValue, # html-5 autofocus pecifies that INPUT element should automatically get focus when the page loads.\<return>checked: ChangeValue, # checked If type = \"radio\" or type = \"checkbox\" it will already be selected when the page loads.\<return>max: ChangeValue, # html-5 autofocus Specifies the maximum value.\<return>maxlength: ChangeValue, # number (set to 255 for strings) Defines the maximum number of characters allowed in a text field.\<return>min: ChangeValue, # html-5 number Specifies the minimum value.\<return>minlength: 'ChangeMinLength', # number Defines the minimum number of characters allowed in a text field.\<return>multiple: ChangeValue, # html-5 multiple Specifies that a user can enter multiple values.\<return>size: ChangeValue, # number Specifies the width of the control. If type = \"text\" or type = \"password\" this refers to the width in characters. Otherwise it's in pixels.\<return>step: ChangeValue, # html-5 number Specifies the legal number intervals for an input field"
@@ -107,20 +101,13 @@
   nnoremap <silent> ,hirt a<%= ChangeThisPls_form.rich_text_area(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
   " Html Input Email Field
   nnoremap <silent> ,hief a<%= ChangeForm_form.email_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'email',<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>size: 'ChangeSize',<return>maxlength: 'ChangeMaxLength'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|'email'\\|ChangePlaceholder\\|ChangeSize\\|ChangeMaxLength<return>
-  " Html Input Checkbox Stacked
-  nmap <silent> ,hics a<div class="pt-1"><esc>,,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,,o,hicw<down><down><down>,o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
-  " Html Input Checkbox Inline (exact same as hics but add d-flex to parent div)
-  nmap <silent> ,hici a<div class="pt-1 d-flex"><esc>,,o,hicw/ChangeForm<return>cgnxxx<esc>./ChangeAttribute<return>cgnyyy<esc>./ChangeDisplay<return>cgnzzz<esc><down><down>,,o,hicw<down><down><down>,o</div><esc>/xxx<return>cgnChangeForm<esc>./yyy<return>cgnChangeAttribute<esc>./zzz<return>cgnChangeDisplay<esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>nnnnn
-  " Html Input Checkbox Wrapper
-  " this is used by by ,hics and ,hici so if you change this you might
-  " need to change those as well
-  nmap <silent> ,hicw a<div class="pr-2 custom-control custom-checkbox"><esc>,,o,hicb<esc>,,o,hflc<esc><down><down>,o</div><esc>/ChangeForm\\|ChangeAttribute\\|ChangeDisplay<return>
+  " Html Input Checkbox Group
+  nnoremap <silent> ,hicg a<div class="pt-1"><return><%# DeleteThis - default is stacked checkboxes. To make inline, add class "d-flex" to div above %><return><space><backspace><esc>:call HtmlInputCheckbox()<return>`qo<space><backspace><esc>:call HtmlInputCheckbox()<return>`qo</div><esc>n
   " Html Input CheckBox
-  " this is used by ,hicw so if you change this you might need to change
-  " ,hicw as well
-  nnoremap <silent> ,hicb a<%= ChangeForm_form.check_box(:ChangeAttribute, class: 'custom-control-input') %><esc>/ChangeForm\\|ChangeAttribute<return>
-  " Html Input CheckBox full
-  nnoremap <silent> ,hicB a<%= ChangeThisPls_form.check_box(:ChangeThisPls, { class: 'custom-control-input' }, ChangeThisPls, false) %><esc>/ChangeThisPls<return>
+  nnoremap <silent> ,hicb :call HtmlInputCheckbox()<return>
+  function! HtmlInputCheckbox()
+    execute "normal! a<div class=\"pr-2 custom-control custom-checkbox\">\<return><%= ChangeForm_form.check_box(:ChangeAttribute, class: 'custom-control-input') %>\<return><%= ChangeForm_form.label(:ChangeAttribute, 'ChangeDisplay', class: \"custom-control-label form-text2\") %>\<return><%# DeleteThis - for blank label, make label above a block with a blank space (\" \") between the do and end %>\<return></div>\<esc>mq/ChangeForm\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis\<return>"
+  endfunction
   " Html Input Radio Inline
   nnoremap <silent> ,hiri a<div class="pt-1"><return><label class="custom-control custom-radio custom-control-inline"><return><%= ChangeForm_form.radio_button(:ChangeAttribute, ChangeValue, class: 'custom-control-input') %><return><span class="custom-control-label form-text2">ChangeDisplay</span><return></label><return><%# DeleteThis - copy label and contents for additional options %><return></div><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|ChangeDisplay\\|DeleteThis<return>
   " Html Input Radio Stacked
@@ -139,6 +126,8 @@
   nnoremap <silent> ,hise a<%=<delete> ChangeForm_form.select(<delete><return>  :ChangeAttribute,<return>ChangeOptionsArray,<return>{ include_blank: 'Select' },<return>{<delete><return><tab>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o)<backspace>})<return>%><esc>:call HtmlInputSearch()<return>
   " Html Input Select Options for select
   nnoremap <silent> ,hiso aoptions_for_select(ChangeOptionsArrayDisplayFirstValueSecond, ChangeSelectedOption),<esc>/ChangeOptionsArrayDisplayFirstValueSecond\\|ChangeSelectedOption<return>
+  " Html Input Select options for select for Enum
+  nnoremap <silent> ,hisE aoptions_for_select(ChangeClass.ChangeEnum, ChangeObject.ChangeAttribute_for_database),<esc>/ChangeOptionsArrayDisplayFirstValueSecond\\|ChangeSelectedOption<return>
   " Html Input Select Grouped options for select
   nnoremap <silent> ,hisg agrouped_options_for_select(ChangeOptionsHash, ChangeSelectedOption),<esc>/ChangeOptionsHash\\|ChangeSelectedOption<return>
   " Html Input Select Multiple
@@ -149,8 +138,8 @@
   nnoremap <silent> ,hiop a<option <%= "selected='true'" if ChangeThisPls %> value="<%= ChangeThisPls %>">ChangeThisPls</option><esc>/ChangeThisPls<return>
   " Html Input CAlendar
   nnoremap <silent> ,hica a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control datetimepicker',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>autocomplete: 'off',<return>data: { 'min-view': '2', 'date-format': 'MM d, yyyy' },<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>:call HtmlInputMainAttributes()<return>o) %><return><esc>:call HtmlInputCalendarMessage()<return>:call HtmlInputSearch()<return>
-  " Html Input Calendar with Button
-  nnoremap <silent> ,hicb a<div class="input-group date datetimepicker" data-min-view="2" data-date-format="DD, MM d, yyyy"><return><%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>autocomplete: 'off',<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>:call HtmlInputMainAttributes()<return>o) %><return><space><space><div class="input-group-append"><return><a class="btn btn-primary cal-button do-not-disable" onclick="removeInlineCalendarsAfterAjax()"><i class="icon-th mdi mdi-calendar"></i></a><return></div><return></div><return><esc> :call HtmlInputCalendarMessage()<return>:call HtmlInputSearch()<return>
+  " Html Input CAlendar with button
+  nnoremap <silent> ,hicA a<div class="input-group date datetimepicker" data-min-view="2" data-date-format="DD, MM d, yyyy"><return><%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>autocomplete: 'off',<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>:call HtmlInputMainAttributes()<return>o) %><return><space><space><div class="input-group-append"><return><a class="btn btn-primary cal-button do-not-disable" onclick="removeInlineCalendarsAfterAjax()"><i class="icon-th mdi mdi-calendar"></i></a><return></div><return></div><return><esc> :call HtmlInputCalendarMessage()<return>:call HtmlInputSearch()<return>
   function! HtmlInputCalendarMessage()
     execute "normal! a\<%# DeleteThis - value of nil or if value is excluded, text box will be blank and calendar defaults to today. If a value is included, make sure it is a date, not a date time and include correct strftime %>\<return>\<%# DeleteThis - min-view: 0 is 5 minutes; 1 is hour; 2 is date %>\<return>\<%# DeleteThis - date-format: MM is January; mm is 01; m is 1 (no preceding 0); DD is Monday (day of week); dd is 01 (day of month); d is 1 (no preceding 0) %>\<return>\<%# DeleteThis - see https://xdsoft.net/jqplugins/datetimepicker/ for more options %>"
   endfunction

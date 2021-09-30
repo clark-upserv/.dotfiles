@@ -87,6 +87,13 @@
   inoremap <silent> selectb select <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> selecti select { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> selects select(&:)<left>
+  " Ruby Block REject
+  nnoremap <silent> ,rbse areject \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
+  nnoremap <silent> ,rbsE areject { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
+  " [shorthand]
+  inoremap <silent> rejectb reject <esc>:call RubyBlockBlockInsertMode()<return>i
+  inoremap <silent> rejecti reject { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
+  inoremap <silent> rejects reject(&:)<left>
   " Ruby Block SOrt
   nnoremap <silent> ,rbso asort do \|a, b\|<retrun>a.ChangeLogic <=> b.ChangeLogic<return>end<esc>/ChangeLogic<return>
   nnoremap <silent> ,rbsO asort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>
