@@ -58,29 +58,14 @@ so ~/.dotfiles/vim/misc_process_mappings.vim
     " Kill the capslock when leaving insert mode.
     autocmd InsertLeave * set iminsert=0
 
-" Misc. mapping / messages
+" Misc. mapping
   " Misc. Reload Source
   nnoremap <silent> ,mrs :so ~/.dotfiles/vim/manifest.vim<return>
-  " Misc. Edit Template
-  nnoremap <silent> ,met :%s/###//g<return>:noh<return>gg
-  " Misc. Finish Template
-  nnoremap <silent> ,mft gg0<C-v>GI###<esc>
   " Misc. DD but combine to previous line instead of delete line  (I<tab>
   " makes sure there is at least something on the line because viwx on empty
   " line deletes entire line and then grabs following line)
-  nmap <silent> ,mdd I<tab><esc>0viwxi<backspace><esc><right>
+  nnoremap <silent> ,mdd I<tab><esc>0viwxi<backspace><esc><right>
   " Misc. Dd but combine to Forward line instead of delete line
   nmap <silent> ,mdf $<down>,mdd
+  " Misc. Df but add <return> between each line
   nmap <silent> ,mdr $<down>,mddi<lt>return><esc>
-  " temp for whatever
-  nnoremap <silent> ,mss a<lt>backspace><lt>backspace><lt>backspace>
-
-  " Misc. Messages
-  nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Input %><esc>/DeleteThis<return>
-  nnoremap <silent> ,mmdir_notes a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace><esc>
-
-" Stylesheet mappings
-  " Stylesheet Base
-    " Stylesheet Base Text Colors
-    nnoremap <silent> ,sbtc atext-primary text-secondary text-danger text-warning text-warning-2
-

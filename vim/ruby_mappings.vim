@@ -41,7 +41,7 @@
   nnoremap <silent> ,rbis a#{}<esc>i
 
   " Ruby Basic Dir
-  nmap <silent> ,rbdi ,mmdir_notesaDir[Rails.root.join('app', 'ChangePath', '**', '*.ChangeExtension')].each do \|path\|<return># DeleteThisNote: add logic here...<return>DeleteThisNote: use this to clean file name: path.remove(Rails.root.join('app', 'ChangePath')).split('<delete>.ChangeExtension').first<return><backspace><backspace>end<esc>/DeleteThisNote\\|ChangePath\\|ChangeExtension<return>
+  nnoremap <silent> ,rbdi a# DeleteThisNote: ** searches all subfolders; *.ChangeExtension searches all file names wit that extension; the final * makes sure to include erb files<return><backspace><backspace>Dir[Rails.root.join('app', 'ChangePath', '**', '*.ChangeExtension')].each do \|path\|<return># DeleteThisNote: add logic here...<return>DeleteThisNote: use this to clean file name: path.remove(Rails.root.join('app', 'ChangePath')).split('<delete>.ChangeExtension').first<return><backspace><backspace>end<esc>/DeleteThisNote\\|ChangePath\\|ChangeExtension<return>
   " Ruby basic Rails Root
   nnoremap <silent> ,rbrr aRails.root.join('ChangeThis', 'ChangeThis', 'Etc.')<esc>/ChangeThis\\|Etc.<return>
   " Ruby Basic BEgin
@@ -60,7 +60,7 @@
   nnoremap <silent> ,rbeA aeach { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   " [shorthand]
   inoremap <silent> eachb each <esc>:call RubyBlockBlockInsertMode()<return>i
-  inoremap <silent> eachi each { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
+  inoremap <silent> eacho each { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> eachs each(&:)<left>
   " Ruby Block Each With index
   nnoremap <silent> ,rbew aeach_with_index do \|ChangeArgs, index\|<return>end<esc>/ChangeArgs<return>
@@ -69,50 +69,53 @@
   inoremap <silent> eachwi each_with_index { \|, index\| ChangeLogic }<esc>/ChangeLogic<return>9<left>i
   " Ruby Block TImes
   " [block]
-  " [inline]
+  " [inline (ie 'o' for one liner because 'i' might be another word like
+  " selection or sorting]
   " [shorthand]
   inoremap <silent> timesb times do \|index\|<return>end<esc>/index<return>
-  inoremap <silent> timesi times { \|index\| ChangeLogic }<esc>/index\\|ChangeLogic<return>
+  inoremap <silent> timeso times { \|index\| ChangeLogic }<esc>/index\\|ChangeLogic<return>
   inoremap <silent> timess times(&:)<left>
   " Ruby Block MAp
   nnoremap <silent> ,rbma amap do \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
   nnoremap <silent> ,rbmA amap { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   inoremap <silent> mapb map <esc>:call RubyBlockBlockInsertMode()<return>i
-  inoremap <silent> mapi map { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
+  inoremap <silent> mapo map { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> maps map(&:)<left>
   " Ruby Block SElect
   nnoremap <silent> ,rbse aselect \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
   nnoremap <silent> ,rbsE aselect { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   " [shorthand]
   inoremap <silent> selectb select <esc>:call RubyBlockBlockInsertMode()<return>i
-  inoremap <silent> selecti select { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
+  inoremap <silent> selecto select { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> selects select(&:)<left>
   " Ruby Block REject
   nnoremap <silent> ,rbse areject \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
   nnoremap <silent> ,rbsE areject { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   " [shorthand]
   inoremap <silent> rejectb reject <esc>:call RubyBlockBlockInsertMode()<return>i
-  inoremap <silent> rejecti reject { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
+  inoremap <silent> rejecto reject { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> rejects reject(&:)<left>
   " Ruby Block SOrt
   nnoremap <silent> ,rbso asort do \|a, b\|<retrun>a.ChangeLogic <=> b.ChangeLogic<return>end<esc>/ChangeLogic<return>
   nnoremap <silent> ,rbsO asort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>
   " [block]
   inoremap <silent> sortb sort do \|a, b\|<return>a.ChangeLogic <=> b.ChangeLogic<return>end<esc>/ChangeLogic<return>cgn
-  inoremap <silent> sorti sort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>cgn
+  inoremap <silent> sorto sort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>cgn
   " Ruby Block Lambda
   " [block]
-  " [inline]
+  " [inline (ie 'o' for one liner because 'i' might be another word like
+  " selection or sorting]
   " [shorthand]
   inoremap <silent> lambdab lambda <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> lambdaa lambda { \|\|<return>}<esc><up>$i
-  inoremap <silent> lambdai ->() { ChangeLogic }<esc>/ChangeLogic<return>4<left>i
+  inoremap <silent> lambdao ->() { ChangeLogic }<esc>/ChangeLogic<return>4<left>i
   inoremap <silent> lambdas lambda(&:ChangeMethod)<esc>/ChangeMethod<return>
   " Ruby Block Proc
   " [block]
-  " [inline]
+  " [inline (ie 'o' for one liner because 'i' might be another word like
+  " selection or sorting]
   " [shorthand]
   inoremap <silent> procb proc <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> proca proc { \|\|<return>}<esc><up>$i
-  inoremap <silent> proci proc { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
+  inoremap <silent> proco proc { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> procs proc(&:ChangeMethod)<esc>/ChangeMethod<return>

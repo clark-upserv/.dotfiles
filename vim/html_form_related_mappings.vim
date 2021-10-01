@@ -62,13 +62,17 @@
   " Html Input ROw
   nmap <silent> ,hiro a<div class="form-row"><return><%#<delete> DeleteThis - insert Html Input Group %><return></div><esc>/DeleteThis<return>
   " Html Input Group 1
-  nmap <silent> ,hig1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label if top label (,hfla) %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
+  nnoremap <silent> ,mminsert_input a<%# DeleteThis - insert HTML Input %><esc>/DeleteThis<return>
+  function! HtmlInputGroupContents()
+    execute "normal! a<%#\<delete> DeleteThis - insert label if top label (,hfla) %>\<return><%# DeleteThis - insert HTML Input %>\<return>\<esc>:call HtmlInputInlineErrors()\<return>"
+  endfunction
+  nnoremap <silent> ,hig1 a<div class="form-group col-12"><return><esc>:call HtmlInputGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
   " Html Input Group 2
-  nmap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label if top label (,hfla) %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
+  nnoremap <silent> ,hig2 a<div class="form-group col-12 col-sm-6"><return><esc>:call HtmlInputGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
   " Html Input Group 3
-  nmap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label if top label (,hfla) %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
+  nnoremap <silent> ,hig3 a<div class="form-group col-12 col-sm-4"><return><esc>:call HtmlInputGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
   " Html Input Group 4
-  nmap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label if top label (,hfla) %><esc>,,o,mminsert_input<down>,,o,hiie,,oa</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
+  nnoremap <silent> ,hig4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><esc>:call HtmlInputGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
   " Html Input Buttons (cancel & submit) - Buttons
   nnoremap <silent> ,hibb :read ../templates/views/elements/buttons_and_links/cancel_and_submit_buttons.html.erb<return>/ChangeSesId\\|ChangeForm<return>
   " Html Input Buttons (cancel & submit) - Icons
@@ -85,7 +89,7 @@
   " Htmo form Input ATtrubutes (all others)
   nnoremap <silent> ,hiaT aaccept: ChangeValue, # content types Specifies a comma-separated list of content types that the server accepts.<return>align: ChangeValue, # left right top middle bottom Deprecated − Defines the alignment of content<return>disabled: ChangeValue, # disabled Disables the input control. The button won't accept changes from the user. It also cannot receive focus and will be skipped when tabbing.<return>form: ChangeValue, # html-5 form_id Specifies one or more forms<return>formaction: ChangeValue, # html-5 URL Specifies the URL of the file that will process the input control when the form is submitted<return>formenctypeh: ChangeValue, #tml-5 application/x-www-form-urlencoded multipart/form-data text/plain Specifies how the form-data should be encoded when submitting it to the serve<return>formmethod: ChangeValue, #  html-5 post get Defines the HTTP method for sending data to the action URL<return>formnovalidate: ChangeValue, # html-5 formnovalidate Defines that form elements should not be validated when submitted<return>formtarget: ChangeValue, # html-5 _blank _self _parent _top Specifies the target where the response will be display that is received after submitting the form<return>height: ChangeValue, # html-5 pixels Specifies the height<return>list: ChangeValue, # html-5 datalist_id Specifies the <datalist> element that contains pre-defined options for an <input> element<return>name: ChangeValue, # text Assigns a name to the input control.<return>pattern: ChangeValue, # html-5 regexp Specifies a regular expression that an <input> element's value is checked against<return>readonly: ChangeValue, # readonly Sets the input control to read-only. It won't allow the user to change the value. The control however, can receive focus and are included when tabbing through the form controls.<return>src: ChangeValue, # URL Defines the URL of the image to display. Used only for type = "image".<return>type: ChangeValue, # button checkbox color date datetime datetime-local email file hidden image month number password radio range reset search submit tel text time url week Specifies the type of control.<return>width: ChangeValue, # html-5 pixels Specifies the width<esc>/ChangeValue<return>
   function! HtmlInputSearch()
-    let @/ = "ChangeForm\\|ChangeObject\\|ChangeAttribute\\|ChangeValue\\|ChangeOptionsArray\\|DeleteThis"
+    let @/ = "ChangeFormObject\\|ChangeForm\\|ChangeObject\\|ChangeAttribute\\|ChangeValue\\|ChangeOptionsList\\|DeleteThis\\|MakeTrueOrRemoveThisLine\\|ChangeOptionObjects\\|ChangeOptionObject\\|ChangeDisplay"
   endfunction
   " Html Input HIdden field
   nnoremap <silent> ,hihf a<%= ChangeThisPls_form.hidden_field(:ChangeThisPls, value: ChangeThisPls) %><esc>/ChangeThisPls<return>
@@ -123,17 +127,40 @@
   " Html Input Password Confirmation
   nnoremap <silent> ,hipc a<%= ChangeThisPls_form.password_field(:password_confirmation, class: 'form-control') %><esc>/ChangeThisPls<return>
   " Html Input SElect
-  nnoremap <silent> ,hise a<%=<delete> ChangeForm_form.select(<delete><return>  :ChangeAttribute,<return>ChangeOptionsArray,<return>{ include_blank: 'Select' },<return>{<delete><return><tab>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o)<backspace>})<return>%><esc>:call HtmlInputSearch()<return>
-  " Html Input Select Options for select
-  nnoremap <silent> ,hiso aoptions_for_select(ChangeOptionsArrayDisplayFirstValueSecond, ChangeSelectedOption),<esc>/ChangeOptionsArrayDisplayFirstValueSecond\\|ChangeSelectedOption<return>
-  " Html Input Select options for select for Enum
-  nnoremap <silent> ,hisE aoptions_for_select(ChangeClass.ChangeEnum, ChangeObject.ChangeAttribute_for_database),<esc>/ChangeOptionsArrayDisplayFirstValueSecond\\|ChangeSelectedOption<return>
-  " Html Input Select Grouped options for select
-  nnoremap <silent> ,hisg agrouped_options_for_select(ChangeOptionsHash, ChangeSelectedOption),<esc>/ChangeOptionsHash\\|ChangeSelectedOption<return>
-  " Html Input Select Multiple
-  nnoremap <silent> ,hism a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>ChangeOptionsArray,<return>{ include_hidden: false,<return>  include_blank: "Select"<return><backspace>},<return>{ class: 'form-control',<return>  multiple: true,<return>autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsArray\\|autofocus\\|required<return>
+  nnoremap <silent> ,hise a<%=<delete> ChangeForm_form.select(<delete><return>  :ChangeAttribute,<return>ChangeOptionsList,<return>{ include_blank: 'Select' },<return>{<delete><return><tab>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o)<backspace>})<return>%><esc>:call HtmlInputSearch()<return>
+  function HtmlInputSelectValueNote()
+    execute "normal! a# DeleteThis - even if object.attribute has a value, the selected value must be set manually.\<return>Typically options_for_select is the best option (,hios)\<return>\<backspace>\<backspace>"
+  endfunction
+  function! HtmlInputSelectIncludeBlankNote()
+    execute "normal! a# DeleteThis - include_blank is best when a selection is not requried and can be left blank\<return>will add an option to the beginning of the list with value=\"\" regardless of the value of\<return>object.attribute\<return>\<backspace>\<backspace>"
+  endfunction
+  function! HtmlInputSelectPromptNote()
+    execute "normal! a# DeleteThis - prompt is best when a selection is required and the user needs to be prompted\<return>to make a selection. If object.attribute is nil, prompt will add an option to the beginning\<return>of the list with value=\"\". However, if object.attribute has a value, then prompt will not\<return>add an option to the beginning. If object.attribute is nil and then a selection is made,\<return>the prompt will remain. The prompt is only removed if the object is saved and the select\<return>element is re-rendered (via ajax or re-reloading the page)\<return>\<backspace>\<backspace>"
+  endfunction
+  function! HtmlInputSelectDefaultNote()
+    execute "normal! a# DeleteThis - for select with default, neither include_blank nor prompt is added. This means\<return>the only options that will appear will be the options from the options list. If a value\<return>is selected then that value will be selected when the page loads. If no value is selected,\<return>then the first option from the options list will be selected as the \"default\" option\<return>\<backspace>\<backspace>"
+  endfunction
+  function! HtmlInputSelectRequiredNote()
+    execute "normal! a# DeleteThis - required on HTML select elements will error unless the first opion has value=\"\".\<return>The rails select helper adjust for this in several ways:\<return>\<tab>1) if neither include_blank or prompt options are passed, then adding required will also add an\<return>empty option as the first option with a value="" and will make the select required\<return>2) if include_blank is added, rails will add the first option with whatever display is selected\<return>and will make the select required\<return>3) if prompt is selected and the object has a value of nil for the attribute, then rails will add\<return>a first option with whatever display is selected and will make the select required\<return>4) if prompt is selected and the object has a value for the attribute, then rails will ignore the\<return>required attribute (because in this case, there is no blank option and therefore the select is\<return>effectively required. However, it would error if the required attribute was actually included\<return>because for html select to have the required attribute, the first option must have a value of nil)\<return>\<backspace>\<backspace>\<backspace>"
+  endfunction
+  " Html Input Select Optional
+  nnoremap <silent> ,hiso a<%=<delete> ChangeForm_form.select(<delete><return>  :ChangeAttribute,<return>ChangeOptionsList,<return><space><backspace><esc>:call HtmlInputSelectValueNote()<return>a{ include_blank: 'Select' },<return><space><backspace><esc>:call HtmlInputSelectIncludeBlankNote()<return>a{<delete><return><tab>class: 'form-control',<return>autofocus: MakeTrueOrRemoveThisLine<return><backspace>)<backspace>})<return>%><esc>:call HtmlInputSearch()<return>
+  " Html Input Select Required
+  nnoremap <silent> ,hisr a<%=<delete> ChangeForm_form.select(<delete><return>  :ChangeAttribute,<return>ChangeOptionsList,<return><space><backspace><esc>:call HtmlInputSelectValueNote()<return>a{ prompt: 'Select' },<return><space><backspace><esc>:call HtmlInputSelectPromptNote()<return>a{<delete><return><tab>class: 'form-control',<return>required: true,<return>autofocus: MakeTrueOrRemoveThisLine<return><backspace>)<backspace>})<return>%><esc>:call HtmlInputSearch()<return>
+  " Html Input Select Default
+  nnoremap <silent> ,hisd a<%=<delete> ChangeForm_form.select(<delete><return>  :ChangeAttribute,<return>ChangeOptionsList,<return><space><backspace><esc>:call HtmlInputSelectValueNote()<return>a{},<return><space><backspace><esc>:call HtmlInputSelectDefaultNote()<return>a{<delete><return><tab>class: 'form-control',<return>autofocus: MakeTrueOrRemoveThisLine<return><backspace>)<backspace>})<return>%><esc>:call HtmlInputSearch()<return>
   " Html Input Select Block
-  nnoremap <silent> ,hisb a<%= ChangeThisPls_form.select(:ChangeThisPls , [], { include_blank: 'Select' }, { class: 'form-control' }) do %><esc>o<% end %><esc>/ChangeThisPls<return>
+  nnoremap <silent> ,hisb a<%=<delete> ChangeForm_form.select(<delete><return>  :ChangeAttribute,<return>[],<return>{ prompt: 'Select' include_blank: 'Select' },<return># Deletethis - set up select:<return><tab>if select is optional: use include_blank above and do not include "required: true" below<return>if select is requried and the user should be prompted to make a selection: use prompt above and include "required: true" below<return>if select is requried with a default selection picked (rather than a prompt): leaev above blank (do not use include blank nor prompt above) and do not include "required: true" below<return><backspace><backspace><backspace><esc>:call HtmlInputSelectPromptNote()<return>:call HtmlInputSelectIncludeBlankNote()<return>a{<delete><return><tab>class: 'form-control',<return>required: MakeTrueOrRemoveThisLine<return><space><backspace><esc>:call HtmlInputSelectRequiredNote()<return>aautofocus: MakeTrueOrRemoveThisLine<return><backspace>)<backspace>}) do<return>%><return><% ChangeOptionObjects.each do \|ChangeOptionObject\| %><esc>V2><esc>o<option value="<%= ChangeOptionObject.ChangeValue %>"<%= " selected=\"true\"" if ChangeOptionObject.ChangeValue == ChangeFormObject.ChangeValue %>><%= ChangeOptionObject.ChangeDisplay %></option><return><% end %><return><% end %><esc>:call HtmlInputSearch()<return>
+  " Html Input Select Options for select
+  nnoremap <silent> ,hios aoptions_for_select(ChangeOptionsListDisplayFirstValueSecond, ChangeSelectedOptionOrOptionsIfMultiple)<esc>/ChangeOptionsListDisplayFirstValueSecond\\|ChangeSelectedOptionOrOptionsIfMultiple<return>
+  " Html Input Select options for select for Enum
+  nnoremap <silent> ,hioe aoptions_for_select(ChangeClass.ChangeAttributes, ChangeObject.ChangeAttribute_for_database),<esc>/ChangeClass\\|ChangeAttributes\\|ChangeObject\\|ChangeAttribute<return>
+  " Html Input Select Grouped options for select
+  nnoremap <silent> ,higs agrouped_options_for_select(ChangeOptionsHash, ChangeSelectedOptionOrOptionsIfMultiple)<esc>/ChangeOptionsHash\\|ChangeSelectedOptionOrOptionsIfMultiple<return>
+  " Html Input Select Multiple
+  nnoremap <silent> ,hism a<%= ChangeForm_form.select(<return>  :ChangeAttribute,<return>ChangeOptionsList,<return>{ include_hidden: false,<return>  include_blank: "Select"<return><backspace>},<return>{ class: 'form-control',<return>  multiple: true,<return>autofocus: true,<return>required: true<return><backspace>})<return>%><esc>/ChangeForm\\|ChangeAttribute\\|ChangeOptionsList\\|autofocus\\|required<return>
+  " Html Input Select Block
+  "nnoremap <silent> ,hisb a<%= ChangeThisPls_form.select(:ChangeThisPls , [], { include_blank: 'Select' }, { class: 'form-control' }) do %><esc>o<% end %><esc>/ChangeThisPls<return>
   " Html Input OPtion
   nnoremap <silent> ,hiop a<option <%= "selected='true'" if ChangeThisPls %> value="<%= ChangeThisPls %>">ChangeThisPls</option><esc>/ChangeThisPls<return>
   " Html Input CAlendar
@@ -146,7 +173,10 @@
   " Html Input Errors
   nnoremap <silent> ,hier a<div id="ChangeId_errors"><return><%# DeleteThis - if using a single error message for repeat block of many objects with ajax form, remove render from html and fill div contents with errors partial on ajax instead %><return><%= render('shared/errors', object: ChangeObject) %><return></div><esc>/ChangeId\\|DeleteThis\\|ChangeObject<return>
   " Html input inline errors
-  nnoremap <silent> ,hiie a<%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %><esc>/ChangeObject\\|ChangeAttribute<return>
+  nnoremap <silent> ,hiie :call HtmlInputInlineErrors()<return>/ChangeObject\\|ChangeAttribute<return>
+  function! HtmlInputInlineErrors()
+    execute "normal! a<%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %>"
+  endfunction
   " Html input inline errors
   nnoremap <silent> ,hiiE a<div id="ChangeId_errors"><return><%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %><return></div><esc>/ChangeId\\|ChangeObject\\|ChangeAttribute<return>
   " Html Input SUbmit
