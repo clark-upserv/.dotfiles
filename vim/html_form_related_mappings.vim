@@ -78,7 +78,7 @@
     execute "normal! a<%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %>"
   endfunction
   " Html Form Buttons (cancel & submit) - Buttons 
-  nnoremap <silent> ,hfbb a<div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><esc>/ChangeSesId\\|ChangeForm<return>
+  nnoremap <silent> ,hfbb a<div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit 'ChangeSubmit', class: "btn btn-primary" %><return></div><esc>/ChangeSesId\\|ChangeForm\\|ChangeSubmit<return>
   " Html Form Buttons (cancel & submit) - Icons
   nnoremap <silent> ,hfbi a<div class="d-flex align-items-center justify-content-center"><return><a class="px-3 fs-4 c-pointer text-secondary mdi mdi-close-circle-o ChangeSesId-ses-cancel-button"></a><return><button class="px-3 fs-4 btn-no-background text-primary mdi mdi-check-circle do-not-disable"></button><return></div><esc>/ChangeSesId<return>
   " Html Form Buttons (cancel & submit) - Left label (usually not necessary
