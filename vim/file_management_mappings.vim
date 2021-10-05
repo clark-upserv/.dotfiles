@@ -15,16 +15,42 @@
     let current_file = expand('%')
     let new_file = input("Move \"" . current_file . "\" to: ", current_file) 
     if new_file == ''
-      "do nothing
+      execute "normal! :echo"
+      echo "Move cancelled"
     elseif current_file == new_file
-      echo "\nDestination path be the same as current path. Please try again."
+      execute "normal! :echo"
     elseif filereadable(new_file)
+      execute "normal! :echo"
       echo "\nFile already exists at \"" . new_file '". Please try a different destination path.'
     else
       execute "e " . new_file
       normal aa
       w
       execute "! mv " . current_file . ' ' . new_file
+      execute "bd " . current_file
+      wa
+    endif 
+  endfunction
+  nnoremap <silent> <space>fr :call FileRename()<return>
+  function! FileRename()
+    wa
+    let current_file = expand('%')
+    let current_path = expand('%:h')
+    let current_file_name = expand('%:t')
+    let new_file_name = input("Rename \"" . current_file_name . "\" to: ", current_file_name) 
+    if new_file_name == ''
+      execute "normal! :echo"
+      echo "Rename cancelled"
+    elseif current_file_name == new_file_name
+      execute "normal! :echo"
+    elseif filereadable(current_path . "/" . new_file_name)
+      execute "normal! :echo"
+      echo "\nFile already exists at \"" . current_path . "/" . new_file_name '". Please try a different name.'
+    else
+      execute "e " . current_path . "/" . new_file_name
+      normal aa
+      w
+      execute "! mv " . current_file . ' ' . current_path . "/" . new_file_name
       execute "bd " . current_file
       wa
     endif 
@@ -118,7 +144,11 @@
         execute ':Explore' directory
       else
         let new_file = input("There are no style sheet files yet. Create the first one!: " . directory . "/")
-        execute ":e " . directory . "/" . new_file
+        if new_file == ''
+          execute "normal! :echo"
+        else
+          execute ":e " . directory . "/" . new_file
+        endif
       endif
     endif
   endfunction
@@ -222,7 +252,11 @@
         execute ':Explore' directory
       else
         let new_file = input("There are no view files yet. Create the first one!: " . directory . "/")
-        execute ":e " . directory . "/" . new_file
+        if new_file == ''
+          execute "normal! :echo"
+        else
+          execute ":e " . directory . "/" . new_file
+        endif
       endif
     endif
   endfunction
@@ -304,7 +338,11 @@
         execute ':Explore' directory
       else
         let new_file = input("There are no service files yet. Create the first one!: " . directory . "/")
-        execute ":e " . directory . "/" . new_file
+        if new_file == ''
+          execute "normal! :echo"
+        else
+          execute ":e " . directory . "/" . new_file
+        endif
       endif
     endif
   endfunction

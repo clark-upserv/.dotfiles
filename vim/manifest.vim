@@ -31,6 +31,7 @@ so ~/.dotfiles/vim/html_element_mappings.vim
 
 " Rails / Upserv specific / 'comma' mappings
 so ~/.dotfiles/vim/app_controller_mappings.vim
+so ~/.dotfiles/vim/javascript_ajax_mappings.vim
 so ~/.dotfiles/vim/app_helper_mappings.vim
 so ~/.dotfiles/vim/app_job_mappings.vim
 so ~/.dotfiles/vim/app_mailer_mappings.vim

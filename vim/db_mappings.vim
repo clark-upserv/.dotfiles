@@ -1,5 +1,5 @@
 " Db Seeds BAse
-nnoremap <silent> ,dsba a# frozen_string_literal: true<return><backspace><backspace><return>puts 'Loading ChangeName ChangeItems...'<return><return># Clear used values for all generators<return><backspace><backspace>Faker::UniqueGenerator.clear<return><return># Setup<return><backspace><backspace>account = Core::Account.first<return>dif_account = Core::Account.second<return>user = Core::User.first<return>dif_account_user = dif_account.users.first<return><return>puts 'ChangeName ChangeItems created'<esc>/ChangeName\\|ChangeItems<return>
+nnoremap <silent> ,dsba a# frozen_string_literal: true<return><backspace><backspace><return>puts 'Loading ChangeApp ChangeFile...'<return><return># Clear used values for all generators<return><backspace><backspace>Faker::UniqueGenerator.clear<return><return># Setup<return><backspace><backspace>account = Core::Account.first<return>dif_account = Core::Account.second<return>user = Core::User.first<return>dif_account_user = dif_account.users.first<esc>/ChangeApp\\|ChangeFile<return>
 " Db Migration BAse
 nnoremap <silent> ,dmba ggO# frozen_string_literal: true<return><backspace><backspace><return># ChangeTopLevelDocumentation<esc>/ChangeTopLevelDocumentation<return>
 " Db Migration Foreign Key
