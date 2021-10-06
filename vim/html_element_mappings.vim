@@ -10,7 +10,7 @@ nnoremap <silent> ,hesc a<span class="ChangeClass"><return></span><esc>/ChangeCl
 " Html Elements STrong
 nnoremap <silent> ,hest a<strong>ChangeThisPls</strong><esc>/ChangeThisPls<return>
 " Html Elements ICon
-nnoremap <silent> ,heic a<i class="icon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon"></i><return>DeleteThis - common options include: edit delete more plus-circle-o check info-outline alert-triangle close-circle-o close plus<esc>/px-3\\|fs-4\\|ChangeColor\\|ChangeIcon\\|DeleteThis<return>
+nnoremap <silent> ,heic a<i class="icon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon"></i><return><%# DeleteThis - common options include: edit delete more plus-circle-o check info-outline alert-triangle close-circle-o close plus %><esc>/px-3\\|fs-4\\|ChangeColor\\|ChangeIcon\\|DeleteThis<return>
 " Html Elements BUtton
 nnoremap <silent> ,hebu a<button class="btn btn-ChangeColor">ChangeText</button><esc>/ChangeColor\\|ChangeText<return>
 " Html Elements Button Icon (classes only)

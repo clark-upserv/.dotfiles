@@ -64,9 +64,9 @@ nnoremap <silent> ,hrjt a<%= javascript_include_tag('ChangePath') %><esc>/Change
 " Embedded Ruby StyleSheet
 nnoremap <silent> ,hrss a<%= stylesheet_link_tag('ChangeThisPls') %><esc>/ChangeThisPls<return>
 " Embedded Ruby PArtial
-nnoremap <silent> ,hrpa a<%= render('ChangePath/ChangeTemplate_ChangePartial', ChangeLocals) %><esc>/ChangePath\\|ChangeTemplate\\|ChangePartial\\|ChangeLocals<return>
+nnoremap <silent> ,hrpa a<%= render('ChangePath/ChangeTemplate_ChangePartial') %><esc>/ChangePath\\|ChangeTemplate\\|ChangePartial<return>
 " Embedded Ruby PArtial (full)
-nnoremap <silent> ,hrpA a<div id="ChangePartial_container"><return><%= render('ChangePath/ChangeTemplate_ChangePartial', ChangeLocals) %><return></div><esc>/ChangePartial\\|ChangePath\\|ChangeTemplate\\|ChangeLocals<return>
+nnoremap <silent> ,hrpA a<div id="ChangePartial_container"><return><%= render('ChangePath/ChangeTemplate_ChangePartial') %><return></div><esc>/ChangePartial\\|ChangePath\\|ChangeTemplate<return>
 " Embedded Ruby Partials for Show edit swap
 nmap <silent> ,hrps ,vsba
 " Embedded Ruby Puts Debugger

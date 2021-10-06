@@ -1,6 +1,6 @@
 "  View Page
   " View Page BAse
-  nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThisPls\\|ChangeNavTypeOrDeleteThisLine\\|ChangeTemplate\\|ChangePath<return>
+  nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThis\\|ChangeNavTypeOrDeleteThisLine\\|ChangeTemplate\\|ChangePath<return>
   " View Page STylesheets
   nnoremap <silent> ,vpss :read ../templates/views/page/stylesheets.html.erb<return>/DeleteThisNote\\|ChangePath<return>
   " View Page Javascript Packs
@@ -9,12 +9,16 @@
   nnoremap <silent> ,vpnp :read ../templates/views/page/non_pack_javascripts.html.erb<return>/ChangePath<return>
   " View Page End of Body
   nnoremap <silent> ,vpeb :read ../templates/views/page/end_of_body.html.erb<return>/DeleteThisNote<return>
+  " View Page Nav type Base
+  nnoremap <silent> ,vpnb a<%# DeleteThis - Delete "provide()" line below OR insert nav type. Options: 'default_logged_in', 'splash',<return>'full_height_columns', 'custom' %><return><%# DeleteThis - 'default_logged_in' or 'splash' are included automatically if user is logged in or not<return>logged in, respectively (and therefore do not need to be set manually) %><return><% provide(:nav_type, 'ChangeNavTypeOrDeleteThisLine') %><esc>/DeleteThis\\|ChangeNavTypeOrDeleteThisLine<return>
+  " View Page Nav type Full height columns
+  nnoremap <silent> ,vpnf a<% provide(:nav_type, 'full_height_columns') %><esc> 
   " View Page Header Base
   nnoremap <silent> ,vphb :read ../templates/views/page/header_base.html.erb<return>/ChangeTitle\\|ChangeDisplay\\|ChangePathHelper\\|DeleteThis<return>
   " View Page Body Base
   nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis<return>
   " View Page Body Full height columns
-  nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeColumnName\\|d-xx-or-larger\\|background-color: ChangeBackgroundColor\\|ChangeWidth\\|overflow-y: scroll\\|DeleteThis\\|ChangePath\\|ChangeLocals<return>
+  nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeTemplate\\|ChangeColumnName\\|background-color: ChangeBackgroundColor\\|ChangeWidth\\|overflow-y: scroll\\|DeleteThis\\|ChangePath<return>
   " View Page Tabs Base
   nnoremap <silent> ,vptb :read ../templates/views/page/tabs_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangePathHelper<return>
 

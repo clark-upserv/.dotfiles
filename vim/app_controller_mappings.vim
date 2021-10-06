@@ -1,11 +1,11 @@
 " App Controller mappings
   " App Controllers Base for Template (or Html) controller
-  nnoremap <silent> ,acbt :call CreateBaseFile(1, 0, 1)<return>/ChangeTopLevelDocumentation<return>cgnTemplate controller for ChangeDescription<esc>/class<return>A < ApplicationController<esc>/inner_followup<return>C# DeleteThis - use this if all actions require user to be logged in. Otherewise, remove<return><backspace><backspace>before_action :require_current_user<return>include_helpers ChangeHelpers<return><return># DeleteThis - insert actions<esc>/ChangeThisPls\\|ChangeDescription\\|DeleteThis\\|ChangeHelpers<return>
+  nnoremap <silent> ,acbt :call CreateBaseFile(1, 0, 1)<return>/ChangeTopLevelDocumentation<return>cgnTemplate controller for ChangeDescription<esc>/class<return>A < ApplicationController<esc>/inner_followup<return>C# DeleteThis - use this if all actions require user to be logged in. Otherewise, remove<return><backspace><backspace>before_action :require_current_user<return># DeleteThis - add helpers if necessary. Usually at first there are none so delete this line. But<return>add back later if / when helpers are needed. Default helper for controller included automatically<return><backspace><backspace>include_helpers ChangeHelpers<return><return># DeleteThis - insert actions<esc>/ChangeThisPls\\|ChangeDescription\\|DeleteThis\\|ChangeHelpers<return>
   nmap <silent> ,acbh ,acbt
   " App Controllers Base for Ajax controller
   nnoremap <silent> ,acba :call CreateBaseFile(1, 0, 1)<return>/ChangeTopLevelDocumentation<return>cgnAjax controller for ChangeDescription<esc>/class<return>A < ApplicationController<esc>/inner_followup<return>C# DeleteThis - use this if all actions require user to be logged in. Otherewise, remove<return><backspace><backspace>before_action :require_current_user<return>include_helpers ChangeTemplateController.included_helpers<return><return># DeleteThis - insert actions<esc>/ChangeThisPls\\|ChangeDescription\\|DeleteThis\\|ChangeTemplate<return>
   " App Controllers Index Base
-  nnoremap <silent> ,acib adef index<return>authorize!(:ChangeAbility, :ChangeControllerOrFeature)<return>@pagy, @ChangeLoads = pagy(ChangeModel.accessible_by(current_ability, :ChangeAbility).ChangeScopes.ChangeSort)<return>end<esc>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis\\|ChangeScopes\\|ChangeOrder<return>
+  nnoremap <silent> ,acib adef index<return>authorize!(:ChangeAbility, :ChangeControllerOrFeature)<return>@pagy, @ChangeLoads = pagy(ChangeModel.accessible_by(current_ability, :ChangeAbility).ChangeScopes.ChangeSort)<return>end<esc>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis\\|ChangeScopes\\|ChangeSort<return>
   " App Controllers Index with Filters
   nnoremap <silent> ,acif adef index<return>authorize!(:ChangeAbility, :ChangeControllerOrFeature)<return>index_loads<return>end<return><return># DeleteThis - move this method to private<return><backspace><backspace>def index_loads(options = { filters_only: false })<return>@filter_helper = FilterHelpers::ChangePathToFilterHelper.new(params, current_ability, current_user)<return>@pagy, @ChangeLoads = pagy(@filter_helper.loads) unless options[:filters_only]<return>end<esc>/ChangeAbility\\|ChangeControllerOrFeature\\|ChangeLoads\\|DeleteThis\\|ChangePathTo<return>
   " App Controllers Show Base
@@ -66,4 +66,6 @@
   nnoremap <silent> ,acre arender 'ChangeTemplate'<esc>/ChangeTemplate<return>
   " App Controller Redirect To
   nnoremap <silent> ,acrt aredirect_to Change_url<esc>/Change_url<return>
+  " App Controller Include Helpers
+  nnoremap <silent> ,acih ainclude_helpers ChangeHelpers<esc>/ChangeHelpers<return>
 

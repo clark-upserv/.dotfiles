@@ -1,5 +1,5 @@
 " Db Seeds BAse
-nnoremap <silent> ,dsba a# frozen_string_literal: true<return><backspace><backspace><return>puts 'Loading ChangeApp ChangeFile...'<return><return># Clear used values for all generators<return><backspace><backspace>Faker::UniqueGenerator.clear<return><return># Setup<return><backspace><backspace>account = Core::Account.first<return>dif_account = Core::Account.second<return>user = Core::User.first<return>dif_account_user = dif_account.users.first<esc>/ChangeApp\\|ChangeFile<return>
+nnoremap <silent> ,dsba a# frozen_string_literal: true<return><backspace><backspace><return>puts 'Loading ChangeApp ChangeFile...'<return><return># Clear used values for all generators<return><backspace><backspace>Faker::UniqueGenerator.clear<return><return># Setup<return><backspace><backspace>account = Core::Account.first<return>dif_account = Core::Account.second<return>user = Core::User.first<return>dif_account_user = dif_account.users.first<return><return># DeleteThis - make sure to add unique to faker if unique names are important<return>Faker::SomeType.unique.some_method<esc>/ChangeApp\\|ChangeFile\\|DeleteThis<return>
 " Db Migration BAse
 nnoremap <silent> ,dmba ggO# frozen_string_literal: true<return><backspace><backspace><return># ChangeTopLevelDocumentation<esc>/ChangeTopLevelDocumentation<return>
 " Db Migration Foreign Key
@@ -22,4 +22,3 @@ nnoremap <silent> ,dmrc aremove_column :ChangeTableName, :ChangeColumn<esc>/Chan
 nnoremap <silent> ,dmri aremove_index :ChangeTableName, name: ChangeIndexName<esc>/ChangeTableName\\|ChangeIndexName<return>
 " Db Migration Drop Table
 nnoremap <silent> ,dmdt adrop_table :ChangeTableName<esc>/ChangeTableName<return>
-
