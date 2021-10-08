@@ -44,7 +44,7 @@
   " View Card Body Query (ie search) for table
   nnoremap <silent> ,vcbq :read ../templates/views/card/body_search_for_table.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
   " View Card Body Filters for table
-  nnoremap <silent> ,vcbf :read ../templates/views/card/body_filters_for_table.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
+  nnoremap <silent> ,vcbf :read ../templates/views/card/body_filters_for_table.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilterButtonId\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
   " View Card Body Actual table
   nnoremap <silent> ,vcba :read ../templates/views/card/body_actual_table.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan\\|ChangeModalId\\|ChangeModal<return>
   " View Card Body sortable table Positions

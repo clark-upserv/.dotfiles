@@ -55,8 +55,6 @@ nnoremap <silent> ,hrlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod
 nnoremap <silent> ,hrlR a<%= link_to(ChangeDisplay, ChangePath_path, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangePath\\|ChangeMethod<return>
 " Embedded Ruby Link to Dropdown Item
 nnoremap <silent> ,hrld a<%= link_to(ChangeDisplay, ChangePath_path, class: 'dropdown-item') %><esc>/ChangeDisplay\\|ChangePath<return>
-" Html Elements DropDown (full)
-nnoremap <silent> ,hrlD a<<delete>%# DeleteThis - see bootstrap docs for customizing dropdown %><return><div class="dropdown"><return><%= content_tag(<return>  'A',<return>ChangeDisplay,<return>id: 'ChangeId',<return>class: "no-href-link no-href-icon dropdown-toggle",<return>data: { toggle: 'dropdown' },<return>aria: { haspopup: 'true', expanded: 'false' }) %><return><esc>:call NoHrefComment()<return>o<div class="dropdown-menu" aria-labelledby="ChangeId"><return><%= link_to(ChangeDisplay, ChangePath_path, class: 'dropdown-item') %><return></div><return></div><esc>/ChangeDisplay\\|ChangeId\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangePath<return>
 " Embedded Ruby Image Tag
 nnoremap <silent> ,hrit a<%= image_tag(ChangeThisPls, alt: 'ChangeThisPls', width: 'ChangeThisPls', height: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
 " Embedded Ruby Javascript Tag

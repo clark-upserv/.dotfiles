@@ -38,6 +38,7 @@ so ~/.dotfiles/vim/app_mailer_mappings.vim
 so ~/.dotfiles/vim/app_model_mappings.vim
 so ~/.dotfiles/vim/view_mappings.vim
 so ~/.dotfiles/vim/html_form_related_mappings.vim
+so ~/.dotfiles/vim/html_ui_mappings.vim
 so ~/.dotfiles/vim/html_ruby_mappings.vim
 so ~/.dotfiles/vim/config_mappings.vim
 so ~/.dotfiles/vim/db_mappings.vim
