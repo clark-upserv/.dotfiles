@@ -66,6 +66,8 @@
   nnoremap <silent> ,acre arender 'ChangeTemplate'<esc>/ChangeTemplate<return>
   " App Controller Redirect To
   nnoremap <silent> ,acrt aredirect_to Change_url<esc>/Change_url<return>
+  " App Controller Respond To
+  nnoremap <silent> ,acrT arespond_to do \|format\|<return>format.html<return>format.js<return>end<esc>
   " App Controller Include Helpers
   nnoremap <silent> ,acih ainclude_helpers ChangeHelpers<esc>/ChangeHelpers<return>
 

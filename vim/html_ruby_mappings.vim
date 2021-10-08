@@ -53,8 +53,6 @@ nnoremap <silent> ,hrlm a<%= content_tag('A', ChangeDisplay, class: 'no-href-lin
 nnoremap <silent> ,hrlr a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
 " Embedded Ruby Link to Remote (full)
 nnoremap <silent> ,hrlR a<%= link_to(ChangeDisplay, ChangePath_path, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangePath\\|ChangeMethod<return>
-" Embedded Ruby Link to Dropdown Item
-nnoremap <silent> ,hrld a<%= link_to(ChangeDisplay, ChangePath_path, class: 'dropdown-item') %><esc>/ChangeDisplay\\|ChangePath<return>
 " Embedded Ruby Image Tag
 nnoremap <silent> ,hrit a<%= image_tag(ChangeThisPls, alt: 'ChangeThisPls', width: 'ChangeThisPls', height: 'ChangeThisPls') %><esc>/ChangeThisPls<return>
 " Embedded Ruby Javascript Tag

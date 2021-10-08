@@ -2,9 +2,9 @@
   " Html Show edit swap ASsets
   nnoremap <silent> ,hsas a<% add_javascript_packs('lib/show_edit_swap') %><return><return><%= content_for :stylesheets do %><return><%= stylesheet_link_tag('lib/show_edit_swap') %><return><% end %><return><esc>
   " Html Show edit swap BAse
-  nnoremap <silent> ,hsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/show', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/edit', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
+  nnoremap <silent> ,hsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/show') %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/edit') %><return></div><esc>/ChangeSesId\\|ChangePath<return>
   " Html Show edit swap Base New
-  nnoremap <silent> ,hsbn a<div id="ChangeSesId-ses-new-show"><return><%= render('ChangePath/show_new', ChangeLocals) %><return></div><return><return><div id="ChangeSesId-new-ses-edit"><return><%= render('ChangePath/edit_new', ChangeLocals) %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeLocals<return>
+  nnoremap <silent> ,hsbn a<div id="ChangeSesId-ses-new-show"><return><%= render('ChangePath/show_new') %><return></div><return><return><div id="ChangeSesId-new-ses-edit"><return><%= render('ChangePath/edit_new') %><return></div><esc>/ChangeSesId\\|ChangePath<return>
   " Html Show edit swap Edit button - Button
   nnoremap <silent> ,hseb a<a class="btn btn-primary ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
   " Html Show edit swap Edit button - Icon

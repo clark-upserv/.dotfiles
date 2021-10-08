@@ -201,6 +201,42 @@
       execute ':e' file
     endif
   endfunction
+  "
+  " File Edit Javascrip Pack
+  nnoremap <silent> <space>fejp :call FileEditJavascriptPack()<return>
+  function FileEditJavascriptPack()
+    let current_file = expand('%')
+    if match(current_file, 'app/javascript') != -1
+      let directory = expand('%:h')
+    elseif match(current_file, 'app/controllers') != -1
+      let directory = substitute(expand('%'), 'controllers', 'javacsript/packs', '')
+      let directory = substitute(directory, '_controller.rb', '', '')
+    elseif match(current_file, 'app/views') != -1
+      let directory = substitute(expand('%:h'), 'views', 'javascript/packs', '')
+    elseif match(current_file, 'app/helpers') != -1
+      let directory = substitute(expand('%'), 'helpers', 'javascript/packs', '')
+      let directory = substitute(directory, '_helper.rb', '', '')
+    elseif match(current_file, 'app/assets/stylesheets') != -1
+      let directory = substitute(expand('%h'), 'assets/stylesheets', 'javascript/packs', '')
+    else 
+      let directory = 1
+    endif
+    if directory == 1
+      echo 'Unable to find javascript pack for' current_file
+    else
+      if isdirectory(directory)
+        execute ':Explore' directory
+      else
+        let new_file = input("There are no javascript pack files yet. Create the first one!: " . directory . "/")
+        if new_file == ''
+          execute "normal! :echo"
+        else
+          execute ":e " . directory . "/" . new_file
+        endif
+      endif
+    endif
+  endfunction
+
 
   " File Edit MOdel
   nnoremap <silent> <space>femo :call FileEditModel()<return>
