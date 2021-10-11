@@ -40,15 +40,18 @@
   " View Card Body Single show edit swap
   nnoremap <silent> ,vcbS :read ../templates/views/card/body_single_show_edit_swap.html.erb<return>/ChangeThisPls\\|ChangeSesId\\|ChangePath<return>
   " View Card Body Table Base
-  nnoremap <silent> ,vcbt :read ../templates/views/card/body_table_base.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan\\|ChangeModalId\\|ChangeAction\\|ChangeModal\\|ChangeLinkToCreate<return>
+  nnoremap <silent> ,vcbt :call IndentTemplate('', 0, 0, '../templates/views/card/body_table_base.html.erb')<return>/DeleteThis<return>
   " View Card Body Query (ie search) for table
-  nnoremap <silent> ,vcbq :read ../templates/views/card/body_search_for_table.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
+  nnoremap <silent> ,vcbq :call IndentTemplate('', 0, 0, '../templates/views/card/body_search_for_table.html.erb')<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
   " View Card Body Filters for table
-  nnoremap <silent> ,vcbf :read ../templates/views/card/body_filters_for_table.html.erb<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilterButtonId\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
+  nnoremap <silent> ,vcbf :call IndentTemplate('', 0, 0, '../templates/views/card/body_filters_for_table.html.erb')<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilterButtonId\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
   " View Card Body Actual table
   nnoremap <silent> ,vcba :call IndentTemplate('', 0, 0, '../templates/views/card/body_actual_table.html.erb')<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan\\|ChangeModalId\\|ChangeModal<return>
   " View Card Body sortable table Positions
   nmap <silent> ,vcbp ,pstv
+  " View Card Body table row for no objects
+  nnoremap <silent> ,vcbn :call IndentTemplate('', 0, 0, '../templates/views/card/body_no_objects.html.erb')<return>/DeleteThis\\|ChangeObjects\\|ChangeModalId\\|ChangePath\\|ChangeTemplate\\|ChangeModal\\|ChangeLinkToCreate<return>
+  
 
 " View Modals
   " View Models BAse

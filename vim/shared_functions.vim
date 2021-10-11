@@ -5,7 +5,6 @@ endfunction
 
 function! CreateBaseFile(class_or_module, include_outer_followup, include_inner_followup)
   let current_file = expand('%:r')
-
   " lib files and lib file tests (ie all non-app files that are tested) skip one level
   " (skip 'lib' or 'test') but do not skip second level (ie keep 'servies' or
   " 'integrations' etc.)

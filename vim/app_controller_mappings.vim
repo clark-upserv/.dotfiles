@@ -11,11 +11,11 @@
   " App Controllers Show Base
   nnoremap <silent> ,acsb :call IndentTemplate('', 1, 0, '../templates/controllers/actions/show_base.rb')<return>:call AppControllerShowSearch()<return>
   function! AppControllerShowSearch()
-    let @/ = "ChangeLoad\\|ChangeModel\\|DeleteThis"
+    let @/ = "ChangeAbility\\|ChangeLoad\\|ChangeModel\\|DeleteThis"
     normal! n
   endfunction
   " App Controllers Show Tab Router
-  nnoremap <silent> ,acsr :call IndentTemplate('', 1, 0, '../templates/controllers/actions/show_router.rb')<return>/ChangeLoad\\|ChangeModel\\|ChangeUrl\\|DeleteThis<return>
+  nnoremap <silent> ,acsr :call IndentTemplate('', 1, 0, '../templates/controllers/actions/show_router.rb')<return>/ChangeLoad\\|ChangeModel\\|ChangeUrl\\|DeleteThis\\|ChangeAbility<return>
   " App Controllers New Base
   nnoremap <silent> ,acnb :call IndentTemplate('', 1, 0, '../templates/controllers/actions/show_base.rb')<return>/show<return>cgnnew<esc>:call AppControllerShowSearch()<return>
   " App Controllers Create Ajax

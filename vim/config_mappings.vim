@@ -9,14 +9,16 @@
   nnoremap <silent> ,crrp aresources :ChangeController, path: :ChangeUrl, only: %i[index show create update destroy]<esc><up>/ChangeUrl\\|ChangeController\\|index \\|show \\|create \\|update \\|destroy<return>
   " Routes Nested Resources
   nnoremap <silent> ,crnr aget ':id/ChangeController', to: 'ChangeController#index', as: :ChangeController<esc>opost ':id/ChangeController', to: 'ChangeController#create', as: :ChangeController<return># DeleteThis - remove as: :ChangeController in post method for create action if already included in get method for index action above (including it in both will cause error because rails tries to create the same url helper twice)<return><backspace><backspace>resources :ChangeController, only: %i[show update destroy]<esc>/ChangeController\\|DeleteThis<return>
+  nnoremap ,crmg aget ':id/ChangeControllerPlural', to: 'ChangeControllerPlural', as: :ChangeControllerSingular<esc>/ChangeControllerPlural\\|ChangeControllerSingular<return>
   " Routes GEt (for non-restful routes)
   nnoremap <silent> ,crge aget 'ChangeThisPls', to: 'ChangeThisPls#ChangeThisPls'<esc>/ChangeThisPls<return>
+
   
   " everything below should probably be depricated / or just removed...
   
 
   " Routes Member Get
-  nnoremap <silent> ,crmg aget ':id/ChangeMemberInUrl', to: 'ChangeMemberController#show', as: :ChangeMemberSingular<esc>/ChangeMemberInUrl\\|ChangeMemberController\\|ChangeMemberSingular<return>
+  "nnoremap <silent> ,crmg aget ':id/ChangeMemberInUrl', to: 'ChangeMemberController#show', as: :ChangeMemberSingular<esc>/ChangeMemberInUrl\\|ChangeMemberController\\|ChangeMemberSingular<return>
 " other routes
   "
   " Routes REsources full
