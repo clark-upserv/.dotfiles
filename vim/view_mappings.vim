@@ -17,10 +17,14 @@
   nnoremap <silent> ,vphb :read ../templates/views/page/header_base.html.erb<return>/ChangeTitle\\|ChangeDisplay\\|ChangePathHelper\\|DeleteThis<return>
   " View Page Body Base
   nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis<return>
+  " View Page Body Stacked tabs
+  nnoremap <silent> ,vpbl :call IndentTemplate('', 0, 0, '../templates/views/page/body_stacked_tabs.html.erb')<return>/ChangePath\\|ChangeTemplate\\|DeleteThis<return>
   " View Page Body Full height columns
   nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeTemplate\\|ChangeColumnName\\|background-color: ChangeBackgroundColor\\|ChangeWidth\\|overflow-y: scroll\\|DeleteThis\\|ChangePath<return>
   " View Page Tabs Base
   nnoremap <silent> ,vptb :read ../templates/views/page/tabs_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangePathHelper<return>
+  " View Page Tabs Stacked tabs
+  nnoremap <silent> ,vpts :call IndentTemplate('', 0, 0, '../templates/views/page/tabs_stacked.html.erb')<return>/ChangePath\\|ChangeTemplate\\|DeleteThis<return>
 
 " View Card
   " View Card Container Element

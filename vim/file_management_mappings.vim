@@ -158,7 +158,7 @@
   function FileEditController()
     let current_file = expand('%')
     if match(current_file, 'app/controllers') != -1
-      let file = 'on controller'
+      let file = current_file
     elseif match(current_file, 'app/helpers') != -1
       let file = substitute(expand('%'), 'helpers', 'controllers', '')
       let file = substitute(file, '_helper.rb', '_controller.rb', '')
@@ -167,10 +167,17 @@
     elseif match(current_file, 'lib/filter_helpers') != -1
       let file = substitute(expand('%'), 'lib/filter_helpers', 'app/controllers', '')
       let file = substitute(file, '_filter_helper.rb', '_controller.rb', '')
+    elseif match(current_file, 'app/assets/stylesheets') != -1
+      let file = substitute(expand('%:h'), 'assets/stylesheets', 'controllers', '') . '_controller.rb'
+    elseif match(current_file, 'app/javacsript/packs') != -1
+      let file = substitute(expand('%:h'), 'javacsript/packs', 'controllers', '') . '_controller.rb'
+    elseif match(current_file, 'test') != -1
+      let file = substitute(expand('%'), 'test/controllers', 'app/controllers', '')
+      let file = substitute(file, 'controller_test', 'controller', '')
     else 
       let file = 1
     endif
-    if file == 'on controller'
+    if file == current_file
       echo 'Already on controller file'
     elseif file == 1
       echo 'Unable to find controller for' current_file
@@ -323,7 +330,7 @@
   " File Edit TEst
   nnoremap <silent> <space>fete :call FileEditTest()<return>
   function FileEditTest()
-    execute ':e' GetTestFileName()
+    execute ':e' GetTestFile()
   endfunction
 
   " File Edit Test Source

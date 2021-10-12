@@ -1,3 +1,21 @@
+" Get test file name
+function! GetTestFile()
+  let file = expand('%')
+  " if file is view, js or stylesheet, open test for related controller
+  if match(file, 'app/views') != -1
+    let file = substitute(expand('%:h'), 'views', 'controllers', '') . '_controller.rb'
+  elseif match(file, 'app/assets/stylesheets') != -1
+    let file = substitute(expand('%:h'), 'assets/stylesheets', 'controllers', '') . '_controller.rb'
+  elseif match(file, 'app/javacsript/packs') != -1
+    let file = substitute(expand('%:h'), 'javacsript/packs', 'controllers', '') . '_controller.rb'
+  endif
+  " modify file name for non test files
+  if index(split(file, '/'), 'test') == -1
+    let file = substitute(file, '.rb', '_test.rb', '')
+  endif
+  return substitute(file, 'app\|lib\|test', 'test', '')
+endfunction
+
 " Tests Included and Not included
 function! TestIncludedNotIncluded()
   execute "normal! aincluded = [ChangeTable(:ChangeFixture).id] # ChangeDescription\<return>included << ChangeTable(:ChangeFixture).id # ChangeDescription\<return>assert_equal included.sort, (result & included).sort\<return>not_included = [ChangeTable(:ChangeFixture).id] # ChangeDescription\<return>not_included << ChangeTable(:ChangeFixture).id # ChangeDescription\<return>assert_empty not_included & result"

@@ -10,21 +10,13 @@ endfunction
   nnoremap <silent> ,trcF :call FileTestCurrentFile(1)<return>:call OpenTerminalInWindow()<return><C-c><C-\><C-n>pa<return>
   function! FileTestCurrentFile(use_shell)
     execute ':wa'
-    let test_file = GetTestFileName()
+    let test_file = GetTestFile()
     let test_command = substitute(test_file, 'test', 'rails t test', '')
     if a:use_shell == 0
       execute ':!' test_command
     else 
       let @+ = test_command
     endif
-  endfunction
-  function! GetTestFileName()
-    let file = expand('%')
-    " modify file name for non test files
-    if index(split(file, '/'), 'test') == -1
-      let file = substitute(file, '.rb', '_test.rb', '')
-    endif
-    return substitute(file, 'app\|lib\|test', 'test', '')
   endfunction
   " File Test All Files
   nnoremap <silent> ,traf :wa<return>:! rails t<return>
