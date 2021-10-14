@@ -1,6 +1,6 @@
 " Models Search
 function! TestModelSearch()
-  let @/ = 'ChangeParent\|ChangeChildrenSingular\|ChangeChildren\|ChangeChildModel\|ChangeChild\|DeleteThis\|ChangeAttributes\|ChangeAttribute\|ChangeObject\|ChangeInvalidValue\|ChangeValue\|ChangeValidation\|ChangeConnectionModel\|ChangeAssociationSingular\|ChangeAssociation\|ChangeTable\|ChangeFixture\|ChangeScope\|ChangeClass\|ChangeThisPls\|ChangeDescription\|ChangeModel\|ChangeNextAttribute\|ChangeOneOrMany\|ChangeVariable\|ChangePathAndExtension\|ChangeContentType\|CopyScopeMethods'
+  let @/ = 'ChangeParent\|ChangeChildrenSingular\|ChangeChildren\|ChangeChildModel\|ChangeChild\|DeleteThis\|ChangeAttributes\|ChangeAttribute\|ChangeObject\|ChangeInvalidValue\|ChangeValue\|ChangeValidation\|ChangeConnectionModel\|ChangeAssociationSingular\|ChangeAssociation\|ChangeTable\|ChangeFixture\|ChangeScope\|ChangeClass\|ChangeThisPls\|ChangeDescription\|ChangeModel\|ChangeNextAttribute\|ChangeOneOrMany\|ChangeVariable\|ChangePathAndExtension\|ChangeContentType\|CopyScopeMethods\|ChangeMethod'
   normal! n
 endfunction
 " Tests Model BAse
@@ -22,7 +22,7 @@ nnoremap <silent> ,tmba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<ret
 
 " Test Models Scopes
   " Tests Models SCope
-  nnoremap <silent> ,tmsc atest 'scope ChangeScope' do<return>result = ChangeModel.ChangeScope.map(&:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id), result<return># DeleteThis - use this for scopes that filter (ie use "where")<return><backspace><backspace><esc>:call TestIncludedNotIncluded()<return>o# DeleteThis - use this for scopes that sort (ie use "oder")<return><backspace><backspace>first = ChangeTable(:ChangeFixture).id<return>second = ChangeTable(:ChangeFixture).id<return>assert result.find_index(first) < result.find_index(second)<return>end<esc>:call TestModelSearch()<return>
+  nnoremap <silent> ,tmsc atest 'scope ChangeScope' do<return>result = ChangeModel.ChangeScope.map(&:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id), result<return># DeleteThis - use this for scopes that filter (ie use "where")<return><backspace><backspace><esc>:call TestIncludedNotIncluded()<return>o# DeleteThis - use this for scopes that sort (ie use "oder")<return><backspace><backspace>first = ChangeTable(:ChangeFixture).id<return>second = ChangeTable(:ChangeFixture).id<return>assert result.find_index(first) < result.find_index(second)<return># DeleteThis - use this for scopes that pluck<return><backspace><backspace>ChangeObject = ChangeTable(:ChangeFixture)<return>included = [[ChangeObject.ChangeMethod]]<return>assert_equal included, (result & included)<return>end<esc>:call TestModelSearch()<return>
 
 " Test Models Attributes
   " Tests Models ATtribute

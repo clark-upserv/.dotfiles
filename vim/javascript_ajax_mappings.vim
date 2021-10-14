@@ -8,7 +8,7 @@
   " Javascript Ajax CReate by adding to end and re-rendering new
   nnoremap <silent> ,jacR :read ../templates/javascript/ajax/create.js.erb<return>/DeleteThis\\|CHANGEELEMENTTYPE\\|ChangeId\\|ChangeClass\\|ChangeRender\\|ChangeSibling\\|CopyIdFromView<return>
   " Javascript Ajax Invalid Create
-  nnoremap <silent> ,jaic :read ../templates/javascript/ajax/invalid_create.js.erb<return>/ChangeSesId\\|ChangeRender\\|CopyPathFromView\\|ChangeObject\\|DeleteThis\\|ChangeModel\\|ChangeRender\\|CopyIdFromVie<return>
+  nnoremap <silent> ,jaic :read ../templates/javascript/ajax/invalid_create.js.erb<return>/ChangeSesId\\|ChangeRender\\|CopyPathFromView\\|ChangeObject\\|DeleteThis\\|ChangeModel\\|ChangeRender\\|CopyIdFromView<return>
   " Javascript Ajax UPdate
   nmap <silent> ,jaup ,jasu
   " Javascript Ajax Invalid Update
