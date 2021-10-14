@@ -102,6 +102,11 @@ function! IndentTemplate(start, delete_start, indentations, template)
   else
     let indentations = a:indentations
   endif
+  "before reading template, we go <up> one line. This breaks if we are on the
+  "first line, so add a line in that situation
+  if line('.') == 1
+    normal! o
+  endif
   " search for start / cursor position is reset after each execute command, so if there is a
   " start, it must be searched again and it must be search again and all in
   " one inline command
