@@ -129,11 +129,16 @@
     elseif match(current_file, 'app/controllers') != -1
       let directory = substitute(expand('%'), 'controllers', 'assets/stylesheets', '')
       let directory = substitute(directory, '_controller.rb', '', '')
-    elseif match(current_file, 'app/views') != -1
-      let directory = substitute(expand('%:h'), 'views', 'assets/stylesheets', '')
     elseif match(current_file, 'app/helpers') != -1
       let directory = substitute(expand('%'), 'helpers', 'assets/stylesheets', '')
       let directory = substitute(directory, '_helper.rb', '', '')
+    elseif match(current_file, 'app/javascript/packs') != -1
+      let directory = substitute(expand('%:h'), 'javascript/packs', 'assets/stylesheets', '')
+    elseif match(current_file, 'app/views') != -1
+      let directory = substitute(expand('%:h'), 'views', 'assets/stylesheets', '')
+    elseif match(current_file, 'test/controllers') != -1
+      let directory = substitute(expand('%'), 'test/controllers', 'app/assets/stylesheets', '')
+      let directory = substitute(directory, '_controller_test.rb', '', '')
     else 
       let directory = 1
     endif
@@ -157,23 +162,23 @@
   nnoremap <silent> <space>feco :call FileEditController()<return>
   function FileEditController()
     let current_file = expand('%')
-    if match(current_file, 'app/controllers') != -1
+    if match(current_file, 'app/assets/stylesheets') != -1
+      let file = substitute(expand('%:h'), 'assets/stylesheets', 'controllers', '') . '_controller.rb'
+    elseif match(current_file, 'app/controllers') != -1
       let file = current_file
     elseif match(current_file, 'app/helpers') != -1
       let file = substitute(expand('%'), 'helpers', 'controllers', '')
       let file = substitute(file, '_helper.rb', '_controller.rb', '')
+    elseif match(current_file, 'app/javascript/packs') != -1
+      let file = substitute(expand('%:h'), 'javascript/packs', 'controllers', '') . '_controller.rb'
     elseif match(current_file, 'app/views') != -1
       let file = substitute(expand('%:h'), 'views', 'controllers', '') . '_controller.rb'
-    elseif match(current_file, 'lib/filter_helpers') != -1
-      let file = substitute(expand('%'), 'lib/filter_helpers', 'app/controllers', '')
-      let file = substitute(file, '_filter_helper.rb', '_controller.rb', '')
-    elseif match(current_file, 'app/assets/stylesheets') != -1
-      let file = substitute(expand('%:h'), 'assets/stylesheets', 'controllers', '') . '_controller.rb'
-    elseif match(current_file, 'app/javacsript/packs') != -1
-      let file = substitute(expand('%:h'), 'javacsript/packs', 'controllers', '') . '_controller.rb'
     elseif match(current_file, 'test') != -1
       let file = substitute(expand('%'), 'test/controllers', 'app/controllers', '')
       let file = substitute(file, 'controller_test', 'controller', '')
+    elseif match(current_file, 'lib/filter_helpers') != -1
+      let file = substitute(expand('%'), 'lib/filter_helpers', 'app/controllers', '')
+      let file = substitute(file, '_filter_helper.rb', '_controller.rb', '')
     else 
       let file = 1
     endif
@@ -190,17 +195,24 @@
   nnoremap <silent> <space>fehe :call FileEditHelper()<return>
   function FileEditHelper()
     let current_file = expand('%')
-    if match(current_file, 'app/helpers') != -1
-      let file = 'on helper'
+    if match(current_file, 'app/assets/stylesheets') != -1
+      let file = substitute(expand('%:h'), 'assets/stylesheets', 'helpers', '') . '_helper.rb'
     elseif match(current_file, 'app/controllers') != -1
       let file = substitute(current_file, 'controllers', 'helpers', '')
       let file = substitute(file, '_controller.rb', '_helper.rb', '')
+    elseif match(current_file, 'app/helpers') != -1
+      let file = current_file
+    elseif match(current_file, 'app/javascript/packs') != -1
+      let file = substitute(expand('%:h'), 'javascript/packs', 'helpers', '') . '_helper.rb'
     elseif match(current_file, 'app/views') != -1
       let file = substitute(expand('%:h'), 'views', 'helpers', '') . '_helper.rb'
+    elseif match(current_file, 'test') != -1
+      let file = substitute(expand('%'), 'test/controllers', 'app/helpers', '')
+      let file = substitute(file, 'controller_test', 'helper', '')
     else 
       let file = 1
     endif
-    if file == 'on helper'
+    if file == current_file
       echo 'Already on helper file'
     elseif file == 1
       echo 'Unable to find helper for' current_file
@@ -213,18 +225,21 @@
   nnoremap <silent> <space>fejp :call FileEditJavascriptPack()<return>
   function FileEditJavascriptPack()
     let current_file = expand('%')
-    if match(current_file, 'app/javascript') != -1
-      let directory = expand('%:h')
+    if match(current_file, 'app/assets/stylesheets') != -1
+      let directory = substitute(expand('%:h'), 'assets/stylesheets', 'javascript/packs', '')
     elseif match(current_file, 'app/controllers') != -1
-      let directory = substitute(expand('%'), 'controllers', 'javacsript/packs', '')
+      let directory = substitute(expand('%'), 'controllers', 'javascript/packs', '')
       let directory = substitute(directory, '_controller.rb', '', '')
-    elseif match(current_file, 'app/views') != -1
-      let directory = substitute(expand('%:h'), 'views', 'javascript/packs', '')
     elseif match(current_file, 'app/helpers') != -1
       let directory = substitute(expand('%'), 'helpers', 'javascript/packs', '')
       let directory = substitute(directory, '_helper.rb', '', '')
-    elseif match(current_file, 'app/assets/stylesheets') != -1
-      let directory = substitute(expand('%h'), 'assets/stylesheets', 'javascript/packs', '')
+    elseif match(current_file, 'app/javascript') != -1
+      let directory = expand('%:h')
+    elseif match(current_file, 'app/views') != -1
+      let directory = substitute(expand('%:h'), 'views', 'javascript/packs', '')
+    elseif match(current_file, 'test/controllers') != -1
+      let directory = substitute(expand('%'), 'test/controllers', 'app/javascript/packs', '')
+      let directory = substitute(directory, '_controller_test.rb', '', '')
     else 
       let directory = 1
     endif
@@ -272,9 +287,7 @@
   nnoremap <silent> <space>fevi :call FileEditView()<return>
   function FileEditView()
     let current_file = expand('%')
-    if match(current_file, 'app/views') != -1
-      let directory = expand('%:h')
-    elseif match(current_file, 'app/assets/stylesheets') != -1
+    if match(current_file, 'app/assets/stylesheets') != -1
       let directory = substitute(expand('%:h'), 'assets/stylesheets', 'views', '')
     elseif match(current_file, 'app/controllers') != -1
       let directory = substitute(current_file, 'controllers', 'views', '')
@@ -282,9 +295,13 @@
     elseif match(current_file, 'app/helpers') != -1
       let directory = substitute(expand('%'), 'helpers', 'views', '')
       let directory = substitute(directory, '_helper.rb', '', '')
-    elseif match(current_file, 'lib/filter_helpers') != -1
-      let directory = substitute(current_file, 'lib/filter_helpers', 'app/views', '')
-      let directory = substitute(directory, '_filter_helper.rb', '', '')
+    elseif match(current_file, 'app/javascript/packs') != -1
+      let directory = substitute(expand('%:h'), 'javascript/packs', 'views', '')
+    elseif match(current_file, 'app/views') != -1
+      let directory = expand('%:h')
+    elseif match(current_file, 'test/controllers') != -1
+      let directory = substitute(expand('%'), 'test/controllers', 'app/views', '')
+      let directory = substitute(directory, '_controller_test.rb', '', '')
     else 
       let directory = 1
     endif
@@ -309,19 +326,17 @@
   function FileEditFilterHelper()
     let current_file = expand('%')
     if match(current_file, 'lib/filter_helpers') != -1
-      let file = 'on filter helper'
+      let file = current_file
     elseif match(current_file, 'app/controllers') != -1
       let file = substitute(current_file, 'app/controllers', 'lib/filter_helpers', '')
       let file = substitute(file, '_controller.rb', '_filter_helper.rb', '')
-    elseif match(current_file, 'app/views') != -1
-      let file = substitute(expand('%:h'), 'app/views', 'lib/filter_helpers', '') . '_filter_helper.rb'
     else 
       let file = 1
     endif
-    if file == 'on filter helper'
+    if file == current_file
       echo 'Already on filter helper file'
     elseif file == 1
-      echo 'Unable to find helper for' current_file
+      echo 'Unable to find filter helper for' current_file
     else
       execute ':e' file
     endif

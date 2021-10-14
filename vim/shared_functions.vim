@@ -6,8 +6,8 @@ function! GetTestFile()
     let file = substitute(expand('%:h'), 'views', 'controllers', '') . '_controller.rb'
   elseif match(file, 'app/assets/stylesheets') != -1
     let file = substitute(expand('%:h'), 'assets/stylesheets', 'controllers', '') . '_controller.rb'
-  elseif match(file, 'app/javacsript/packs') != -1
-    let file = substitute(expand('%:h'), 'javacsript/packs', 'controllers', '') . '_controller.rb'
+  elseif match(file, 'app/javascript/packs') != -1
+    let file = substitute(expand('%:h'), 'javascript/packs', 'controllers', '') . '_controller.rb'
   endif
   " modify file name for non test files
   if index(split(file, '/'), 'test') == -1

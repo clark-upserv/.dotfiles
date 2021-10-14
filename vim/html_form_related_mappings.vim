@@ -32,7 +32,7 @@
 
 " Html Form
   " Html Form BAse
-  nnoremap <silent> ,hfba a<%= form_with(model: ChangeThisPls, scope: 'ChangeThisPls', url: ChangeThisPls, method: :ChangeThisPls) do \|ChangeThisPls_form\| %><return><return><%# DeleteThisPls - insert errors if necessary (,hfer) %><return><%# DeleteThisPls - insert hidden fields here if necessary %><return><%# DeleteThisPls - insert rows, fields for and non-stanard forms as needed %><return><%# DeleteThisPls - insert cancel and submit buttons if show edit swap or modal %><return><return><% end %><esc>/ChangeThisPls\\|DeleteThisPls<return>
+  nnoremap <silent> ,hfba a<%= form_with(model: ChangeObject, scope: 'ChangeScope', url: ChangeUrl_path, method: :ChangeHTMLMethod) do \|ChangeForm_form\| %><return><return><return><%# DeleteThis - insert hidden fields here if necessary %><return><%# DeleteThis - insert label type (or fields for if necessary) %><return><%# DeleteThis - insert form buttons %><return><return><% end %><esc>/ChangeObject\\|ChangeScope\\|ChangeUrl\\|ChangeHTMLMethod\\|ChangeForm\\|DeleteThis<return>
   " Html Form ERrors
   nnoremap <silent> ,hfer a<div id="ChangeId_errors"><return><%# DeleteThis - if using a single error message for repeat block of many objects with ajax form, remove render from html and fill div contents with errors partial on ajax instead %><return><%= render('shared/errors', object: ChangeObject) %><return></div><esc>/ChangeId\\|DeleteThis\\|ChangeObject<return>
   " Html Form Full Errors
@@ -64,7 +64,7 @@
   " Html Form Group 4
   nnoremap <silent> ,hfg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><esc>:call HtmlFormGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
   function! HtmlFormGroupContents()
-    execute "normal! a<%#\<delete> DeleteThis - insert label if top label (,hfla) %>\<return><%# DeleteThis - insert HTML Form %>\<return>\<esc>:call HtmlFormInlineErrors()\<return>"
+    execute "normal! a<%# DeleteThis - insert label if top label (,hfla) %>\<return><%# DeleteThis - insert HTML Form Input %>\<return>\<esc>:call HtmlFormInlineErrors()\<return>"
   endfunction
   " Html Form LAbel
   nnoremap <silent> ,hfla a<%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
@@ -78,14 +78,14 @@
     execute "normal! a<%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %>"
   endfunction
   " Html Form Buttons (cancel & submit) - Buttons 
-  nnoremap <silent> ,hfbb a<div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit 'ChangeSubmit', class: "btn btn-primary" %><return></div><esc>/ChangeSesId\\|ChangeForm\\|ChangeSubmit<return>
+  nnoremap <silent> ,hfbb a<%# Form buttons %><return><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit 'ChangeSubmit', class: "btn btn-primary" %><return></div><esc>/ChangeSesId\\|ChangeForm\\|ChangeSubmit<return>
   " Html Form Buttons (cancel & submit) - Icons
-  nnoremap <silent> ,hfbi a<div class="d-flex align-items-center justify-content-center"><return><a class="px-3 fs-4 c-pointer text-secondary mdi mdi-close-circle-o ChangeSesId-ses-cancel-button"></a><return><button class="px-3 fs-4 btn-no-background text-primary mdi mdi-check-circle do-not-disable"></button><return></div><esc>/ChangeSesId<return>
+  nnoremap <silent> ,hfbi a<%# Form buttons - icons %><return><div class="d-flex align-items-center justify-content-center"><return><a class="px-3 fs-4 c-pointer text-secondary mdi mdi-close-circle-o ChangeSesId-ses-cancel-button"></a><return><button class="px-3 fs-4 btn-no-background text-primary mdi mdi-check-circle do-not-disable"></button><return></div><esc>/ChangeSesId<return>
   " Html Form Buttons (cancel & submit) - Left label (usually not necessary
   " but can be helpful if you want buttons to align not at end)
-  nnoremap <silent> ,hfbl a<%#<delete> Left label cancel and submit buttons %><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return></div><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
+  nnoremap <silent> ,hfbl a<%# Left label cancel and submit buttons %><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="d-flex justify-content-end"><return><a class="btn btn-secondary mr-3 ChangeSesId-ses-cancel-button">Cancel</a><return><%= ChangeForm_form.submit "Save", class: "btn btn-primary" %><return></div><return></div><return></div><return><esc>/ChangeForm\\|ChangeSesId<return>
   " Html Form Buttons (cancel & submit) - Modal
-  nnoremap <silent> ,hfbm a<div class="form-row mb-2 d-flex justify-content-center"><return><div class="form-group-modal mt-6 px-3 d-flex justify-content-between"><return><button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button><return><%= ChangeForm_form.submit 'ChangeSubmit', class: 'btn btn-primary' %><return></div><return></div><esc>/ChangeForm\\|ChangeSubmit<return>
+  nnoremap <silent> ,hfbm a<%# Form buttons - for modal %><return><div class="form-row mb-2 d-flex justify-content-center"><return><div class="form-group-modal mt-6 px-3 d-flex justify-content-between"><return><button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button><return><%= ChangeForm_form.submit 'ChangeSubmit', class: 'btn btn-primary' %><return></div><return></div><esc>/ChangeForm\\|ChangeSubmit<return>
 
 " Html Inputs
   " Htmo Input Main Attrubutes
@@ -133,8 +133,6 @@
   nnoremap <silent> ,hipf a<%= ChangeForm_form.password_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>autofocus: true,<return>placeholder: 'ChangePlaceholder',<return>required: true,<return>size: ChangeSize,<return>minlength: ChangeMinLength) %><esc>/ChangeAttribute\\|ChangeForm\\|ChangePlaceholder\\|ChangeSize\\|ChangeMinLength<return>
   " Html Input Password Confirmation
   nnoremap <silent> ,hipc a<%= ChangeThisPls_form.password_field(:password_confirmation, class: 'form-control') %><esc>/ChangeThisPls<return>
-  " Html Input SElect
-  nnoremap <silent> ,hise a<%=<delete> ChangeForm_form.select(<delete><return>  :ChangeAttribute,<return>ChangeOptionsList,<return>{ include_blank: 'Select' },<return>{<delete><return><tab>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o)<backspace>})<return>%><esc>:call HtmlInputSearch()<return>
   function HtmlInputSelectValueNote()
     execute "normal! a# DeleteThis - even if object.attribute has a value, the selected value must be set manually.\<return>Typically options_for_select is the best option (,hios)\<return>\<backspace>\<backspace>"
   endfunction
