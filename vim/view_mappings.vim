@@ -24,7 +24,7 @@
   " View Page Tabs Base
   nnoremap <silent> ,vptb :read ../templates/views/page/tabs_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangePathHelper<return>
   " View Page Stacked tabs Helper
-  nnoremap <silent> ,vpsh :call CreateBaseFile(0, 0, 1)<return>/ChangeTopLevelDocumentation<return><up>$viwy/ChangeTopLevelDocumentation<return>viwpbiHelper methods for <esc>A tabs<esc>:call IndentTemplate('inner_followup', 1, 0, '../templates/views/page/stacked_tabs_helper.rb')<return>/DeleteThis\\|ChangeSection\\|ChangeObject\\|ChangeNameOrMakeNil\\|ChangeUrl\\|DeleteThis\\|ChangeActiveId\\|ChangeDisplay<return>
+  nnoremap <silent> ,vpsh :call CreateBaseFile(0, 0, 1)<return>/ChangeTopLevelDocumentation<return><up>$viwy/ChangeTopLevelDocumentation<return>viwpbiHelper methods for <esc>A tabs<esc>:call IndentTemplate('inner_followup', 1, 0, '../templates/views/page/stacked_tabs_helper.rb')<return>/DeleteThis\\|ChangeSection\\|ChangeObject\\|ChangeUrl\\|DeleteThis\\|ChangeActiveId\\|ChangeDisplay<return>
   " View Page Stacked Tabs
   nnoremap <silent> ,vpst :read ../templates/views/page/stacked_tabs.html.erb<return>/ChangeWidth\\|ChangeObject<return>
   " View Page Stacked tabs Mobile
