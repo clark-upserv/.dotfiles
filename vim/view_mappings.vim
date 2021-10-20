@@ -3,6 +3,13 @@
   nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThis\\|ChangeNavTypeOrDeleteThisLine\\|ChangeTemplate\\|ChangePath<return>
   " View Page STylesheets
   nnoremap <silent> ,vpss :read ../templates/views/page/stylesheets.html.erb<return>/DeleteThisNote\\|ChangePath<return>
+  nnoremap <silent> ,vpss a<%= content_for :stylesheets do %><return><%# DeleteThis - use this for custom stylesheet for this file %><return><space><backspace><esc>:call AddCustomStyleSheetForFile()<return>a<return><%# DeleteThisNote: use this for custom stylesheet for this file %><return><%= stylesheet_link_tag('ChangePath') %><return><% end %>
+  function! AddCustomStyleSheetForFile()
+    let file = expand('%')
+    let file = substitute(file, 'app/views/', '', '')
+    let file = substitute(file, '.html.erb', '', '')
+    execute "normal! a<%= stylesheet_link_tag('" . file . "') %>"
+  endfunction
   " View Page Javascript Packs
   nnoremap <silent> ,vpjp :read ../templates/views/page/javascript_packs.html.erb<return>/DeleteThisNote\\|ChangePath\\|Etc\.<return>
   " View Page  Non Pack javascriopts
