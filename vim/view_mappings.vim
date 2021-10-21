@@ -2,8 +2,7 @@
   " View Page BAse
   nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThis\\|ChangeNavTypeOrDeleteThisLine\\|ChangeTemplate\\|ChangePath<return>
   " View Page STylesheets
-  nnoremap <silent> ,vpss :read ../templates/views/page/stylesheets.html.erb<return>/DeleteThisNote\\|ChangePath<return>
-  nnoremap <silent> ,vpss a<%= content_for :stylesheets do %><return><%# DeleteThis - use this for custom stylesheet for this file %><return><space><backspace><esc>:call AddCustomStyleSheetForFile()<return>a<return><%# DeleteThisNote: use this for custom stylesheet for this file %><return><%= stylesheet_link_tag('ChangePath') %><return><% end %>
+  nnoremap <silent> ,vpss a<%= content_for :stylesheets do %><return><%# DeleteThis - use this for custom stylesheet for this file (or delete it if not necessary) %><return><space><backspace><esc>:call AddCustomStyleSheetForFile()<return>a<return><%# DeleteThis - use this for any other stylesheet (or delete it if not necessary) %><return><%= stylesheet_link_tag('ChangePath') %><return><% end %><esc>/DeleteThis\\|ChangePath<return>
   function! AddCustomStyleSheetForFile()
     let file = expand('%')
     let file = substitute(file, 'app/views/', '', '')
@@ -11,7 +10,14 @@
     execute "normal! a<%= stylesheet_link_tag('" . file . "') %>"
   endfunction
   " View Page Javascript Packs
-  nnoremap <silent> ,vpjp :read ../templates/views/page/javascript_packs.html.erb<return>/DeleteThisNote\\|ChangePath\\|Etc\.<return>
+  nnoremap <silent> ,vpjp a<%# DeleteThis - can include one or multiple packs as arguments %><return><% add_javascript_packs('<esc>:call AddCustomJavascroptPackForFile()<return>a', 'ChangePath') %><esc>n
+  function! AddCustomJavascroptPackForFile()
+    let file = expand('%')
+    let file = substitute(file, 'app/views/', '', '')
+    let file = substitute(file, '.html.erb', '', '')
+    execute "normal! a" . file
+    let @/ = "'" . file . "',\\|DeleteThis\\|'ChangePath'"
+  endfunction
   " View Page  Non Pack javascriopts
   nnoremap <silent> ,vpnp :read ../templates/views/page/non_pack_javascripts.html.erb<return>/ChangePath<return>
   " View Page End of Body

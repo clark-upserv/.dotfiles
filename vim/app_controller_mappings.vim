@@ -3,7 +3,24 @@
   nnoremap <silent> ,acbt :call CreateBaseFile(1, 0, 1)<return>/ChangeTopLevelDocumentation<return>cgnTemplate controller for ChangeDescription<esc>/class<return>A < ApplicationController<esc>/inner_followup<return>C# DeleteThis - use this if all actions require user to be logged in. Otherewise, remove<return><backspace><backspace>before_action :require_current_user<return># DeleteThis - add helpers if necessary. Usually at first there are none so delete this line. But<return>add back later if / when helpers are needed. Default helper for controller included automatically<return><backspace><backspace>include_helpers ChangeHelpers<return><return># DeleteThis - insert actions<esc>/ChangeThisPls\\|ChangeDescription\\|DeleteThis\\|ChangeHelpers<return>
   nmap <silent> ,acbh ,acbt
   " App Controllers Base for Ajax controller
-  nnoremap <silent> ,acba :call CreateBaseFile(1, 0, 1)<return>/ChangeTopLevelDocumentation<return>cgnAjax controller for ChangeDescription<esc>/class<return>A < ApplicationController<esc>/inner_followup<return>C# DeleteThis - use this if all actions require user to be logged in. Otherewise, remove<return><backspace><backspace>before_action :require_current_user<return>include_helpers ChangeTemplateController.included_helpers<return><return># DeleteThis - insert actions<esc>/ChangeThisPls\\|ChangeDescription\\|DeleteThis\\|ChangeTemplate<return>
+  nnoremap <silent> ,acba :call CreateBaseFile(1, 0, 1)<return>/ChangeTopLevelDocumentation<return>cgnAjax controller for ChangeDescription<esc>/class<return>A < ApplicationController<esc>/inner_followup<return>C# DeleteThis - use this if all actions require user to be logged in. Otherewise, remove<return><backspace><backspace>before_action :require_current_user<return># DeleteThis - make sure parent controller is correct<return><backspace><backspace>include_helpers ChangeParentController.included_helpers<return><return># DeleteThis - insert actions<esc>:call AddParentController()<return>/ChangeThisPls\\|ChangeDescription\\|DeleteThis<return>
+  function! AddParentController()
+    let file = expand('%')
+    let directories = split(file, '/')
+    " remove 'app', 'controllers' and current controller
+    call remove(directories, 0)
+    call remove(directories, 0)
+    call remove(directories, -1)
+    let parentController = []
+    for directory in directories
+      let camel = ''
+      for word in split(directory, '_' )
+        let camel = camel . substitute(word, "\\<.", "\\u&", '')
+      endfor
+      call add(parentController, camel)
+    endfor
+    execute "normal! /ChangeParentController\<return>cgn" . join(parentController, '::') . "Controller"
+  endfunction
   " App Controllers Index Base
   nnoremap <silent> ,acib adef index<return>authorize!(:ChangeAbility, :ChangeControllerOrFeature)<return>@pagy, @ChangeLoads = pagy(ChangeModel.accessible_by(current_ability, :ChangeAbility).ChangeScopes.ChangeSort)<return>end<esc>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis\\|ChangeScopes\\|ChangeSort<return>
   " App Controllers Index with Filters
