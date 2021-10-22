@@ -163,7 +163,7 @@
   function! FileEditParentController()
     let file = expand('%')
     let split = split(file, '/')
-    call remove(split, -1)
+    remove(split, -1)
     let file = join(split, '/') . '_controller.rb'
     execute ':e ' . file
   endfunction
