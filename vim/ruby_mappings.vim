@@ -2,7 +2,7 @@
   " Ruby Basic Frozen String
   nnoremap <silent> ,rbfs a# frozen_string_literal: true
   " Ruby Basic CLass
-
+  nnoremap <silent> ,rbcl :call CreateBaseFile(1, 0, 0)<return>
   " Ruby Basic MOdule
   nnoremap <silent> ,rbmo :call CreateBaseFile(0, 0, 0)<return>
   " Ruby Basic IF
