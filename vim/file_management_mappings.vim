@@ -182,12 +182,14 @@
       let file = substitute(expand('%:h'), 'javascript/packs', 'controllers', '') . '_controller.rb'
     elseif match(current_file, 'app/views') != -1
       let file = substitute(expand('%:h'), 'views', 'controllers', '') . '_controller.rb'
-    elseif match(current_file, 'test') != -1
+    elseif match(current_file, 'test/') != -1
       let file = substitute(expand('%'), 'test/controllers', 'app/controllers', '')
       let file = substitute(file, 'controller_test', 'controller', '')
     elseif match(current_file, 'lib/filter_helpers') != -1
       let file = substitute(expand('%'), 'lib/filter_helpers', 'app/controllers', '')
       let file = substitute(file, '_filter_helper.rb', '_controller.rb', '')
+    elseif match(current_file, 'lib/services') != -1
+      let file = substitute(expand('%:h'), 'lib/services', 'app/controllers', '') . '_controller.rb'
     else 
       let file = 1
     endif
@@ -268,23 +270,22 @@
     endif
   endfunction
 
-
   " File Edit MOdel
   nnoremap <silent> <space>femo :call FileEditModel()<return>
   function FileEditModel()
     let current_file = expand('%')
-    if match(current_file, 'app/services') != -1
-      let file = 'on helper'
-    elseif match(current_file, 'test/controllers') != -1
-      let file = substitute(current_file, 'controllers', 'helpers', '')
-      let file = substitute(file, '_controller.rb', '_helper.rb', '')
-    elseif match(current_file, 'app/views') != -1
-      let file = substitute(expand('%:h'), 'views', 'helpers', '') . '_helper.rb'
+    if match(current_file, 'app/models') != -1
+      let file = current_file
+    elseif match(current_file, 'lib/services') != -1
+      let file = substitute(expand('%:h'), 'lib/services', 'app/models', '') . '.rb'
+    elseif match(current_file, 'test/models') != -1
+      let file = substitute(current_file, 'test/models', 'app/models', '')
+      let file = substitute(file, '_test.rb', '.rb', '')
     else 
       let file = 1
     endif
-    if file == 'on helper'
-      echo 'Already on helper file'
+    if file == current_file
+      echo 'Already on model file'
     elseif file == 1
       echo 'Unable to find helper for' current_file
     else

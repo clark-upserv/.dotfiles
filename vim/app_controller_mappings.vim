@@ -22,7 +22,14 @@
     execute "normal! /ChangeParentController\<return>cgn" . join(parentController, '::') . "Controller"
   endfunction
   " App Controllers Index Base
-  nnoremap <silent> ,acib adef index<return>authorize!(:ChangeAbility, :ChangeControllerOrFeature)<return>@pagy, @ChangeLoads = pagy(ChangeModel.accessible_by(current_ability, :ChangeAbility).ChangeScopes.ChangeSort)<return>end<esc>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis\\|ChangeScopes\\|ChangeSort<return>
+  nnoremap <silent> ,acib adef index<return>authorize!(:ChangeAbility, :ChangeControllerOrFeature)<return># Deletethis - if index loads need to be shared with another controller (ie an ajax controller):<return><tab>create a service for this controller named "index_loads_service.rb" and add a base module (,rbmo)<return>add a method called set_<esc>:call ControllerSnakeName()<return>a_index_loads<return>include the module and the method in any other controller as needed<return><backspace><backspace><backspace>@pagy, @ChangeLoads = pagy(ChangeModel.accessible_by(current_ability, :ChangeAbility).ChangeScopes.ChangeSort)<return>end<esc>/ChangeLoads\\|ChangeModel\\|ChangeAbility\\|ChangeControllerOrFeature\\|DeleteThis\\|ChangeScopes\\|ChangeSort<return>
+  function ControllerSnakeName()
+    let snake_name = expand('%')
+    let snake_name = substitute(snake_name, 'app/controllers/', '', '')
+    let snake_name = substitute(snake_name, '_controller.rb', '', '')
+    let snake_name = substitute(snake_name, '/', '_', 'g')
+    execute "normal! a" . snake_name
+  endfunction
   " App Controllers Index with Filters
   nnoremap <silent> ,acif adef index<return>authorize!(:ChangeAbility, :ChangeControllerOrFeature)<return>index_loads<return>end<return><return># DeleteThis - move this method to private<return><backspace><backspace>def index_loads(options = { filters_only: false })<return>@filter_helper = FilterHelpers::ChangePathToFilterHelper.new(params, current_ability, current_user)<return>@pagy, @ChangeLoads = pagy(@filter_helper.loads) unless options[:filters_only]<return>end<esc>/ChangeAbility\\|ChangeControllerOrFeature\\|ChangeLoads\\|DeleteThis\\|ChangePathTo<return>
   " App Controllers Show Base
