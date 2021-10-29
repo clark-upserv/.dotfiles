@@ -72,9 +72,8 @@
   " [inline (ie 'o' for one liner because 'i' might be another word like
   " selection or sorting]
   " [shorthand]
-  inoremap <silent> timesb times do \|index\|<return>end<esc>/index<return>
-  inoremap <silent> timeso times { \|index\| ChangeLogic }<esc>/index\\|ChangeLogic<return>
-  inoremap <silent> timess times(&:)<left>
+  inoremap <silent> timesb times do \|index\|<return>end<esc>O
+  inoremap <silent> timeso times { \|index\| ChangeLogic }<esc>/ChangeLogic<return>
   " Ruby Block MAp
   nnoremap <silent> ,rbma amap do \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
   nnoremap <silent> ,rbmA amap { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>

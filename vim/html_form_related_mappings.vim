@@ -2,9 +2,10 @@
   " Html Show edit swap ASsets
   nnoremap <silent> ,hsas a<% add_javascript_packs('lib/show_edit_swap') %><return><return><%= content_for :stylesheets do %><return><%= stylesheet_link_tag('lib/show_edit_swap') %><return><% end %><return><esc>
   " Html Show edit swap BAse
-  nnoremap <silent> ,hsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/show') %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/edit') %><return></div><esc>/ChangeSesId\\|ChangePath<return>
-  " Html Show edit swap Base New
-  nnoremap <silent> ,hsbn a<div id="ChangeSesId-ses-new-show"><return><%= render('ChangePath/show_new') %><return></div><return><return><div id="ChangeSesId-new-ses-edit"><return><%= render('ChangePath/edit_new') %><return></div><esc>/ChangeSesId\\|ChangePath<return>
+  nnoremap <silent> ,hsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/ChangeSubController/show') %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/ChangeSubController/edit') %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeSubController<return>
+  " Html Show edit swap Base for Single item
+  nnoremap <silent> ,hsbs a<div id="ChangeSesId-ses-show"><return><a class="ChangeSesId-ses-edit-button"><return><%= ChangeDisplay %> <return></a><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/ChangeSubController/edit') %><return></div><esc>/ChangeSesId\\|ChangeDisplay\\|ChangePath\\|ChangeSubController<return>
+
   " Html Show edit swap Edit button - Button
   nnoremap <silent> ,hseb a<a class="btn btn-primary ChangeSesId-ses-edit-button">ChangeDisplay</a><esc>/ChangeSesId\\|ChangeDisplay<return>
   " Html Show edit swap Edit button - Icon
