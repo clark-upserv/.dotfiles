@@ -80,7 +80,7 @@
   " App Models Validates Base
   nnoremap <silent> ,amvb avalidates :ChangeAttribute, ChangeValidation: {<return><space><backspace><esc>:call AppModelsValidatesMessage()<return>a}<esc>:call RubyModlesValidatesOptions()<return>:call AppModelsValidatesSearch()<return>
   function! AppModelsPresenceAbsenceNote()
-    execute "normal! a# DeleteThis - for booleans, use exclusion or inclusion rather than presence or absence because presence and absence use \"blank?\" and false.blank? is true\<return>DeleteThis - NOTE: Also, in general booleans shouldn't use presence or absence but instead should have a default value set up in the migration file\<return>\<backspace>\<backspace>"
+    execute "normal! a# DeleteThis - for booleans, use exclusion or inclusion rather than presence or absence because presence and absence use \"blank?\" and false.blank? is true\<return>DeleteThis - NOTE: Also, in general booleans shouldn't use presence or absence but instead should have a default value set up in the migration file\<return>\<backspace>\<backspace>\<space>\<backspace>"
   endfunction
   " App Models Validates Presence
   nnoremap <silent> ,amvp :call AppModelsPresenceAbsenceNote()<return>avalidates :ChangeAttribute, presence: {<return>message: 'please add ChangeAttribute'<return><space><backspace><esc>:call AppModelsValidatesMessage()<return>a}<esc>:call RubyModlesValidatesOptions()<return>:call AppModelsValidatesSearch()<return>
@@ -89,7 +89,7 @@
   " App Models Validates Length
   nnoremap <silent> ,amvl avalidates :ChangeAttribute, length: {<return>is: ChangeValue,<return>minimum: ChangeMin,<return>maximum: 255,<return>in: ChangeRange,<return>message: 'ChangeAttribute is too long (maximum is 255 characters)'<return><space><backspace><esc>:call AppModelsValidatesMessage()<return>a}<esc>:call RubyModlesValidatesOptions()<return>:call AppModelsValidatesSearch()<return>
   " App Models Validates Uniqueness
-  nnoremap <silent> ,amvu avalidates :ChangeAttribute, uniqueness: {<return>case_sensitive: false,<return>scope: %i[ChangeAttributes],<return>message: 'The ChangeAttribute "%<attribute>s" is already taken'<return><space><backspace><esc>:call AppModelsValidatesMessage()<return>a}<esc>:call RubyModlesValidatesOptions()<return>:call AppModelsValidatesSearch()<return>
+  nnoremap <silent> ,amvu avalidates :ChangeAttribute, uniqueness: {<return>case_sensitive: false,<return>scope: %i[ChangeAttributes],<return>message: 'the ChangeAttribute "%<attribute>s" is already taken'<return><space><backspace><esc>:call AppModelsValidatesMessage()<return>a}<esc>:call RubyModlesValidatesOptions()<return>:call AppModelsValidatesSearch()<return>
   " App Models Validates Numericality
   nnoremap <silent> ,amvn avalidates :ChangeAttribute, numericality: {<return>only_integer: true,<return>allow_nil: true,<return>less_than: ChangeValue,<return>less_than_or_eqaul_to: ChangeValue,<return>equal_to: ChangeValue,<return>greater_than: ChangeValue,<return>greater_than_or_equal_to: ChangeValue,<return>other_than: ChangeValue,<return>odd: true,<return>even: true,<return>message: 'ChangeAttribute must be a number'<return><space><backspace><esc>:call AppModelsValidatesMessage()<return>a}<esc>:call RubyModlesValidatesOptions()<return>:call AppModelsValidatesSearch()<return>
   " App Models Validates Attachment
