@@ -5,7 +5,7 @@
   " allow changing case
   vnoremap <silent> ,u u
   vnoremap <silent> ,U U
-  " coment
+  " comment
   vnoremap <silent> # I#<esc>
   vnoremap <silent> " I"<esc>
   vnoremap <silent> / I//<esc>
@@ -35,7 +35,7 @@
 
 " single key non-comma
   " select word in visual mode (spacevim does this but I want to get rid of
-  " spacevim_
+  " spacevim
   vnoremap v iw
   " select entire page
   vnoremap aa <esc>ggVG
@@ -65,6 +65,9 @@
   " o and O but remain in normal mode
   nnoremap <silent> b o <backspace><esc>
   nnoremap <silent> B O <backspace><esc>
+  " create empty line and then another line but in normal mode
+  nnoremap <silent> gb o<esc>o<space><backspace><esc>
+  nnoremap <silent> gB O<esc>O<space><backspace><esc>
   " previously o and O were re-mapped and then several recursive mappigns
   " used this new mapping. But that became almost impossible to track
   " (because /o<return> is not helpful) so ,,o and ,,O were used
