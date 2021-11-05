@@ -55,4 +55,5 @@ nnoremap <silent> ,tmam atest 'attribute instance method - ChangeMethodName' do<
 nnoremap <silent> ,tmqm atest 'query instance method - ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
 
 " Tests Models Service instance Method
-nnoremap <silent> ,tmsm atest 'service instance method - ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
+nnoremap <silent> ,tmsm a# Service methods<return>Simply call methods to ensure no errors (actual logic tested in service test)<return>Service methods that add logic beyond calling service should be tested sepearately<return><backspace><backspace>test 'service instance methods' do<return>end<esc>O
+nnoremap <silent> ,tmsM atest 'service instance method - ChangeMethodName' do<return># DeleteThis - This test is for a service method that calls a service and adds logic. Create test accordingly.<return><backspace><backspace>end<esc>/ChangeMethodName\\|DeleteThis<return>

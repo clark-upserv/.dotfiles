@@ -80,4 +80,8 @@ nnoremap <silent> ,thba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<ret
   
 " Test Lib files
   " Test Lib files BAse
-  nnoremap <silent> ,tlba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<return>cgnrequire 'test_helper'<esc>o<esc>/class<return>A < ActionDispatch::IntegrationTest<esc>:call IndentTemplate('inner_followup', 1, 0, '../templates/tests/base.rb')<return>/ChangeTopLevelDocumentation<return><down>^wviwy/ChangeTopLevelDocumentation<return>viwpbiTest for <esc>$xxxx/test disclaimer<return>cgn<esc>:call TestDisclaimer()<return>/ChangeObject\\|ChangeTable\\|ChangeFixture\\|DeleteThis<return>
+  nnoremap <silent> ,tlba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<return>cgnrequire 'test_helper'<esc>o<esc>/class<return>A < ActionDispatch::IntegrationTest<esc>/inner_followup<return>cgn<esc>:call TestDisclaimer()<return><esc>/ChangeTopLevelDocumentation<return><down>^wviwy/ChangeTopLevelDocumentation<return>viwpbiTest for <esc>$xxxx/ChangeObject\\|ChangeTable\\|ChangeFixture\\|DeleteThis<return>
+" Test Services
+  " Test Services BAse
+  nmap <silent> ,tsba ,tlba
+  

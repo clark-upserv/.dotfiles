@@ -59,7 +59,7 @@
   " View Card Body Single show
   nnoremap <silent> ,vcbs :read ../templates/views/card/body_single_show.html.erb<return>/ChangeThisPls<return>
   " View Card Body Single show edit swap
-  nnoremap <silent> ,vcbS :read ../templates/views/card/body_single_show_edit_swap.html.erb<return>/ChangeThisPls\\|ChangeSesId\\|ChangePath<return>
+  nnoremap <silent> ,vcbS :read ../templates/views/card/body_single_show_edit_swap.html.erb<return>/ChangeThisPls\\|ChangeSesId\\|ChangePath\\|ChangeSubController<return>
   " View Card Body Table Base
   nnoremap <silent> ,vcbt :call IndentTemplate('', 0, 0, '../templates/views/card/body_table_base.html.erb')<return>/DeleteThis<return>
   " View Card Body Query (ie search) for table
