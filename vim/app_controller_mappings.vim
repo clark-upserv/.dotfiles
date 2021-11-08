@@ -64,6 +64,8 @@
   nnoremap <silent> ,acsp adef ChangeAction_params<return>params.require('ChangeRequire').permit(:ChangeAttributes)<return>end<esc>/ChangeAction\\|ChangeRequire\\|ChangeAttributes<return>
   " App Controller Strong params with Enum
   nnoremap <silent> ,acse adef ChangeAction_params<return>ChangeAction_params = params.require('ChangeRequire').permit(:ChangeAttributes)<return>ChangeAction_params[:ChangeEnum] = ChangeAction_params[:ChangeEnum].to_i<return>ChangeAction_params<return>end<esc>/ChangeAction\\|ChangeRequire\\|ChangeAttributes\\|ChangeEnum<return>
+  " App Controller Strong params Array
+  nnoremap <silent> ,acsa adef ChangeArray_ids<return># DeleteThis - if "fields_for" is used, include additional "&& ChangeAction_params[:ChangeFieldsForScope]" for each level of fields_for<return><backspace><backspace>if (ChangeArray_ids = ChangeAction_params[:ChangeArray_ids])<return>ChangeArray_ids<return>else<return>[]<return>end<return>end<esc>/ChangeAction\\|ChangeArray\\|DeleteThis\\|ChangeFieldsForScope<return>
   " App Controller Strong params with Logic
   nnoremap <silent> ,acsl adef ChangeAction_params<return>ChangeAction_params = params.require('ChangeRequire').permit(:ChangeAttributes)<return>ChangeAction_params # insert logic to restrict or clean params<return>ChangeAction_params<return>end<esc>/ChangeAction\\|ChangeRequire\\|ChangeAttributes<return>
   " App Controller Strong Params full
