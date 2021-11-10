@@ -61,15 +61,17 @@
   " App Controllers Destroy Html
   nnoremap <silent> ,acdh :call IndentTemplate('', 1, 0, ' ../templates/controllers/actions/destroy_html.rb')<return>/ChangeLoad\\|ChangeAbility\\|ChangeObject\\|ChangeModel\\|ChangeUrlHelper\\|ChangeTemplate\\|DeleteThis<return>
   " App Controller Strong Params
-  nnoremap <silent> ,acsp adef ChangeAction_params<return>params.require('ChangeRequire').permit(:ChangeAttributes)<return>end<esc>/ChangeAction\\|ChangeRequire\\|ChangeAttributes<return>
+  nnoremap <silent> ,acsp adef ChangeAction_params<return>params.require('ChangeScope').permit(:ChangeAttributes)<return>end<esc>/ChangeAction\\|ChangeScope\\|ChangeAttributes<return>
+  " App Controller Strong params for Fields_for
+  nnoremap <silent> ,acsf adef ChangeAction_ChangeFieldsForScope_params<return>params.require('ChangeScope').require('ChangeFieldsForScope').permit(:ChangeAttributes)<return>end<esc>/ChangeAction\\|ChangeScope\\|ChangeFieldsForScope\\|ChangeAttributes<return>
   " App Controller Strong params with Enum
-  nnoremap <silent> ,acse adef ChangeAction_params<return>ChangeAction_params = params.require('ChangeRequire').permit(:ChangeAttributes)<return>ChangeAction_params[:ChangeEnum] = ChangeAction_params[:ChangeEnum].to_i<return>ChangeAction_params<return>end<esc>/ChangeAction\\|ChangeRequire\\|ChangeAttributes\\|ChangeEnum<return>
-  " App Controller Strong params Array
-  nnoremap <silent> ,acsa adef ChangeArray_ids<return># DeleteThis - if "fields_for" is used, include additional "&& ChangeAction_params[:ChangeFieldsForScope]" for each level of fields_for<return><backspace><backspace>if (ChangeArray_ids = ChangeAction_params[:ChangeArray_ids])<return>ChangeArray_ids<return>else<return>[]<return>end<return>end<esc>/ChangeAction\\|ChangeArray\\|DeleteThis\\|ChangeFieldsForScope<return>
+  nnoremap <silent> ,acse adef ChangeAction_params<return>ChangeAction_params = params.require('ChangeScope').permit(:ChangeAttributes)<return>ChangeAction_params[:ChangeEnum] = ChangeAction_params[:ChangeEnum].to_i<return>ChangeAction_params<return>end<esc>/ChangeAction\\|ChangeScope\\|ChangeAttributes\\|ChangeEnum<return>
+  " App Controller Strong params select Multiple
+  nnoremap <silent> ,acsm adef ChangeArray_ids<return># DeleteThis - if no items are selected, params for scope might not be not sent so safe navigation must be used<return>DeleteThis - add "&.[](ChangeFieldsForScope)" if any fields_for levels are used<return><backspace><backspace>params['ChangeScope']&.[]('ChangeArray_ids') \|\| []<return>end<esc>/ChangeArray\\|DeleteThis\\|ChangeFieldsForScope\\|ChangeScope<return>
   " App Controller Strong params with Logic
-  nnoremap <silent> ,acsl adef ChangeAction_params<return>ChangeAction_params = params.require('ChangeRequire').permit(:ChangeAttributes)<return>ChangeAction_params # insert logic to restrict or clean params<return>ChangeAction_params<return>end<esc>/ChangeAction\\|ChangeRequire\\|ChangeAttributes<return>
+  nnoremap <silent> ,acsl adef ChangeAction_params<return>ChangeAction_params = params.require('ChangeScope').permit(:ChangeAttributes)<return>ChangeAction_params # insert logic to restrict or clean params<return>ChangeAction_params<return>end<esc>/ChangeAction\\|ChangeScope\\|ChangeAttributes<return>
   " App Controller Strong Params full
-  nnoremap <silent> ,acsP adef ChangeAction_params<return>params.require('ChangeRequire').permit(:ChangeAttribute,<return>ChangeArrayAttribute: [],<return>ChangeChildName: [:ChangeAttribute],<return>ChangeChildrenName: [ChangeChildName: [:ChangeAttribute]])<return>end<esc>/ChangeAction\\|ChangeRequire\\|ChangeAttribute\\|ChangeArrayAttribute\\|ChangeChildrenName\\|ChangeChildName<return>
+  nnoremap <silent> ,acsP adef ChangeAction_params<return>params.require('ChangeScope').permit(:ChangeAttribute,<return>ChangeArrayAttribute: [],<return>ChangeChildName: [:ChangeAttribute],<return>ChangeChildrenName: [ChangeChildName: [:ChangeAttribute]])<return>end<esc>/ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeArrayAttribute\\|ChangeChildrenName\\|ChangeChildName<return>
   " App Controller Cancancan authorize Model based
   nnoremap <silent> ,accm aauthorize!(:ChangeAbility, @ChangeObject)<esc>/ChangeAbility\\|ChangeObject<return>
   " App Controller Cancancan authorize Non-model based (feature specific)
