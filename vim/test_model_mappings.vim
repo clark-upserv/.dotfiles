@@ -23,8 +23,12 @@ nnoremap <silent> ,tmba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<ret
   nnoremap <silent> ,tmma atest 'association - has many attached ChangeAssociation' do<return>assert_empty @ChangeObject.ChangeAssociation<return><space><backspace><esc>:call TestsFixturesUploadFile()<return>oassert_not_empty @ChangeObject.ChangeAssociation<return>end<esc>:call TestModelSearch()<return>
 
 " Test Models Scopes
-  " Tests Models SCope
-  nnoremap <silent> ,tmsc atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope.map(&:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id), result<return># DeleteThis - use this for scopes that filter (ie use "where")<return><backspace><backspace><esc>:call TestIncludedNotIncluded()<return>o# DeleteThis - use this for scopes that sort (ie use "oder")<return><backspace><backspace>first = ChangeTable(:ChangeFixture).id<return>second = ChangeTable(:ChangeFixture).id<return>assert result.find_index(first) < result.find_index(second)<return># DeleteThis - use this for scopes that pluck<return><backspace><backspace>ChangeObject = ChangeTable(:ChangeFixture)<return>included = [[ChangeObject.ChangeMethod]]<return>assert_equal included, (result & included)<return>end<esc>:call TestModelSearch()<return>
+  " Tests Models Scope - Where
+  nnoremap <silent> ,tmsw atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope.map(&:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id), result<return><space><backspace><esc>:call TestIncludedNotIncluded()<return>oend<esc>:call TestModelSearch()<return>
+  " Tests Models Scope - Order
+  nnoremap <silent> ,tmso atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope.map(&:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id), result<return>first = ChangeTable(:ChangeFixture).id<return>second = ChangeTable(:ChangeFixture).id<return>assert result.find_index(first) < result.find_index(second)<return>end<esc>:call TestModelSearch()<return>
+  " Tests Models Scope - Pluck
+  nnoremap <silent> ,tmsp atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope<return>assert_equal ChangeClass.CopyScopeMethods, result<return>ChangeObject = ChangeTable(:ChangeFixture)<return>included = []<return># DeleteThis - use this if pluck returns only one item<return><backspace><backspace>included << ChangeObject.ChangeMethod<return># DeleteThis - use this if pluck returns multiple items<return><backspace><backspace>included << [ChangeObject.ChangeMethod, ChangeObject.ChangeMethod]<return>assert_equal included, (result & included)<return>end<esc>:call TestModelSearch()<return>
 
 " Test Models Attributes
   " Tests Models ATtribute

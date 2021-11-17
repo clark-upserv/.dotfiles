@@ -35,7 +35,7 @@
   " Html Form Single Item
   nnoremap <silent> ,hfsi a<%# DeleteThis - if looping several items next to each other, wrap the "each" block in a div with class="d-flex flex-wrap" and give each show and edit partial container class="pr-2" %><return><%= form_with(model: ChangeObject, scope: 'ChangeScope', url: ChangePath_path, method: :ChangeMethod) do \|ChangeForm_form\| %><return><div class="d-flex align-items-center"><return><%# DeleteThis - use text feild or change input type %><return><%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return># DeleteThis - typically looks better to manage input witdh by setting html size attribute; otherwise input width will default to 100% and doesn't look very good usually<return><backspace><backspace>size: ChangeObject.ChangeAttribute.length,<return>class: 'form-control',<return># DeleteThis - make height of the ses edit partial the same height as the ses show partial. This looks better when clicking to edit and also looks way better if looping through multiple times next to teach other (b ecause the edit partial when editing will show up right next to the show partial on either side)<return><backspace><backspace>style: 'height: 26px !important; padding: 3px 6px;',<return><esc>:call HtmlInputMainAttributes()<return>o) %><return>  <a class="pl-3 pr-2 fs-4 c-pointer text-secondary mdi mdi-close-circle-o ChangeSesId-ses-cancel-button"></a><return><button class="pl-2 pr-3 fs-4 btn-no-background text-primary mdi mdi-check-circle do-not-disable"></button><return></div><return><%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute]) %><return><% end %><esc>:call HtmlInputSearch()<return>
   " Html Form Fields For
-  nnoremap <silent> ,hfff a<%# DeleteThis - ChangeModel is optional %><return><%= ChangeThisPls_form.fields_for('ChangeScope', ChangeModel) do \|ChangeThisPls_form\| %><return><% end %><esc>/ChangeThisPls\\|ChangeScope\\|ChangeModel<return>
+  nnoremap <silent> ,hfff a<%# DeleteThis - ChangeModel is optional %><return><%= ChangeThisPls_form.fields_for('ChangeScope', ChangeModel) do \|ChangeThisPls_form\| %><return><% end %><esc>/DeleteThis\\|ChangeThisPls\\|ChangeScope\\|ChangeModel<return>
   " Html Form Left Label
   nmap <silent> ,hfll a<%#<delete> Left label for ChangeAttribute %><return><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return></div><return></div><return><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
   " Html Form Top Label
@@ -95,13 +95,13 @@
   " Html Input Hidden field Tag
   nnoremap <silent> ,hiht a<%= hidden_field_tag(:ChangeThisPls, ChangeThisPls) %><esc>/ChangeThisPls<return>
   " Html Input HIdden field
-  nnoremap <silent> ,hihf a<%= ChangeThisPls_form.hidden_field(:ChangeThisPls, value: ChangeThisPls) %><esc>/ChangeThisPls<return>
+  nnoremap <silent> ,hihi a<%= ChangeThisPls_form.hidden_field(:ChangeThisPls, value: ChangeThisPls) %><esc>/ChangeThisPls<return>
   " Html Input Text Field
-  nnoremap <silent> ,hitf a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hite a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Text Area
   nnoremap <silent> ,hita a<%= ChangeForm_form.text_area(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Number Field
-  nnoremap <silent> ,hinf a<%= ChangeForm_form.number_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'Enter ChangePlaceholder',<return>required: true,<return>size: ChangeSize,<return>min: ChangeMin,<return>max: ChangeMax,<return>step: ChangeStep,<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|ChangeAutocomplete\\|ChangePlaceholder\\|ChangeSize\\|ChangeMin\\|ChangeMax\\|ChangeStep<return>
+  nnoremap <silent> ,hinu a<%= ChangeForm_form.number_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'Enter ChangePlaceholder',<return>required: true,<return>size: ChangeSize,<return>min: ChangeMin,<return>max: ChangeMax,<return>step: ChangeStep,<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|ChangeAutocomplete\\|ChangePlaceholder\\|ChangeSize\\|ChangeMin\\|ChangeMax\\|ChangeStep<return>
   " Html Input CAlendar
   nnoremap <silent> ,hica a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control datetimepicker',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>autocomplete: 'off',<return>data: { 'min-view': '2', 'date-format': 'MM d, yyyy' },<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>:call HtmlInputMainAttributes()<return>o) %><return><esc>:call HtmlInputCalendarMessage()<return>:call HtmlInputSearch()<return>
   " Html Input CAlendar with button
@@ -110,29 +110,29 @@
     execute "normal! a\<%# DeleteThis - value of nil or if value is excluded, text box will be blank and calendar defaults to today. If a value is included, make sure it is a date, not a date time and include correct strftime %>\<return>\<%# DeleteThis - min-view: 0 is 5 minutes; 1 is hour; 2 is date %>\<return>\<%# DeleteThis - date-format: MM is January; mm is 01; m is 1 (no preceding 0); DD is Monday (day of week); dd is 01 (day of month); d is 1 (no preceding 0) %>\<return>\<%# DeleteThis - see https://xdsoft.net/jqplugins/datetimepicker/ for more options %>"
   endfunction
   " Html Input Date Field
-  nnoremap <silent> ,hidf a<%= ChangeForm_form.date_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hida a<%= ChangeForm_form.date_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Time Field
-  nnoremap <silent> ,hiif a<%= ChangeForm_form.time_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hiti a<%= ChangeForm_form.time_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input date time Local Field
-  nnoremap <silent> ,hilf a<%= ChangeForm_form.datetime_local_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hidt a<%= ChangeForm_form.datetime_local_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Month Field
-  nnoremap <silent> ,himf a<%= ChangeForm_form.month_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,himo a<%= ChangeForm_form.month_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Week Field
-  nnoremap <silent> ,hiwf a<%= ChangeForm_form.week_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hiwe a<%= ChangeForm_form.week_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Range Field
-  nnoremap <silent> ,hirf a<%= ChangeForm_form.range_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>in: ChangeRange,<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hira a<%= ChangeForm_form.range_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>in: ChangeRange,<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Search Field
-  nnoremap <silent> ,hisf a<%= ChangeForm_form.search_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hise a<%= ChangeForm_form.search_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Telephone Field
-  nnoremap <silent> ,hitF a<%= ChangeForm_form.telephone_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hitp a<%= ChangeForm_form.telephone_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Url Field
-  nnoremap <silent> ,hiuf a<%= ChangeForm_form.url_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hiur a<%= ChangeForm_form.url_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Color Field
-  nnoremap <silent> ,hicf a<%= ChangeForm_form.color_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hico a<%= ChangeForm_form.color_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>
   " Html Input Email Field
-  nnoremap <silent> ,hief a<%= ChangeForm_form.email_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'email',<return>placeholder: 'Enter ChangePlaceholder',<return>required: true,<return>size: 'ChangeSize',<return>maxlength: 'ChangeMaxLength'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|'email'\\|ChangePlaceholder\\|ChangeSize\\|ChangeMaxLength<return>
+  nnoremap <silent> ,hiem a<%= ChangeForm_form.email_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'email',<return>placeholder: 'Enter ChangePlaceholder',<return>required: true,<return>size: 'ChangeSize',<return>maxlength: 'ChangeMaxLength'<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|'email'\\|ChangePlaceholder\\|ChangeSize\\|ChangeMaxLength<return>
   " Html Input Password field
-  nnoremap <silent> ,hipf a<%= ChangeForm_form.password_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>autofocus: true,<return>placeholder: 'Enter ChangePlaceholder',<return>required: true,<return>size: ChangeSize,<return>minlength: ChangeMinLength) %><esc>/ChangeAttribute\\|ChangeForm\\|ChangePlaceholder\\|ChangeSize\\|ChangeMinLength<return>
+  nnoremap <silent> ,hipa a<%= ChangeForm_form.password_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>autofocus: true,<return>placeholder: 'Enter ChangePlaceholder',<return>required: true,<return>size: ChangeSize,<return>minlength: ChangeMinLength) %><esc>/ChangeAttribute\\|ChangeForm\\|ChangePlaceholder\\|ChangeSize\\|ChangeMinLength<return>
   " Html Input Rich Text
   nnoremap <silent> ,hirt a<%= ChangeThisPls_form.rich_text_area(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
   " Html Input Checkbox Group

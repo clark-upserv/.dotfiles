@@ -35,6 +35,8 @@
   nnoremap <silent> ,amsc ascope :ChangeName, -> { ChangeLogic }<esc>/ChangeName\\|ChangeLogic<return>
   " App Models Scope with Argument(s)
   nnoremap <silent> ,amsa ascope :ChangeName, ->(ChangeArgument) { ChangeLogic }<esc>/ChangeName\\|ChangeArgument\\|ChangeLogic<return>
+  " App Models Scope Multiline
+  nnoremap <silent> ,amsm ascope :ChangeName, lambda { \|ChangeArgument\|<return>ChangeLogic<return>}<esc>/ChangeName\\|ChangeArgument\\|ChangeLogic<return>
   " App Models Scope Order
   nnoremap <silent> ,amso ascope :order_by_ChangeAttributes, -> { order(:ChangeAttribute, 'LOWER(ChangeTable.ChangeAttribute)') }<esc>/ChangeAttributes\\|ChangeTable\\|ChangeAttribute<return>
   nnoremap <silent> ,amsO ascope :order_and_distinct_on_ChangeAttributes, -> { select('DISTINCT ON (ChangeTable.ChangeAttribute, LOWER(ChangeTable.ChangeCaseInsensitiveAttribute)) ChangeTableToAccessAllAttributes.*').order('LOWER(ChangeTable.ChangeAttribute)') }<esc>/ChangeAttributes\\|ChangeTableToAccessAllAttributes\\|ChangeTable\\|ChangeAttribute\\|ChangeCaseInsensitiveAttribute<return>
@@ -56,6 +58,8 @@
   
 
 " Attributes
+  " App Models ATtribute
+  nnoremap <silent> ,amat aattribute :ChangeAttribute<esc>/ChangeAttribute<return>
   " App Models attributes ENum
   nnoremap <silent> ,amen aenum ChangeAttribute: { ChangeValueSymbolOrString: ChangeInteger }, _prefix: true<return># DeleteThis - If attribute will not be displayed, use symbol. If attribute will be displayed (esp. in options for select), use string (this way display does not require processing). If display changes down the road, you may want to refactor to symbol with class method for displays (and opitons for select) and instance method for display (use ,ames for example)<esc>/ChangeAttribute\\|ChangeValueSymbolOrString\\|ChangeInteger\\|DeleteThis<return>
   " App Models attributes ENum

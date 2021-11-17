@@ -52,6 +52,11 @@
   nnoremap <silent> ,rbst astrftime('%A, %B %-d, %Y')<return># DeleteThis - %A gets day spelled out - "Sunday"; %a gets day spelled out abbreviated - "Sun"<return>DeleteThis - %B gets month spelled out - "January"; %b gets month spelled out abbreviated - "Jan"<return>DeleteThis - %d gets day of month (ex 01-31); %-d gets day of month with blank instead of 0 padding (ex 1-31)<return>DeleteThis - %Y gets full year - 2021; %y gets last 2 digits of year - 21<return>DeleteThis - see here for more https://apidock.com/ruby/DateTime/strftime<esc>/%A, %B %-d, %Y\\|DeleteThis<return>
 
 " Ruby Block
+  " b = block
+  " a = block alternate (mostly for multi line lambdas used as method
+  " arguments
+  " o = inline
+  " x = shorthand
   function! RubyBlockBlockInsertMode()
     execute "normal! ado \|\|\<return>end\<esc>\<up>$"
   endfunction
@@ -68,10 +73,6 @@
   inoremap <silent> eachwb each_with_index do \|, index\|<return>end<esc><up>$7<left>i
   inoremap <silent> eachwi each_with_index { \|, index\| ChangeLogic }<esc>/ChangeLogic<return>9<left>i
   " Ruby Block TImes
-  " [block]
-  " [inline (ie 'o' for one liner because 'i' might be another word like
-  " selection or sorting]
-  " [shorthand]
   inoremap <silent> timesb times do \|index\|<return>end<esc>O
   inoremap <silent> timeso times { \|index\| ChangeLogic }<esc>/ChangeLogic<return>
   " Ruby Block MAp
@@ -79,21 +80,21 @@
   nnoremap <silent> ,rbmA amap { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   inoremap <silent> mapb map <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> mapo map { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
-  inoremap <silent> maps map(&:)<left>
+  inoremap <silent> mapx map(&:)<left>
   " Ruby Block SElect
   nnoremap <silent> ,rbse aselect \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
   nnoremap <silent> ,rbsE aselect { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   " [shorthand]
   inoremap <silent> selectb select <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> selecto select { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
-  inoremap <silent> selects select(&:)<left>
+  inoremap <silent> selectx select(&:)<left>
   " Ruby Block REject
   nnoremap <silent> ,rbse areject \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
   nnoremap <silent> ,rbsE areject { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   " [shorthand]
   inoremap <silent> rejectb reject <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> rejecto reject { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
-  inoremap <silent> rejects reject(&:)<left>
+  inoremap <silent> rejectx reject(&:)<left>
   " Ruby Block SOrt
   nnoremap <silent> ,rbso asort do \|a, b\|<retrun>a.ChangeLogic <=> b.ChangeLogic<return>end<esc>/ChangeLogic<return>
   nnoremap <silent> ,rbsO asort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>
@@ -101,20 +102,12 @@
   inoremap <silent> sortb sort do \|a, b\|<return>a.ChangeLogic <=> b.ChangeLogic<return>end<esc>/ChangeLogic<return>cgn
   inoremap <silent> sorto sort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>cgn
   " Ruby Block Lambda
-  " [block]
-  " [inline (ie 'o' for one liner because 'i' might be another word like
-  " selection or sorting]
-  " [shorthand]
   inoremap <silent> lambdab lambda <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> lambdaa lambda { \|\|<return>}<esc><up>$i
   inoremap <silent> lambdao ->() { ChangeLogic }<esc>/ChangeLogic<return>4<left>i
-  inoremap <silent> lambdas lambda(&:ChangeMethod)<esc>/ChangeMethod<return>
+  inoremap <silent> lambdax lambda(&:ChangeMethod)<esc>/ChangeMethod<return>
   " Ruby Block Proc
-  " [block]
-  " [inline (ie 'o' for one liner because 'i' might be another word like
-  " selection or sorting]
-  " [shorthand]
   inoremap <silent> procb proc <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> proca proc { \|\|<return>}<esc><up>$i
   inoremap <silent> proco proc { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
-  inoremap <silent> procs proc(&:ChangeMethod)<esc>/ChangeMethod<return>
+  inoremap <silent> procx proc(&:ChangeMethod)<esc>/ChangeMethod<return>
