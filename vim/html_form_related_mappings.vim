@@ -12,6 +12,8 @@
   nnoremap <silent> ,hsei a<a class="no-href-icon px-3 fs-4 text-primary mdi mdi-edit ChangeSesId-ses-edit-button"></a><esc>/ChangeSesId<return>
   " Html Show edit swap Edit button - Link
   nnoremap <silent> ,hsel a<a class="no-href-link ChangeSesId-ses-edit-button">AddForCreateOrSaveForUpdate</a><esc>/ChangeSesId\\|AddForCreateOrSaveForUpdate<return>
+  " Html Show edit swap Edit button - Class
+  nnoremap <silent> ,hsec aChangeSesId-ses-edit-button<esc>/ChangeSesId<return>
   
 " Html Show
   " Html Show Left Label wrapper
