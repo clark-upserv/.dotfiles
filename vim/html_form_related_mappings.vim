@@ -4,7 +4,7 @@
   " Html Show edit swap BAse
   nnoremap <silent> ,hsba a<div id="ChangeSesId-ses-show"><return><%= render('ChangePath/ChangeSubController/show') %><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/ChangeSubController/edit') %><return></div><esc>/ChangeSesId\\|ChangePath\\|ChangeSubController<return>
   " Html Show edit swap Base for Single item
-  nnoremap <silent> ,hsbs a<div id="ChangeSesId-ses-show"><return><a class="ChangeSesId-ses-edit-button"><return><%= ChangeDisplay %> <return></a><return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/ChangeSubController/edit') %><return></div><esc>/ChangeSesId\\|ChangeDisplay\\|ChangePath\\|ChangeSubController<return>
+  nnoremap <silent> ,hsbs a<div id="ChangeSesId-ses-show" class="ChangeSesId-ses-edit-button"><return><%= ChangeDisplay %> <return></div><return><return><div id="ChangeSesId-ses-edit"><return><%= render('ChangePath/ChangeSubController/edit') %><return></div><esc>/ChangeSesId\\|ChangeDisplay\\|ChangePath\\|ChangeSubController<return>
 
   " Html Show edit swap Edit button - Button
   nnoremap <silent> ,hseb a<a class="btn btn-primary ChangeSesId-ses-edit-button">AddForCreateOrSaveForUpdate</a><esc>/ChangeSesId\\|AddForCreateOrSaveForUpdate<return>
@@ -30,6 +30,9 @@
   nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label (,hflt) %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
   " Html Show Simple Container
   nnoremap <silent> ,hssc a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
+  " Html Show String from Time
+  nnoremap <silent> ,hsst aChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y')<esc>/ChangeObject\\|ChangeAttribute<return>
+  
 
 " Html Form
   " Html Form BAse
@@ -105,11 +108,17 @@
   " Html Input Number Field
   nnoremap <silent> ,hinu a<%= ChangeForm_form.number_field(<return>  :ChangeAttribute,<return>value: ChangeValue,<return>class: 'form-control',<return>autofocus: true,<return>autocomplete: 'ChangeAutocomplete',<return>placeholder: 'Enter ChangePlaceholder',<return>required: true,<return>size: ChangeSize,<return>min: ChangeMin,<return>max: ChangeMax,<return>step: ChangeStep,<return>) %><esc>/ChangeForm\\|ChangeAttribute\\|ChangeValue\\|ChangeAutocomplete\\|ChangePlaceholder\\|ChangeSize\\|ChangeMin\\|ChangeMax\\|ChangeStep<return>
   " Html Input CAlendar
-  nnoremap <silent> ,hica a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control datetimepicker',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>autocomplete: 'off',<return>data: { 'min-view': '2', 'date-format': 'MM d, yyyy' },<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>:call HtmlInputMainAttributes()<return>o) %><return><esc>:call HtmlInputCalendarMessage()<return>:call HtmlInputSearch()<return>
+  nnoremap <silent> ,hica a<%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control datetimepicker',<return><space><backspace><esc>:call HtmlInputCalendarMessage3()<return>o<backspace><backspace>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>placeholder: 'Enter ChangeValue',<return>autocomplete: 'off',<return><esc>:call HtmlInputCalendarMessage1()<return>o<backspace><backspace>data: { 'min-view': '2', 'date-format': 'DD, MM d, yyyy' },<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>:call HtmlInputMainAttributes()<return>o) %><return><space><backspace><esc>:call HtmlInputCalendarMessage2()<return>:call HtmlInputSearch()<return>
   " Html Input CAlendar with button
-  nnoremap <silent> ,hicA a<div class="input-group date datetimepicker" data-min-view="2" data-date-format="DD, MM d, yyyy"><return><%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>autocomplete: 'off',<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>:call HtmlInputMainAttributes()<return>o) %><return><space><space><div class="input-group-append"><return><a class="btn btn-primary cal-button do-not-disable" onclick="removeInlineCalendarsAfterAjax()"><i class="icon-th mdi mdi-calendar"></i></a><return></div><return></div><return><esc> :call HtmlInputCalendarMessage()<return>:call HtmlInputSearch()<return>
-  function! HtmlInputCalendarMessage()
-    execute "normal! a\<%# DeleteThis - value of nil or if value is excluded, text box will be blank and calendar defaults to today. If a value is included, make sure it is a date, not a date time and include correct strftime %>\<return>\<%# DeleteThis - min-view: 0 is 5 minutes; 1 is hour; 2 is date %>\<return>\<%# DeleteThis - date-format: MM is January; mm is 01; m is 1 (no preceding 0); DD is Monday (day of week); dd is 01 (day of month); d is 1 (no preceding 0) %>\<return>\<%# DeleteThis - see https://xdsoft.net/jqplugins/datetimepicker/ for more options %>"
+  nnoremap <silent> ,hicA a<%<esc>:call HtmlInputCalendarMessage1()<return>a %><return><div class="input-group date datetimepicker" data-min-view="2" data-date-format="DD, MM d, yyyy"><return><%= ChangeForm_form.text_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><space><backspace><esc>:call HtmlInputCalendarMessage3()<return>o<backspace><backspace>value: ChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y'),<return>placeholder: 'Enter ChangeValue',<return>autocomplete: 'off',<return>onclick: "removeInlineCalendarsAfterAjax()",<return><esc>:call HtmlInputMainAttributes()<return>o) %><return><space><space><div class="input-group-append"><return><a class="btn btn-primary cal-button do-not-disable" onclick="removeInlineCalendarsAfterAjax()"><i class="icon-th mdi mdi-calendar"></i></a><return></div><return></div><return><esc>:call HtmlInputCalendarMessage2()<return><return>:call HtmlInputSearch()<return>
+  function! HtmlInputCalendarMessage1()
+    execute "normal! a# DeleteThis - update min-view: 0 is 5 minutes; 1 is hour; 2 is date\<return>DeleteThis - update date-format: DD is Monday (day of week); MM is January; mm is 01; m is 1 (no preceding 0); dd is 01 (day of month); d is 1 (no preceding 0)"
+  endfunction
+  function! HtmlInputCalendarMessage2()
+    execute "normal! a\<%# DeleteThis - if value is nil or value excluded, text box will be blank and calendar defaults to today. If a value is included, make sure it is a date as a string, not a date time (ie ues strftime) %>\<return>\<%# DeleteThis - see https://xdsoft.net/jqplugins/datetimepicker/ for more options %>"
+  endfunction
+  function! HtmlInputCalendarMessage3()
+    execute "normal! a# DeleteThis - make sure strftime format matches datetimepicker date format"
   endfunction
   " Html Input Date Field
   nnoremap <silent> ,hida a<%= ChangeForm_form.date_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return><esc>:call HtmlInputMainAttributes()<return>o) %><esc>:call HtmlInputSearch()<return>

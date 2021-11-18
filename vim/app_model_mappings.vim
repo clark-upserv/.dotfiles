@@ -59,7 +59,7 @@
 
 " Attributes
   " App Models ATtribute
-  nnoremap <silent> ,amat aattribute :ChangeAttribute<esc>/ChangeAttribute<return>
+  nnoremap <silent> ,amat aattribute :ChangeAttribute, :ChangeDataTypeOrRemoveThisOption<esc>/ChangeAttribute\\|ChangeDataTypeOrRemoveThisOption<return>
   " App Models attributes ENum
   nnoremap <silent> ,amen aenum ChangeAttribute: { ChangeValueSymbolOrString: ChangeInteger }, _prefix: true<return># DeleteThis - If attribute will not be displayed, use symbol. If attribute will be displayed (esp. in options for select), use string (this way display does not require processing). If display changes down the road, you may want to refactor to symbol with class method for displays (and opitons for select) and instance method for display (use ,ames for example)<esc>/ChangeAttribute\\|ChangeValueSymbolOrString\\|ChangeInteger\\|DeleteThis<return>
   " App Models attributes ENum
