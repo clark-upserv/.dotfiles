@@ -31,7 +31,8 @@
   " Html Show Simple Container
   nnoremap <silent> ,hssc a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
   " Html Show String from Time
-  nnoremap <silent> ,hsst aChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y')<esc>/ChangeObject\\|ChangeAttribute<return>
+  nmap <silent> ,hsst ,rbst
+  "aChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y')<esc>/ChangeObject\\|ChangeAttribute<return>
   
 
 " Html Form
