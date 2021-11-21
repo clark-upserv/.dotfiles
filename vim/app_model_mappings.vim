@@ -83,7 +83,7 @@
   endfunction
   " App Models Validates Search
   function! AppModelsValidatesSearch()
-    let @/ = 'ChangeAttributes\|ChangeAttribute\|ChangeValidation\|%<model>s %<attribute>s %<value>s\|ChangeMethodOrProcOrArray\|255ForStringOrSomeOtherLength\|ChangeThis\|ChangeRange\|DeleteThis\|ChangeAttachmentName\|ChangeMin\|ChangeMax\|ChangeSize\|ChangeByteType\|ChangeWidthInteger\|ChangeHeightInteger\|ChangeItems\|Changemessage\|ChangeLogic\|ChangeValue\|ChangeMessage\|ChangeDescription'
+    let @/ = 'ChangeAttributes\|ChangeAttribute\|ChangeValidation\|%<model>s %<attribute>s %<value>s\|ChangeMethodOrProcOrArray\|255ForStringOrSomeOtherLength\|ChangeThis\|ChangeRange\|DeleteThis\|ChangeAttachmentName\|ChangeMin\|ChangeMax\|ChangeSize\|ChangeByteType\|ChangeWidthInteger\|ChangeHeightInteger\|ChangeItems\|Changemessage\|ChangeLogic\|ChangeValue\|ChangeMessage'
     normal! n
   endfunction
   function! AppModelsValidatesMessage()
@@ -111,4 +111,4 @@
   " App Models Validates Exclusion
   nnoremap <silent> ,amve avalidates :ChangeAttribute, exclusion: {<return>in: [ChangeItems],<return><space><backspace><esc>:call AppModelsValidatesMessage()<return>a}<esc>:call RubyModlesValidatesOptions()<return>:call AppModelsValidatesSearch()<return>
   " App Models Validates Each
-  nnoremap <silent> ,amvE a# ChangeDescription<return><backspace><backspace>validates_each :ChangeAttribute do \|record, attr, value\|<return>record.errors.add(attr, 'ChangeMessage') if ChangeLogic<return>end<esc>:call AppModelsValidatesSearch()<return>
+  nnoremap <silent> ,amvE a# DeleteThis - make sure to add logic so that validation is not run if needed attributes are not present<return>DeleteThis - presence validations should test presence if precsence is needed<return><backspace><backspace>validates_each :ChangeAttribute do \|record, attr, value\|<return>record.errors.add(attr, 'ChangeMessage') if ChangeLogic<return>end<esc>:call AppModelsValidatesSearch()<return>
