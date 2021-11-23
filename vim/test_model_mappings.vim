@@ -31,10 +31,16 @@ nnoremap <silent> ,tmba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<ret
   nnoremap <silent> ,tmsp atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope<return>assert_equal ChangeClass.CopyScopeMethods, result<return>ChangeObject = ChangeTable(:ChangeFixture)<return>included = []<return># DeleteThis - use this if pluck returns only one item<return><backspace><backspace>included << ChangeObject.ChangeMethod<return># DeleteThis - use this if pluck returns multiple items<return><backspace><backspace>included << [ChangeObject.ChangeMethod, ChangeObject.ChangeMethod]<return>assert_equal included, (result & included)<return>end<esc>:call TestModelSearch()<return>
 
 " Test Models Attributes
+  " Tests Models Atributes Base
+  nnoremap <silent> ,tmab atest 'attributes' do<return>ChangeObject = ChangeClass.new<return>end<esc>/ChangeObject\\|ChangeClass<return>
   " Tests Models ATtribute
+  nnoremap <silent> ,tmat a# DeleteThis - if attribute does not specify a datatype, simply call the attribute to ensure no errors<return><backspace><backspace>ChangeObject.ChangeAttribute<return># DeleteThis - if attribute specifies datadype, set to different datatype and assert it is converted (or set to nil if conversion is not possible)<return>DeleteThis - example: ChangeObject.ChangeAttribute = [] should make ChangeObject.ChangeAttribute nil<return><backspace><backspace>ChangeObject.ChangeAttribute = ChangeIncorrectDataType<return>assert_equal ChangeConvertedValueOrNil, ChangeObject.ChangeAttribute<esc>/DeleteThis\\|ChangeObject\\|ChangeIncorrectDataType\\|ChangeAttribute\\|ChangeConvertedValueOrNil<return>
   " Tests Models Attribute Enum
+  nnoremap <silent> ,tmae a[ChangePossibleIntegerValues].each do \|value_for_database\|<return>ChangeObject.ChangeAttribute = value_for_database<return>end<esc>/ChangePossibleIntegerValues\\|ChangeObject\\|ChangeAttribute<return>
   " Tests Models Attributes Hash
+  nnoremap <silent> ,tmah aassert_equal({}, ChangeObject.ChangeAttribute)<esc>/ChangeObject\\|ChangeAttribute<return>
   " Tests Models Attributes Array
+  nnoremap <silent> ,tmaa aassert_equal [], ChangeObject.ChangeAttribute<esc>/ChangeObject\\|ChangeAttribute<return>
 
 " Test Models Callbacks
   " Test Models CAllback
