@@ -183,7 +183,7 @@
       let file = substitute(expand('%:h'), 'javascript/packs', 'controllers', '') . '_controller.rb'
     elseif match(current_file, 'app/views') != -1
       let file = substitute(expand('%:h'), 'views', 'controllers', '') . '_controller.rb'
-    elseif match(current_file, 'test/') != -1
+    elseif match(current_file, 'test/controllers') != -1
       let file = substitute(expand('%'), 'test/controllers', 'app/controllers', '')
       let file = substitute(file, 'controller_test', 'controller', '')
     elseif match(current_file, 'lib/filter_helpers') != -1
