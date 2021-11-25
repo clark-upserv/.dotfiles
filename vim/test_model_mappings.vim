@@ -36,7 +36,7 @@ nnoremap <silent> ,tmba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<ret
   " Tests Models ATtribute
   nnoremap <silent> ,tmat a# DeleteThis - if attribute does not specify a datatype, simply call the attribute to ensure no errors<return><backspace><backspace>ChangeObject.ChangeAttribute<return># DeleteThis - if attribute specifies datadype, set to different datatype and assert it is converted (or set to nil if conversion is not possible)<return>DeleteThis - example: ChangeObject.ChangeAttribute = [] should make ChangeObject.ChangeAttribute nil<return><backspace><backspace>ChangeObject.ChangeAttribute = ChangeIncorrectDataType<return>assert_equal ChangeConvertedValueOrNil, ChangeObject.ChangeAttribute<esc>/DeleteThis\\|ChangeObject\\|ChangeIncorrectDataType\\|ChangeAttribute\\|ChangeConvertedValueOrNil<return>
   " Tests Models Attribute Enum
-  nnoremap <silent> ,tmae a[ChangePossibleIntegerValues].each do \|value_for_database\|<return>ChangeObject.ChangeAttribute = value_for_database<return>end<esc>/ChangePossibleIntegerValues\\|ChangeObject\\|ChangeAttribute<return>
+  nnoremap <silent> ,tmae a# DeleteThis - make sure to include base test for attributes if you haven't already (,tmab)<return>DeleteThis - run through list of possible database values and simply make sure they dont error (no assertions needed)<return><backspace><backspace>[ChangePossibleIntegerValues].each do \|value_for_database\|<return>ChangeObject.ChangeAttribute = value_for_database<return>end<esc>/DeleteThis\\|ChangePossibleIntegerValues\\|ChangeObject\\|ChangeAttribute<return>
   " Tests Models Attributes Hash
   nnoremap <silent> ,tmah aassert_equal({}, ChangeObject.ChangeAttribute)<esc>/ChangeObject\\|ChangeAttribute<return>
   " Tests Models Attributes Array
@@ -65,5 +65,5 @@ nnoremap <silent> ,tmam atest 'attribute instance method - ChangeMethodName' do<
 nnoremap <silent> ,tmqm atest 'query instance method - ChangeMethodName' do<return>end<esc>/ChangeMethodName<return>
 
 " Tests Models Service instance Method
-nnoremap <silent> ,tmsm a# Service methods<return>Simply call methods to ensure no errors (actual logic tested in service test)<return>Service methods that add logic beyond calling service should be tested sepearately<return><backspace><backspace>test 'service instance methods' do<return>end<esc>O
+nnoremap <silent> ,tmsm a# Service methods<return>Simply call methods to ensure no errors (actual logic tested in service test)<return>Service methods that add logic beyond calling service should be tested sepearately<return><backspace><backspace>test 'service instance methods' do<return>end<esc>O<space><backspace><esc>
 nnoremap <silent> ,tmsM atest 'service instance method - ChangeMethodName' do<return># DeleteThis - This test is for a service method that calls a service and adds logic. Create test accordingly.<return><backspace><backspace>end<esc>/ChangeMethodName\\|DeleteThis<return>
