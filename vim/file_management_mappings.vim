@@ -189,6 +189,9 @@
     elseif match(current_file, 'lib/filter_helpers') != -1
       let file = substitute(expand('%'), 'lib/filter_helpers', 'app/controllers', '')
       let file = substitute(file, '_filter_helper.rb', '_controller.rb', '')
+    elseif match(current_file, 'lib/loaders') != -1
+      let file = substitute(expand('%'), 'lib/loaders', 'app/controllers', '')
+      let file = substitute(file, '_loader.rb', '_controller.rb', '')
     elseif match(current_file, 'lib/services') != -1
       let file = substitute(expand('%:h'), 'lib/services', 'app/controllers', '') . '_controller.rb'
     else 
@@ -353,37 +356,26 @@
     endif
   endfunction
 
-  " File Edit TEst
-  nnoremap <silent> <space>fete :call FileEditTest()<return>
-  function FileEditTest()
-    execute ':e' GetTestFile()
-  endfunction
-
-  " File Edit Test Source
-  nnoremap <silent> <space>fets :call FileEditTestSource()<return>
-  function FileEditTestSource()
+  " File Edit LOader
+  nnoremap <silent> <space>felo :call FileEditLoader()<return>
+  function FileEditLoader()
     let current_file = expand('%')
-    let file = substitute(current_file, '_test.rb', '.rb', '')
-    if match(file, 'channel\|controller\|helper\|job\|mailer\|model') != -1
-      let file = substitute(file, 'test', 'app', '')
-    else
-      let file = substitute(file, 'test', 'lib', '')
+    if match(current_file, 'lib/loaders') != -1
+      let file = current_file
+    elseif match(current_file, 'app/controllers') != -1
+      let file = substitute(current_file, 'app/controllers', 'lib/loaders', '')
+      let file = substitute(file, '_controller.rb', '_loader.rb', '')
+    else 
+      let file = 1
     endif
-    execute ':e' file
+    if file == current_file
+      echo 'Already on filter loader'
+    elseif file == 1
+      echo 'Unable to find loader for' current_file
+    else
+      execute ':e' file
+    endif
   endfunction
-
-  " File Edit FIxtures
-  nnoremap <silent> <space>fefi :e test/fixtures/
-  " File Edit Schema
-  nnoremap <silent> <space>fesc :e db/schema.rb<return>
-  " File Edit ROutes
-  nnoremap <silent> <space>fero :e config/routes.rb<return>
-  " File Edit ABility
-  nnoremap <silent> <space>feab :e app/models/ability.rb<return>
-  " File Edit GEmfile
-  nnoremap <silent> <space>fege :e Gemfile<return>
-  " File Edit REadme
-  nnoremap <silent> <space>fere :e README.md<return>
 
   " File Edit Service
   nnoremap <silent> <space>fese :call FileEditService()<return>
@@ -415,6 +407,38 @@
       endif
     endif
   endfunction
+
+  " File Edit TEst
+  nnoremap <silent> <space>fete :call FileEditTest()<return>
+  function FileEditTest()
+    execute ':e' GetTestFile()
+  endfunction
+
+  " File Edit Test Source
+  nnoremap <silent> <space>fets :call FileEditTestSource()<return>
+  function FileEditTestSource()
+    let current_file = expand('%')
+    let file = substitute(current_file, '_test.rb', '.rb', '')
+    if match(file, 'channel\|controller\|helper\|job\|mailer\|model') != -1
+      let file = substitute(file, 'test', 'app', '')
+    else
+      let file = substitute(file, 'test', 'lib', '')
+    endif
+    execute ':e' file
+  endfunction
+
+  " File Edit FIxtures
+  nnoremap <silent> <space>fefi :e test/fixtures/
+  " File Edit Schema
+  nnoremap <silent> <space>fesc :e db/schema.rb<return>
+  " File Edit ROutes
+  nnoremap <silent> <space>fero :e config/routes.rb<return>
+  " File Edit ABility
+  nnoremap <silent> <space>feab :e app/models/ability.rb<return>
+  " File Edit GEmfile
+  nnoremap <silent> <space>fege :e Gemfile<return>
+  " File Edit REadme
+  nnoremap <silent> <space>fere :e README.md<return>
 
   
   
