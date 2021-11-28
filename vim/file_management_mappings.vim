@@ -186,9 +186,6 @@
     elseif match(current_file, 'test/controllers') != -1
       let file = substitute(expand('%'), 'test/controllers', 'app/controllers', '')
       let file = substitute(file, 'controller_test', 'controller', '')
-    elseif match(current_file, 'lib/filter_helpers') != -1
-      let file = substitute(expand('%'), 'lib/filter_helpers', 'app/controllers', '')
-      let file = substitute(file, '_filter_helper.rb', '_controller.rb', '')
     elseif match(current_file, 'lib/loaders') != -1
       let file = substitute(expand('%'), 'lib/loaders', 'app/controllers', '')
       let file = substitute(file, '_loader.rb', '_controller.rb', '')
@@ -335,27 +332,6 @@
     endif
   endfunction
 
-  " File Edit Filter Helper
-  nnoremap <silent> <space>fefh :call FileEditFilterHelper()<return>
-  function FileEditFilterHelper()
-    let current_file = expand('%')
-    if match(current_file, 'lib/filter_helpers') != -1
-      let file = current_file
-    elseif match(current_file, 'app/controllers') != -1
-      let file = substitute(current_file, 'app/controllers', 'lib/filter_helpers', '')
-      let file = substitute(file, '_controller.rb', '_filter_helper.rb', '')
-    else 
-      let file = 1
-    endif
-    if file == current_file
-      echo 'Already on filter helper file'
-    elseif file == 1
-      echo 'Unable to find filter helper for' current_file
-    else
-      execute ':e' file
-    endif
-  endfunction
-
   " File Edit LOader
   nnoremap <silent> <space>felo :call FileEditLoader()<return>
   function FileEditLoader()
@@ -369,7 +345,7 @@
       let file = 1
     endif
     if file == current_file
-      echo 'Already on filter loader'
+      echo 'Already on loader'
     elseif file == 1
       echo 'Unable to find loader for' current_file
     else
