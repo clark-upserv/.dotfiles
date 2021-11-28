@@ -33,9 +33,9 @@
   " Html Show Simple Container
   nnoremap <silent> ,hssc a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
   " Html Show String from Time
-  nmap <silent> ,hsst ,rbst
-  "aChangeObject.ChangeAttribute.try(:strftime, '%A, %B %-d, %Y')<esc>/ChangeObject\\|ChangeAttribute<return>
-  
+  nnoremap <silent> ,hsst a<div class="sse"><%= ChangeObject.ChangeDate.try(:strftime, '%A, %B %-d, %Y') %></div><return><%# DeleteThis - for more details on strftime, use (,rbst) %><esc>/ChangeObject\\|ChangeDate<return>
+  " Html Show Text Area
+  nnoremap <silent> ,hsta a<div class="sse"><%= simple_format(ChangeObject.ChangeTextArea) %></div><esc>/ChangeObject\\|ChangeTextArea<return>
 
 " Html Form
   " Html Form BAse
