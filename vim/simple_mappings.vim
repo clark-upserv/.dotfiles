@@ -18,6 +18,8 @@
   inoremap <silent> <return> <space><backspace><return>
   " ruby curley brace spacing
   inoremap <silent> {{ {<space><space>}<left><left>
+  " ruby curley brace entered
+  inoremap <silent> {<return> {<return>}<esc>O
   " bar options
   inoremap <silent> <bar><bar><bar> <bar><bar><left>
   inoremap <silent> <bar><bar><space> <bar><bar><space>

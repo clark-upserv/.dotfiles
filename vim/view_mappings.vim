@@ -33,7 +33,7 @@
   " View Page Body Stacked tabs
   nnoremap <silent> ,vpbs :read ../templates/views/page/body_stacked_tabs.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis\\|ChangeObject<return>
   " View Page Body Full height columns
-  nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeTemplate\\|ChangeColumnName\\|background-color: ChangeBackgroundColor\\|ChangeWidth\\|overflow-y: scroll\\|DeleteThis\\|ChangePath<return>
+  nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeTemplate\\|ChangeColumnName\\|ChangeWidth\\|DeleteThis\\|ChangePath\\|ChangeMinScreenSize<return>
   " View Page Tabs Base
   nnoremap <silent> ,vptb :read ../templates/views/page/tabs_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangePathHelper<return>
   " View Page Stacked tabs Helper

@@ -44,3 +44,31 @@ nnoremap <silent> ,heol a<ol><return><li>ChangeThisPls</li><return></ol><esc>/Ch
 nnoremap <silent> ,heul a<ul><return><li>ChangeThisPls</li><return></ul><esc>/ChangeThisPls<return>
 " Html Elements CUstom
 nnoremap <silent> ,hecu a<ChangeThisPls></ChangeThisPls><esc>/ChangeThisPls<return>
+" Html Elements Ordered List
+nnoremap <silent> ,heol a<ol><return><% ChangeThisPls.each do \|ChangeThisPls\| %><return><li>ChangeThisPls</li><return><% end %><return></ol><esc>/ChangeThisPls<return>
+" Html Elements Unordered List
+nnoremap <silent> ,heul a<ul><return><% ChangeThisPls.each do \|ChangeThisPls\| %><return><li>ChangeThisPls</li><return><% end %><return></ul><esc>/ChangeThisPls<return>
+" Html Elements ANchor
+nnoremap <silent> ,hean a<%= link_to(ChangeDisplay, ChangePath_path) %><esc>/ChangeDisplay\\|ChangePath<return>
+" Html Elements Anchor with Class
+nnoremap <silent> ,heac a<%= link_to(ChangeDisplay, ChangePath_path, class: 'ChangeClass') %><esc>/ChangeDisplay\\|ChangePath\\|ChangeClass<return>
+" Html Elements Anchor Icon (classes only)
+nnoremap <silent> ,heai aicon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon<esc>/ChangeColor\\|ChangeIcon<return>
+" Html Elements Anchor Icon (full)
+nnoremap <silent> ,heaI a<%= link_to('', ChangePath_path, class: 'icon px-3 fs-4 text-ChangeColor mdi mdi-ChangeIcon') %><esc>/ChangePath\\|ChangeColor\\|ChangeIcon<return>
+" Html Elements Anchor Button (classes only)
+nnoremap <silent> ,heab abtn btn-ChangeColor<esc>/ChangeColor<return>
+" Html Elements Anchor Button (full)
+nnoremap <silent> ,heaB a<%= link_to(ChangeDisplay, ChangePath_path, class: 'btn btn-ChangeColor') %><esc>/ChangeDisplay\\|ChangePath\\|ChangeColor<return>
+" Html Elements Anchor Ajax
+nnoremap <silent> ,heaa a<%= link_to(ChangeDisplay, ChangePath_path, method: :ChangeMethod, remote: true) %><esc>/ChangeDisplay\\|ChangePath\\|ChangeMethod<return>
+" Html Elements Anchor No href
+nnoremap <silent> ,hean a<%= content_tag('A', ChangeDisplay, class: "no-href-link no-href-icon") %><return><esc>:call NoHrefComment()<return>/ChangeDisplay\\|no-href-link\\|no-href-icon\\|DeleteThis<return>
+" Html Elements Anchor Modal
+nnoremap <silent> ,heam a<%= content_tag('A', ChangeDisplay, class: 'no-href-link no-href-icon', data: { toggle: 'modal', target: '#ChangeModalId_modal' }) %><return><esc>:call NoHrefComment()<return>o<div id="ChangeModalId_modal" class="modal fade" tabindex="-1" role="dialog"><return><%= render('ChangePath/ChangeTemplate_ChangeModal_modal') %><return></div><esc>/ChangeDisplay\\|ChangeColor\\|no-href-link\\|no-href-icon\\|DeleteThis\\|ChangeModalId\\|ChangeErbIfNecessary\\|ChangePath\\|ChangeTemplate\\|ChangeModal<return>
+" Html Elements Anchor Remote (attributes only)
+nnoremap <silent> ,hear a remote: true, method: :ChangeMethod,<esc>/ChangeMethod<return>
+" Html Elements Anchor Remote (full)
+nnoremap <silent> ,heaR a<%= link_to(ChangeDisplay, ChangePath_path, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangePath\\|ChangeMethod<return>
+" Html Elements IMage
+nnoremap <silent> ,heim a<%= image_tag(ChangeSource, class: 'img_base', alt: 'ChangeAlt', width: 'ChangeWidth', height: 'ChangeHeight') %><esc>/ChangeSource\\|ChangeAlt\\|ChangeWidth\\|ChangeHeight<return>
