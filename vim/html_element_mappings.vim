@@ -71,4 +71,4 @@ nnoremap <silent> ,hear a remote: true, method: :ChangeMethod,<esc>/ChangeMethod
 " Html Elements Anchor Remote (full)
 nnoremap <silent> ,heaR a<%= link_to(ChangeDisplay, ChangePath_path, remote: true, method: :ChangeMethod) %><esc>/ChangeDisplay\\|ChangePath\\|ChangeMethod<return>
 " Html Elements IMage
-nnoremap <silent> ,heim a<%= image_tag(ChangeSource, class: 'img_base', alt: 'ChangeAlt', width: 'ChangeWidth', height: 'ChangeHeight') %><esc>/ChangeSource\\|ChangeAlt\\|ChangeWidth\\|ChangeHeight<return>
+nnoremap <silent> ,heim a<%= image_tag(ChangeSource, class: 'img_rounded_corners', alt: 'ChangeAlt', width: 'ChangeWidth', height: 'ChangeHeight') %><esc>/ChangeSource\\|ChangeAlt\\|ChangeWidth\\|ChangeHeight<return>
