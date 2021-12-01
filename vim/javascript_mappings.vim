@@ -24,9 +24,9 @@
   " Javascript jQiery html
   nnoremap <silent> ,jqht ahtml("ChangeHtml")<esc>/ChangeHtml<return>
   " Javascript jQiery html (full)
-  nmap <silent> ,jqhT ahtml("<%= escape_javascript(render(ChangeRender)) %>")<esc>/ChangeRender<return><n
+  nnoremap <silent> ,jqhT ahtml("<%= escape_javascript(render(ChangeRender)) %>")<esc>/ChangeRender<return>n
   " Javascript jQiery EAch
-  nmap <silent> ,jqea aeach(function(index){<return>})<esc>,,O
+  nnoremap <silent> ,jqea aeach(function(index){<return>})<esc>O
 
 " Javascript Vanilla
   " Javascript Vanilla IF

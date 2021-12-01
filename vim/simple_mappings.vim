@@ -19,7 +19,7 @@
   " ruby curley brace spacing
   inoremap <silent> {{ {<space><space>}<left><left>
   " ruby curley brace entered
-  inoremap <silent> {<return> {<return>}<esc>O
+  inoremap <silent> {<return> {<return><space><backspace><return>}<up><tab>
   " bar options
   inoremap <silent> <bar><bar><bar> <bar><bar><left>
   inoremap <silent> <bar><bar><space> <bar><bar><space>
@@ -62,6 +62,8 @@
   " paste word and copy word just replaced
   nnoremap <silent> = viwp
   vmap <silent> = p
+  " idk why p in visual mode isn't working... but this fixes it.
+  vnoremap <silent> p p
   " redo
   nnoremap <S-u> <C-r>
   " o and O but remain in normal mode

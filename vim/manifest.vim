@@ -71,4 +71,7 @@ so ~/.dotfiles/vim/misc_process_mappings.vim
   nmap <silent> ,mdf $<down>,mdd
   " Misc. Df but add <return> between each line
   nmap <silent> ,mdr $<down>,mddi<lt>return><esc>
-  nmap <silent> ,mmm :let @+ = '<div id="tabs_container" class="d-none d-md-block">'<return>/tabs_container<return>O<space><backspace><esc>p<down>dd
+  nmap <silent> ,mmm :let @+ = ", html_attributes: 'class=\"input_error ses-single\"'"<return>p
+  
+  
+  
