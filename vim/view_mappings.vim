@@ -47,13 +47,13 @@
   " View Card Container Element
   nnoremap <silent> ,vcce o<%# ChangeCardName card %><return><div id="ChangeCardName_card_container"><return><%= render('ChangePath/ChangeTemplate_ChangeCardName_card') %><return></div><esc>/ChangeCardName\\|ChangePath\\|ChangeTemplate<return>
   " View Card Contents Base
-  nnoremap <silent> ,vccb :read ../templates/views/card/contents_base.html.erb<return>/DeleteThis<return>
+  nnoremap <silent> ,vccb :read ../templates/views/card/contents_base.html.erb<return>ggdd/DeleteThis<return>
   " View Card Contents WIde
-  nnoremap <silent> ,vccw :read ../templates/views/card/contents_wide.html.erb<return>/DeleteThis<return>
+  nnoremap <silent> ,vccw :read ../templates/views/card/contents_wide.html.erb<return>ggdd/DeleteThis<return>
   " View Card Contents Full
-  nnoremap <silent> ,vccf :read ../templates/views/card/contents_full.html.erb<return>/DeleteThis<return>
+  nnoremap <silent> ,vccf :read ../templates/views/card/contents_full.html.erb<return>ggdd/DeleteThis<return>
   " View Card Contents Non-Card
-  nnoremap <silent> ,vccn :read ../templates/views/card/contents_non_card.html.erb<return>/DeleteThis<return>
+  nnoremap <silent> ,vccn :read ../templates/views/card/contents_non_card.html.erb<return>ggdd/DeleteThis<return>
   " View Card Header Base
   nnoremap <silent> ,vchb :read ../templates/views/card/header_base.html.erb<return>/ChangeThisPls<return>
   " View Card Body Single show
@@ -73,8 +73,10 @@
   
 
 " View Modals
+  " View Mdoels Info Modal and button
+  nmap <silent> ,vmim :read ../templates/views/modals/info_modal_and_button.html.erb<return>/ChangeModalId\\|ChangeTitle\\|ChangeContent<return>
   " View Models BAse
-  nnoremap <silent> ,vmba :read ../templates/views/modals/base.html.erb<return>/DeleteThis<return>
+  nnoremap <silent> ,vmba :read ../templates/views/modals/base.html.erb<return>ggdd/DeleteThis<return>
   " View Models Contents Base
   nnoremap <silent> ,vmcb :read ../templates/views/modals/contents_base.html.erb<return>/DeleteThis\\|OK<return>
   " View Models Contents Destroy
@@ -87,6 +89,4 @@
   nnoremap <silent> ,vmhb :read ../templates/views/modals/header_base.html.erb<return>/ChangeIconColor\\|DeleteThis\\|ChangeIconType\\|ChangeTitle<return>
   " View Mdoels Close button Group
   nmap <silent> ,vmcg :read ../templates/views/modals/close_button_base.html.erb<return>/DeleteThis<return>
-  " View Mdoels Info Modal and button
-  nmap <silent> ,vmim :read ../templates/views/modals/info_modal_and_button.html.erb<return>/ChangeModalId\\|ChangeTitle\\|ChangeContent<return>
 

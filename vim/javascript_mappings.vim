@@ -41,6 +41,10 @@
   nnoremap <silent> ,jvte aChangeBoolean ? ChangeTrueResult : ChangeFalseResult<esc>/ChangeBoolean\\|ChangeTrueResult\\|ChangeFalseResult<return>
   " Javascrip Vanilla FOr
   nnoremap <silent> ,jvfo afor (ChangeThisPls of ChangeThisPls) {<return>}<esc>/ChangeThisPls<return>
+  inoremap <silent> forjv for (ChangeThisPls of ChangeThisPls) {<return>}<esc>/ChangeThisPls<return>
+  " Javascrip Vanilla FOr Each (doesn't seem to work???)
+  nnoremap <silent> ,jvfe aforEach(function(ChangeVar, index){<return>})<esc>/ChangeVar<return>
+  inoremap <silent> forEach forEach(function(ChangeVar, index){<return>})<esc>/ChangeVar<return>
   " Javascript Vanilla FUnction
   nnoremap <silent> ,jvfu afunction ChangeThisPls(){<return>}<esc>/ChangeThisPls<return>
   " Javascript Vanilla Get Attribute
