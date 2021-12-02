@@ -62,7 +62,7 @@ so ~/.dotfiles/vim/misc_process_mappings.vim
 
 " Misc. mapping
   " Misc. Reload Source
-  nnoremap <silent> ,mrs :so ~/.dotfiles/vim/manifest.vim<return>
+  nnoremap <silent> ,mrs :so ~/.dotfiles/vim/manifest.vim<return>:echo "Source reloaded"<return>
   " Misc. DD but combine to previous line instead of delete line  (I<tab>
   " makes sure there is at least something on the line because viwx on empty
   " line deletes entire line and then grabs following line)

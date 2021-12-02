@@ -1,3 +1,7 @@
+
+    "" close terminal buffer if there are no other listed buffers ie terminal is last buffer
+    "" and only one window exists
+    "elseif len(map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')) == 1
 noremap <silent> <A-left> :call GoToNextbuf(0)<return>
 noremap <silent> <A-right> :call GoToNextbuf(1)<return>
 noremap <silent> <C-k> :call GoToNextbuf(0)<return>
@@ -57,14 +61,15 @@ function! ClearBuffer()
   " close it or create new ones
   if &buftype == 'terminal'
     " simply close terminal window if there are mutliple windows but don't close terminal buffer
-    if winnr() > 1
-      execute ':close'
-    " close terminal buffer if there are no other listed buffers ie terminal is last buffer
-    " and only one window exists
-    elseif len(map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')) == 1
-      execute ':bd!'
-    " simply go to next buffer if there are other buffers
-    else
+    "if winnr('$') > 1
+    "  call GoToNextbuf(1)
+    "  execute ':close'
+    "" close terminal buffer if there are no other listed buffers ie terminal is last buffer
+    "" and only one window exists
+    "elseif len(map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')) == 1
+    "  execute ':bd!'
+    "" simply go to next buffer if there are other buffers
+    "else
       call GoToNextbuf(1)
       " if all remaining buffers are terminals, then GoToNextbuf will result
       " in landing on the same terminal buffer that it started on (this would only happen if
@@ -74,14 +79,18 @@ function! ClearBuffer()
       " ahead and close terminal buffer
       if buf_number == bufnr()
         execute 'bd!'
-      endif
+    "  endif
     endif 
   " close buffer if not terminal
   else
     " go to next buffer so closing buffer doesn't close window if there are
     " mutliple windows
-    if winnr() > 1
-      call GoToNextbuf(1)
+    if winnr('$') > 1
+      " if current buffer is file explorer, going to next buf to left
+      " (GoToNextbuf(0)) will take you back to the buffer you were on before
+      " the file explorer. Idk why but it works and GoToNextbuf(1) does not
+      " work so I'm keeping it as is lol eeeeek wooof
+      call GoToNextbuf(0)
       " if next buffer is same as current buffer, then there is only one
       " non-terminal / regular buffer left. Close window instead 
       if buf_number == bufnr()
