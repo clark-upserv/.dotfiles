@@ -50,27 +50,48 @@ endfunction
 " Buffer Delete
 nnoremap <space>bd :call ClearBuffer()<return>
 function! ClearBuffer()
+  let buf_number = bufnr()
+  " normally, we don't close terminal buffer but rather switch to other buffer
+  " because we like to keep terminal buffer with all previous content /
+  " commands and we only want to have one terminal buffer so we try to never
+  " close it or create new ones
   if &buftype == 'terminal'
-    " close terminal window if there are multiple windows
+    " simply close terminal window if there are mutliple windows but don't close terminal buffer
     if winnr() > 1
       execute ':close'
-    " close terminal buffer if there are no other listed buffers and only one
-    " window
+    " close terminal buffer if there are no other listed buffers ie terminal is last buffer
+    " and only one window exists
     elseif len(map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')) == 1
       execute ':bd!'
-    " if go to next buffer if there are multiple buffers
+    " simply go to next buffer if there are other buffers
     else
-      let buf = bufnr()
       call GoToNextbuf(1)
-      " clsoe buffer if next buffer is the same buffer (ie all buffers are
-      " terminals
-      if buf == bufnr()
+      " if all remaining buffers are terminals, then GoToNextbuf will result
+      " in landing on the same terminal buffer that it started on (this would only happen if
+      " somehow multiple terminal buffers and no other non-terminal /
+      " non-special buffers remaining which shoulding happen because we try to
+      " only keep one terminal buffer but it could happen). In this case, go
+      " ahead and close terminal buffer
+      if buf_number == bufnr()
         execute 'bd!'
       endif
     endif 
   " close buffer if not terminal
   else
-    execute ':bd'
+    " go to next buffer so closing buffer doesn't close window if there are
+    " mutliple windows
+    if winnr() > 1
+      call GoToNextbuf(1)
+      " if next buffer is same as current buffer, then there is only one
+      " non-terminal / regular buffer left. Close window instead 
+      if buf_number == bufnr()
+        execute ':close'
+      else
+        execute ':bd' . buf_number
+      endif
+    else
+      execute ':bd' . buf_number
+    endif
   endif
 endfunction
 nnoremap <space>bD :bd!<return>
@@ -78,6 +99,7 @@ nnoremap <space>bD :bd!<return>
 nnoremap <space>bc :call ClearBuffers()<return>
 function! ClearBuffers()
   " listed is buffers in tabs; loaded is basiclly listed + any loaded files
+  " 
   " that are not in the tabs - only example I have of this is nerd tree.
   " Not hidden is any loaded buffer in a window plus all other non-loaded buffers.
   " We want to clear the listed_hidden.
