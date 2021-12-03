@@ -29,11 +29,13 @@
   " View Page Header Base
   nnoremap <silent> ,vphb :read ../templates/views/page/header_base.html.erb<return>/ChangeTitle\\|ChangeDisplay\\|ChangePathHelper\\|DeleteThis<return>
   " View Page Body Base
-  nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis<return>
+  nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/DeleteThis<return>
   " View Page Body Stacked tabs
   nnoremap <silent> ,vpbs :read ../templates/views/page/body_stacked_tabs.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis\\|ChangeObject<return>
   " View Page Body Full height columns
   nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeTemplate\\|ChangeColumnName\\|ChangeWidth\\|DeleteThis\\|ChangePath\\|ChangeMinScreenSize<return>
+  " View Page Tabs Container
+  nnoremap <silent> ,vptc a<%# Page tabs %><return><div id="page_tabs_container"><return><%= render('ChangePath/ChangeTemplate_tabs', tab: @tab) %><return></div><esc>/ChangePath\\|ChangeTemplate<return>
   " View Page Tabs Base
   nnoremap <silent> ,vptb :read ../templates/views/page/tabs_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangePathHelper<return>
   " View Page Stacked tabs Helper

@@ -99,9 +99,8 @@ function! ClearBuffer()
     " assume the window was meant to be delted (like the help window)
     " 
     " 
-    " actually I'm editing below to include logic for certain buffers bassed
-    " on their name (file explorer is vim, nerd tree is NERD_tree[some
-    " number])
+    " actually I'm editing below to include logic for file explorer buffers 
+    " (file explorer buf name is the same as expand('%')
     " basically delete buffer but not window if coming from file explorer (and
     " try to open buffer you came from but if you can't then just go to next
     " buffer). Otherwise, delete buffer without changing buffers first which
@@ -111,7 +110,7 @@ function! ClearBuffer()
     " if not listed
     if filter(copy(getbufinfo()), 'v:val.bufnr == ' . buf_number)[0].listed == 0 
       " if file explorer
-      if bufname() == 'vim' 
+      if bufname() == expand('%')
         " try to go to buffer you came from 
         if get(g:, 'came_from_buf_num', 0)
           execute ':b ' . g:came_from_buf_num
