@@ -1,12 +1,8 @@
-
-    "" close terminal buffer if there are no other listed buffers ie terminal is last buffer
-    "" and only one window exists
-    "elseif len(map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')) == 1
-noremap <silent> <A-left> :call GoToNextbuf(0)<return>
-noremap <silent> <A-right> :call GoToNextbuf(1)<return>
-noremap <silent> <C-k> :call GoToNextbuf(0)<return>
-noremap <silent> <C-l> :call GoToNextbuf(1)<return>
-function! GoToNextbuf(direction)
+noremap <silent> <A-left> :call GoToNextBuf(0)<return>
+noremap <silent> <A-right> :call GoToNextBuf(1)<return>
+noremap <silent> <C-k> :call GoToNextBuf(0)<return>
+noremap <silent> <C-l> :call GoToNextBuf(1)<return>
+function! GoToNextBuf(direction)
   if a:direction == 1
     let adj = 1
   else
@@ -55,55 +51,99 @@ endfunction
 nnoremap <space>bd :call ClearBuffer()<return>
 function! ClearBuffer()
   let buf_number = bufnr()
-  " normally, we don't close terminal buffer but rather switch to other buffer
+  " normally, we don't delete terminal buffer but rather switch to other buffer
   " because we like to keep terminal buffer with all previous content /
   " commands and we only want to have one terminal buffer so we try to never
-  " close it or create new ones
+  " delete it or create new ones
   if &buftype == 'terminal'
-    " simply close terminal window if there are mutliple windows but don't close terminal buffer
-    "if winnr('$') > 1
-    "  call GoToNextbuf(1)
-    "  execute ':close'
-    "" close terminal buffer if there are no other listed buffers ie terminal is last buffer
-    "" and only one window exists
-    "elseif len(map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')) == 1
-    "  execute ':bd!'
-    "" simply go to next buffer if there are other buffers
-    "else
-      call GoToNextbuf(1)
-      " if all remaining buffers are terminals, then GoToNextbuf will result
-      " in landing on the same terminal buffer that it started on (this would only happen if
-      " somehow multiple terminal buffers and no other non-terminal /
-      " non-special buffers remaining which shoulding happen because we try to
-      " only keep one terminal buffer but it could happen). In this case, go
-      " ahead and close terminal buffer
-      if buf_number == bufnr()
-        execute 'bd!'
-    "  endif
+    " simply go to next buffer if there are other buffers
+    call GoToNextBuf(1)
+    " if all remaining buffers are terminals, then GoToNextBuf will result
+    " in landing on the same terminal buffer that it started on (this would only happen if
+    " somehow multiple terminal buffers and no other non-terminal /
+    " non-special buffers remaining which shoulding happen because we try to
+    " only keep one terminal buffer but it could happen). In this case, go to
+    " next buffer (if there is one) and go ahead and delete current terminal buffer
+    if buf_number == bufnr()
+      let next_buf_number = NextBuf(1)
+      execute ':b ' . next_buf_number
+      " ! is needed to delete terminal buffer
+      execute 'bd! ' . buf_number
     endif 
-  " close buffer if not terminal
-  else
-    " go to next buffer so closing buffer doesn't close window if there are
-    " mutliple windows
-    if winnr('$') > 1
-      " if current buffer is file explorer, going to next buf to left
-      " (GoToNextbuf(0)) will take you back to the buffer you were on before
-      " the file explorer. Idk why but it works and GoToNextbuf(1) does not
-      " work so I'm keeping it as is lol eeeeek wooof
-      call GoToNextbuf(0)
+ " if not terminal but there are unsaved changes - send warning
+  elseif  &modified == 1
+    echo "Buffer has unsaved changes. Please save or execute :bd!"
+  " delete buffer if not terminal and all changes saved
+  else 
+    " NOTE: we will go to next buffer first, THEN delete the buffer. We do
+    " this because if we simply delete buffer and there are multiple windows,
+    " then deleting the buffer will also close the window which i find
+    " annoying because I like to set up my windows as columns and so when I
+    " delete a buffer, I would prefer the window to remain and be filled with
+    " the next buffer.
+    " This creats a minor problem when deleting non listed buffers because
+    " when you open a non-listed buffer, the next buffer is not necessary the
+    " buffer you would expect. For example, if you are on buffer 1 and then
+    " opn the file eplorer and then delete the file explorer buffer, you would
+    " expect it to go back to buffer 1 (in fact this is excactly what happens
+    " if there is only one window and you do :bd. My goal here is to replicate
+    " that when there are multiple windows)
+    " In order for this to work, we need to know the previous buffer number. I
+    " am not sure if there is a better way to do it so for now, on certain
+    " functions, I am settinga global variable g:came_from_buf_num when I open
+    " a non-listed buffer. 
+    " So, first check if we are on a non-listed buffer
+    " If we are, then check and see if g:came_from_buf_num exists
+    " If it does, then go to that buffer and delete the non-listed buffer
+    " If not, then just delete the buffer and if we are on multiple windows,
+    " assume the window was meant to be delted (like the help window)
+    " 
+    " 
+    " actually I'm editing below to include logic for certain buffers bassed
+    " on their name (file explorer is vim, nerd tree is NERD_tree[some
+    " number])
+    " basically delete buffer but not window if coming from file explorer (and
+    " try to open buffer you came from but if you can't then just go to next
+    " buffer). Otherwise, delete buffer without changing buffers first which
+    " will also close window (which is actually what we want for help windows
+    " and nerd tree)
+    " 
+    " if not listed
+    if filter(copy(getbufinfo()), 'v:val.bufnr == ' . buf_number)[0].listed == 0 
+      " if file explorer
+      if bufname() == 'vim' 
+        " try to go to buffer you came from 
+        if get(g:, 'came_from_buf_num', 0)
+          execute ':b ' . g:came_from_buf_num
+        " otherwise, go to to the next buffer
+        else
+          call GoToNextBuf(1)
+        endif
+      endif
+      " delete the non-listed buffer
+      execute ':bd ' . buf_number
+    " otherwise, go to the next buffer and delete the buffer you wanted to
+    " delete.
+    else
+      call GoToNextBuf(1)
       " if next buffer is same as current buffer, then there is only one
-      " non-terminal / regular buffer left. Close window instead 
+      " non-terminal / regular buffer left. Go to next buffer (if there is
+      " one) even if it's terminal and close current. If there are no other
+      " buffers, this will delete the buffer and close windows if there are
+      " mulitple widnows
       if buf_number == bufnr()
-        execute ':close'
+        let next_buf_number = NextBuf(1)
+        execute ':b ' . next_buf_number
+        execute ':bd ' . buf_number
       else
         execute ':bd' . buf_number
       endif
-    else
-      execute ':bd' . buf_number
     endif
   endif
 endfunction
+
 nnoremap <space>bD :bd!<return>
+
 " Buffer Clear
 nnoremap <space>bc :call ClearBuffers()<return>
 function! ClearBuffers()
@@ -119,25 +159,7 @@ function! ClearBuffers()
     endif
   endfor
 endfunction
-" searched stach overflow far and wide for these examples and don't know
-" where to keep them...
-" fitler for these attributes and get all info for those that pass:
-"   echo getbufinfo({'bufloaded': 1, 'buflisted': 1})
-" get buffer numbers only in an array
-"   echo map(copy(getbufinfo()), 'v:val.bufnr')
-" get filter for these attributes and buffer numbers only in an array
-"   echo map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')
-"   echo map(filter(copy(getbufinfo()), 'v:val.hidden == 1 && v:val.listed == 1'), 'v:val.bufnr')
-" rather than doing copy or filter / copy, you can also do:
-"  let l:blist = getbufinfo()
-"  let l:listed_hidden = []
-"  for l:item in l:blist
-"    if l:item.listed == 1 && l:item.hidden == 1
-"      call add(l:listed_hidden, l:item.bufnr)
-"    endif
-"  endfor
-"  NOTE: in vim loops, you can use 'continue' and it has the same effect as
-"  ruby 'next'
+
 nnoremap <space>bC :%bd!\|e#\|bd#<return>
 " Buffer Terminal 
 nnoremap <space>bt :call OpenTerminal()<return>

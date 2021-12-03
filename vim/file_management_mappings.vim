@@ -60,7 +60,7 @@
   " File Save (single)
   nnoremap <silent> <space>fS :w<return>
   " File eXplore
-  nnoremap <silent> <space>fx :Explore<return>
+  nnoremap <silent> <space>fx :let g:came_from_buf_num = bufnr()<return>:Explore<return>
   nnoremap <silent> <space>fX :Explore .git/..<return>
   
 " File Paste
