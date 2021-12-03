@@ -14,7 +14,8 @@
   " Javascript jQiery Select attribute Value
   nnoremap <silent> ,jqsv a$("[ChangeAttribute='ChangeValue']")<esc>/ChangeAttribute\\|ChangeValue<return>
   " Javascript jQiery Document On
-  nnoremap <silent> ,jqdo :call JavascriptReadyAndAjaxVsOnNotes()<return>a// DeleteThis - make sure that query will account for future elements that may be rendered via ajax<return><backspace><backspace><backspace>$(document).on('ChangeEvents', 'ChangeSelectors', {}, function(event){<return>})<esc>/DeleteThis\\|ChangeEvents\\|ChangeSelectors<return>
+  nnoremap <silent> ,jqdo :call JavascriptReadyAndAjaxVsOnNotes()<return>a// DeleteThis - make sure that query will account for future elements that may be rendered via ajax<return>DeleteThis - if you need to trigger other events based on some feature ID, use (,jqdO)<return><backspace><backspace><backspace>$(document).on('ChangeEvents', 'ChangeSelectors', {}, function(event){<return>})<esc>/DeleteThis\\|ChangeEvents\\|ChangeSelectors<return>
+  
   " Javascript jQiery Document On for feature
   nnoremap <silent> ,jqdO :call JavascriptReadyAndAjaxVsOnNotes()<return>a// DeleteThis - call main element and use id to call other functions<return><backspace><backspace><backspace>$(document).on('ChangeEvents', '[data-ChangeFeatureNameId]', {}, function(event){<return>// DeleteThis - find the feature Id and pass it to methods. Ex:<return><backspace><backspace><backspace>var ChangeFeatureNameId = this.getAttribute('data-ChangeFeatureNameId')<return>ChangeMethod(ChangeFeatureNameId)<return>})<esc>/DeleteThis\\|ChangeEvents\\|ChangeFeatureName\\|ChangeMethod<return>
   " Javascript jQiery document ready and ajax complete
