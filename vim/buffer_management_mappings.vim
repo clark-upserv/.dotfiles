@@ -100,7 +100,9 @@ function! ClearBuffer()
     " 
     " 
     " actually I'm editing below to include logic for file explorer buffers 
-    " (file explorer buf name is the same as expand('%')
+    " (file explorer buf name is the same as expand('%:r') because r removes
+    " extension and file explorer does not have an extension. Most other
+    " files, bufname() is the same as expand('%'). So this is
     " basically delete buffer but not window if coming from file explorer (and
     " try to open buffer you came from but if you can't then just go to next
     " buffer). Otherwise, delete buffer without changing buffers first which
@@ -109,8 +111,13 @@ function! ClearBuffer()
     " 
     " if not listed
     if filter(copy(getbufinfo()), 'v:val.bufnr == ' . buf_number)[0].listed == 0 
-      " if file explorer
-      if bufname() == expand('%')
+      " if nerd tree, do not switch buffer. Delete buffer which will also
+      " close window
+      if stridx(expand('%'), 'NERD_tree_') != -1
+        execute ':bd ' . buf_number
+      " if file explorer, switch buffers before deleting buffer (so window
+      " does not close)
+      elseif bufname() == expand('%:r')
         " try to go to buffer you came from 
         if get(g:, 'came_from_buf_num', 0)
           execute ':b ' . g:came_from_buf_num
@@ -118,12 +125,16 @@ function! ClearBuffer()
         else
           call GoToNextBuf(1)
         endif
+        execute ':bd ' . buf_number
+      " in all other cases of non listted buffers, do not switch buffers. Delete
+      " the non-listed buffer which will close the window
+      else
+        execute ':bd ' . buf_number
       endif
-      " delete the non-listed buffer
-      execute ':bd ' . buf_number
     " otherwise, go to the next buffer and delete the buffer you wanted to
     " delete.
     else
+      echo 4
       call GoToNextBuf(1)
       " if next buffer is same as current buffer, then there is only one
       " non-terminal / regular buffer left. Go to next buffer (if there is

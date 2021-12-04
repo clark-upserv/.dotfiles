@@ -108,7 +108,7 @@
   " File Edit Current File
   nnoremap <silent> <space>fecf :let @+ = expand('%')<return>:e <C-R><C-R>+
   " File Edit CLipboard
-  nnoremap <silent> <space>fecl :e <C-R><C-R>+<space><backspace>
+  nnoremap <silent> <space>fecl :e <C-R><C-R>+<return>
   " File Edit PArtial
   nnoremap <silent> <space>fepa :call FileCreatePartial()<return>
   function! FileCreatePartial()

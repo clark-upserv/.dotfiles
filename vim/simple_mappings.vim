@@ -56,14 +56,12 @@
   nnoremap <silent> cx viwx<left>
   " replace word or highlighed
   nnoremap <silent> cc viwc
+  " make p in visual keep original clipboard
+  vnoremap <silent> p :<backspace><backspace><backspace><backspace><backspace>let previous_clipboard = @+<return>gvp:let @+ = previous_clipboard<return>
   " paste word and keep orignal 
   nnoremap <silent> - viwpviwy
-  vnoremap <silent> - pviwy
   " paste word and copy word just replaced
   nnoremap <silent> = viwp
-  vmap <silent> = p
-  " idk why p in visual mode isn't working... but this fixes it.
-  vnoremap <silent> p p
   " redo
   nnoremap <S-u> <C-r>
   " o and O but remain in normal mode
