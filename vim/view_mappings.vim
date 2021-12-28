@@ -1,6 +1,24 @@
 "  View Page
   " View Page BAse
-  nnoremap <silent> ,vpba :read ../templates/views/page/base.html.erb<return>ggdd/DeleteThis\\|ChangeNavTypeOrDeleteThisLine\\|ChangeTemplate\\|ChangePath<return>
+  nnoremap <silent> ,vpba a<%# DeleteThis - insert stylesheets, javascript packs, non-pack javascripts and content for end of body and nav type here as needed %><return><return><%# Page header %><return><div id="page_header_container"><return><%= render('ChangePath/ChangeTemplate_header') %><return></div><return><return><%# DeleteThis - insert page body %><esc>/DeleteThis\\|ChangeTemplate\\|ChangePath<return>
+  " View Page Header Base
+  nnoremap <silent> ,vphb a<%# Page Header - base %><return><div class="page-header"> <return><div class="row"><return><div class="col-12 d-flex flex-wrap"><return><div class="mr-auto"><return><%# Page Title %><return><h2 class="page-head-title mr-2"><return>ChangeTitle<return></h2><return><%# DeleteThis - delete entire breadcrumb if not used %><return><%# Breadcumb %><return><nav aria-label="breadcrumb" role="navigation" style="line-height: 6px;"><return><ol class="breadcrumb page-head-nav" style="padding: 3px 0px; margin: 0px 0px 7px 0px; background-color: #eeeeee;"><return><li class="breadcrumb-item"><%= link_to(ChangeDisplay, ChangePathHelper_path) %></li><return></ol><return></nav><return></div><return><%# Page header buttons %><return><div class="d-flex align-items-center flex-wrap"><return><%# NOTE: if multiple buttons, all buttons EXCEPT FOR THE LAST BUTTON need a class of mr-2 %><return></div><return></div><return></div><return></div><esc>/ChangeTitle\\|ChangeDisplay\\|ChangePathHelper\\|DeleteThis<return>
+  " View Page Tabs Container
+  nnoremap <silent> ,vptc a<%# Page tabs %><return><div id="page_tabs_container"><return><%= render('ChangePath/ChangeTemplate_tabs', tab: @tab) %><return></div><esc>/ChangePath\\|ChangeTemplate<return>
+  " View Page Tabs Base
+  nnoremap <silent> ,vptb :read ../templates/views/page/tabs_base.html.erb<return>ggdd/ChangeThisPls\\|ChangeDisplay\\|ChangePathHelper<return>
+  " View Page Body Base
+  nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/DeleteThis<return>
+  " View Page Body Stacked tabs
+  nnoremap <silent> ,vpbs :read ../templates/views/page/body_stacked_tabs.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis\\|ChangeObject<return>
+  " View Page Stacked tabs Helper
+  nnoremap <silent> ,vpsh :call CreateBaseFile(0, 0, 1)<return>/ChangeTopLevelDocumentation<return><up>$viwy/ChangeTopLevelDocumentation<return>viwpbiHelper methods for <esc>A tabs<esc>:call IndentTemplate('inner_followup', 1, 0, '../templates/views/page/stacked_tabs_helper.rb')<return>/DeleteThis\\|ChangeSection\\|ChangeObject\\|ChangeUrl\\|DeleteThis\\|ChangeActiveId\\|ChangeDisplay<return>
+  " View Page Stacked tabs Mobile
+  nnoremap <silent> ,vpsm :read ../templates/views/page/stacked_tabs_mobile.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis\\|ChangeObject<return>
+  " View Page Stacked Tabs
+  nnoremap <silent> ,vpst :read ../templates/views/page/stacked_tabs.html.erb<return>/ChangeWidth\\|ChangeObject<return>
+  " View Page Body Full height columns
+  nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeTemplate\\|ChangeColumnName\\|ChangeWidth\\|DeleteThis\\|ChangePath\\|ChangeMinScreenSize<return>
   " View Page STylesheets
   nnoremap <silent> ,vpss a<%= content_for :stylesheets do %><return><%# DeleteThis - use this for custom stylesheet for this file (or delete it if not necessary) %><return><space><backspace><esc>:call AddCustomStyleSheetForFile()<return>a<return><%# DeleteThis - use this for any other stylesheet (or delete it if not necessary) %><return><%= stylesheet_link_tag('ChangePath') %><return><% end %><esc>/DeleteThis\\|ChangePath<return>
   function! AddCustomStyleSheetForFile()
@@ -22,28 +40,14 @@
   nnoremap <silent> ,vpnp :read ../templates/views/page/non_pack_javascripts.html.erb<return>/ChangePath<return>
   " View Page End of Body
   nnoremap <silent> ,vpeb :read ../templates/views/page/end_of_body.html.erb<return>/DeleteThisNote<return>
-  " View Page Nav type Base
-  nnoremap <silent> ,vpnb a<%# DeleteThis - Delete "provide()" line below OR insert nav type. Options: 'default_logged_in', 'splash',<return>'full_height_columns', 'custom' %><return><%# DeleteThis - 'default_logged_in' or 'splash' are included automatically if user is logged in or not<return>logged in, respectively (and therefore do not need to be set manually) %><return><% provide(:nav_type, 'ChangeNavTypeOrDeleteThisLine') %><esc>/DeleteThis\\|ChangeNavTypeOrDeleteThisLine<return>
   " View Page Nav type Full height columns
   nnoremap <silent> ,vpnf a<% provide(:nav_type, 'full_height_columns') %><esc> 
-  " View Page Header Base
-  nnoremap <silent> ,vphb :read ../templates/views/page/header_base.html.erb<return>/ChangeTitle\\|ChangeDisplay\\|ChangePathHelper\\|DeleteThis<return>
-  " View Page Body Base
-  nnoremap <silent> ,vpbb :read ../templates/views/page/body_base.html.erb<return>/DeleteThis<return>
-  " View Page Body Stacked tabs
-  nnoremap <silent> ,vpbs :read ../templates/views/page/body_stacked_tabs.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis\\|ChangeObject<return>
-  " View Page Body Full height columns
-  nnoremap <silent> ,vpbf :read ../templates/views/page/body_full_height_columns.html.erb<return>/ChangeTemplate\\|ChangeColumnName\\|ChangeWidth\\|DeleteThis\\|ChangePath\\|ChangeMinScreenSize<return>
-  " View Page Tabs Container
-  nnoremap <silent> ,vptc a<%# Page tabs %><return><div id="page_tabs_container"><return><%= render('ChangePath/ChangeTemplate_tabs', tab: @tab) %><return></div><esc>/ChangePath\\|ChangeTemplate<return>
-  " View Page Tabs Base
-  nnoremap <silent> ,vptb :read ../templates/views/page/tabs_base.html.erb<return>/ChangeThisPls\\|ChangeDisplay\\|ChangePathHelper<return>
-  " View Page Stacked tabs Helper
-  nnoremap <silent> ,vpsh :call CreateBaseFile(0, 0, 1)<return>/ChangeTopLevelDocumentation<return><up>$viwy/ChangeTopLevelDocumentation<return>viwpbiHelper methods for <esc>A tabs<esc>:call IndentTemplate('inner_followup', 1, 0, '../templates/views/page/stacked_tabs_helper.rb')<return>/DeleteThis\\|ChangeSection\\|ChangeObject\\|ChangeUrl\\|DeleteThis\\|ChangeActiveId\\|ChangeDisplay<return>
-  " View Page Stacked Tabs
-  nnoremap <silent> ,vpst :read ../templates/views/page/stacked_tabs.html.erb<return>/ChangeWidth\\|ChangeObject<return>
-  " View Page Stacked tabs Mobile
-  nnoremap <silent> ,vpsm :read ../templates/views/page/stacked_tabs_mobile.html.erb<return>/ChangePath\\|ChangeTemplate\\|DeleteThis\\|ChangeObject<return>
+  " View Page Nav type Custom
+  nnoremap <silent> ,vpnc a<% provide(:nav_type, 'custom') %><esc> 
+
+" View Columns
+  " View Columns BAse
+  " nnoremap <silent> ,vcba
 
 " View Card
   " View Card Container Element
@@ -66,8 +70,8 @@
   nnoremap <silent> ,vcbq :call IndentTemplate('', 0, 0, '../templates/views/card/body_search_for_table.html.erb')<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
   " View Card Body Filters for table
   nnoremap <silent> ,vcbf :call IndentTemplate('', 0, 0, '../templates/views/card/body_filters_for_table.html.erb')<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilterButtonId\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan<return>
-  " View Card Body Actual table
-  nnoremap <silent> ,vcba :call IndentTemplate('', 0, 0, '../templates/views/card/body_actual_table.html.erb')<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan\\|ChangeModalId\\|ChangeModal<return>
+  " View Card Body actual Table
+  nnoremap <silent> ,vcbT :call IndentTemplate('', 0, 0, '../templates/views/card/body_actual_table.html.erb')<return>/ChangeObjects\\|ChangeObject\\|ChangePath\\|DeleteThis\\|ChangeFilter\\|ChangeAttributes\\|ChangeModels\\|ChangeWidth\\|ChangeColumn\\|ChangeColSpan\\|ChangeModalId\\|ChangeModal<return>
   " View Card Body sortable table Positions
   nmap <silent> ,vcbp ,pstv
   " View Card Body table row for no objects

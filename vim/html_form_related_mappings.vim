@@ -1,6 +1,6 @@
 " Html Packages
   " Html Single Item Image container
-  nnoremap <silent> ,hsii a<div id="ChangeAttribute_ssi_form_container"><return><%= render('ChangePath/ChangeTemplate_ChangeAttribute_ssi_form') %><return></div><esc>/ChangeAttribute\\|ChangePath\\|ChangeTemplate<return>
+  nnoremap <silent> ,hsii a<div id="ChangeAttribute_sii_form_container"><return><%= render('ChangePath/ChangeTemplate_ChangeAttribute_sii_form') %><return></div><esc>/ChangeAttribute\\|ChangePath\\|ChangeTemplate<return>
   " Html Single Item Image partial
   nnoremap <silent> ,hsiI a<%= form_with(scope: 'ChangeScope', url: ChangePath_path(ChangeObject), method: :ChangeMethod) do \|sii_form\| %><return><%= sii_form.label(:ChangeAttribute, class: 'm-0') do %><return><i class="c-pointer icon px-3 fs-4 text-secondary mdi mdi-camera"></i><return><% end %><return><%= sii_form.file_field(<return><tab>:ChangeAttribute,<return>data: { siiId: 'ChangeSiiId' },<return># DeleteThis - by default, images over 25MB are not allowed and images larger than 5MB will be resized to 5MB<return>DeleteThis - these can be changed by setting "removeIfOverMb" and "resizeIfOverMb" data attributes to an integer<return>DeleteThis - ex. "resizeIfOverMb: '1'" will attach message to any photo over 1MB (actual resizing must be set up in back end)<return>DeleteThis - ex. "removeIfOverMb: '10'" will attach message to any photo over 10MB and will hide form submit button<return><backspace><backspace>accept: 'image/*',<return># DeleteThis - limit to specific types of images by updating accept attribute<return>DeleteThis - common formats are: image/jpeg image/gif image/png image/heic<return>DeleteThis - keep image/* for now until I do more research and test different types.<return><backspace><backspace>multiple: ChangeToTrueOrRemove<return>) %><return><tab><%= render(<return><tab>'shared/single_input_images_modal',<return>siiId: 'ChangeSiiId',<return>title: 'Changetitle',<return># DeleteThis - Change title... typically "Preview Photo" or "Preview Photos" if mulitiple<return><backspace><backspace>form: sii_form<return>)%><return><% end %><esc>/ChangeScope\\|ChangePath\\|ChangeObject\\|ChangeMethod\\|ChangeAttribute\\|ChangeToTrueOrRemove\\|ChangeSiiId\\|Changetitle\\|DeleteThis<return>
 
@@ -49,9 +49,9 @@
   " Html Form Single Item
   nnoremap <silent> ,hfsi a<%= form_with(scope: 'ChangeScope', url: ChangePath_path(ChangeObject), method: :ChangeMethod) do \|f\| %><return><div class="ses-single-input-container"><return><%# DeleteThis - use text feild or change input type %><return><%= f.text_field(<return>  :ChangeAttribute,<return># DeleteThis - typically looks better to manage input witdh by setting html size attribute; otherwise input width will default to 100% which doesn't look as good.<return>DeleteThis - if value is nil, delete size attribute and use default of 100% width. If value could be nil, use safe navigation.<return><backspace><backspace>size: ChangeObject.ChangeAttribute.length,<return># DeleteThis - include class "page-head" if for page header<return>DeleteThis - include class "card-head" if for card header<return><backspace><backspace>class: 'form-control ses-single-input',<return># DeleteThis - goal is for edit form to look like show but with border and buttons. If above classes do not work, try adding custom styles:<return><backspace><backspace># DeleteOrUseThis - style: 'height: XXpx !important; font-size: XXpx; font-weight: XXX; Etc...',<return><backspace><backspace><esc>:call HtmlInputMainAttributes()<return>o) %><return>  <a class="pl-3 pr-2 fs-4 c-pointer text-secondary mdi mdi-close-circle-o ChangeSesId-ses-cancel-button"></a><return><button class="pl-2 pr-3 fs-4 btn-no-background text-primary mdi mdi-check-circle ses-do-not-disable"></button><return></div><return><%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute], html_attributes: 'class="input_error ses-single"') %><return><% end %><esc>:call HtmlInputSearch()<return>
   " Html Form Fields For
-  nnoremap <silent> ,hfff a<%# DeleteThis - ChangeModel is optional %><return><%= ChangeThisPls_form.fields_for('ChangeScope', ChangeModel) do \|ChangeThisPls_form\| %><return><% end %><esc>/DeleteThis\\|ChangeThisPls\\|ChangeScope\\|ChangeModel<return>
+  nnoremap <silent> ,hfff a<%# DeleteThis - ChangeModel is optional %><return><%= f.fields_for('ChangeScope', ChangeModel) do \|f\| %><return><% end %><esc>/DeleteThis\\|ChangeThisPls\\|ChangeScope\\|ChangeModel<return>
   " Html Form Left Label
-  nmap <silent> ,hfll a<%#<delete> Left label for ChangeAttribute %><return><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return></div><return></div><return><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
+  nmap <silent> ,hfll a<%#<delete> Left label for ChangeAttribute %><return><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= f.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return></div><return></div><return><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
   " Html Form Top Label
   nmap <silent> ,hftl a<%#<delete> Top label for ChangeAttribute %><return><div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
   " Html Form Top label Modal
@@ -102,13 +102,13 @@
   " Html Form Buttons (cancel & submit) - Modal
   nnoremap <silent> ,hfbm a<%# Form buttons - for modal %><return><div class="form-row mb-2 d-flex justify-content-center"><return><div class="form-group-modal mt-6 px-3 d-flex justify-content-between"><return><button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button><return><%= f.submit 'AddForCreateOrSaveForUpdate', class: 'btn btn-primary' %><return></div><return></div><esc>/AddForCreateOrSaveForUpdate<return>
   " Html Form LAbel
-  nnoremap <silent> ,hfla a<%= ChangeThisPls_form.label(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
+  nnoremap <silent> ,hfla a<%= f.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
   " Html Form Label Block
-  nnoremap <silent> ,hflb a<%= ChangeThisPls_form.label(:ChangeAttribute, class: 'col-form-label') do %><return>ChangeDisplay<return><% end %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
+  nnoremap <silent> ,hflb a<%= f.label(:ChangeAttribute, class: 'col-form-label') do %><return>ChangeDisplay:<return><% end %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
   " Html Form Label Tag
-  nnoremap <silent> ,hflt a<%= label_tag(:ChangeAttribute, 'ChangeDisplay', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
+  nnoremap <silent> ,hflt a<%= label_tag(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay<return>
   " Html Form HIdden field
-  nnoremap <silent> ,hfhi a<%= ChangeThisPls_form.hidden_field(:ChangeThisPls, value: ChangeThisPls) %><esc>/ChangeThisPls<return>
+  nnoremap <silent> ,hfhi a<%= f.hidden_field(:ChangeThisPls, value: ChangeThisPls) %><esc>/ChangeThisPls<return>
   " Html Form Hidden field Tag
   nnoremap <silent> ,hfht a<%= hidden_field_tag(:ChangeThisPls, ChangeThisPls) %><esc>/ChangeThisPls<return>
   " Html Form Text Field
@@ -155,7 +155,7 @@
   " Html Form Password field
   nnoremap <silent> ,hfpa a<%= f.password_field(<return>  :ChangeAttribute,<return>class: 'form-control',<return>autofocus: true,<return>placeholder: 'Enter ChangePlaceholder',<return>required: true,<return>size: ChangeSize,<return>minlength: ChangeMinLength) %><esc>/ChangeAttribute\\|ChangePlaceholder\\|ChangeSize\\|ChangeMinLength<return>
   " Html Form Rich Text
-  nnoremap <silent> ,hfrt a<%= ChangeThisPls_form.rich_text_area(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
+  nnoremap <silent> ,hfrt a<%= f.rich_text_area(:ChangeThisPls, value: ChangeThisPls, class: 'form-control') %><esc>/ChangeThisPls<return>
   " Html Form Checkbox Group
   nnoremap <silent> ,hfcg a<div class="pt-1"><return><%# DeleteThis - default is stacked checkboxes. To make inline, add class "d-flex" to div above %><return><space><backspace><esc>:call HtmlInputCheckbox()<return>`qo<space><backspace><esc>:call HtmlInputCheckbox()<return>`qo</div><esc>n
   " Html Form CheckBox
