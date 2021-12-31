@@ -10,7 +10,7 @@ augroup CustomVimEntry
 augroup END
 
 " mappings that help with vim
-so ~/.dotfiles/vim/vim_function_mappings.vim
+so ~/.dotfiles/vim/vim_mappings.vim
 
 " this should be cleaned and / or clarified...
 so ~/.dotfiles/vim/simple_mappings.vim

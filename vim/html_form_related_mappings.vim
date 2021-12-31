@@ -23,19 +23,14 @@
   
 " Html Show
   " Html Show Left Label wrapper
-  nmap <silent> ,hsll a<div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= label_tag(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html Show Group %><return></div><return></div><return></div><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
-  " Html Top Label (for top label)
-  nmap <silent> ,hstl a<div class="form-row"><return><%#<delete> DeleteThis - insert Show Group %><return></div><esc>/DeleteThis<return>
-  " Html Show Group 1
-  nmap <silent> ,hsg1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label tag if top label (,hflt) %><return><esc>,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return>
-  " Html Show Group 2
-  nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label (,hflt) %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yP
-  " Html Show Group 3
-  nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label (,hflt) %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPP
-  " Html Show Group 4
-  nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label (,hflt) %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
-  " Html Show Simple Container
-  nnoremap <silent> ,hssc a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
+  nmap <silent> ,hsll :call HtmlShowLeftLabel()<return>
+  function! HtmlShowLeftLabel()
+    let attribute = input("What is the attribute name?: ")
+    let form = input("What is the form name (this is the scope on the original form)?: ")
+    let labelDisplay = input("What is the label display?: ")
+    execute "normal! a<%# Left label for " . attribute . " %>\<return><%# DeleteThis - NOTE: default label width is 150px; to change for all labels on this form, add style: ." . form . "_label { width: ChangeWidthpx; } %>\<return><div class=\"input_container\">\<return><%= label_tag(:" . attribute . ", '" . labelDisplay . ":', class: 'input_label " .form . "_label') %>\<return><div class\"form_row\">\<return><div class=\"form_group\">\<return><div class=\"sse\">ChangeDisplay</div>\<return></div>\<return></div>\<return></div>"
+    let @/ = "DeleteThis\\|ChangeWidth\\|ChangeDisplay"
+  endfunction
   " Html Show String from Time
   nnoremap <silent> ,hsst a<div class="sse"><%= ChangeObject.ChangeDate.try(:strftime, '%A, %B %-d, %Y') %></div><return><%# DeleteThis - for more details on strftime, use (,rbst) %><esc>/ChangeObject\\|ChangeDate<return>
   " Html Show Text Area
@@ -49,22 +44,18 @@
   " Html Form Fields For
   nnoremap <silent> ,hfff a<%# DeleteThis - ChangeModel is optional %><return><%= f.fields_for('ChangeScope', ChangeModel) do \|f\| %><return><% end %><esc>/DeleteThis\\|ChangeThisPls\\|ChangeScope\\|ChangeModel<return>
   " Html Form Left Label
-  nmap <silent> ,hfll a<%#<delete> Left label for ChangeAttribute %><return><div class="row mb-2"><return><div class="col-12 col-sm-2 pr-0"><return><div class="form-row"><return><div class="form-group left-label col-12"><return><%= f.label(:ChangeAttribute, 'ChangeDisplay:', class: 'col-form-label') %><return></div><return></div><return></div><return><div class="col-12 col-sm-10"><return><div class="form-row"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return></div><return></div><return><esc>/ChangeThisPls\\|ChangeAttribute\\|ChangeDisplay\\|DeleteThis<return>
-  " Html Form Top Label
-  nmap <silent> ,hftl a<%#<delete> Top label for ChangeAttribute %><return><div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
+  nmap <silent> ,hfll :call HtmlFormLeftLabel()<return>
+  function! HtmlFormLeftLabel()
+    let attribute = input("What is the attribute name?: ")
+    let form = input("What is the form name (this is the scope on the original form)?: ")
+    let scope = input("What is the scope (this is either the scope on the original form OR the scope on fields_for)?: ")
+    let labelDisplay = input("What is the label display?: ")
+    let object = input("What is the form object?: ")
+    execute "normal! a<%# Left label for " . attribute . " %>\<return><%# DeleteThis - NOTE: default label width is 150px; to change for all labels on this form, add style: ." . form . "_label { width: ChangeWidthpx; } %>\<return><div class=\"input_container\">\<return><%= " . scope . "_form.label(:" . attribute . ", '" . labelDisplay . ":', class: 'input_label " .form . "_label') %>\<return><div class\"form_row\">\<return><div class=\"form_group\">\<return><%# DeleteThis - insert HTML Form Input %>\<return><%= render('shared/inline_errors', errors: " . object . ".errors.messages[:" . attribute . "]) %>\<return></div>\<return></div>\<return></div>"
+    let @/ = "DeleteThis\\|ChangeWidth"
+  endfunction
   " Html Form Top label Modal
   nmap <silent> ,hftm a<%#<delete> Top label modal for ChangeAttribute %><return><div class="form-row mb-2 d-flex justify-content-center"><return><div class="form-group-modal"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
-  " Html Form Group 1
-  nnoremap <silent> ,hfg1 a<div class="form-group col-12"><return><esc>:call HtmlFormGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
-  " Html Form Group 2
-  nnoremap <silent> ,hfg2 a<div class="form-group col-12 col-sm-6"><return><esc>:call HtmlFormGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
-  " Html Form Group 3
-  nnoremap <silent> ,hfg3 a<div class="form-group col-12 col-sm-4"><return><esc>:call HtmlFormGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
-  " Html Form Group 4
-  nnoremap <silent> ,hfg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><esc>:call HtmlFormGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
-  function! HtmlFormGroupContents()
-    execute "normal! a<%# DeleteThis - insert label if top label (,hfla) %>\<return><%# DeleteThis - insert HTML Form Input %>\<return>\<esc>:call HtmlFormInlineErrors()\<return>"
-  endfunction
   " Html Form non-standard forms Array Simple
   nnoremap <silent> ,hfas :read ../templates/views/forms/non_standard_forms/array_simple.html.erb<return>/ChangeModel\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ChangeAttributes\\|ChangeAttribute\\|ReplaceThis\\|DeleteThis:<return>field tags (do not take form helper / don't include scope)
   " Html Form non-standard forms Array Hash
@@ -159,7 +150,8 @@
   " Html Form CheckBox
   nnoremap <silent> ,hfcb :call HtmlInputCheckbox()<return>
   function! HtmlInputCheckbox()
-    execute "normal! a<div class=\"pr-2 custom-control custom-checkbox\">\<return><%= f.check_box(:ChangeAttribute, class: 'custom-control-input') %>\<return><%= f.label(:ChangeAttribute, 'ChangeDisplay', class: \"custom-control-label form-text2\") %>\<return><%# DeleteThis - for blank label, make label above a block with a blank space (\" \") between the do and end %>\<return></div>\<esc>mq/ChangeAttribute\\|ChangeDisplay\\|DeleteThis\<return>"
+    execute "normal! a<div class=\"pr-2 custom-control custom-checkbox\">\<return><%= f.check_box(:ChangeAttribute, class: 'custom-control-input') %>\<return><%= f.label(:ChangeAttribute, 'ChangeDisplay', class: \"custom-control-label form-text2\") %>\<return><%# DeleteThis - for blank label, make label above a block with a blank space (\" \") between the do and end %>\<return></div>\<esc>mq"
+    let @/ = "ChangeAttribute\\|ChangeDisplay\\|DeleteThis"
   endfunction
   " Html Form Radio Inline
   nnoremap <silent> ,hfri a<div class="pt-1"><return><label class="custom-control custom-radio custom-control-inline"><return><%= f.radio_button(:ChangeAttribute, ChangeValue, class: 'custom-control-input') %><return><span class="custom-control-label form-text2">ChangeDisplay</span><return></label><return><%# DeleteThis - copy label and contents for additional options %><return></div><esc>/ChangeAttribute\\|ChangeValue\\|ChangeDisplay\\|DeleteThis<return>
@@ -209,3 +201,35 @@
   nnoremap <silent> ,hfsl a<%= f.submit('ChangeDisplay', class: 'btn-link') %><esc>/ChangeDisplay<return>
   " Html Form Input Submit with Image
   nnoremap <silent> ,hfsI a<%= image_submit_tag('ChangePathAndFileName', alt: 'ChangeAltText', width: 'ChangeWidth', height: 'auto') %><esc>/ChangePathAndFileName\\|ChangeAltText\\|ChangeWidth<return>
+  
+  
+  
+  
+  
+  
+"Html Depricated
+  " Html Show Top Label (for top label)
+  nmap <silent> ,hstl a<div class="form-row"><return><%#<delete> DeleteThis - insert Show Group %><return></div><esc>/DeleteThis<return>
+  " Html Show Group 1
+  nmap <silent> ,hsg1 a<div class="form-group col-12"><return><%#<delete> DeleteThis: insert label tag if top label (,hflt) %><return><esc>,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return>
+  " Html Show Group 2
+  nmap <silent> ,hsg2 a<div class="form-group col-12 col-sm-6"><return><%#<delete> DeleteThis: insert label tag if top label (,hflt) %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yP
+  " Html Show Group 3
+  nmap <silent> ,hsg3 a<div class="form-group col-12 col-sm-4"><return><%#<delete> DeleteThis: insert label tag if top label (,hflt) %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPP
+  " Html Show Group 4
+  nmap <silent> ,hsg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><%#<delete> DeleteThis: insert label tag if top label (,hflt) %><esc>,,o,hssc$a<return></div><esc>/DeleteThis\\|ChangeDisplay<return><up>V3<down>yPPP
+  " Html Show Simple Container
+  nnoremap <silent> ,hssc a<div class="sse">ChangeDisplay</div><esc>/ChangeDisplay<return>
+  " Html Form Top Label
+  nmap <silent> ,hftl a<%#<delete> Top label for ChangeAttribute %><return><div class="form-row mb-2"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
+  " Html Form Group 1
+  nnoremap <silent> ,hfg1 a<div class="form-group col-12"><return><esc>:call HtmlFormGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return>
+  " Html Form Group 2
+  nnoremap <silent> ,hfg2 a<div class="form-group col-12 col-sm-6"><return><esc>:call HtmlFormGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yP
+  " Html Form Group 3
+  nnoremap <silent> ,hfg3 a<div class="form-group col-12 col-sm-4"><return><esc>:call HtmlFormGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPP
+  " Html Form Group 4
+  nnoremap <silent> ,hfg4 a<div class="form-group col-12 col-sm-6 col-md-3"><return><esc>:call HtmlFormGroupContents()<return>o</div><esc>/DeleteThis\\|ChangeObject\\|ChangeAttribute<return><up>V4<down>yPPP
+  function! HtmlFormGroupContents()
+    execute "normal! a<%# DeleteThis - insert label if top label (,hfla) %>\<return><%# DeleteThis - insert HTML Form Input %>\<return>\<esc>:call HtmlFormInlineErrors()\<return>"
+  endfunction
