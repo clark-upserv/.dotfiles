@@ -47,12 +47,7 @@
   nmap <silent> ,hfll :call HtmlFormLeftLabel()<return>
   function! HtmlFormLeftLabel()
     let groupCount = input("How many inputs / attributes? (1-4): ")
-    if groupCount == 1
-      let attribute = input("What is the attribute name?: ")
-    else
-      let attribute = input("What is the snakecase name for the label?: ")
-    endif
-    let labelDisplay = input("What is the label display?: ")
+
     if groupCount == 1
       let groupCountClass = ''
     elseif groupCount == 2
@@ -62,11 +57,43 @@
     elseif groupCount == 4
       let groupCountClass = ' four_groups'
     endif
+    
+    if groupCount == 1
+      let labelName = input("What is the attribute name?: ")
+    else
+      let labelName = input("What is the name for the label? (use snakecase): ")
+    endif
+
+    let labelDisplay = input("What is the label display?: ")
+
+    if groupCount == 1
+      let firstAttribute = labelName
+    elseif groupCount > 1
+      let firstAttribute = input("What is the first attribute name?: ")
+      let secondAttribute = input("What is the second attribute name?: ")
+    endif
+    if groupCount > 2
+      let thirdAttribute = input("What is the third attribute name?: ")
+    endif
+    if groupCount > 3
+      let fourthAttribute = input("What is the fourth attribute name?: ")
+    endif
+    
     let form = input("What is the form name (this is the scope on the original form)?: ")
     let scope = input("What is the scope (this is either the scope on the original form OR the scope on fields_for)?: ")
     let object = input("What is the form object?: ")
-    execute "normal! a<%# Left label for " . labelDisplay . " %>\<return><%# DeleteThis - NOTE: default label width is 150px; to change for all labels on this form, add style: ." . form . "_label { width: ChangeWidthpx; } %>\<return><div class=\"input_container\">\<return><%= " . scope . "_form.label(:" . attribute . ", '" . labelDisplay . ":', class: 'input_label " .form . "_label') %>\<return><div class\"form_row" . groupCountClass . "\">\<esc>mqa\<return></div>\<return></div>"
-    execute "normal! `qo<div class=\"form_group\">\<return><%# DeleteThis - insert HTML Form Input %>\<return><%= render('shared/inline_errors', errors: " . object . ".errors.messages[:" . attribute . "]) %>\<return></div>"
+    
+    execute "normal! a<%# Left label for " . labelDisplay . " %>\<return><%# DeleteThis - NOTE: default label width is 150px; to change for all labels on this form, add style: ." . form . "_label { width: ChangeWidthpx; } %>\<return><div class=\"input_container\">\<return><%= " . scope . "_form.label(:" . labelName . ", '" . labelDisplay . ":', class: 'input_label " .form . "_label') %>\<return><div class\"form_row" . groupCountClass . "\">\<esc>mqa\<return></div>\<return></div>"
+    execute "normal! `qo<div class=\"form_group\">\<return><%# DeleteThis - insert HTML Form Input %>\<return><%= render('shared/inline_errors', errors: " . object . ".errors.messages[:" . firstAttribute . "]) %>\<return></div>"
+    if groupCount > 1
+      execute "normal! o<div class=\"form_group\">\<return><%# DeleteThis - insert HTML Form Input %>\<return><%= render('shared/inline_errors', errors: " . object . ".errors.messages[:" . secondAttribute . "]) %>\<return></div>"
+    endif
+    if groupCount > 2
+      execute "normal! o<div class=\"form_group\">\<return><%# DeleteThis - insert HTML Form Input %>\<return><%= render('shared/inline_errors', errors: " . object . ".errors.messages[:" . thirdAttribute . "]) %>\<return></div>"
+    endif
+    if groupCount > 3
+      execute "normal! o<div class=\"form_group\">\<return><%# DeleteThis - insert HTML Form Input %>\<return><%= render('shared/inline_errors', errors: " . object . ".errors.messages[:" . fourthAttribute . "]) %>\<return></div>"
+    endif
     let @/ = "DeleteThis\\|ChangeWidth"
   endfunction
   " Html Form Top label Modal
