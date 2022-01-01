@@ -1,4 +1,6 @@
 " Html Packages
+  " Html Form BAse
+  nnoremap <silent> ,hfba a<%= form_with(scope: 'ChangeScope', url: ChangeUrl_path(ChangeObject), method: :ChangeHTMLMethod) do \|f\| %><return><return><%# DeleteThis - insert hidden fields here if necessary %><return><%# DeleteThis - insert label type (or fields for if necessary) %><return><%# DeleteThis - insert form buttons %><return><return><% end %><esc>/ChangeObject\\|ChangeScope\\|ChangeUrl\\|ChangeHTMLMethod\\|DeleteThis<return>
   " Html Single Item Image container
   nnoremap <silent> ,hsii a<div id="ChangeAttribute_sii_form_container"><return><%= render('ChangePath/ChangeTemplate_ChangeAttribute_sii_form') %><return></div><esc>/ChangeAttribute\\|ChangePath\\|ChangeTemplate<return>
   " Html Single Item Image partial
@@ -21,6 +23,28 @@
   " Html Show edit swap Edit button - Class
   nnoremap <silent> ,hsec aChangeSesId-ses-edit-button<esc>/ChangeSesId<return>
   
+  " Html Form Single Item
+  nnoremap <silent> ,hfsi a<%= form_with(scope: 'ChangeScope', url: ChangePath_path(ChangeObject), method: :ChangeMethod) do \|f\| %><return><div class="ses-single-input-container"><return><%# DeleteThis - use text feild or change input type %><return><%= f.text_field(<return>  :ChangeAttribute,<return># DeleteThis - typically looks better to manage input witdh by setting html size attribute; otherwise input width will default to 100% which doesn't look as good.<return>DeleteThis - if value is nil, delete size attribute and use default of 100% width. If value could be nil, use safe navigation.<return><backspace><backspace>size: ChangeObject.ChangeAttribute.length,<return># DeleteThis - include class "page-head" if for page header<return>DeleteThis - include class "card-head" if for card header<return><backspace><backspace>class: 'form-control ses-single-input',<return># DeleteThis - goal is for edit form to look like show but with border and buttons. If above classes do not work, try adding custom styles:<return><backspace><backspace># DeleteOrUseThis - style: 'height: XXpx !important; font-size: XXpx; font-weight: XXX; Etc...',<return><backspace><backspace><esc>:call HtmlInputMainAttributes()<return>o) %><return>  <a class="pl-3 pr-2 fs-4 c-pointer text-secondary mdi mdi-close-circle-o ChangeSesId-ses-cancel-button"></a><return><button class="pl-2 pr-3 fs-4 btn-no-background text-primary mdi mdi-check-circle ses-do-not-disable"></button><return></div><return><%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute], html_attributes: 'class="input_error ses-single"') %><return><% end %><esc>:call HtmlInputSearch()<return>
+  
+  " Html Form Top label Modal
+  nmap <silent> ,hftm a<%#<delete> Top label modal for ChangeAttribute %><return><div class="form-row mb-2 d-flex justify-content-center"><return><div class="form-group-modal"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
+  " Html Form non-standard forms Array Simple
+  nnoremap <silent> ,hfas :read ../templates/views/forms/non_standard_forms/array_simple.html.erb<return>/ChangeModel\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ChangeAttributes\\|ChangeAttribute\\|ReplaceThis\\|DeleteThis:<return>field tags (do not take form helper / don't include scope)
+  " Html Form non-standard forms Array Hash
+  nnoremap <silent> ,hfah :read ../templates/views/forms/non_standard_forms/array_hash.html.erb<return>/ChangeModel\\|ChangeScop\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ReplaceThis\\|DeleteThis:\\|ChangeAttribute<return>
+  
+  
+  
+  
+  
+  
+" Above needs major refactor - see form packages in docs
+
+
+
+
+
+
 " Html Show
   " Html Show Left Label wrapper
   nmap <silent> ,hsll :call HtmlShowLeftLabel()<return>
@@ -37,10 +61,6 @@
   nnoremap <silent> ,hsta a<div class="sse"><%= simple_format(ChangeObject.ChangeTextArea) %></div><esc>/ChangeObject\\|ChangeTextArea<return>
 
 " Html Form
-  " Html Form BAse
-  nnoremap <silent> ,hfba a<%= form_with(scope: 'ChangeScope', url: ChangeUrl_path(ChangeObject), method: :ChangeHTMLMethod) do \|f\| %><return><return><%# DeleteThis - insert hidden fields here if necessary %><return><%# DeleteThis - insert label type (or fields for if necessary) %><return><%# DeleteThis - insert form buttons %><return><return><% end %><esc>/ChangeObject\\|ChangeScope\\|ChangeUrl\\|ChangeHTMLMethod\\|DeleteThis<return>
-  " Html Form Single Item
-  nnoremap <silent> ,hfsi a<%= form_with(scope: 'ChangeScope', url: ChangePath_path(ChangeObject), method: :ChangeMethod) do \|f\| %><return><div class="ses-single-input-container"><return><%# DeleteThis - use text feild or change input type %><return><%= f.text_field(<return>  :ChangeAttribute,<return># DeleteThis - typically looks better to manage input witdh by setting html size attribute; otherwise input width will default to 100% which doesn't look as good.<return>DeleteThis - if value is nil, delete size attribute and use default of 100% width. If value could be nil, use safe navigation.<return><backspace><backspace>size: ChangeObject.ChangeAttribute.length,<return># DeleteThis - include class "page-head" if for page header<return>DeleteThis - include class "card-head" if for card header<return><backspace><backspace>class: 'form-control ses-single-input',<return># DeleteThis - goal is for edit form to look like show but with border and buttons. If above classes do not work, try adding custom styles:<return><backspace><backspace># DeleteOrUseThis - style: 'height: XXpx !important; font-size: XXpx; font-weight: XXX; Etc...',<return><backspace><backspace><esc>:call HtmlInputMainAttributes()<return>o) %><return>  <a class="pl-3 pr-2 fs-4 c-pointer text-secondary mdi mdi-close-circle-o ChangeSesId-ses-cancel-button"></a><return><button class="pl-2 pr-3 fs-4 btn-no-background text-primary mdi mdi-check-circle ses-do-not-disable"></button><return></div><return><%= render('shared/inline_errors', errors: ChangeObject.errors.messages[:ChangeAttribute], html_attributes: 'class="input_error ses-single"') %><return><% end %><esc>:call HtmlInputSearch()<return>
   " Html Form Fields For
   nnoremap <silent> ,hfff a<%# DeleteThis - ChangeModel is optional %><return><%= f.fields_for('ChangeScope', ChangeModel) do \|f\| %><return><% end %><esc>/DeleteThis\\|ChangeThisPls\\|ChangeScope\\|ChangeModel<return>
   " Html Form Left Label
@@ -96,12 +116,6 @@
     endif
     let @/ = "DeleteThis\\|ChangeWidth"
   endfunction
-  " Html Form Top label Modal
-  nmap <silent> ,hftm a<%#<delete> Top label modal for ChangeAttribute %><return><div class="form-row mb-2 d-flex justify-content-center"><return><div class="form-group-modal"><return><%#<delete> DeleteThis - insert Html Form Group %><return></div><return></div><return><esc>/ChangeAttribute\\|DeleteThis<return>
-  " Html Form non-standard forms Array Simple
-  nnoremap <silent> ,hfas :read ../templates/views/forms/non_standard_forms/array_simple.html.erb<return>/ChangeModel\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ChangeAttributes\\|ChangeAttribute\\|ReplaceThis\\|DeleteThis:<return>field tags (do not take form helper / don't include scope)
-  " Html Form non-standard forms Array Hash
-  nnoremap <silent> ,hfah :read ../templates/views/forms/non_standard_forms/array_hash.html.erb<return>/ChangeModel\\|ChangeScop\\|ChangeUrl\\|ChangeMethod\\|ChangeParentForm\\|ChangeObjects\\|ChangeObject\\|ReplaceThis\\|DeleteThis:\\|ChangeAttribute<return>
   " Html Form Toggle Wrapper
   nnoremap <silent> ,hftw :call IndentTemplate('', 1, 0, '../templates/views/elements/toggle_wrapper.html.erb')<return>/DeleteThis<return>
   " Html Form Inline Errors
