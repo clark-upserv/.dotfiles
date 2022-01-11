@@ -97,9 +97,11 @@
   " up
   nnoremap <silent> l k
   vnoremap <silent> l k
+  nnoremap <silent> dl dk
   " down
   nnoremap <silent> k j
   vnoremap <silent> k j
+  nnoremap <silent> dk dj
   " left
   nnoremap <silent> j <left>
   vnoremap <silent> j <left>

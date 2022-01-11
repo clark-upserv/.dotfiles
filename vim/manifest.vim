@@ -71,7 +71,7 @@ so ~/.dotfiles/vim/misc_process_mappings.vim
   nmap <silent> ,mdf $<down>,mdd
   " Misc. Df but add <return> between each line
   nmap <silent> ,mdr $<down>,mddi<lt>return><esc>
-  nmap <silent> ,mmm :let @+ = ", html_attributes: 'class=\"input_error ses-single\"'"<return>p
-  
-  
-  
+  " one off
+   nmap <silent> ,mn dd<space>fecl
+   nmap <silent> ,mm /left-sidebar<return>cgnpage_content_left_menu<esc>/course_left_sidebar<return>cgncourses_left_menu<esc><space>fs
+  "app/views/layouts/training/_assignment_left_menu.html.erb
