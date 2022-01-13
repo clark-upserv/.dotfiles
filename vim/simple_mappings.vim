@@ -116,15 +116,15 @@
   nnoremap <silent> w b
   vnoremap <silent> w b
   " forward to begiining of word
-  nnoremap <silent> e w
-  vnoremap <silent> e w
-  " forward to end of word
-  nnoremap <silent> r e
-  vnoremap <silent> r e
+  nnoremap <silent> t w
+  vnoremap <silent> t w
+  " forward to end of word (no mapping needed because it's already e)
+  "nnoremap <silent> e e
+  "vnoremap <silent> e e
   " far right (when in visual mode, use <left> to make sure to not get next line)
-  nnoremap <silent> t $
-  vnoremap <silent> t $<left>
-  nnoremap <silent> T A
+  nnoremap <silent> r $
+  vnoremap <silent> r $<left>
+  nnoremap <silent> R A
   " to top of page (keep same gg)
   "
   " to bottom of page (make hh go to bottom like G)
