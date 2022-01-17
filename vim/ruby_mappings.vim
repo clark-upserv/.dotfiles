@@ -5,6 +5,8 @@
   nnoremap <silent> ,rbcl :call CreateBaseFile(1, 0, 0)<return>
   " Ruby Basic MOdule
   nnoremap <silent> ,rbmo :call CreateBaseFile(0, 0, 0)<return>
+  " Ruby Basic Code Challenge
+  nnoremap <silent> ,rbcc a# frozen_string_literal: true<return><return>Dir.glob('app/**/*.rb').each do |file|<return>require_relative file<return>end
   " Ruby Basic IF
   nnoremap <silent> ,rbif aif ChangeThisPls<return>end<esc>/ChangeThisPls<return>
   " Ruby Basic IF inline
