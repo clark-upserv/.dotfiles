@@ -18,7 +18,7 @@ function! TestControllerBase()
 endfunction
 
 " Tests Controller AUthorization
-nnoremap <silent> ,tcau :call IndentTemplate('', 0, 0, '../templates/tests/controller_authorization.rb')<return>/DeleteThis\\|ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeValueForDifferentAccount\\|ChangeValue\\|ChangeHtmlMethod\\|ChangeUrlHelper\\|ChangeObject\\|, params: ChangeAction_params\\|ChangeUserWithPermission\\|ChangeInvalidValue<return>
+nnoremap <silent> ,tcau :call IndentTemplate('', 0, 0, '../templates/tests/controller_authorization.rb')<return>/DeleteThis\\|ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeUrlHelper\\|ChangeObject\\|, ChangeAction\\|ChangeUserWithPermission\\|ChangeInvalidValue<return>
 
 function! TestControllerAuthorization(action)
   " add comment indicating start of tests for action
@@ -27,7 +27,6 @@ function! TestControllerAuthorization(action)
   if a:action == ''
     let a:action = 'ChangeAction'
   endif
-  let has_params = input("Does the " . a:action . " action have params? (y/n): ")
   if index(['index', 'show'], a:action) >= 0
     let html_method = 'get'
   elseif a:action == 'create'
@@ -38,15 +37,23 @@ function! TestControllerAuthorization(action)
     let html_method = 'delete'
   endif 
   let url_helper = input("What is the url helper excluding arguments and \"_path\" sufffix? (ex. \"core_user\", not \"core_user_path(@user)\"): ")
+  if url_helper == ''
+    let url_helper = 'ChangeUrlHelper'
+  endif
   if a:action == 'index'
     let object_name = ''
   else
     let object_name = input("What is the name of object?: ")
+    if object_name == ''
+      let object_name = 'ChangeObject'
+    endif
   endif
-  if url_helper == ''
-    let url_helper = 'ChangeUrlHelper'
-  endif
+  let has_params = input("Does the " . a:action . " action have params? (y/n): ")
   let is_ajax = input("Is this an ajax request? (y/n): ")
+  let user_with_permission = input("What is the role with permision (ex \"hr_admin\"): ")
+  if user_with_permission == ''
+    let user_with_permission = 'ChangeUserWithPermission'
+  endif
   
   " add params method
   if has_params == 'y'
@@ -86,7 +93,6 @@ function! TestControllerAuthorization(action)
   " test that user with access cannot access objects for different accounts
   if index(['show', 'update', 'destroy'], a:action) >= 0
     " sign in user with access
-    let user_with_permission = input("What is the fixture name for the user with permision (ex \"hr_admin\"): ")
     execute "normal! o# Logged in as " . user_with_permission . " but for " . object_name . " on different account\<return>\<backspace>\<backspace>\<space>\<backspace>sign_in(@" . user_with_permission . ")"
     " make request while logged in but request object on different account
     execute "normal! o" . html_method . " " . url_helper . "_path"
@@ -130,8 +136,56 @@ function! TestControllerAuthorization(action)
       endif
     endif
   endif
-  execute "normal! o# DeleteThis - repeat dif account tests for each user with access AND each variation that could end in object being on different account\<return>\<backspace>\<backspace>end"
+  execute "normal! o# DeleteThis - repeat dif account tests for each user with access AND each variation that could end in object being on different account\<return>\<backspace>\<backspace>end\<esc>o"
+  if a:action == 'index'
+  elseif a:action == 'show'
+  elseif a:action == 'create'
+  elseif a:action == 'update'
+    call TestControllerUpdate(user_with_permission, html_method, url_helper, object_name, has_params, is_ajax)
+  elseif a:action == 'destroy'
+  endif 
+  let @/ = "DeleteThis\\|ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeUrlHelper\\|ChangeObject\\|ChangeUserWithPermission\\|ChangeInvalidValue\\|ChangeTemplate\\|ChangePath"
   echo 'Follow instructions in text file to finish'
+endfunction
+
+function! TestControllerUpdate(user_with_permission, html_method, url_helper, object_name, has_params, is_ajax)
+  execute "normal! otest 'Should update when logged in as " . a:user_with_permission . "' do\<return>sign_in(@" . a:user_with_permission . ")"
+  " make request
+  execute "normal! o" . a:html_method . " " . a:url_helper . "_path"
+  execute "normal! a(@" . a:object_name . ")"
+  if a:has_params == 'y'
+    execute "normal! a, params: update_params"
+  endif
+  if a:is_ajax == 'y'
+    execute "normal! a, xhr: true"
+  endif
+  let response = input("Is the expected response success or redirect (s/r): ")
+  if response = 's'
+    let response = 'success'
+  else
+    let response = 'redirect'
+  endif
+  execute "normal! oassert_response :" . response
+  if a:is_ajax != 'y'
+    execute "normal! oassert_template 'ChangeTemplate'\<return>"
+    if response != 's'
+      execute "normal! oassert_redirected_to ChangePath"
+    endif
+  endif
+  let flash_type = input("What is the flash - success, info, danger, none (s/i/d/n): ")
+  if flash_type == 's'
+    let flash_type = 'success'
+  elseif flash_type == 'i'
+    let flash_type = 'info'
+  elseif flash_type == 'i'
+    let flash_type = 'danger'
+  else
+    let flash_type = ''
+  endif
+  if flash_type != ''
+    execute "normal! oassert flash[:" . flash_type . "]"
+  endif
+  execute "normal! o@" . a:object_name . ".reload\<return>assert_equal @" . a:object_name . ", assigns(:" . a:object_name . ")\<return>assert_equal ChangeValue, @" . a:object_name . ".ChangeAttribute\<return># DeleteThis - insert at least one assertions per line of code in control flow\<return>\<backspace>\<backspace>end"
 endfunction
 " Tests Controller Sortable Table positions
 nnoremap <silent> ,tcst :call IndentTemplate('', 1, 0, '../templates/tests/controller_sortable_table_positions.rb')<return>/ChangeUserWithPermission\\|ChangeUser\\|ChangeParent\\|ChangeTable\\|ChangeFixture\\|ChangeChildren\\|ChangeChild\\|ChangeStpId\\|ChangeUrlHelper\\|DeleteThis<return>
