@@ -6,7 +6,7 @@
   " Ruby Basic MOdule
   nnoremap <silent> ,rbmo :call CreateBaseFile(0, 0, 0)<return>
   " Ruby Basic Code Challenge
-  nnoremap <silent> ,rbcc a# frozen_string_literal: true<return><return>Dir.glob('app/**/*.rb').each do |file|<return>require_relative file<return>end
+  nnoremap <silent> ,rbcc a# frozen_string_literal: true<return><backspace><backspace><return>Dir['./app/**/*.rb'].each do \|file\|<return>require file<return>end<esc>
   " Ruby Basic IF
   nnoremap <silent> ,rbif aif ChangeThisPls<return>end<esc>/ChangeThisPls<return>
   " Ruby Basic IF inline
@@ -62,45 +62,35 @@
   function! RubyBlockBlockInsertMode()
     execute "normal! ado \|\|\<return>end\<esc>\<up>$"
   endfunction
-  " Ruby Block EAch
-  nnoremap <silent> ,rbea aeach do \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>cgn
-  nnoremap <silent> ,rbeA aeach { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
-  " [shorthand]
+  " Ruby Block Each
   inoremap <silent> eachb each <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> eacho each { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
-  inoremap <silent> eachs each(&:)<left>
+  inoremap <silent> eachx each(&:)<left>
   " Ruby Block Each With index
-  nnoremap <silent> ,rbew aeach_with_index do \|ChangeArgs, index\|<return>end<esc>/ChangeArgs<return>
-  nnoremap <silent> ,rbeW aeach_with_index { \|ChangeArgs, index\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
   inoremap <silent> eachwb each_with_index do \|, index\|<return>end<esc><up>$7<left>i
-  inoremap <silent> eachwi each_with_index { \|, index\| ChangeLogic }<esc>/ChangeLogic<return>9<left>i
-  " Ruby Block TImes
+  inoremap <silent> eachwo each_with_index { \|, index\| ChangeLogic }<esc>/ChangeLogic<return>9<left>i
+  " Ruby Block Times
   inoremap <silent> timesb times do \|index\|<return>end<esc>O
   inoremap <silent> timeso times { \|index\| ChangeLogic }<esc>/ChangeLogic<return>
-  " Ruby Block MAp
-  nnoremap <silent> ,rbma amap do \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
-  nnoremap <silent> ,rbmA amap { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
+  " Ruby Block While
+  inoremap <silent> whileb while <return>end<esc><up>A
+  " Ruby Block Until
+  inoremap <silent> untilb until <return>end<esc><up>A
+  " Ruby Block Until
+  inoremap <silent> loopb loop do<return>ChangeLogic<return>break if ChangeConditional<return>end<esc>/ChangeLogic\\|ChangeConditional<return>
+  " Ruby Block Map
   inoremap <silent> mapb map <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> mapo map { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> mapx map(&:)<left>
-  " Ruby Block SElect
-  nnoremap <silent> ,rbse aselect \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
-  nnoremap <silent> ,rbsE aselect { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
-  " [shorthand]
+  " Ruby Block Select
   inoremap <silent> selectb select <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> selecto select { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> selectx select(&:)<left>
-  " Ruby Block REject
-  nnoremap <silent> ,rbse areject \|ChangeArgs\|<return>end<esc>/ChangeArgs<return>
-  nnoremap <silent> ,rbsE areject { \|ChangeArgs\| ChangeLogic }<esc>/ChangeArgs\\|ChangeLogic<return>
-  " [shorthand]
+  " Ruby Block Reject
   inoremap <silent> rejectb reject <esc>:call RubyBlockBlockInsertMode()<return>i
   inoremap <silent> rejecto reject { \|\| ChangeLogic }<esc>/ChangeLogic<return>2<left>i
   inoremap <silent> rejectx reject(&:)<left>
-  " Ruby Block SOrt
-  nnoremap <silent> ,rbso asort do \|a, b\|<retrun>a.ChangeLogic <=> b.ChangeLogic<return>end<esc>/ChangeLogic<return>
-  nnoremap <silent> ,rbsO asort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>
-  " [block]
+  " Ruby Block Sort
   inoremap <silent> sortb sort do \|a, b\|<return>a.ChangeLogic <=> b.ChangeLogic<return>end<esc>/ChangeLogic<return>cgn
   inoremap <silent> sorto sort { \|a, b\| a.ChangeLogic <=> b.ChangeLogic }<esc>/ChangeLogic<return>cgn
   " Ruby Block Lambda
