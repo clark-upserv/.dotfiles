@@ -1,3 +1,82 @@
+" Do not tab to terminal window
+nnoremap <silent> <S-tab> :call GoToNextWindow(0, 1)<return><esc>
+nnoremap <silent> <tab> :call GoToNextWindow(1, 1)<return><esc>
+function GoToNextWindow(direction, attempt)
+  let window_count = winnr('$')
+  let current_window = winnr()
+  if a:direction == 1
+    if current_window < window_count
+      let target_window = current_window + 1
+    else 
+      let target_window = 1
+    endif
+  else
+    if current_window == 1
+      let target_window = window_count
+    else 
+      let target_window = current_window - 1
+    endif
+  endif
+  execute "normal! " . target_window . "\<C-w>\<C-w>"
+  " skip terminal windows
+  if getbufvar(bufnr(), '&buftype') == 'terminal' 
+    " prevent endless loop in case that all windows are terminals
+    if a:attempt < window_count
+      call GoToNextWindow(a:direction, a:attempt + 1)
+    endif
+  end
+endfunction
+
+function! GoToNextBuf(direction)
+  if a:direction == 1
+    let adj = 1
+  else
+    let adj = -1
+  end
+  let continue = 1
+  while continue 
+    let nbuf = NextBuf(adj)
+    if nbuf == bufnr()
+      let continue = 0
+    endif
+    if getbufvar(nbuf, '&buftype') == 'terminal'
+      if a:direction == 1
+        let adj = adj + 1
+      else
+        let adj = adj - 1
+      endif
+    else
+      let continue = 0
+    endif
+  endwhile
+  exec ':buf' nbuf 
+endfunction
+
+function! NextBuf(adj)
+  let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')
+  let l:len = len(l:blist)
+  let cbuf = bufnr()
+  let cpos = index(l:blist, cbuf)
+  let ncount = cpos + a:adj
+  while ncount > l:len
+    let ncount = ncount - l:len
+  endwhile
+  while ncount <= 0
+    let ncount = ncount + l:len
+  endwhile
+  if ncount == l:len
+    let nbuf = l:blist[0]
+  else
+    let nbuf = l:blist[ncount]
+  endif
+  return nbuf
+endfunction
+
+
+
+
+
+
 " Window Split
 nnoremap <space>ws :sp<return>
 " Window split Vertically

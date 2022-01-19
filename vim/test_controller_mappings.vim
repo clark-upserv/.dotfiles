@@ -48,12 +48,12 @@ function! TestControllerAuthorization(action)
       let object_name = 'ChangeObject'
     endif
   endif
-  let has_params = input("Does the " . a:action . " action have params? (y/n): ")
-  let is_ajax = input("Is this an ajax request? (y/n): ")
   let user_with_permission = input("What is the role with permision (ex \"hr_admin\"): ")
   if user_with_permission == ''
     let user_with_permission = 'ChangeUserWithPermission'
   endif
+  let has_params = input("Does the " . a:action . " action have params? (y/n): ")
+  let is_ajax = input("Is this an ajax request? (y/n): ")
   
   " add params method
   if has_params == 'y'
@@ -92,8 +92,10 @@ function! TestControllerAuthorization(action)
   execute "normal! oassert assigns(:access_denied_while_logged_in)"
   " test that user with access cannot access objects for different accounts
   if index(['show', 'update', 'destroy'], a:action) >= 0
+    execute "normal! o# DeleteThis - Below we test limitations on users that have access\<return>DeleteThis..."
+    execute "normal! oDeleteThis - We start by testing url params that could break rules in ability file\<return>DeleteThis - the most common issue is testing that " . user_with_permission . " cannot ". a:action . " " . object_name . " on different account.\<return>\<backspace>\<backspace>\<space>\<backspace>"
     " sign in user with access
-    execute "normal! o# Logged in as " . user_with_permission . " but for " . object_name . " on different account\<return>\<backspace>\<backspace>\<space>\<backspace>sign_in(@" . user_with_permission . ")"
+    execute "normal! a# Logged in as " . user_with_permission . " but for " . object_name . " on different account\<return>\<backspace>\<backspace>\<space>\<backspace>sign_in(@" . user_with_permission . ")"
     " make request while logged in but request object on different account
     execute "normal! o" . html_method . " " . url_helper . "_path"
     execute "normal! a(@dif_account_" . object_name . ")"
@@ -106,38 +108,40 @@ function! TestControllerAuthorization(action)
     " assert access denied while logged in with access but attempting to
     " access object on different account
     execute "normal! oassert assigns(:access_denied_while_logged_in)"
-    " test that object can not be created or updated to be on a different
-    " account
-    if index(['create', 'update'], a:action) >= 0
-      " prep
-      let could_create_on_dif_account = input("Is it possible to " . a:action . " " . object_name . " on different account? (y/n): ")
-      if could_create_on_dif_account == 'y'
-        if a:action == 'update'
-          let helper_word = 'to'
-        else 
-          let helper_word = 'for'
-        endif
-        execute "normal! o# Logged in as " . user_with_permission . " but attempting to " . a:action . " " . object_name . " " . helper_word . " different account\<return>\<backspace>\<backspace>\<space>\<backspace>"
-        execute "normal! ainvalid_" . a:action . "_params = " . a:action . "_params\<return>invalid_" . a:action . "_params['ChangeScope']['ChangeAttribute'] = ChangeInvalidValue"
-        " make request to create or update for antoher account
-        execute "normal! o" . html_method . " " . url_helper . "_path"
-        if a:action != 'index'
-          execute "normal! a(@" . object_name . ")"
-        endif
-        if has_params == 'y'
-          execute "normal! a, params: invalid_" . a:action . "_params"
-        endif
-        if is_ajax == 'y'
-          execute "normal! a, xhr: true"
-        endif
-        " assert access denied while logged in with access but attempting to
-        " create or update object for  different account
-        execute "normal! oassert assigns(:access_denied_while_logged_in)"
+    execute "normal! o# DeleteThis - Repeat above section for any other situation where " . user_with_permission . " cannot ". a:action . " " . object_name . " based on ability file and url params\<return>\<backspace>\<backspace>\<space>\<backspace>"
+  endif
+  " test that params cannot break ability file
+  if has_params == 'y' && index(['create', 'update'], a:action) >= 0
+    " prep
+    let params_could_break_ability = input("Is it possible that any params break rules in ability file? (y/n): ")
+    if params_could_break_ability == 'y'
+      if a:action == 'update'
+        let helper_word = 'to'
+      else 
+        let helper_word = 'for'
       endif
+      execute "normal! a# DeleteThis...\<return>DeleteThis - Next we test params that could break rules in ability file\<return>DeleteThis - the most common issue is testing that " . user_with_permission . " cannot ". a:action . " " . object_name . " on different account.\<return>\<backspace>\<backspace>\<space>\<backspace>"
+      execute "normal! a# Logged in as " . user_with_permission . " but attempting to " . a:action . " " . object_name . " " . helper_word . " different account\<return>\<backspace>\<backspace>\<space>\<backspace>"
+      execute "normal! ainvalid_" . a:action . "_params = " . a:action . "_params\<return>invalid_" . a:action . "_params['ChangeScope']['ChangeAttribute'] = ChangeInvalidValue"
+      " make request to create or update for antoher account
+      execute "normal! o" . html_method . " " . url_helper . "_path"
+      if a:action != 'index'
+        execute "normal! a(@" . object_name . ")"
+      endif
+      if has_params == 'y'
+        execute "normal! a, params: invalid_" . a:action . "_params"
+      endif
+      if is_ajax == 'y'
+        execute "normal! a, xhr: true"
+      endif
+      " assert access denied while logged in with access but attempting to
+      " create or update object for  different account
+      execute "normal! oassert assigns(:access_denied_while_logged_in)"
+      execute "normal! o# DeleteThis - Repeat above section for any other situation where " . user_with_permission . " cannot ". a:action . " " . object_name . " based on ability file and params\<return>\<backspace>\<backspace>\<space>\<backspace>"
     endif
   endif
-  execute "normal! o# DeleteThis - repeat dif account tests for each user with access AND each variation that could end in object being on different account\<return>\<backspace>\<backspace>end\<esc>o"
-  if a:action == 'index'
+  execute "normal! a# DeleteThis...\<return>DeleteThis - Repeat above section for " . user_with_permission . " for all user roles that have access\<return>\<backspace>\<backspace>end\<esc>o"
+  if a:action == 'index'tests
   elseif a:action == 'show'
   elseif a:action == 'create'
   elseif a:action == 'update'
@@ -159,31 +163,34 @@ function! TestControllerUpdate(user_with_permission, html_method, url_helper, ob
   if a:is_ajax == 'y'
     execute "normal! a, xhr: true"
   endif
-  let response = input("Is the expected response success or redirect (s/r): ")
-  if response = 's'
+  if a:is_ajax != 'y'
+    let response = input("For valid control flow (ie no errors), is the expected response success or redirect? (s/r): ")
+  else
+    let response = 's'
+  endif
+  if response == 's'
     let response = 'success'
   else
     let response = 'redirect'
   endif
   execute "normal! oassert_response :" . response
   if a:is_ajax != 'y'
-    execute "normal! oassert_template 'ChangeTemplate'\<return>"
-    if response != 's'
+    if response == 'success'
+      execute "normal! oassert_template 'ChangeTemplate'"
+    else
       execute "normal! oassert_redirected_to ChangePath"
     endif
   endif
-  let flash_type = input("What is the flash - success, info, danger, none (s/i/d/n): ")
+  let flash_type = input("for valid control flow (ie no errors) what is the flash - success, info, none (s/i/n): ")
   if flash_type == 's'
     let flash_type = 'success'
   elseif flash_type == 'i'
     let flash_type = 'info'
-  elseif flash_type == 'i'
-    let flash_type = 'danger'
   else
     let flash_type = ''
   endif
   if flash_type != ''
-    execute "normal! oassert flash[:" . flash_type . "]"
+    execute "normal! oassert flash[:success]"
   endif
   execute "normal! o@" . a:object_name . ".reload\<return>assert_equal @" . a:object_name . ", assigns(:" . a:object_name . ")\<return>assert_equal ChangeValue, @" . a:object_name . ".ChangeAttribute\<return># DeleteThis - insert at least one assertions per line of code in control flow\<return>\<backspace>\<backspace>end"
 endfunction
