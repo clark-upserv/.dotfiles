@@ -18,7 +18,7 @@ nnoremap <silent> ,tcau :call IndentTemplate('', 0, 0, '../templates/tests/contr
 
 function! TestControllerAuthorization(action)
   " add comment indicating start of tests for action
-  execute "normal! a# Tests for " . a:action . " action\<return>\<backspace>\<backspace>\<space>\<backspace>"
+  execute "normal! o# " . a:action . " action params\<return>\<backspace>\<backspace>\<space>\<backspace>"
   " get details
   if a:action == ''
     let a:action = 'ChangeAction'
@@ -57,7 +57,7 @@ function! TestControllerAuthorization(action)
   endif
   
   " start authentication test
-  execute "normal! atest 'Should not " . a:action . " without authorization' do\<return># not logged in\<return>\<backspace>\<backspace>\<space>\<backspace>"
+  execute "normal! a# " . a:action . " authorization test\<return>\<backspace>\<backspace>test 'Should not " . a:action . " without authorization' do\<return># not logged in\<return>\<backspace>\<backspace>\<space>\<backspace>"
   " make request while not logged in
   execute "normal! a" . html_method . " " . url_helper . "_path"
   if a:action != 'index'
@@ -150,7 +150,7 @@ function! TestControllerAuthorization(action)
 endfunction
 
 function! TestControllerUpdate(user_with_permission, html_method, url_helper, object_name, has_params, is_ajax)
-  execute "normal! otest 'Should update when logged in as " . a:user_with_permission . "' do\<return>sign_in(core_users(:" . a:user_with_permission . "))"
+  execute "normal! o# update action test (valid)\<return>\<backspace>\<backspace>test 'Should update when logged in as " . a:user_with_permission . "' do\<return>sign_in(core_users(:" . a:user_with_permission . "))"
   " make request
   execute "normal! o" . a:html_method . " " . a:url_helper . "_path"
   execute "normal! a(@" . a:object_name . ")"
@@ -178,7 +178,7 @@ function! TestControllerUpdate(user_with_permission, html_method, url_helper, ob
       execute "normal! oassert_redirected_to ChangePath"
     endif
   endif
-  let flash_type = input("for valid control flow (ie no errors) what is the flash - success, info, none (s/i/n): ")
+  let flash_type = input("For valid control flow (ie no errors) what is the flash - success, info, none (s/i/n): ")
   if flash_type == 's'
     let flash_type = 'success'
   elseif flash_type == 'i'
@@ -187,7 +187,7 @@ function! TestControllerUpdate(user_with_permission, html_method, url_helper, ob
     let flash_type = ''
   endif
   if flash_type != ''
-    execute "normal! oassert flash[:success]"
+    execute "normal! oassert flash[:" . flash_type . "]"
   endif
   execute "normal! o@" . a:object_name . ".reload\<return>assert_equal @" . a:object_name . ", assigns(:" . a:object_name . ")\<return>assert_equal ChangeValue, @" . a:object_name . ".ChangeAttribute\<return># DeleteThis - insert at least one assertions per line of code in control flow\<return>\<backspace>\<backspace>end"
   call TestControllerUpdateAdditionalUserWithAccess(a:html_method, a:url_helper, a:object_name, a:has_params, a:is_ajax)
@@ -196,7 +196,7 @@ endfunction
 function! TestControllerUpdateAdditionalUserWithAccess(html_method, url_helper, object_name, has_params, is_ajax)
   let user_with_permission = input("Are there any other users / roles with permision? (ex \"hr_doc_manager\" or leave blank if none): ")
   if user_with_permission != ''
-    execute "normal! o\<esc>o# Simplified version of test for " . user_with_permission . "\<return>\<backspace>\<backspace>test 'Should updated when logged in as " . user_with_permission . "' do\<return>sign_in(core_users(:" . user_with_permission . "))"
+    execute "normal! o\<esc>o# update test (valid - simplified version for " . user_with_permission . ")\<return>\<backspace>\<backspace>test 'Should updated when logged in as " . user_with_permission . "' do\<return>sign_in(core_users(:" . user_with_permission . "))"
     " make request
     execute "normal! o" . a:html_method . " " . a:url_helper . "_path"
     execute "normal! a(@" . a:object_name . ")"
@@ -212,12 +212,13 @@ function! TestControllerUpdateAdditionalUserWithAccess(html_method, url_helper, 
 endfunction
 
 function! TestControllerUpdateInvalid(user_with_permission, html_method, url_helper, object_name, has_params, is_ajax)
-  execute "normal! otest 'Should not update when params are invalid' do\<return>sign_in(core_users(:" . a:user_with_permission . "))"
+  execute "normal! o\<esc>\o# DeleteThis - repeat entire invalid test for all invalid control flows (if more than one)\<return>DeleteThis - only test for one " . a:object_name . " error (we are testing control flow, not model validations)\<return>DeleteThis - only test for one user with permision (we are testing control flow, not authorization)\<return>update test (invalid)\<return>\<backspace>\<backspace>test 'Should not update when params are invalid' do\<return>sign_in(core_users(:" . a:user_with_permission . "))"
+  execute "normal! oinvalid_update_params = update_params\<return>invalid_update_params['ChangeScope']['ChangeAttribute'] = ChangeInvalidValue"
   " make request
   execute "normal! o" . a:html_method . " " . a:url_helper . "_path"
   execute "normal! a(@" . a:object_name . ")"
   if a:has_params == 'y'
-    execute "normal! a, params: update_params"
+    execute "normal! a, params: invalid_update_params"
   endif
   if a:is_ajax == 'y'
     execute "normal! a, xhr: true"
@@ -240,19 +241,16 @@ function! TestControllerUpdateInvalid(user_with_permission, html_method, url_hel
       execute "normal! oassert_redirected_to ChangePath"
     endif
   endif
-  let flash_type = input("for valid control flow (ie no errors) what is the flash - success, info, none (s/i/n): ")
-  if flash_type == 's'
-    let flash_type = 'success'
-  elseif flash_type == 'i'
-    let flash_type = 'info'
+  let flash_type = input("For ivalid control flow (ie no errors) what is the flash - danger or none (d/n): ")
+  if flash_type == 'd'
+    let flash_type = 'danger'
   else
     let flash_type = ''
   endif
   if flash_type != ''
-    execute "normal! oassert flash[:success]"
+    execute "normal! oassert flash[:" . flash_type . "]"
   endif
   execute "normal! o@" . a:object_name . ".reload\<return>assert_equal @" . a:object_name . ", assigns(:" . a:object_name . ")\<return>assert_equal ChangeValue, @" . a:object_name . ".ChangeAttribute\<return># DeleteThis - insert at least one assertions per line of code in control flow\<return>\<backspace>\<backspace>end"
-  call TestControllerUpdateAdditionalUserWithAccess(a:html_method, a:url_helper, a:object_name, a:has_params, a:is_ajax)
 endfunction
 
 
