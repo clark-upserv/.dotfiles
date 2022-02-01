@@ -24,9 +24,22 @@ nnoremap <silent> ,tmba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<ret
 
 " Test Models Scopes
   " Tests Models Scope - Where
-  nnoremap <silent> ,tmsw atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope.map(&:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id), result<return><space><backspace><esc>:call TestIncludedNotIncluded()<return>oend<esc>:call TestModelSearch()<return>
+  nnoremap <silent> ,tmsw atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope.pluck(:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id), result<return><space><backspace><esc>:call TestIncludedNotIncluded()<return>oend<esc>:call TestModelSearch()<return>
   " Tests Models Scope - Order
-  nnoremap <silent> ,tmso atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope.map(&:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id), result<return>first = ChangeTable(:ChangeFixture).id<return>second = ChangeTable(:ChangeFixture).id<return>assert result.find_index(first) < result.find_index(second)<return>end<esc>:call TestModelSearch()<return>
+  nnoremap <silent> ,tmso atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope.pluck(:id)<return>assert_equal ChangeClass.CopyScopeMethods.pluck(:id), result<return>first = ChangeTable(:ChangeFixture).id<return>second = ChangeTable(:ChangeFixture).id<return>assert result.find_index(first) < result.find_index(second)<return>end<esc>:call TestModelSearch()<return>
+  nnoremap <silent> ,tmso :call TestModelsScopeOrder()<return>
+  function TestModelsScopeOrder()
+    let scope_name = input("What is the name of the scope?: ")
+    let model_name = input("What is the model name (camel case, ex. \"Core::UserRole\"): ")
+    let table_name = input("What is the table name for the model (snake case, ex. \"core_user_roles\"): ")
+    execute "normal! atest 'scope - " . scope_name . "' do"
+    execute "normal! oresult = " . model_name . "." . scope_name . ".map(&:id)"
+    execute "normal! oassert_equal " . model_name . ".CopyScopeMethods.pluck(:id), result"
+    execute "normal! ofirst = " . table_name . "(:ChangeFixture).id"
+    execute "normal! osecond = " . table_name . "(:ChangeFixture).id"
+    execute "normal! oassert result.find_index(first) < result.find_index(second)\<return>end"
+    call TestModelSearch()
+  endfunction
   " Tests Models Scope - Pluck
   nnoremap <silent> ,tmsp atest 'scope - ChangeScope' do<return>result = ChangeModel.ChangeScope<return>assert_equal ChangeClass.CopyScopeMethods, result<return>ChangeObject = ChangeTable(:ChangeFixture)<return>included = []<return># DeleteThis - use this if pluck returns only one item<return><backspace><backspace>included << ChangeObject.ChangeMethod<return># DeleteThis - use this if pluck returns multiple items<return><backspace><backspace>included << [ChangeObject.ChangeMethod, ChangeObject.ChangeMethod]<return>assert_equal included, (result & included)<return>end<esc>:call TestModelSearch()<return>
 

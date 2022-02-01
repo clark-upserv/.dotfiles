@@ -1,16 +1,8 @@
 " Tests Controller BAse
 nnoremap <silent> ,tcba :call CreateBaseFile(1, 1, 1)<return>/outer_followup<return>cgnrequire 'test_helper'<esc>o<esc>/class<return>A < ActionDispatch::IntegrationTest<esc>/ChangeTopLevelDocumentation<return><down>^wviwy/ChangeTopLevelDocumentation<return>viwpbiTest for <esc>0/Test<return>ncgn<esc>:call TestControllerBase()<return>
 function! TestControllerBase()
-  execute "normal! /inner_followup\<return>cgninclude Devise::Test::IntegrationHelpers\<return>\<return>setup do\<return>@ChangeObject = ChangeTable(:ChangeFixture)\<return>@dif_account_ChangeObject = ChangeTable(:ChangeFixture)\<return>end\<return>test disclaimer\<esc>/test disclaimer\<return>cgn\<esc>:call TestDisclaimer()\<return>"
-  let Object = input("What is the name for the main object(ex \"user\"): ")
-  if Object != ""
-    execute "normal! /ChangeObject\<return>cgn" . Object . "\<esc>n."
-  endif 
-  let FixtureTable = input("What is the table name for the main object(ex \"core_users\"): ")
-  if FixtureTable != ""
-    execute "normal! /ChangeTable\<return>cgn" . FixtureTable . "\<esc>n."
-  endif 
-  let @/ = "DeleteThis\\|ChangeUserWithPermission\\|ChangeObject\\|ChangeTable\\|ChangeFixture"
+  execute "normal! /inner_followup\<return>cgninclude Devise::Test::IntegrationHelpers\<return>test disclaimer\<esc>/test disclaimer\<return>cgn\<esc>:call TestDisclaimer()\<return>"
+  let @/ = "DeleteThis"
 endfunction
 
 " Tests Controller AUthorization
@@ -36,12 +28,18 @@ function! TestControllerAuthorization(action)
   if url_helper == ''
     let url_helper = 'ChangeUrlHelper'
   endif
-  if a:action == 'index'
-    let object_name = ''
-  else
+  if a:action != 'index'
     let object_name = input("What is the name of object?: ")
     if object_name == ''
       let object_name = 'ChangeObject'
+    endif
+    let object_table = input("What is the name of object's table?: ")
+    if object_table == ''
+      let object_table = 'ChangeTable'
+    endif
+    let object_fixture = input("What is the name of object's fixture?: ")
+    if object_fixture == ''
+      let object_fixture = 'ChangeFixture'
     endif
   endif
   let user_with_permission = input("What is the first role with permision (ex \"hr_admin\"): ")
@@ -56,12 +54,16 @@ function! TestControllerAuthorization(action)
     execute "normal! adef " . a:action . "_params\<return>{ 'ChangeScope' => { 'ChangeAttribute' => 'ChangeValue' } }\<return>end\<return>\<esc>0Do\<space>\<backspace>"
   endif
   
-  " start authentication test
-  execute "normal! a# " . a:action . " authorization test\<return>\<backspace>\<backspace>test 'Should not " . a:action . " without authorization' do\<return># not logged in\<return>\<backspace>\<backspace>\<space>\<backspace>"
+  " start authorization test
+  execute "normal! a# " . a:action . " action authorization test\<return>\<backspace>\<backspace>test 'Should not " . a:action . " without authorization' do"
+  if a:action != 'index'
+    execute "normal! o" . object_name . " = " . object_table . "(:" . object_fixture . ")"
+  endif
+  execute "normal! o# not logged in\<return>\<backspace>\<backspace>\<space>\<backspace>"
   " make request while not logged in
   execute "normal! a" . html_method . " " . url_helper . "_path"
   if a:action != 'index'
-    execute "normal! a(@" . object_name . ")"
+    execute "normal! a(" . object_name . ")"
   endif
   if has_params == 'y'
     execute "normal! a, params: " . a:action . "_params"
@@ -76,7 +78,7 @@ function! TestControllerAuthorization(action)
   " make request make request while signed in but without access
   execute "normal! o" . html_method . " " . url_helper . "_path"
   if a:action != 'index'
-    execute "normal! a(@" . object_name . ")"
+    execute "normal! a(" . object_name . ")"
   endif
   if has_params == 'y'
     execute "normal! a, params: " . a:action . "_params"
@@ -88,13 +90,14 @@ function! TestControllerAuthorization(action)
   execute "normal! oassert assigns(:access_denied_while_logged_in)"
   " test that user with access cannot access objects for different accounts
   if index(['show', 'update', 'destroy'], a:action) >= 0
+    " add notes regarding when user with access cannot access
     execute "normal! o# DeleteThis - Below we test limitations on users that have access\<return>DeleteThis..."
     execute "normal! oDeleteThis - We start by testing url params that could break rules in ability file\<return>DeleteThis - the most common issue is testing that " . user_with_permission . " cannot ". a:action . " " . object_name . " on different account.\<return>\<backspace>\<backspace>\<space>\<backspace>"
     " sign in user with access
     execute "normal! a# Logged in as " . user_with_permission . " but for " . object_name . " on different account\<return>\<backspace>\<backspace>\<space>\<backspace>sign_in(core_users(:" . user_with_permission . "))"
     " make request while logged in but request object on different account
     execute "normal! o" . html_method . " " . url_helper . "_path"
-    execute "normal! a(@dif_account_" . object_name . ")"
+    execute "normal! a(" . object_table . "(:ChangeDifAccountObject))"
     if has_params == 'y'
       execute "normal! a, params: " . a:action . "_params"
     endif
@@ -122,7 +125,7 @@ function! TestControllerAuthorization(action)
       " make request to create or update for antoher account
       execute "normal! o" . html_method . " " . url_helper . "_path"
       if a:action != 'index'
-        execute "normal! a(@" . object_name . ")"
+        execute "normal! a(" . object_name . ")"
       endif
       if has_params == 'y'
         execute "normal! a, params: invalid_" . a:action . "_params"
@@ -141,19 +144,21 @@ function! TestControllerAuthorization(action)
   elseif a:action == 'show'
   elseif a:action == 'create'
   elseif a:action == 'update'
-    call TestControllerUpdate(user_with_permission, html_method, url_helper, object_name, has_params, is_ajax)
-    call TestControllerUpdateInvalid(user_with_permission, html_method, url_helper, object_name, has_params, is_ajax)
+    call TestControllerUpdate(user_with_permission, html_method, url_helper, object_name, object_table, object_fixture, has_params, is_ajax)
+    call TestControllerUpdateInvalid(user_with_permission, html_method, url_helper, object_name, object_table, object_fixture, has_params, is_ajax)
   elseif a:action == 'destroy'
   endif 
-  let @/ = "DeleteThis\\|ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeUrlHelper\\|ChangeObject\\|ChangeUserWithPermission\\|ChangeInvalidValue\\|ChangeTemplate\\|ChangePath"
+  let @/ = "DeleteThis\\|ChangeAction\\|ChangeScope\\|ChangeAttribute\\|ChangeValue\\|ChangeUrlHelper\\|ChangeObject\\|ChangeDifAccountObject\\|ChangeTable\\|ChangeFixture\\|ChangeUserWithPermission\\|ChangeInvalidValue\\|ChangeTemplate\\|ChangePath"
   echo 'Follow instructions in text file to finish'
 endfunction
 
-function! TestControllerUpdate(user_with_permission, html_method, url_helper, object_name, has_params, is_ajax)
-  execute "normal! o# update action test (valid)\<return>\<backspace>\<backspace>test 'Should update when logged in as " . a:user_with_permission . "' do\<return>sign_in(core_users(:" . a:user_with_permission . "))"
+function! TestControllerUpdate(user_with_permission, html_method, url_helper, object_name, object_table, object_fixture, has_params, is_ajax)
+  execute "normal! o# update action test (valid)\<return>\<backspace>\<backspace>test 'Should update when logged in as " . a:user_with_permission . "' do"
+  execute "normal! o" . a:object_name . " = " . a:object_table . "(:" . a:object_fixture . ")"
+  execute "normal! osign_in(core_users(:" . a:user_with_permission . "))"
   " make request
   execute "normal! o" . a:html_method . " " . a:url_helper . "_path"
-  execute "normal! a(@" . a:object_name . ")"
+  execute "normal! a(" . a:object_name . ")"
   if a:has_params == 'y'
     execute "normal! a, params: update_params"
   endif
@@ -189,34 +194,38 @@ function! TestControllerUpdate(user_with_permission, html_method, url_helper, ob
   if flash_type != ''
     execute "normal! oassert flash[:" . flash_type . "]"
   endif
-  execute "normal! o@" . a:object_name . ".reload\<return>assert_equal @" . a:object_name . ", assigns(:" . a:object_name . ")\<return>assert_equal ChangeValue, @" . a:object_name . ".ChangeAttribute\<return># DeleteThis - insert at least one assertions per line of code in control flow\<return>\<backspace>\<backspace>end"
-  call TestControllerUpdateAdditionalUserWithAccess(a:html_method, a:url_helper, a:object_name, a:has_params, a:is_ajax)
+  execute "normal! o" . a:object_name . ".reload\<return>assert_equal " . a:object_name . ", assigns(:" . a:object_name . ")\<return>assert_equal ChangeValue, " . a:object_name . ".ChangeAttribute\<return># DeleteThis - insert at least one assertions per line of code in control flow\<return>\<backspace>\<backspace>end"
+  call TestControllerUpdateAdditionalUserWithAccess(a:html_method, a:url_helper, a:object_name, a:object_table, a:object_fixture, a:has_params, a:is_ajax)
 endfunction
 
-function! TestControllerUpdateAdditionalUserWithAccess(html_method, url_helper, object_name, has_params, is_ajax)
+function! TestControllerUpdateAdditionalUserWithAccess(html_method, url_helper, object_name, object_table, object_fixture, has_params, is_ajax)
   let user_with_permission = input("Are there any other users / roles with permision? (ex \"hr_doc_manager\" or leave blank if none): ")
   if user_with_permission != ''
-    execute "normal! o\<esc>o# update test (valid - simplified version for " . user_with_permission . ")\<return>\<backspace>\<backspace>test 'Should updated when logged in as " . user_with_permission . "' do\<return>sign_in(core_users(:" . user_with_permission . "))"
+    execute "normal! o\<esc>o# update test (valid - simplified version for " . user_with_permission . ")\<return>\<backspace>\<backspace>test 'Should updated when logged in as " . user_with_permission . "' do"
+    execute "normal! o" . a:object_name . " = " . a:object_table . "(:" . a:object_fixture . ")"
+    execute "normal! osign_in(core_users(:" . user_with_permission . "))"
     " make request
     execute "normal! o" . a:html_method . " " . a:url_helper . "_path"
-    execute "normal! a(@" . a:object_name . ")"
+    execute "normal! a(" . a:object_name . ")"
     if a:has_params == 'y'
       execute "normal! a, params: update_params"
     endif
     if a:is_ajax == 'y'
       execute "normal! a, xhr: true"
     endif
-    execute "normal! o@" . a:object_name . ".reload\<return>assert_equal ChangeValue, @" . a:object_name . ".ChangeAttribute\<return>end"
-    call TestControllerUpdateAdditionalUserWithAccess(a:html_method, a:url_helper, a:object_name, a:has_params, a:is_ajax)
+    execute "normal! o" . a:object_name . ".reload\<return>assert_equal ChangeValue, " . a:object_name . ".ChangeAttribute\<return>end"
+    call TestControllerUpdateAdditionalUserWithAccess(a:html_method, a:url_helper, a:object_name, a:object_table, a:object_fixture, a:has_params, a:is_ajax)
   endif
 endfunction
 
-function! TestControllerUpdateInvalid(user_with_permission, html_method, url_helper, object_name, has_params, is_ajax)
-  execute "normal! o\<esc>\o# DeleteThis - repeat entire invalid test for all invalid control flows (if more than one)\<return>DeleteThis - only test for one " . a:object_name . " error (we are testing control flow, not model validations)\<return>DeleteThis - only test for one user with permision (we are testing control flow, not authorization)\<return>update test (invalid)\<return>\<backspace>\<backspace>test 'Should not update when params are invalid' do\<return>sign_in(core_users(:" . a:user_with_permission . "))"
+function! TestControllerUpdateInvalid(user_with_permission, html_method, url_helper, object_name, object_table, object_fixture, has_params, is_ajax)
+  execute "normal! o\<esc>\o# DeleteThis - repeat entire invalid test for all invalid control flows (if more than one)\<return>DeleteThis - only test for one " . a:object_name . " error (we are testing control flow, not model validations)\<return>DeleteThis - only test for one user with permision (we are testing control flow, not authorization)\<return>update test (invalid)\<return>\<backspace>\<backspace>test 'Should not update when params are invalid' do"
+  execute "normal! o" . a:object_name . " = " . a:object_table . "(:" . a:object_fixture . ")"
+  execute "normal! osign_in(core_users(:" . a:user_with_permission . "))"
   execute "normal! oinvalid_update_params = update_params\<return>invalid_update_params['ChangeScope']['ChangeAttribute'] = ChangeInvalidValue"
   " make request
   execute "normal! o" . a:html_method . " " . a:url_helper . "_path"
-  execute "normal! a(@" . a:object_name . ")"
+  execute "normal! a(" . a:object_name . ")"
   if a:has_params == 'y'
     execute "normal! a, params: invalid_update_params"
   endif
@@ -241,7 +250,7 @@ function! TestControllerUpdateInvalid(user_with_permission, html_method, url_hel
       execute "normal! oassert_redirected_to ChangePath"
     endif
   endif
-  let flash_type = input("For ivalid control flow (ie no errors) what is the flash - danger or none (d/n): ")
+  let flash_type = input("For invalid control flow (ie no errors) what is the flash - danger or none (d/n): ")
   if flash_type == 'd'
     let flash_type = 'danger'
   else
@@ -250,7 +259,7 @@ function! TestControllerUpdateInvalid(user_with_permission, html_method, url_hel
   if flash_type != ''
     execute "normal! oassert flash[:" . flash_type . "]"
   endif
-  execute "normal! o@" . a:object_name . ".reload\<return>assert_equal @" . a:object_name . ", assigns(:" . a:object_name . ")\<return>assert_equal ChangeValue, @" . a:object_name . ".ChangeAttribute\<return># DeleteThis - insert at least one assertions per line of code in control flow\<return>\<backspace>\<backspace>end"
+  execute "normal! o" . a:object_name . ".reload\<return>assert_equal " . a:object_name . ", assigns(:" . a:object_name . ")\<return>assert_equal ChangeValue, " . a:object_name . ".ChangeAttribute\<return># DeleteThis - insert at least one assertions per line of code in control flow\<return>\<backspace>\<backspace>end"
 endfunction
 
 

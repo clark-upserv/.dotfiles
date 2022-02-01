@@ -52,35 +52,10 @@ function! GoToNextBuf(direction)
   exec ':buf' nbuf 
 endfunction
 
-function! NextBuf(adj)
-  let l:blist = map(filter(copy(getbufinfo()), 'v:val.listed == 1'), 'v:val.bufnr')
-  let l:len = len(l:blist)
-  let cbuf = bufnr()
-  let cpos = index(l:blist, cbuf)
-  let ncount = cpos + a:adj
-  while ncount > l:len
-    let ncount = ncount - l:len
-  endwhile
-  while ncount <= 0
-    let ncount = ncount + l:len
-  endwhile
-  if ncount == l:len
-    let nbuf = l:blist[0]
-  else
-    let nbuf = l:blist[ncount]
-  endif
-  return nbuf
-endfunction
-
-
-
-
-
-
 " Window Split
-nnoremap <space>ws :sp<return>
+nnoremap <space>ws :sp<return>:set wrap<return>
 " Window split Vertically
-nnoremap <space>wv :vsp<return>
+nnoremap <space>wv :vsp<return>:set wrap<return>
 " Window Close
 nnoremap <space>wc :close<return>
 " Window Maximize (close all others)
